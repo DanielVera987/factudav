@@ -10,6 +10,7 @@ class Bussine extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'bussine_name',
         'tradename',
         'rfc',
