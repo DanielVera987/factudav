@@ -62,4 +62,26 @@ class AuthTest extends TestCase
                 'password_confirmation' => '12345678'
             ])->assertRedirect('/home');
     }
+
+    function test_name_required_register() 
+    {
+        $this->from('/register')
+        ->post('/register', [
+            'name' => '',
+            'email' => 'e@gmail.com',
+            'password' => '12345678',
+            'password_confirmation' => '12345678'
+        ])->assertRedirect('/register');
+    }
+
+    function test_email_required_register() 
+    {
+        $this->from('/register')
+        ->post('/register', [
+            'name' => 'test',
+            'email' => '',
+            'password' => '12345678',
+            'password_confirmation' => '12345678'
+        ])->assertRedirect('/register');
+    }
 }
