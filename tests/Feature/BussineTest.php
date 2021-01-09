@@ -18,10 +18,4 @@ class BussineTest extends TestCase
         $response->assertStatus(200)
             ->assertSee('Login');
     }
-
-    //Logic
-
-    //Views
-
-    //Routes
 }
