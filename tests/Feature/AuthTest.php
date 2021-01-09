@@ -2,13 +2,21 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AuthTest extends TestCase
 {
     use RefreshDatabase;
+
+    function test_load_raiz()
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200)
+            ->assertSee('Login');
+    }   
 
     function test_load_view_login()
     {
@@ -16,8 +24,29 @@ class AuthTest extends TestCase
         $response->assertStatus(200);
     }
 
+    function test_singup_raiz_form()
+    {
+        User::create([
+            'name' => 'daniel vera',
+            'email' => 'danielveraangulo703@gmail.com',
+            'password' => bcrypt('12345678')
+        ]);
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'daniel vera'
+        ]);
+
+        $this->from('/')
+            ->post('/login', [
+                'email' => 'danielveraangulo703@gmail.com',
+                'password' => '12345678'
+            ])->assertRedirect('/home');
+    }
+
     function test_singup_form()
     {
+        DB::table('users')->truncate();
+
         User::create([
             'name' => 'daniel vera',
             'email' => 'danielveraangulo703@gmail.com',
