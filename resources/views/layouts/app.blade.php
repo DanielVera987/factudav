@@ -1,5 +1,9 @@
 @extends('layouts.head')
 
+@section('styles')
+  @yield('styles')
+@endsection
+
 @section('app') 
   <body class="nav-md">
     <div class="container body">
@@ -20,7 +24,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>{{ Auth::user()->name }}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -32,10 +36,10 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                    </ul>
+                  <li>
+                    <a href="{{ route('home') }}">
+                      <i class="fa fa-home"></i> Dashboard
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -78,7 +82,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('images/img.jpg') }}" alt="">John Doe
+                    <img src="{{ asset('images/img.jpg') }}" alt="">{{ Auth::user()->name }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -224,6 +228,8 @@
     <!-- bootstrap-daterangepicker -->
     <script src="{{ asset('/vendors/moment/min/moment.min.js') }}"></script>
     <script src="{{ asset('/vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+
+    @yield('script')
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('/js/custom.min.js') }}"></script>

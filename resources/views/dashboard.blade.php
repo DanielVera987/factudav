@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('styles')
+    <!-- bootstrap-progressbar -->
+    <link href="{{ asset('/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="{{ asset('/vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="{{ asset('/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
   <!-- top tiles -->
   <div class="row tile_count">

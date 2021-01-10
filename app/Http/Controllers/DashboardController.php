@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -23,6 +24,16 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        return $this->verifyCompleteConfiguration();
+    }
+
+    private function verifyCompleteConfiguration()
+    {
+        $user = Auth::user();
+        if ($user->bussine_id == null) {
+            return redirect('/setting');
+        }
+
+        return view('/dashboard');
     }
 }

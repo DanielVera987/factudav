@@ -18,13 +18,8 @@
     <link href="{{ asset('/vendors/nprogress/nprogress.css') }}" rel="stylesheet">
     <!-- iCheck -->
     <link href="{{ asset('/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
-	
-    <!-- bootstrap-progressbar -->
-    <link href="{{ asset('/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="{{ asset('/vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker -->
-    <link href="{{ asset('/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+
+    @yield('styles')
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('/css/custom.min.css') }}" rel="stylesheet">
