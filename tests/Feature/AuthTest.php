@@ -24,6 +24,12 @@ class AuthTest extends TestCase
         $response->assertStatus(200);
     }
 
+    function test_load_error_404()
+    {
+        $response = $this->get('/noexiste');
+        $response->assertStatus(404);
+    }
+
     function test_singup_raiz_form()
     {
         User::create([
@@ -40,7 +46,7 @@ class AuthTest extends TestCase
             ->post('/login', [
                 'email' => 'danielveraangulo703@gmail.com',
                 'password' => '12345678'
-            ])->assertRedirect('/home');
+            ])->assertRedirect('/dashboard');
     }
 
     function test_singup_form()
@@ -61,7 +67,7 @@ class AuthTest extends TestCase
             ->post('/login', [
                 'email' => 'danielveraangulo703@gmail.com',
                 'password' => '12345678'
-            ])->assertRedirect('/home');
+            ])->assertRedirect('/dashboard');
     }
 
     function test_email_incorrect() 
@@ -101,7 +107,7 @@ class AuthTest extends TestCase
                 'email' => 'e@gmail.com',
                 'password' => '12345678',
                 'password_confirmation' => '12345678'
-            ])->assertRedirect('/home');
+            ])->assertRedirect('/dashboard');
         
         $this->assertDatabaseHas('users', [
             'name' => 'UserTest',

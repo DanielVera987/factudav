@@ -12,10 +12,9 @@ class BussineTest extends TestCase
 {
     use RefreshDatabase;
 
-    function test_load_raiz()
+    function test_load_route_setting()
     {
-        $response = $this->get('/');
-        $response->assertStatus(200)
-            ->assertSee('Login');
+        $response = $this->get('/setting');
+        $response->assertStatus(200);
     }
 }
