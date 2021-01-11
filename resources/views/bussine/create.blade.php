@@ -14,39 +14,64 @@
 @section('content')
   <div class="x_panel">
     <div class="x_title">
-      <h2>Configuración General</h2>
+      <h2><i class="fa fa-institution"></i> Configuración General</h2>
       <div class="clearfix"></div>
     </div>
     <div class="x_content">
       <div class="" role="tabpanel" data-example-id="togglable-tabs">
         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Datos Generales</a>
+          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Datos Generales <i class="fa fa-warning"></i></a>
           </li>
           <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Direcciones</a>
           </li>
-          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Sellos Digitales</a>
+          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Configuración Facturación</a>
           </li>
         </ul>
         <div id="myTabContent" class="tab-content">
 
           <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
             <!-- start form for validation -->
-              
+            <span class="clearfix"></span>
               <form id="demo-form" data-parsley-validate>
                 <div class="row">
-                  <div class="col-md-4">
-                    <label for="fullname">Razon Social * :</label>
-                    <input type="text" id="fullname" class="form-control" name="fullname" required />
-                  </div>
-                
-                  <div class="col-md-4">
-                    <label for="email">RFC * :</label>
-                    <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="center-block">
+                        <div class="profile_img">
+                          <div id="crop-avatar">
+                            <img class="img-responsive avatar-view center-block" src="images/picture.jpg" alt="Avatar" title="">
+                            <input type="file">
+                            </br>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="col-md-6">
+                        <label for="fullname">Razón Social * :</label>
+                        <input type="text" id="fullname" class="form-control" name="fullname" required />
+                      </div>
+                    
+                      <div class="col-md-6">
+                        <label for="fullname">Nombre Comercial * :</label>
+                        <input type="text" id="fullname" class="form-control" name="fullname" required />
+                      </div>
+
+                      <div class="col-md-6">
+                        <label for="email">RFC * :</label>
+                        <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                      </div>
+    
+                      <div class="col-md-6">
+                        <label for="email">Correo Electrónico * :</label>
+                        <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                      </div>
+                    </div>
                   </div>
 
                   <div class="col-md-4">
-                    <label for="fullname">Nombre Comercial * :</label>
-                    <input type="text" id="fullname" class="form-control" name="fullname" required />
+                    <label for="email">Teléfono * :</label>
+                    <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
                   </div>
 
                   <div class="col-md-4">
@@ -58,15 +83,29 @@
                   </div>
 
                   <div class="col-md-4">
-                    <label for="message">Message (20 chars min, 100 max) :</label>
-                    <textarea id="message" required="required" class="form-control" name="message" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 20 caracters long comment.."
-                      data-parsley-validation-threshold="10"></textarea>
+                    <label for="heard">Régimen Fiscal *:</label>
+                    <select id="heard" class="form-control" required>
+                      <option value="">Moral</option>
+                      <option value="press">Fisica</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="email">Registro Patronal * :</label>
+                    <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="email">CURP * :</label>
+                    <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
                   </div>
 
                   <br/>
                   <div class="col-md-12">
                     </br>
-                    <span class="btn btn-primary">Validate form</span>
+                    <div class="actionBar">
+                      <input type="submit" class="btn btn-primary float-rigth" value="Guardar">
+                    </div>
                   </div>
                 </div>
               </form>
@@ -74,13 +113,107 @@
           </div>
 
           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-            <p>Food truck fixie locavore, accusamus mcsweeneys marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
-              booth letterpress, commodo enim craft beer mlkshk aliquip</p>
+            <form id="demo-form" data-parsley-validate>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="email">País * :</label>
+                  <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="heard">Estado *:</label>
+                  <select id="heard" class="form-control" required>
+                    <option value="">Moral</option>
+                    <option value="press">Fisica</option>
+                  </select>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="heard">Municipio *:</label>
+                  <select id="heard" class="form-control" required>
+                    <option value="">Moral</option>
+                    <option value="press">Fisica</option>
+                  </select>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="email">Localidad * :</label>
+                  <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="email">Calle * :</label>
+                  <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="email">Colonia * :</label>
+                  <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="email">Código Postal * :</label>
+                  <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="email">No. Exterior * :</label>
+                  <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="email">No. Interior * :</label>
+                  <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <br/>
+                <div class="col-md-12">
+                  </br>
+                  <div class="actionBar">
+                    <input type="submit" class="btn btn-primary float-rigth" value="Guardar">
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
 
           <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-            <p>xxFood truck fixie locavore, accusamus mcsweeneys marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
-              booth letterpress, commodo enim craft beer mlkshk </p>
+            <form id="demo-form" data-parsley-validate>
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="email">Certificado * :</label>
+                  <input type="file" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="email">Llave Privada * :</label>
+                  <input type="file" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="email">Contraseña * :</label>
+                  <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="email">PAC * :</label>
+                  <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <div class="col-md-4">
+                  <label for="email">Contraseña PAC * :</label>
+                  <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required />
+                </div>
+
+                <br/>
+                <div class="col-md-12">
+                  </br>
+                  <div class="actionBar">
+                    <input type="submit" class="btn btn-primary float-rigth" value="Guardar">
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
 
         </div>
