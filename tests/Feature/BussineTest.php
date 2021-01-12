@@ -15,7 +15,7 @@ class BussineTest extends TestCase
     
     function test_verify_that_the_setting_route_redirects_to_login_when_you_are_not_logged_in()
     {
-        $response = $this->get('/setting');
+        $response = $this->get(route('settings.create'));
         $response->assertStatus(302);
         $response->assertRedirect('/login');
     }
@@ -43,7 +43,7 @@ class BussineTest extends TestCase
 
         $this->post('/login', $credentials);
         $this->assertCredentials($credentials);
-        $this->get('/dashboard')->assertRedirect('/setting');
+        $this->get('/dashboard')->assertRedirect(route('settings.create'));
     }
 
     function test_load_view_setting()
@@ -69,8 +69,60 @@ class BussineTest extends TestCase
 
         $this->post('/login', $credentials);
         $this->assertCredentials($credentials);
-        $response = $this->get('/setting');
+        $response = $this->get(route('settings.create'));
         $response->assertSee('Configuración General');
     }
 
+    function test_create_company_user_relationship()
+    {
+        DB::table('users')->truncate();
+
+        User::create([
+            'bussine_id' => null,
+            'name' => 'daniel vera',
+            'email' => 'test@gmail.com',
+            'password' => bcrypt('12345678')
+        ]);
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'daniel vera',
+            'email' => 'test@gmail.com'
+        ]);
+
+        $credentials = [
+            'email' => 'test@gmail.com',
+            'password' => '12345678'
+        ];
+
+        $this->post('/login', $credentials);
+        $this->assertCredentials($credentials);
+
+        //hacer un post en settings.create
+        $this->post(route('settings.store'), [
+            'bussine_name' => 'DavaDev',
+            'tradename' => 'DavaDev',
+            'rfc' => 'DAVA98762DA',
+            'email' => 'test@gmail.com',
+            'phone' => '9999999999',
+            'type_person' => 'F',
+            'taxregimen' => '1',
+            'country' => 'Mexico',
+            'state' => 'Quintana Roo',
+            'municipality' => 'Cozumel',
+            'location' => 'Cozumel',
+            'street' => 'Calle 41',
+            'colony' => 'CTM',
+            'zip' => '8888',
+            'noexterior' => '0',
+            'nointerior' => '0',
+            'centificate' => 'centificado',
+            'privatekey' => 'AAAAA',
+            'password' => '1234A',
+            //'name_pac' => 'AAAA',
+            //'password_pac' => 'AAAA'
+        ])->assertRedirect(route('settings.create'))
+          ->assertSee('Datos Guardados');
+
+          //verificarlos en la base de datos
+    }
 }

@@ -31,7 +31,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         if ($user->bussine_id == null) {
-            return redirect('/setting');
+            return redirect(route('settings.create'));
         }
 
         return view('/dashboard');

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.head')
 
 @section('app')
   <body class="nav-md">

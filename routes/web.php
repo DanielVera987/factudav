@@ -12,4 +12,6 @@ Auth::routes();
 
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
 
-Route::get('setting', [BussineController::class, 'create'])->name('bussine.create');
+Route::resource('settings', BussineController::class);
+
+//Route::get('setting', [BussineController::class, 'create'])->name('bussine.create');

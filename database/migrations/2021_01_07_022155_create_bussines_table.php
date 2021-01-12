@@ -15,13 +15,13 @@ class CreateBussinesTable extends Migration
     {
         Schema::create('bussines', function (Blueprint $table) {
             $table->id();
-            $table->string('bussine_name');
-            $table->string('tradename');
+            $table->string('bussine_name'); // Razon social
+            $table->string('tradename'); // Nombre Comercial
             $table->string('rfc');
             $table->string('email');
             $table->string('telephone');
             $table->string('type_person');
-            $table->string('taxregime_id');
+            $table->string('taxregime_id'); // Regimen fiscal
             $table->string('curp');
             $table->string('country_id');
             $table->string('state_id');

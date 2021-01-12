@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bussine;
 use Illuminate\Http\Request;
 
 class BussineController extends Controller
@@ -38,16 +39,18 @@ class BussineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validator($request);
+
+        dd('PASE');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Bussine  $bussine
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Bussine $bussine)
     {
         //
     }
@@ -55,10 +58,10 @@ class BussineController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Bussine  $bussine
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Bussine $bussine)
     {
         //
     }
@@ -67,10 +70,10 @@ class BussineController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Bussine  $bussine
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Bussine $bussine)
     {
         //
     }
@@ -78,11 +81,38 @@ class BussineController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Bussine  $bussine
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Bussine $bussine)
     {
         //
+    }
+
+    protected function validator(Request $data)
+    {
+        return $data->validate([
+            'bussine_name' => 'required|string|max:255',
+            'tradaname' => 'required|alpha|max:255',
+            'rfc' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'required|numeric',
+            'type_person' => 'required|string',
+            'taxregimen' => 'required',
+            'country' => 'required',
+            'state' => 'required',
+            'municipality' => 'required',
+            'location' => 'required',
+            'street' => 'required',
+            'colony' => 'required',
+            'zip' => 'required',
+            'noexterior' => 'required',
+            'nointerior' => 'required',
+            'centificate' => '',
+            'privatekey' => '',
+            'password' => '',
+            'name_pac' => '',
+            'password_pac' => ''
+        ]);
     }
 }
