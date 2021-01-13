@@ -76,8 +76,9 @@ class BussineTest extends TestCase
     function test_create_company_user_relationship()
     {
         DB::table('users')->truncate();
+        $this->withoutExceptionHandling();
 
-        User::create([
+        $user = User::create([
             'bussine_id' => null,
             'name' => 'daniel vera',
             'email' => 'test@gmail.com',
@@ -100,7 +101,7 @@ class BussineTest extends TestCase
         //hacer un post en settings.create
         $this->post(route('settings.store'), [
             'bussine_name' => 'DavaDev',
-            'tradename' => 'DavaDev',
+            'tradaname' => 'DavaDev',
             'rfc' => 'DAVA98762DA',
             'email' => 'test@gmail.com',
             'phone' => '9999999999',
@@ -115,14 +116,18 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'noexterior' => '0',
             'nointerior' => '0',
-            'centificate' => 'centificado',
+            'certificate' => 'centificado',
             'privatekey' => 'AAAAA',
             'password' => '1234A',
-            //'name_pac' => 'AAAA',
-            //'password_pac' => 'AAAA'
+            'name_pac' => 'AAAA',
+            'password_pac' => 'AAAA',
+            'logo' => 'logo.png'
         ])->assertRedirect(route('settings.create'))
-          ->assertSee('Datos Guardados');
+          ->assertSessionMissing('Datos Guardados');
 
-          //verificarlos en la base de datos
+        $this->assertDatabaseHas('bussines', [
+            'bussine_name' => 'DavaDev',
+            'rfc' => "DAVA98762DA"
+        ]);
     }
 }

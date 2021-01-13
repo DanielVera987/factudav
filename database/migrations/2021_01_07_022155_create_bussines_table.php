@@ -22,19 +22,21 @@ class CreateBussinesTable extends Migration
             $table->string('telephone');
             $table->string('type_person');
             $table->string('taxregime_id'); // Regimen fiscal
-            $table->string('curp');
             $table->string('country_id');
             $table->string('state_id');
             $table->string('municipality_id');
             $table->string('location');
-            $table->string('no_inside');
-            $table->string('no_exterior');
-            $table->string('zip');
-            $table->string('colony');
             $table->string('street');
-            $table->string('certificate');
-            $table->string('key_certificate');
-            $table->string('key_private');
+            $table->string('colony');
+            $table->string('zip');
+            $table->string('no_exterior');
+            $table->string('no_inside');
+            $table->string('certificate')->nullable();
+            $table->string('key_private')->nullable();
+            $table->string('password')->nullable();
+            $table->string('name_pac')->nullable();
+            $table->string('password_pac')->nullable();
+            $table->string('logo');
             $table->timestamps();
         });
     }

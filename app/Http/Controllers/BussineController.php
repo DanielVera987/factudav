@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bussine;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BussineController extends Controller
 {
@@ -41,7 +42,35 @@ class BussineController extends Controller
     {
         $this->validator($request);
 
-        dd('PASE');
+        $bussine = new Bussine;
+        $bussine->bussine_name = $request->bussine_name;
+        $bussine->tradename = $request->tradaname;
+        $bussine->rfc = $request->rfc;
+        $bussine->email = $request->email;
+        $bussine->telephone = $request->phone;
+        $bussine->type_person = $request->type_person;
+        $bussine->taxregime_id = $request->taxregimen;
+        $bussine->country_id = $request->country;
+        $bussine->state_id = $request->state;
+        $bussine->municipality_id = $request->municipality;
+        $bussine->location = $request->location;
+        $bussine->street = $request->street;
+        $bussine->colony = $request->colony;
+        $bussine->zip = $request->zip;
+        $bussine->no_exterior = $request->noexterior;
+        $bussine->no_inside = $request->nointerior;
+        $bussine->certificate = $request->certificate;
+        $bussine->key_private = $request->privatekey;
+        $bussine->password = $request->password;
+        $bussine->name_pac = $request->name_pac; 
+        $bussine->password_pac = $request->password_pac; 
+        $bussine->logo = $request->logo;
+        $bussine->save();
+
+        Auth::user()->bussine_id = $bussine->id;
+        Auth::user()->save();
+
+        return redirect()->route('settings.create')->with('Datos Guardados');
     }
 
     /**
@@ -108,11 +137,12 @@ class BussineController extends Controller
             'zip' => 'required',
             'noexterior' => 'required',
             'nointerior' => 'required',
-            'centificate' => '',
-            'privatekey' => '',
-            'password' => '',
-            'name_pac' => '',
-            'password_pac' => ''
+            'certificate' => 'max:255', //file .cer
+            'privatekey' => 'max:255', //file .key
+            'password' => 'max:255',
+            'name_pac' => 'max:255',
+            'password_pac' => 'max:255',
+            'logo' => '' // file jpg, jpge, png
         ]);
     }
 }

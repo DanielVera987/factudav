@@ -17,12 +17,12 @@
   <div class="x_panel">
     <div class="x_title">
       <h2><i class="fa fa-institution"></i> Configuración General</h2>
-      <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-      </ul>
       <div class="clearfix"></div>
+      @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+      @endif
     </div>
     <div class="x_content">
       <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -44,7 +44,12 @@
                         <div class="profile_img">
                           <div id="crop-avatar">
                             <img class="img-responsive avatar-view center-block" src="{{ asset('/images/picture.jpg') }}"  alt="Avatar" title="">
-                            <input type="file" name="logo" value="{{ old('logo') }}" id="logo">
+                            <input type="file" name="logo" value="{{ old('logo') }}" id="logo" data-parsley-trigger="change">
+                              @error('logo')
+                                <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                                </span>
+                              @enderror
                             </br>
                           </div>
                         </div>
@@ -54,21 +59,41 @@
                       <div class="col-md-6">
                         <label for="bussine_name">Razón Social * :</label>
                         <input type="text" id="bussine_name" class="form-control" value="{{ old('bussine_name') }}" name="bussine_name" required />
+                        @error('bussine_name')
+                          <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
                       </div>
                     
                       <div class="col-md-6">
                         <label for="tradaname">Nombre Comercial * :</label>
                         <input type="text" id="tradaname" class="form-control" value="{{ old('tradaname') }}" name="tradaname" required />
+                        @error('tradaname')
+                          <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
                       </div>
 
                       <div class="col-md-6">
                         <label for="rfc">RFC * :</label>
                         <input type="text" id="rfc" class="form-control" name="rfc" value="{{ old('rfc') }}" data-parsley-trigger="change" required />
+                        @error('rfc')
+                          <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
                       </div>
     
                       <div class="col-md-6">
                         <label for="email">Correo Electrónico * :</label>
                         <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}" data-parsley-trigger="change" required />
+                        @error('email')
+                          <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                          </span>
+                        @enderror
                       </div>
                     </div>
                   </div>
@@ -76,73 +101,133 @@
                   <div class="col-md-4">
                     <label for="phone">Teléfono * :</label>
                     <input type="tel" id="phone" class="form-control" name="phone" value="{{ old('phone') }}" data-parsley-trigger="change" required />
+                    @error('phone')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
 
                   <div class="col-md-4">
                     <label for="type_person">Tipo Persona *:</label>
-                    <select id="type_person" name="type_person" class="form-control" value="{{ old('type_person') }}" required>
+                    <select id="type_person" name="type_person" class="form-control" value="{{ old('type_person') }}" required data-parsley-trigger="change">
                       <option value="M">Moral</option>
                       <option value="F">Fisica</option>
                     </select>
+                    @error('type_person')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
 
                   <div class="col-md-4">
                     <label for="taxregimen">Régimen Fiscal *:</label>
-                    <select id="taxregimen" name="taxregimen" class="form-control" value="{{ old('taxregimen') }}" required>
+                    <select id="taxregimen" name="taxregimen" class="form-control" value="{{ old('taxregimen') }}" required data-parsley-trigger="change">
                       <option value="M">Moral</option>
                       <option value="F">Fisica</option>
                     </select>
+                    @error('taxregimen')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
 
                   <div class="col-md-4">
                     <label for="country">País * :</label>
                     <input type="text" id="country" class="form-control" name="country" value="{{ old('country') }}" data-parsley-trigger="change" required />
+                    @error('country')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
   
                   <div class="col-md-4">
                     <label for="state">Estado *:</label>
-                    <select id="state" name="state" class="form-control" value="{{ old('state') }}" required>
+                    <select id="state" name="state" class="form-control" value="{{ old('state') }}" required data-parsley-trigger="change">
                       <option value="d">Moral</option>
                       <option value="press">Fisica</option>
                     </select>
+                    @error('state')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
   
                   <div class="col-md-4">
                     <label for="municipality">Municipio *:</label>
-                    <select id="municipality" name="municipality" class="form-control" value="{{ old('municipality') }}" required>
+                    <select id="municipality" name="municipality" class="form-control" value="{{ old('municipality') }}" required data-parsley-trigger="change">
                       <option value="d">Moral</option>
                       <option value="press">Fisica</option>
                     </select>
+                    @error('municipality')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
   
                   <div class="col-md-4">
                     <label for="location">Localidad * :</label>
                     <input type="text" id="location" name="location" class="form-control" data-parsley-trigger="change" value="{{ old('location') }}" required />
+                    @error('location')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
   
                   <div class="col-md-4">
                     <label for="street">Calle * :</label>
                     <input type="text" id="street" name="street" class="form-control" data-parsley-trigger="change" value="{{ old('street') }}" required />
+                    @error('street')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
   
                   <div class="col-md-4">
                     <label for="colony">Colonia * :</label>
                     <input type="text" id="colony" name="colony" class="form-control" data-parsley-trigger="change" value="{{ old('colony') }}" required />
+                    @error('colony')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
   
                   <div class="col-md-4">
                     <label for="zip">Código Postal * :</label>
                     <input type="text" id="zip" name="zip" class="form-control" data-parsley-trigger="change" value="{{ old('zip') }}" required />
+                    @error('zip')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
   
                   <div class="col-md-4">
                     <label for="noexterior">No. Exterior * :</label>
                     <input type="text" id="noexterior" name="noexterior" class="form-control" data-parsley-trigger="change" value="{{ old('noexterior') }}" required />
+                    @error('noexterior')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
   
                   <div class="col-md-4">
                     <label for="nointerior">No. Interior * :</label>
                     <input type="text" id="nointerior" name="nointerior" class="form-control" data-parsley-trigger="change" value="{{ old('nointerior') }}" required />
+                    @error('nointerior')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
 
                   <br/>
@@ -160,28 +245,53 @@
           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">    
               <div class="row">
                 <div class="col-md-4">
-                  <label for="centificate">Certificado:</label>
-                  <input type="file" class="form-control" id="centificate" name="centificate" data-parsley-trigger="change" value="{{ old('centificate') }}"/>
+                  <label for="certificate">Certificado:</label>
+                  <input type="file" class="form-control" id="certificate" name="certificate" data-parsley-trigger="change" value="{{ old('centificate') }}"/>
+                  @error('certificate')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
 
                 <div class="col-md-4">
                   <label for="privatekey">Llave Privada:</label>
                   <input type="file" class="form-control" id="privatekey" name="privatekey" data-parsley-trigger="change" value="{{ old('privatekey') }}"/>
+                  @error('privatekey')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
 
                 <div class="col-md-4">
                   <label for="password">Contraseña:</label>
                   <input type="password" id="password" name="password" class="form-control" data-parsley-trigger="change" value="{{ old('password') }}"/>
+                  @error('password')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
 
                 <div class="col-md-4">
                   <label for="name_pac">PAC:</label>
                   <input type="text" id="name_pac" name="name_pac" class="form-control" data-parsley-trigger="change" value="{{ old('name_pac') }}"/>
+                  @error('name_pac')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
 
                 <div class="col-md-4">
                   <label for="password_pac">Contraseña PAC:</label>
                   <input type="text" id="password_pac" name="password_pac" class="form-control" data-parsley-trigger="change" value="{{ old('password_pac') }}"/>
+                  @error('password_pac')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
                 </div>
 
                 <br/>

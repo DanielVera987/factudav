@@ -31,6 +31,9 @@ class Bussine extends Model
         'certificate',
         'key_certificate',
         'key_private',
+        'name_pac',
+        'password_pac',
+        'logo'
     ];
 
     public function User() {
