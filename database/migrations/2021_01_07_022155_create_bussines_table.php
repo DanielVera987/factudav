@@ -36,7 +36,7 @@ class CreateBussinesTable extends Migration
             $table->string('password')->nullable();
             $table->string('name_pac')->nullable();
             $table->string('password_pac')->nullable();
-            $table->string('logo');
+            $table->string('logo')->nullable()->default('davadev.jpg');
             $table->timestamps();
         });
     }

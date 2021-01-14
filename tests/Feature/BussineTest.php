@@ -76,7 +76,6 @@ class BussineTest extends TestCase
     function test_create_company_user_relationship()
     {
         DB::table('users')->truncate();
-        $this->withoutExceptionHandling();
 
         $user = User::create([
             'bussine_id' => null,

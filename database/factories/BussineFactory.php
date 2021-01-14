@@ -29,19 +29,21 @@ class BussineFactory extends Factory
             'telephone' => $this->faker->phoneNumber(),
             'type_person' => $this->faker->word(),
             'taxregime_id' => $this->faker->sentence(),
-            'curp' => $this->faker->randomNumber(5, true),
             'country_id' => $this->faker->country(),
             'state_id' => $this->faker->state(),
             'municipality_id' => $this->faker->city(),
             'location' => $this->faker->city(),
-            'no_inside' => $this->faker->randomNumber(3, true),
-            'no_exterior' => $this->faker->randomNumber(3, true),
-            'zip' => $this->faker->postcode(),
-            'colony' => $this->faker->city(),
             'street' => $this->faker->streetName(),
+            'colony' => $this->faker->city(),
+            'zip' => $this->faker->postcode(),
+            'no_exterior' => $this->faker->randomNumber(3, true),
+            'no_inside' => $this->faker->randomNumber(3, true),
             'certificate' => $this->faker->word(),
-            'key_certificate' => $this->faker->word(),
             'key_private' => $this->faker->word(),
+            'password' => $this->faker->word(),
+            'name_pac' => $this->faker->word(),
+            'password_pac' => $this->faker->word(),
+            'logo' => $this->faker->word()
         ];
     }
 }

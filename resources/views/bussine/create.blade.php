@@ -234,7 +234,7 @@
                   <div class="col-md-12">
                     </br>
                     <div class="actionBar">
-                      <a href="#tab_content2" class="btn btn-primary float-rigth" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Siguiente</a>
+                      <button class="btn btn-primary float-rigth" role="tab" id="profile-tab" onclick="document.getElementById('profile-tab2').click();" data-toggle="tab" aria-expanded="false">Siguiente</button>
                     </div>
                   </div>
                 </div>
@@ -298,6 +298,7 @@
                 <div class="col-md-12">
                   </br>
                   <div class="actionBar">
+                    <button class="btn btn-primary float-rigth" role="tab" onclick="document.getElementById('home-tab').click();" data-toggle="tab" aria-expanded="false">Anterior</button>
                     <input type="submit" class="btn btn-primary float-rigth" value="Guardar">
                   </div>
                 </div>
