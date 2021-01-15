@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\Bussine;
 use App\Models\User;
+use App\Models\Bussine;
+use App\Models\Country;
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +24,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123456')
         ]);
         Bussine::factory(10)->create();
-        
+        Country::factory(10)->create();
     }
 }

@@ -29,7 +29,7 @@ class BussineFactory extends Factory
             'telephone' => $this->faker->phoneNumber(),
             'type_person' => $this->faker->word(),
             'taxregime_id' => $this->faker->sentence(),
-            'country_id' => $this->faker->country(),
+            'country_id' => $this->faker->randomDigit(),
             'state_id' => $this->faker->state(),
             'municipality_id' => $this->faker->city(),
             'location' => $this->faker->city(),

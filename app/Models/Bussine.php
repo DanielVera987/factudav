@@ -38,4 +38,8 @@ class Bussine extends Model
     public function User() {
         return $this->hasOne(User::class);
     }
+
+    public function Country() {
+        return $this->belongsTo(Country::class);
+    }
 }
