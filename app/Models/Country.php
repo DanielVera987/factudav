@@ -9,7 +9,13 @@ class Country extends Model
 {
     use HasFactory;
 
-    public function bussine(){
+    public function bussine()
+    {
         return $this->hasMany(Bussine::class);
+    }
+
+    public function state() 
+    {
+        return $this->hasMany(State::class);
     }
 }

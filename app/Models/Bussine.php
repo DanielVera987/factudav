@@ -17,7 +17,7 @@ class Bussine extends Model
         'email',
         'telephone',
         'type_person',
-        'taxregime_id',
+        'taxregimen_id',
         'country_id',
         'state_id',
         'municipality_id',
@@ -35,11 +35,23 @@ class Bussine extends Model
         'logo'
     ];
 
-    public function User() {
+    public function user() {
         return $this->hasOne(User::class);
     }
 
-    public function Country() {
+    public function country() {
         return $this->belongsTo(Country::class);
+    }
+
+    public function state() {
+        return $this->belongsTo(State::class);
+    }
+
+    public function municipality() {
+        return $this->belongsTo(Municipality::class);
+    }
+
+    public function taxregimen() {
+        return $this->belongsTo(TaxRegimen::class);
     }
 }

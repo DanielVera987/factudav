@@ -49,7 +49,7 @@ class BussineController extends Controller
         $bussine->email = $request->email;
         $bussine->telephone = $request->phone;
         $bussine->type_person = $request->type_person;
-        $bussine->taxregime_id = $request->taxregimen;
+        $bussine->taxregimen_id = $request->taxregimen;
         $bussine->country_id = $request->country;
         $bussine->state_id = $request->state;
         $bussine->municipality_id = $request->municipality;

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Bussine;
-use App\Models\Country;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,14 +15,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
-        User::create([
-            'bussine_id' => null,
-            'name' => 'daniel',
-            'email' => 'test@test.com',
-            'password' => bcrypt('123456')
+        /* Call Seeders */
+        $this->call([
+            CountrySeeder::class,
+            StateSeeder::class,
+            MunicipalitySeeder::class,
+            TaxRegimenSeeder::class,
+            UserSeeder::class
         ]);
-        Bussine::factory(10)->create();
-        Country::factory(10)->create();
+        
+        /* Call Factories */
+        User::factory(10)->create();  
+        Bussine::factory(1)->create();
     }
 }

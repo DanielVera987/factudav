@@ -21,13 +21,22 @@ class CreateBussinesTable extends Migration
             $table->string('email');
             $table->string('telephone');
             $table->string('type_person');
-            $table->string('taxregime_id'); // Regimen fiscal
+            $table->foreignId('taxregimen_id')
+                ->nullable()
+                ->reference('id')
+                ->on('tax_regimens'); // Regimen fiscal
             $table->foreignId('country_id')
-                  ->nullable()
-                  ->reference('id')
-                  ->on('countries');
-            $table->string('state_id');
-            $table->string('municipality_id');
+                ->nullable()
+                ->reference('id')
+                ->on('countries');
+            $table->string('state_id')
+                ->nullable()
+                ->reference('id')
+                ->on('states');
+            $table->string('municipality_id')
+                ->nullable()
+                ->reference('id')
+                ->on('municipalities');
             $table->string('location');
             $table->string('street');
             $table->string('colony');
