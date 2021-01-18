@@ -43,8 +43,8 @@
                       <div class="center-block">
                         <div class="profile_img">
                           <div id="crop-avatar">
-                            <img class="img-responsive avatar-view center-block" src="{{ asset('/images/picture.jpg') }}"  alt="Avatar" title="">
-                            <input type="file" name="logo" value="{{ old('logo') }}" id="logo" data-parsley-trigger="change">
+                            <img class="img-responsive avatar-view center-block" src="{{ asset('/images/davadev.png') }}" width="200" id="previewlogo"  alt="Avatar" title="">
+                            <input type="file" name="logo" value="{{ old('logo') }}" id="logo" data-parsley-trigger="change" required>
                               @error('logo')
                                 <span class="invalid-feedback" role="alert">
                                   <strong>{{ $message }}</strong>
@@ -97,7 +97,8 @@
                       </div>
                     </div>
                   </div>
-
+                </div>
+                <div class="row">
                   <div class="col-md-4">
                     <label for="phone">Teléfono * :</label>
                     <input type="tel" id="phone" class="form-control" name="phone" value="{{ old('phone') }}" data-parsley-trigger="change" required />
@@ -124,8 +125,9 @@
                   <div class="col-md-4">
                     <label for="taxregimen">Régimen Fiscal *:</label>
                     <select id="taxregimen" name="taxregimen" class="form-control" value="{{ old('taxregimen') }}" required data-parsley-trigger="change">
-                      <option value="M">Moral</option>
-                      <option value="F">Fisica</option>
+                      @foreach($tax_regimens as $value)
+                        <option value="{{ $value->id }}">{{ $value->code  }} | {{ $value->name  }}</option>
+                      @endforeach
                     </select>
                     @error('taxregimen')
                       <span class="invalid-feedback" role="alert">
@@ -133,10 +135,15 @@
                       </span>
                     @enderror
                   </div>
-
+                </div>
+                <div class="row">
                   <div class="col-md-4">
                     <label for="country">País * :</label>
-                    <input type="text" id="country" class="form-control" name="country" value="{{ old('country') }}" data-parsley-trigger="change" required />
+                    <select id="country" class="form-control" name="country" data-parsley-trigger="change" required data-parsley-trigger="change">
+                      @foreach($contries as $value)
+                        <option value="{{ $value->id }}">{{ $value->name  }}</option>
+                      @endforeach
+                    </select>
                     @error('country')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -147,8 +154,9 @@
                   <div class="col-md-4">
                     <label for="state">Estado *:</label>
                     <select id="state" name="state" class="form-control" value="{{ old('state') }}" required data-parsley-trigger="change">
-                      <option value="d">Moral</option>
-                      <option value="press">Fisica</option>
+                      @foreach($states as $value)
+                        <option value="{{ $value->id }}">{{ $value->name  }}</option>
+                      @endforeach
                     </select>
                     @error('state')
                       <span class="invalid-feedback" role="alert">
@@ -160,8 +168,7 @@
                   <div class="col-md-4">
                     <label for="municipality">Municipio *:</label>
                     <select id="municipality" name="municipality" class="form-control" value="{{ old('municipality') }}" required data-parsley-trigger="change">
-                      <option value="d">Moral</option>
-                      <option value="press">Fisica</option>
+                        <option value="" disabled>Seleccionar...</option>
                     </select>
                     @error('municipality')
                       <span class="invalid-feedback" role="alert">
@@ -169,7 +176,8 @@
                       </span>
                     @enderror
                   </div>
-  
+                </div>
+                <div class="row">
                   <div class="col-md-4">
                     <label for="location">Localidad * :</label>
                     <input type="text" id="location" name="location" class="form-control" data-parsley-trigger="change" value="{{ old('location') }}" required />
@@ -199,7 +207,8 @@
                       </span>
                     @enderror
                   </div>
-  
+                </div>
+                <div class="row">
                   <div class="col-md-4">
                     <label for="zip">Código Postal * :</label>
                     <input type="text" id="zip" name="zip" class="form-control" data-parsley-trigger="change" value="{{ old('zip') }}" required />
@@ -229,7 +238,8 @@
                       </span>
                     @enderror
                   </div>
-
+                </div>
+                <div class="row">
                   <br/>
                   <div class="col-md-12">
                     </br>
@@ -324,6 +334,48 @@
     <script src="{{ asset('/vendors/switchery/dist/switchery.min.js') }}"></script>
     <!-- Select2 -->
     <script src="{{ asset('/vendors/select2/dist/js/select2.full.min.js') }}"></script>
+    <!-- Country -->
+    <script src="{{ asset('/js/helpers/country.js') }}"></script>
+    <script>
+      let $select = document.getElementById('municipality');
+      jQuery(document).ready(function($){
+        $(document).ready(function() {
+          $('#state').on('change', function () {
+            /* Ajax */
+            $.get( "{{ url('/municipalities/') }}" + '/' + $('#state').val(), function( data ) {
+              remove();
+              change(data);
+            });
+          });
+
+          let remove = () => {
+            for (let i = $select.options.length; i >= 0; i--) {
+              $select.remove(i);
+            }
+          };
+
+          let change = (data) => {
+            for(let x in data) {
+              let option = document.createElement('option');
+              option.value = data[x].id;
+              option.text = data[x].name;
+              $select.appendChild(option);
+            }
+          };
+
+          $("#logo").on('change', function(e) {
+            let x = e.target;
+            if (!x.files || !x.files.length) {
+              return false;
+            }
+
+            let img = x.files[0];
+            const objectURL = URL.createObjectURL(img);
+            $("#previewlogo").attr('src',objectURL);
+          });
+        });
+      });
+    </script>
     <!-- Parsley -->
     <script src="{{ asset('/vendors/parsleyjs/dist/parsley.min.js') }}"></script>
     <!-- Autosize -->

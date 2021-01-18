@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Municipality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,5 +36,9 @@ class DashboardController extends Controller
         }
 
         return view('/dashboard');
+    }
+
+    public function getMunicipalities($id){
+        return response()->json(Municipality::where('state_id', $id)->get());
     }
 }

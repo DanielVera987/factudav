@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\State;
 use App\Models\Bussine;
+use App\Models\Country;
+use App\Models\TaxRegimen;
+use App\Models\Municipality;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class BussineController extends Controller
@@ -29,7 +34,15 @@ class BussineController extends Controller
      */
     public function create()
     {
-        return view('bussine.create');
+        $contries = Country::all();
+        $states = State::all();
+        $tax_regimens = TaxRegimen::all();
+
+        return view('bussine.create', [
+            'contries' => $contries,
+            'states' => $states,
+            'tax_regimens' => $tax_regimens
+        ]);
     }
 
     /**
@@ -41,31 +54,7 @@ class BussineController extends Controller
     public function store(Request $request)
     {
         $this->validator($request);
-
-        $bussine = new Bussine;
-        $bussine->bussine_name = $request->bussine_name;
-        $bussine->tradename = $request->tradaname;
-        $bussine->rfc = $request->rfc;
-        $bussine->email = $request->email;
-        $bussine->telephone = $request->phone;
-        $bussine->type_person = $request->type_person;
-        $bussine->taxregimen_id = $request->taxregimen;
-        $bussine->country_id = $request->country;
-        $bussine->state_id = $request->state;
-        $bussine->municipality_id = $request->municipality;
-        $bussine->location = $request->location;
-        $bussine->street = $request->street;
-        $bussine->colony = $request->colony;
-        $bussine->zip = $request->zip;
-        $bussine->no_exterior = $request->noexterior;
-        $bussine->no_inside = $request->nointerior;
-        $bussine->certificate = $request->certificate;
-        $bussine->key_private = $request->privatekey;
-        $bussine->password = $request->password;
-        $bussine->name_pac = $request->name_pac; 
-        $bussine->password_pac = $request->password_pac; 
-        $bussine->logo = $request->logo;
-        $bussine->save();
+        $bussine = $this->createOrUpdate($request);                                         
 
         Auth::user()->bussine_id = $bussine->id;
         Auth::user()->save();
@@ -118,6 +107,34 @@ class BussineController extends Controller
         //
     }
 
+    protected function createOrUpdate($request)
+    {
+        $bussine = new Bussine;
+        $bussine->bussine_name = $request->bussine_name;
+        $bussine->tradename = $request->tradaname;
+        $bussine->rfc = $request->rfc;
+        $bussine->email = $request->email;
+        $bussine->telephone = $request->phone;
+        $bussine->type_person = $request->type_person;
+        $bussine->taxregimen_id = $request->taxregimen;
+        $bussine->country_id = $request->country;
+        $bussine->state_id = $request->state;
+        $bussine->municipality_id = $request->municipality;
+        $bussine->location = $request->location;
+        $bussine->street = $request->street;
+        $bussine->colony = $request->colony;
+        $bussine->zip = $request->zip;
+        $bussine->no_exterior = $request->noexterior;
+        $bussine->no_inside = $request->nointerior;
+        $bussine->certificate = $request->certificate;
+        $bussine->key_private = $request->privatekey;
+        $bussine->password = $request->password;
+        $bussine->name_pac = $request->name_pac; 
+        $bussine->password_pac = $request->password_pac; 
+        $bussine->logo = $request->logo;
+        return $bussine->save();
+    }
+
     protected function validator(Request $data)
     {
         return $data->validate([
@@ -127,22 +144,22 @@ class BussineController extends Controller
             'email' => 'required|email',
             'phone' => 'required|numeric',
             'type_person' => 'required|string',
-            'taxregimen' => 'required',
-            'country' => 'required',
-            'state' => 'required',
-            'municipality' => 'required',
-            'location' => 'required',
-            'street' => 'required',
-            'colony' => 'required',
-            'zip' => 'required',
-            'noexterior' => 'required',
-            'nointerior' => 'required',
+            'taxregimen' => 'required|numeric',
+            'country' => 'required|numeric',
+            'state' => 'required|numeric',
+            'municipality' => 'required|numeric',
+            'location' => 'required|string|max:255',
+            'street' => 'required|string|max:255',
+            'colony' => 'required|string|max:255',
+            'zip' => 'required|string|max:255',
+            'noexterior' => 'required|string|max:255',
+            'nointerior' => 'required|string|max:255',
             'certificate' => 'max:255', //file .cer
             'privatekey' => 'max:255', //file .key
             'password' => 'max:255',
             'name_pac' => 'max:255',
             'password_pac' => 'max:255',
-            'logo' => '' // file jpg, jpge, png
+            'logo' => 'required' // file jpg, jpge, png
         ]);
     }
 }
