@@ -15,7 +15,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'bussine.complete'])->except('getMunicipalities');
     }
 
     /**
@@ -25,20 +25,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return $this->verifyCompleteConfiguration();
-    }
-
-    private function verifyCompleteConfiguration()
-    {
-        $user = Auth::user();
-        if ($user->bussine_id == null) {
-            return redirect(route('settings.create'));
-        }
-
         return view('/dashboard');
     }
 
-    public function getMunicipalities($id){
+    /**
+     * Show the municipalities of the state
+     */
+    public function getMunicipalities($id)
+    {
         return response()->json(Municipality::where('state_id', $id)->get());
     }
 }

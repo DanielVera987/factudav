@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\State;
+use App\Http\Controllers\Controller;
 use App\Models\Bussine;
 use App\Models\Country;
-use App\Models\TaxRegimen;
 use App\Models\Municipality;
+use App\Models\State;
+use App\Models\TaxRegimen;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class BussineController extends Controller
@@ -41,7 +41,7 @@ class BussineController extends Controller
         return view('bussine.create', [
             'contries' => $contries,
             'states' => $states,
-            'tax_regimens' => $tax_regimens
+            'tax_regimens' => $tax_regimens,
         ]);
     }
 
@@ -54,12 +54,12 @@ class BussineController extends Controller
     public function store(Request $request)
     {
         $this->validator($request);
-        $bussine = $this->createOrUpdate($request);                                         
+        $bussine = $this->createOrUpdate($request);
 
-        Auth::user()->bussine_id = $bussine->id;
+        Auth::user()->bussine_id = $bussine;
         Auth::user()->save();
 
-        return redirect()->route('settings.create')->with('Datos Guardados');
+        return redirect()->route('settings.create')->with('message', 'Datos Guardados');
     }
 
     /**
@@ -129,10 +129,15 @@ class BussineController extends Controller
         $bussine->certificate = $request->certificate;
         $bussine->key_private = $request->privatekey;
         $bussine->password = $request->password;
-        $bussine->name_pac = $request->name_pac; 
-        $bussine->password_pac = $request->password_pac; 
+        $bussine->name_pac = $request->name_pac;
+        $bussine->password_pac = $request->password_pac;
         $bussine->logo = $request->logo;
-        return $bussine->save();
+        $result = $bussine->save();
+
+        return ($result)
+            ? $bussine->id
+            : redirect()->route('settings.create')->with('message', 'Error al guardar los datos');
+            
     }
 
     protected function validator(Request $data)
@@ -159,7 +164,7 @@ class BussineController extends Controller
             'password' => 'max:255',
             'name_pac' => 'max:255',
             'password_pac' => 'max:255',
-            'logo' => 'required' // file jpg, jpge, png
+            'logo' => 'required', // file jpg, jpge, png
         ]);
     }
 }
