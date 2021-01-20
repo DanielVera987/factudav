@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace App\Http\Middleware\Bussine;
 
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class BussineMiddleware
+class EditMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,9 +17,8 @@ class BussineMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = Auth::user();
-        if ($user->bussine_id == null) {
-            return redirect(route('settings.create'));
+        if (Auth::user()->bussine_id != $request['setting']) {
+            return redirect()->route('home');
         }
         return $next($request);
     }

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Municipality;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -15,7 +13,8 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'bussine.complete'])->except('getMunicipalities');
+        $this->middleware('auth');
+        $this->middleware('bussine.complete')->except('getMunicipalities');
     }
 
     /**

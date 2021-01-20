@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Bussine;
 use App\Models\Country;
-use App\Models\Municipality;
 use App\Models\State;
 use App\Models\TaxRegimen;
 use Illuminate\Http\Request;
@@ -16,6 +15,8 @@ class BussineController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('bussine.create')->only(['create', 'store']);
+        //$this->middleware('bussine.edit')->only('edit');
     }
     /**
      * Display a listing of the resource.
@@ -79,9 +80,19 @@ class BussineController extends Controller
      * @param  \App\Models\Bussine  $bussine
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bussine $bussine)
+    public function edit($bussine)
     {
-        //
+        $bussine = Bussine::find($bussine);
+        $contries = Country::all();
+        $states = State::all();
+        $tax_regimens = TaxRegimen::all();
+
+        return view('bussine.edit', [
+            'contries' => $contries,
+            'states' => $states,
+            'tax_regimens' => $tax_regimens,
+            'bussine' => $bussine
+        ]);
     }
 
     /**
@@ -91,9 +102,12 @@ class BussineController extends Controller
      * @param  \App\Models\Bussine  $bussine
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bussine $bussine)
+    public function update(Request $request, $bussine)
     {
-        //
+        $this->validator($request);
+        $bussine = $this->createOrUpdate($request);
+
+        return redirect()->route('settings.edit', $bussine)->with('message', 'Datos Actualizados');
     }
 
     /**
