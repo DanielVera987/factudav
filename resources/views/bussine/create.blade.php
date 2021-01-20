@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-<form id="demo-form" method="POST" action="{{ route('settings.store') }}" data-parsley-validate>
+<form id="demo-form" method="POST" action="{{ route('settings.store') }}" enctype="multipart/form-data" data-parsley-validate>
   @csrf
   <div class="x_panel">
     <div class="x_title">

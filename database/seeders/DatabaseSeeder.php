@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         ]);
         
         /* Call Factories */
-        User::factory(10)->create();  
-        Bussine::factory(1)->create();
+        //User::factory(10)->create();  
+        //Bussine::factory(1)->create();
     }
 }

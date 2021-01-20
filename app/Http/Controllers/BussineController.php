@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\State;
 use App\Models\Bussine;
 use App\Models\Country;
-use App\Models\State;
 use App\Models\TaxRegimen;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Municipality;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class BussineController extends Controller
 {
@@ -16,8 +19,9 @@ class BussineController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('bussine.create')->only(['create', 'store']);
-        //$this->middleware('bussine.edit')->only('edit');
+        $this->middleware('bussine.edit')->only(['edit', 'update']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -55,12 +59,20 @@ class BussineController extends Controller
     public function store(Request $request)
     {
         $this->validator($request);
-        $bussine = $this->createOrUpdate($request);
 
-        Auth::user()->bussine_id = $bussine;
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $nameFile = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('images/logos'), $nameFile);
+            $request->logo = $nameFile;
+        }
+
+        $bussineId = $this->createOrUpdate($request);
+
+        Auth::user()->bussine_id = $bussineId;
         Auth::user()->save();
 
-        return redirect()->route('settings.create')->with('message', 'Datos Guardados');
+        return redirect()->route('settings.edit', $bussineId)->with('message', 'Datos Guardados');
     }
 
     /**
@@ -80,16 +92,18 @@ class BussineController extends Controller
      * @param  \App\Models\Bussine  $bussine
      * @return \Illuminate\Http\Response
      */
-    public function edit($bussine)
+    public function edit($id)
     {
-        $bussine = Bussine::find($bussine);
+        $bussine = Bussine::find($id);
         $contries = Country::all();
         $states = State::all();
+        $municipalities = Municipality::where('state_id', $bussine->state_id)->get();
         $tax_regimens = TaxRegimen::all();
 
         return view('bussine.edit', [
             'contries' => $contries,
             'states' => $states,
+            'municipalities' => $municipalities,
             'tax_regimens' => $tax_regimens,
             'bussine' => $bussine
         ]);
@@ -105,6 +119,14 @@ class BussineController extends Controller
     public function update(Request $request, $bussine)
     {
         $this->validator($request);
+        
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $nameFile = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('images/logos'), $nameFile);
+            $request->logo = $nameFile;
+        }
+        
         $bussine = $this->createOrUpdate($request);
 
         return redirect()->route('settings.edit', $bussine)->with('message', 'Datos Actualizados');
@@ -178,7 +200,7 @@ class BussineController extends Controller
             'password' => 'max:255',
             'name_pac' => 'max:255',
             'password_pac' => 'max:255',
-            'logo' => 'required', // file jpg, jpge, png
+            'logo' => 'required|image',
         ]);
     }
 }

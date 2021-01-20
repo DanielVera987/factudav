@@ -44,11 +44,11 @@
                       <div class="center-block">
                         <div class="profile_img">
                           <div id="crop-avatar">
-                            <img class="img-responsive avatar-view center-block" src="{{ asset('/images/davadev.png') }}" width="200" id="previewlogo"  alt="Avatar" title="">
-                            <input type="file" name="logo" value="{{ old('logo') }}" id="logo" data-parsley-trigger="change" required>
+                            <img class="img-responsive avatar-view center-block" src="{{ asset('/images/logos/'. $bussine->logo) }}" width="200" id="previewlogo"  alt="Avatar" title="">
+                            <input type="file" name="logo" value="{{ old('logo') }}" id="logo">
                               @error('logo')
                                 <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
+                                  <strong style="color: red;">{{ $message }}</strong>
                                 </span>
                               @enderror
                             </br>
@@ -170,6 +170,9 @@
                     <label for="municipality">Municipio *:</label>
                     <select id="municipality" name="municipality" class="form-control" value="{{ $bussine->municipality }}" required data-parsley-trigger="change">
                         <option value="" disabled>Seleccionar...</option>
+                        @foreach($municipalities as $value)
+                        <option value="{{ $value->id }}" @if($bussine->municipality_id == $value->id) selected @endif>{{ $value->name }}</option>
+                      @endforeach
                     </select>
                     @error('municipality')
                       <span class="invalid-feedback" role="alert">
