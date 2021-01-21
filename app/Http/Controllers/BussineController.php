@@ -67,7 +67,7 @@ class BussineController extends Controller
             $request->logo = $nameFile;
         }
 
-        $bussineId = $this->createOrUpdate($request);
+        $bussineId = $this->createBussine($request);
 
         Auth::user()->bussine_id = $bussineId;
         Auth::user()->save();
@@ -116,20 +116,69 @@ class BussineController extends Controller
      * @param  \App\Models\Bussine  $bussine
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $bussine)
+    public function update(Request $request, $id)
     {
-        $this->validator($request);
-        
+        $request->validate([
+            'bussine_name' => 'required|string|max:255',
+            'tradename' => 'required|string|max:255',
+            'rfc' => 'required|string|max:255',
+            'email' => 'required|email',
+            'telephone' => 'required|numeric',
+            'type_person' => 'required|string',
+            'taxregimen_id' => 'required|numeric',
+            'country_id' => 'required|numeric',
+            'state_id' => 'required|numeric',
+            'municipality_id' => 'required|numeric',
+            'location' => 'required|string|max:255',
+            'street' => 'required|string|max:255',
+            'colony' => 'required|string|max:255',
+            'zip' => 'required|string|max:255',
+            'no_exterior' => 'required|string|max:255',
+            'no_inside' => 'required|string|max:255',
+            'certificate' => 'max:255', //file .cer
+            'key_private' => 'max:255', //file .key
+            'password' => 'max:255',
+            'name_pac' => 'max:255',
+            'password_pac' => 'max:255',
+            'logo' => 'image',
+        ]);
+
+        $bussine = Bussine::find($id);
+        $bussine->bussine_name = $request->bussine_name;
+        $bussine->tradename = $request->tradename;
+        $bussine->rfc = $request->rfc;
+        $bussine->email = $request->email;
+        $bussine->telephone = $request->telephone;
+        $bussine->type_person = $request->type_person;
+        $bussine->taxregimen_id = $request->taxregimen_id;
+        $bussine->country_id = $request->country_id;
+        $bussine->state_id = $request->state_id;
+        $bussine->municipality_id = $request->municipality_id;
+        $bussine->location = $request->location;
+        $bussine->street = $request->street;
+        $bussine->colony = $request->colony;
+        $bussine->zip = $request->zip;
+        $bussine->no_exterior = $request->no_exterior;
+        $bussine->no_inside = $request->no_inside;
+        $bussine->certificate = $request->certificate;
+        $bussine->key_private = $request->key_private;
+        $bussine->password = $request->password;
+        $bussine->name_pac = $request->name_pac;
+        $bussine->password_pac = $request->password_pac;
+
         if ($request->hasFile('logo')) {
+            $nameImgPrevius = $bussine->logo;
+            unlink(public_path() . '/images/logos/' . $nameImgPrevius);
+
             $file = $request->file('logo');
             $nameFile = time().'_'.$file->getClientOriginalName();
             $file->move(public_path('images/logos'), $nameFile);
-            $request->logo = $nameFile;
+            $bussine->logo = $nameFile;
         }
-        
-        $bussine = $this->createOrUpdate($request);
 
-        return redirect()->route('settings.edit', $bussine)->with('message', 'Datos Actualizados');
+        $result = $bussine->save();
+
+        return redirect()->route('settings.edit', $id)->with('message', 'Datos Guardados');
     }
 
     /**
@@ -143,27 +192,27 @@ class BussineController extends Controller
         //
     }
 
-    protected function createOrUpdate($request)
+    protected function createBussine($request)
     {
-        $bussine = new Bussine;
+        $bussine = new Bussine();
         $bussine->bussine_name = $request->bussine_name;
-        $bussine->tradename = $request->tradaname;
+        $bussine->tradename = $request->tradename;
         $bussine->rfc = $request->rfc;
         $bussine->email = $request->email;
-        $bussine->telephone = $request->phone;
+        $bussine->telephone = $request->telephone;
         $bussine->type_person = $request->type_person;
-        $bussine->taxregimen_id = $request->taxregimen;
-        $bussine->country_id = $request->country;
-        $bussine->state_id = $request->state;
-        $bussine->municipality_id = $request->municipality;
+        $bussine->taxregimen_id = $request->taxregimen_id;
+        $bussine->country_id = $request->country_id;
+        $bussine->state_id = $request->state_id;
+        $bussine->municipality_id = $request->municipality_id;
         $bussine->location = $request->location;
         $bussine->street = $request->street;
         $bussine->colony = $request->colony;
         $bussine->zip = $request->zip;
-        $bussine->no_exterior = $request->noexterior;
-        $bussine->no_inside = $request->nointerior;
+        $bussine->no_exterior = $request->no_exterior;
+        $bussine->no_inside = $request->no_inside;
         $bussine->certificate = $request->certificate;
-        $bussine->key_private = $request->privatekey;
+        $bussine->key_private = $request->key_private;
         $bussine->password = $request->password;
         $bussine->name_pac = $request->name_pac;
         $bussine->password_pac = $request->password_pac;
@@ -180,27 +229,27 @@ class BussineController extends Controller
     {
         return $data->validate([
             'bussine_name' => 'required|string|max:255',
-            'tradaname' => 'required|alpha|max:255',
+            'tradename' => 'required|string|max:255',
             'rfc' => 'required|string|max:255',
             'email' => 'required|email',
-            'phone' => 'required|numeric',
+            'telephone' => 'required|numeric',
             'type_person' => 'required|string',
-            'taxregimen' => 'required|numeric',
-            'country' => 'required|numeric',
-            'state' => 'required|numeric',
-            'municipality' => 'required|numeric',
+            'taxregimen_id' => 'required|numeric',
+            'country_id' => 'required|numeric',
+            'state_id' => 'required|numeric',
+            'municipality_id' => 'required|numeric',
             'location' => 'required|string|max:255',
             'street' => 'required|string|max:255',
             'colony' => 'required|string|max:255',
             'zip' => 'required|string|max:255',
-            'noexterior' => 'required|string|max:255',
-            'nointerior' => 'required|string|max:255',
+            'no_exterior' => 'required|string|max:255',
+            'no_inside' => 'required|string|max:255',
             'certificate' => 'max:255', //file .cer
-            'privatekey' => 'max:255', //file .key
+            'key_private' => 'max:255', //file .key
             'password' => 'max:255',
             'name_pac' => 'max:255',
             'password_pac' => 'max:255',
-            'logo' => 'required|image',
+            'logo' => 'image',
         ]);
     }
 }

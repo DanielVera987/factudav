@@ -14,8 +14,7 @@ class AuthTest extends TestCase
     function test_load_raiz()
     {
         $response = $this->get('/');
-        $response->assertStatus(200)
-            ->assertSee('Login');
+        $response->assertRedirect(route('login'));
     }   
 
     function test_load_view_login()

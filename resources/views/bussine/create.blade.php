@@ -67,8 +67,8 @@
                       </div>
                     
                       <div class="col-md-6">
-                        <label for="tradaname">Nombre Comercial * :</label>
-                        <input type="text" id="tradaname" class="form-control" value="{{ old('tradaname') }}" name="tradaname" required />
+                        <label for="tradename">Nombre Comercial * :</label>
+                        <input type="text" id="tradename" class="form-control" value="{{ old('tradename') }}" name="tradename" required />
                         @error('tradaname')
                           <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -100,9 +100,9 @@
                 </div>
                 <div class="row">
                   <div class="col-md-4">
-                    <label for="phone">Teléfono * :</label>
-                    <input type="tel" id="phone" class="form-control" name="phone" value="{{ old('phone') }}" data-parsley-trigger="change" required />
-                    @error('phone')
+                    <label for="telephone">Teléfono * :</label>
+                    <input type="tel" id="telephone" class="form-control" name="telephone" value="{{ old('telephone') }}" data-parsley-trigger="change" required />
+                    @error('telephone')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
@@ -123,13 +123,13 @@
                   </div>
 
                   <div class="col-md-4">
-                    <label for="taxregimen">Régimen Fiscal *:</label>
-                    <select id="taxregimen" name="taxregimen" class="form-control" value="{{ old('taxregimen') }}" required data-parsley-trigger="change">
+                    <label for="taxregimen_id">Régimen Fiscal *:</label>
+                    <select id="taxregimen_id" name="taxregimen_id" class="form-control" value="{{ old('taxregimen_id') }}" required data-parsley-trigger="change">
                       @foreach($tax_regimens as $value)
                         <option value="{{ $value->id }}">{{ $value->code  }} | {{ $value->name  }}</option>
                       @endforeach
                     </select>
-                    @error('taxregimen')
+                    @error('taxregimen_id')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
@@ -138,13 +138,13 @@
                 </div>
                 <div class="row">
                   <div class="col-md-4">
-                    <label for="country">País * :</label>
-                    <select id="country" class="form-control" name="country" data-parsley-trigger="change" required data-parsley-trigger="change">
+                    <label for="country_id">País * :</label>
+                    <select id="country_id" class="form-control" name="country_id" required data-parsley-trigger="change">
                       @foreach($contries as $value)
                         <option value="{{ $value->id }}">{{ $value->name  }}</option>
                       @endforeach
                     </select>
-                    @error('country')
+                    @error('country_id')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
@@ -152,13 +152,13 @@
                   </div>
   
                   <div class="col-md-4">
-                    <label for="state">Estado *:</label>
-                    <select id="state" name="state" class="form-control" value="{{ old('state') }}" required data-parsley-trigger="change">
+                    <label for="state_id">Estado *:</label>
+                    <select id="state_id" name="state_id" class="form-control" value="{{ old('state_id') }}" required data-parsley-trigger="change">
                       @foreach($states as $value)
                         <option value="{{ $value->id }}">{{ $value->name  }}</option>
                       @endforeach
                     </select>
-                    @error('state')
+                    @error('state_id')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
@@ -166,11 +166,11 @@
                   </div>
   
                   <div class="col-md-4">
-                    <label for="municipality">Municipio *:</label>
-                    <select id="municipality" name="municipality" class="form-control" value="{{ old('municipality') }}" required data-parsley-trigger="change">
+                    <label for="municipality_id">Municipio *:</label>
+                    <select id="municipality_id" name="municipality_id" class="form-control" value="{{ old('municipality_id') }}" required data-parsley-trigger="change">
                         <option value="" disabled>Seleccionar...</option>
                     </select>
-                    @error('municipality')
+                    @error('municipality_id')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
@@ -220,9 +220,9 @@
                   </div>
   
                   <div class="col-md-4">
-                    <label for="noexterior">No. Exterior * :</label>
-                    <input type="text" id="noexterior" name="noexterior" class="form-control" data-parsley-trigger="change" value="{{ old('noexterior') }}" required />
-                    @error('noexterior')
+                    <label for="no_exterior">No. Exterior * :</label>
+                    <input type="text" id="no_exterior" name="noexterior" class="form-control" data-parsley-trigger="change" value="{{ old('no_exterior') }}" required />
+                    @error('no_exterior')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
@@ -230,9 +230,9 @@
                   </div>
   
                   <div class="col-md-4">
-                    <label for="nointerior">No. Interior * :</label>
-                    <input type="text" id="nointerior" name="nointerior" class="form-control" data-parsley-trigger="change" value="{{ old('nointerior') }}" required />
-                    @error('nointerior')
+                    <label for="no_inside">No. Interior * :</label>
+                    <input type="text" id="no_inside" name="no_inside" class="form-control" data-parsley-trigger="change" value="{{ old('no_inside') }}" required />
+                    @error('no_inside')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
@@ -265,9 +265,9 @@
                 </div>
 
                 <div class="col-md-4">
-                  <label for="privatekey">Llave Privada:</label>
-                  <input type="file" class="form-control" id="privatekey" name="privatekey" data-parsley-trigger="change" value="{{ old('privatekey') }}"/>
-                  @error('privatekey')
+                  <label for="key_private">Llave Privada:</label>
+                  <input type="file" class="form-control" id="key_private" name="key_private" data-parsley-trigger="change" value="{{ old('key_private') }}"/>
+                  @error('key_private')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>

@@ -43,7 +43,7 @@ class BussineFactory extends Factory
             'password' => $this->faker->word(),
             'name_pac' => $this->faker->word(),
             'password_pac' => $this->faker->word(),
-            'logo' => $this->faker->word()
+            'logo' => $this->faker->image('public/images/logos/')
         ];
     }
 }
