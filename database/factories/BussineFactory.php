@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Bussine;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 
 class BussineFactory extends Factory
 {
@@ -20,7 +21,9 @@ class BussineFactory extends Factory
      * @return array
      */
     public function definition()
-    {
+    {   
+        $nameFile = UploadedFile::fake()->image('photo1.jpg');
+        //dd($this->faker->image('public/images/logos', 480, 480, null, true, true, 'photo2'));
         return [
             'bussine_name' => $this->faker->company(),
             'tradename' => $this->faker->company(),
@@ -43,7 +46,7 @@ class BussineFactory extends Factory
             'password' => $this->faker->word(),
             'name_pac' => $this->faker->word(),
             'password_pac' => $this->faker->word(),
-            'logo' => $this->faker->image('public/images/logos/')
+            'logo' => $nameFile
         ];
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class BussineTest extends TestCase
 {
@@ -136,10 +137,20 @@ class BussineTest extends TestCase
     function test_edit_company_user_relationship()
     {
 
+        $this->withExceptionHandling();
         DB::table('users')->truncate();
         DB::table('bussines')->truncate();
+
+        $nameFile = UploadedFile::fake()->image('photo1.jpg');
+
+        Storage::fake('logo');
         
-        $bussine = Bussine::factory()->create();
+        $bussine = Bussine::factory()->create([
+            'logo' => $nameFile->hashName()
+        ]);
+            
+        dd($nameFile->hashName());
+
         User::create([
             'bussine_id' => $bussine->id,
             'name' => 'daniel vera',
@@ -155,8 +166,9 @@ class BussineTest extends TestCase
         $this->post('/login', $credentials);
         $this->assertCredentials($credentials);
 
-        $data = $this->from(route('settings.edit', $bussine->id))
-            ->put(route('settings.update', $bussine->id), [
+        $file = UploadedFile::fake()->image('photo1.jpg');
+
+        $this->put(route('settings.update', $bussine->id), [
             'bussine_name' => 'danielvera',
             'tradename' => 'DavaDev',
             'rfc' => 'DAVA98762DA',
@@ -178,7 +190,7 @@ class BussineTest extends TestCase
             'password' => '1234A',
             'name_pac' => 'AAAA',
             'password_pac' => 'AAAA',
-            'logo' =>  UploadedFile::fake()->image('photo1.jpg')
+            'logo' =>  $file
         ])->assertSessionMissing('Datos Guardados');
         
         $this->assertDatabaseHas('bussines', [

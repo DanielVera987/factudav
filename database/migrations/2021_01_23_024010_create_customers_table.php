@@ -1,0 +1,58 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateCustomersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('customers', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('bussine_id')
+                ->reference('id')
+                ->on('bussines');
+            
+            $table->string('bussine_name');
+            $table->string('RFC');
+            $table->string('email')->unique();
+            $table->string('telephone');
+            $table->string('usecfdi_id');
+            $table->string('tradename');
+            $table->foreingId('country_id')
+                ->reference('id')
+                ->on('contries');
+            $table->foreingId('state_id')
+                ->reference('id')
+                ->on('states');
+            $table->foreingId('municipality_id')
+                ->reference('id')
+                ->on('municipalities');
+            $table->string('location');
+            $table->string('street');
+            $table->string('colony');
+            $table->string('zip');
+            $table->string('no_exterior');
+            $table->string('no_inside');
+            $table->string('street_reference');
+            $table->string('type');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('customers');
+    }
+}
