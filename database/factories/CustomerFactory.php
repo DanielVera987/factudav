@@ -22,24 +22,24 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
-            'bussine_id' => '',
-            'bussine_name' => '',
-            'RFC' => '',
-            'email' => '',
-            'telephone' => '',
-            'usecfdi_id' => '',
-            'tradename' => '',
-            'country_id' => '',
-            'state_id' => '',
-            'municipality_id' => '',
-            'location' => '',
-            'street' => '',
-            'colony' => '',
-            'zip' => '',
-            'no_exterior' => '',
-            'no_inside' => '',
-            'street_reference' => '',
-            'type' => '',
+            'bussine_id' => $this->faker->randomDigit(),
+            'bussine_name' => $this->faker->company(),
+            'tradename' => $this->faker->companySuffix(),
+            'rfc' => $this->faker->swiftBicNumber(),
+            'email' => $this->faker->email(),
+            'telephone' => $this->faker->tollFreePhoneNumber(),
+            'usecfdi_id' => $this->faker->randomDigit(),
+            'country_id' => 1,
+            'state_id' => $this->faker->randomDigit(),
+            'municipality_id' => $this->faker->randomDigit(),
+            'location' => $this->faker->cityPrefix(),
+            'street' => $this->faker->streetAddress(),
+            'colony' => $this->faker->country(),
+            'zip' => $this->faker->postcode(),
+            'no_exterior' => $this->faker->buildingNumber(),
+            'no_inside' => $this->faker->buildingNumber(),
+            'street_reference' => $this->faker->address(),
+            'type' => $this->faker->randomDigit(), //1 cliente, 2 proveedor
         ];
     }
 }

@@ -22,4 +22,9 @@ class State extends Model
     {
         return $this->hasMany(Municipality::class);
     }
+
+    public function customer() 
+    {
+        return $this->belongsTo(Customer::class);
+    }
 }

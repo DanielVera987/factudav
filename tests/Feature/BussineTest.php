@@ -77,8 +77,6 @@ class BussineTest extends TestCase
 
     function test_create_company_user_relationship()
     {
-        $this->withoutExceptionHandling();
-
         DB::table('users')->truncate();
 
         $user = User::create([
@@ -136,20 +134,12 @@ class BussineTest extends TestCase
 
     function test_edit_company_user_relationship()
     {
-
+        $this->markTestIncomplete();
         $this->withExceptionHandling();
         DB::table('users')->truncate();
         DB::table('bussines')->truncate();
-
-        $nameFile = UploadedFile::fake()->image('photo1.jpg');
-
-        Storage::fake('logo');
         
-        $bussine = Bussine::factory()->create([
-            'logo' => $nameFile->hashName()
-        ]);
-            
-        dd($nameFile->hashName());
+        $bussine = Bussine::factory()->create();           
 
         User::create([
             'bussine_id' => $bussine->id,

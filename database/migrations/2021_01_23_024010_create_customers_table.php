@@ -20,18 +20,20 @@ class CreateCustomersTable extends Migration
                 ->on('bussines');
             
             $table->string('bussine_name');
-            $table->string('RFC');
+            $table->string('tradename');
+            $table->string('rfc');
             $table->string('email')->unique();
             $table->string('telephone');
             $table->string('usecfdi_id');
-            $table->string('tradename');
-            $table->foreingId('country_id')
+            $table->foreignId('country_id')
                 ->reference('id')
                 ->on('contries');
-            $table->foreingId('state_id')
+
+            $table->foreignId('state_id')
                 ->reference('id')
                 ->on('states');
-            $table->foreingId('municipality_id')
+                
+            $table->foreignId('municipality_id')
                 ->reference('id')
                 ->on('municipalities');
             $table->string('location');

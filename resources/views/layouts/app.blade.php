@@ -41,6 +41,11 @@
                       <i class="fa fa-home"></i> Dashboard
                     </a>
                   </li>
+                  <li>
+                    <a href="{{ route('customers.index') }}">
+                      <i class="fa fa-users"></i> Clientes
+                    </a>
+                  </li>
                 </ul>
               </div>
         

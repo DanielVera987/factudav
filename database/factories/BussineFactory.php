@@ -22,8 +22,8 @@ class BussineFactory extends Factory
      */
     public function definition()
     {   
-        $nameFile = UploadedFile::fake()->image('photo1.jpg');
-        //dd($this->faker->image('public/images/logos', 480, 480, null, true, true, 'photo2'));
+        //$nameFile = $this->faker->image('public/images/logos', 480, 480);
+        //dd($nameFile);
         return [
             'bussine_name' => $this->faker->company(),
             'tradename' => $this->faker->company(),
@@ -46,7 +46,7 @@ class BussineFactory extends Factory
             'password' => $this->faker->word(),
             'name_pac' => $this->faker->word(),
             'password_pac' => $this->faker->word(),
-            'logo' => $nameFile
+            'logo' => ''
         ];
     }
 }

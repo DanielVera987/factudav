@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('bussine.complete');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Customer::with('country', 'state')->get();
+        return view('customer.index', [
+            'customers' => $customers
+        ]);
     }
 
     /**

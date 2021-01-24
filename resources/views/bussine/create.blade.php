@@ -221,7 +221,7 @@
   
                   <div class="col-md-4">
                     <label for="no_exterior">No. Exterior * :</label>
-                    <input type="text" id="no_exterior" name="noexterior" class="form-control" data-parsley-trigger="change" value="{{ old('no_exterior') }}" required />
+                    <input type="text" id="no_exterior" name="no_exterior" class="form-control" data-parsley-trigger="change" value="{{ old('no_exterior') }}" required />
                     @error('no_exterior')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -335,14 +335,19 @@
     <!-- Select2 -->
     <script src="{{ asset('/vendors/select2/dist/js/select2.full.min.js') }}"></script>
     <!-- Country -->
-    <script src="{{ asset('/js/helpers/country.js') }}"></script>
+    {{--  <script src="{{ asset('/js/helpers/country.js') }}"></script>  --}}
     <script>
-      let $select = document.getElementById('municipality');
+      let $select = document.getElementById('municipality_id');
       jQuery(document).ready(function($){
         $(document).ready(function() {
-          $('#state').on('change', function () {
+          $('#taxregimen_id').select2();
+          $('#country_id').select2();
+          $('#state_id').select2();
+          $('#municipality_id').select2();
+
+          $('#state_id').on('change', function () {
             /* Ajax */
-            $.get( "{{ url('/municipalities/') }}" + '/' + $('#state').val(), function( data ) {
+            $.get( "{{ url('/municipalities/') }}" + '/' + $('#state_id').val(), function( data ) {
               remove();
               change(data);
             });
