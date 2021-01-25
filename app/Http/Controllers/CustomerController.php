@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -88,6 +89,10 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        if (Auth::user()->bussine_id === $customer->bussine_id) {
+            $customer->delete();
+        }
+
+        dd('Hola esto no es tuyo');
     }
 }

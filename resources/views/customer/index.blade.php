@@ -57,12 +57,20 @@
                       <td>{{ $customer->rfc}}</td>
                       <td>{{ $customer->email}}</td>
                       <td>{{ $customer->telephone}}</td>
-                      <td>{{ $customer->country->name}}</td>
-                      <td>{{ $customer->state->name ?? 'NaN'}}</td>
+                      <td>{{ $customer->country->abbreviation}}</td>
+                      <td>{{ $customer->state->abbreviation ?? 'NaN'}}</td>
                       <td>
                         <div class="btn-group btn-group-sm  ">
                           <button class="btn btn-info" type="button"><i class="fa fa-edit"></i></button>
-                          <button class="btn btn-danger" type="button"><i class="fa fa-trash-o"></i></button>
+                          <button class="btn btn-danger" type="button"
+                            onclick="event.preventDefault(); document.getElementById('form_destroy').submit();">
+                            <i class="fa fa-trash-o"></i>
+                          </button>
+
+                          <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" id="form_destroy">
+                            @csrf 
+                            @method('delete')
+                          </form>
                         </div>
                       </td>
                     </tr>
