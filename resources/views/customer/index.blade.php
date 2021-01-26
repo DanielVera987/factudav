@@ -19,9 +19,9 @@
 
         <div class="title_right">
           <div style="float: right;">
-            <button class="btn btn-success" type="button">
+            <a href="{{ route('customers.create') }}" class="btn btn-success" type="button">
               Crear Nuevo
-            </button>
+            </a>
           </div>
         </div>
       </div>

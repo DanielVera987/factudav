@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\State;
+use App\Models\Country;
 use App\Models\Customer;
+use App\Models\TaxRegimen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +36,15 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        $contries = Country::all();
+        $states = State::all();
+        $tax_regimens = TaxRegimen::all();
+
+        return view('customer.create', [
+            'contries' => $contries,
+            'states' => $states,
+            'tax_regimens' => $tax_regimens,
+        ]);
     }
 
     /**
