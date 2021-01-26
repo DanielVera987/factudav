@@ -77,6 +77,26 @@ class CustomerTest extends TestCase
         $response->assertSee(['davadev', 'danielveraangulo703@gmail.com']);
     }
 
+    function test_delete_customer() 
+    {
+        DB::table('customers')->truncate();
+
+        $this->authentication();
+
+        $customer = Customer::factory()->create([
+            'bussine_name' => 'davadev',
+            'bussine_id' => 1
+        ]);
+
+        $this->assertDatabaseHas('customers', [
+            'bussine_name' => 'davadev'
+        ]);
+
+        $this->delete(route('customers.destroy', $customer->id));
+
+        $this->assertDeleted($customer);
+    }
+
     protected function authentication($bussine = 1)
     {
         DB::table('users')->truncate();

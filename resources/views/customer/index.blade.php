@@ -29,6 +29,11 @@
       <div class="clearfix"></div>
 
       <div class="row">
+        @if(session()->has('success'))
+          <div class="alert alert-success">
+              {{ session()->get('success') }}
+          </div>
+        @endif
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_title"></div>

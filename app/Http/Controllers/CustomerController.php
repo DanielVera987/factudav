@@ -20,7 +20,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Customer::with('country', 'state')->get();
+        $customers = Customer::with('country', 'state')->where('bussine_id', Auth::user()->bussine_id)->get();
         return view('customer.index', [
             'customers' => $customers
         ]);
@@ -89,10 +89,11 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        if (Auth::user()->bussine_id === $customer->bussine_id) {
-            $customer->delete();
+        if (Auth::user()->bussine_id != $customer->bussine_id) {
+            return abort(404);
         }
-
-        dd('Hola esto no es tuyo');
+        
+        $customer->delete();
+        return redirect()->route('customers.index')->with('success', 'Cliente eliminado con exito');
     }
 }
