@@ -42,7 +42,7 @@ class CreateCustomersTable extends Migration
             $table->string('zip');
             $table->string('no_exterior');
             $table->string('no_inside');
-            $table->string('street_reference');
+            $table->string('street_reference')->nullable();
             $table->string('type');
             $table->timestamps();
         });

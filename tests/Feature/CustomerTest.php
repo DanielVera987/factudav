@@ -97,6 +97,36 @@ class CustomerTest extends TestCase
         $this->assertDeleted($customer);
     }
 
+    function test_create_customer()
+    {
+        $this->withExceptionHandling();
+        $this->authentication();
+
+        $this->post(route('customers.store'), [
+            'bussine_name' => 'Davadev',
+            'tradename' => 'Davadev software',
+            'rfc' => 'DAVADEV875348957',
+            'email' => 'davadev@gmail.com',
+            'telephone' => '9999',
+            'usecfdi_id' => 1,
+            'country_id' => 1,
+            'state_id' => 1,
+            'municipality_id' => 1,
+            'location' => 'Cozumel',
+            'street' => 'calle 1',
+            'colony' => 'San miguel',
+            'zip' => '77777',
+            'no_exterior' => '0',
+            'no_inside' => '0',
+            'street_reference' => 'Ahi lejos'
+        ])->assertRedirect(route('customers.index'))->assertSessionMissing('Cliente creado');
+
+        $this->assertDatabaseHas('customers', [
+            'bussine_name' => 'Davadev',
+            'rfc' => 'DAVADEV875348957'
+        ]);
+    }
+
     protected function authentication($bussine = 1)
     {
         DB::table('users')->truncate();

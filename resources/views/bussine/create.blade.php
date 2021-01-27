@@ -39,7 +39,7 @@
             <span class="clearfix"></span>
                 <div class="row">
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
                       <div class="center-block">
                         <div class="profile_img">
                           <div id="crop-avatar">
@@ -55,8 +55,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-8">
-                      <div class="col-md-6">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                      <div class="col-md-6 col-sm-6 col-xs-12">
                         <label for="bussine_name">Razón Social * :</label>
                         <input type="text" id="bussine_name" class="form-control" value="{{ old('bussine_name') }}" name="bussine_name" required />
                         @error('bussine_name')
@@ -66,7 +66,7 @@
                         @enderror
                       </div>
                     
-                      <div class="col-md-6">
+                      <div class="col-md-6 col-sm-6 col-xs-12">
                         <label for="tradename">Nombre Comercial * :</label>
                         <input type="text" id="tradename" class="form-control" value="{{ old('tradename') }}" name="tradename" required />
                         @error('tradaname')
@@ -76,7 +76,7 @@
                         @enderror
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-md-6 col-sm-6 col-xs-12">
                         <label for="rfc">RFC * :</label>
                         <input type="text" id="rfc" class="form-control" name="rfc" value="{{ old('rfc') }}" data-parsley-trigger="change" required />
                         @error('rfc')
@@ -86,7 +86,7 @@
                         @enderror
                       </div>
     
-                      <div class="col-md-6">
+                      <div class="col-md-6 col-sm-6 col-xs-12">
                         <label for="email">Correo Electrónico * :</label>
                         <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}" data-parsley-trigger="change" required />
                         @error('email')
@@ -99,7 +99,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="telephone">Teléfono * :</label>
                     <input type="tel" id="telephone" class="form-control" name="telephone" value="{{ old('telephone') }}" data-parsley-trigger="change" required />
                     @error('telephone')
@@ -109,7 +109,7 @@
                     @enderror
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="type_person">Tipo Persona *:</label>
                     <select id="type_person" name="type_person" class="form-control" value="{{ old('type_person') }}" required data-parsley-trigger="change">
                       <option value="M">Moral</option>
@@ -122,7 +122,7 @@
                     @enderror
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="taxregimen_id">Régimen Fiscal *:</label>
                     <select id="taxregimen_id" name="taxregimen_id" class="form-control" value="{{ old('taxregimen_id') }}" required data-parsley-trigger="change">
                       @foreach($tax_regimens as $value)
@@ -137,7 +137,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="country_id">País * :</label>
                     <select id="country_id" class="form-control" name="country_id" required data-parsley-trigger="change">
                       @foreach($contries as $value)
@@ -151,7 +151,7 @@
                     @enderror
                   </div>
   
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="state_id">Estado *:</label>
                     <select id="state_id" name="state_id" class="form-control" value="{{ old('state_id') }}" required data-parsley-trigger="change">
                       @foreach($states as $value)
@@ -165,7 +165,7 @@
                     @enderror
                   </div>
   
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="municipality_id">Municipio *:</label>
                     <select id="municipality_id" name="municipality_id" class="form-control" value="{{ old('municipality_id') }}" required data-parsley-trigger="change">
                         <option value="" disabled>Seleccionar...</option>
@@ -178,7 +178,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="location">Localidad * :</label>
                     <input type="text" id="location" name="location" class="form-control" data-parsley-trigger="change" value="{{ old('location') }}" required />
                     @error('location')
@@ -188,7 +188,7 @@
                     @enderror
                   </div>
   
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="street">Calle * :</label>
                     <input type="text" id="street" name="street" class="form-control" data-parsley-trigger="change" value="{{ old('street') }}" required />
                     @error('street')
@@ -198,7 +198,7 @@
                     @enderror
                   </div>
   
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="colony">Colonia * :</label>
                     <input type="text" id="colony" name="colony" class="form-control" data-parsley-trigger="change" value="{{ old('colony') }}" required />
                     @error('colony')
@@ -209,7 +209,7 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="zip">Código Postal * :</label>
                     <input type="text" id="zip" name="zip" class="form-control" data-parsley-trigger="change" value="{{ old('zip') }}" required />
                     @error('zip')
@@ -219,7 +219,7 @@
                     @enderror
                   </div>
   
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="no_exterior">No. Exterior * :</label>
                     <input type="text" id="no_exterior" name="no_exterior" class="form-control" data-parsley-trigger="change" value="{{ old('no_exterior') }}" required />
                     @error('no_exterior')
@@ -229,7 +229,7 @@
                     @enderror
                   </div>
   
-                  <div class="col-md-4">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="no_inside">No. Interior * :</label>
                     <input type="text" id="no_inside" name="no_inside" class="form-control" data-parsley-trigger="change" value="{{ old('no_inside') }}" required />
                     @error('no_inside')
@@ -241,7 +241,7 @@
                 </div>
                 <div class="row">
                   <br/>
-                  <div class="col-md-12">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
                     </br>
                     <div class="actionBar">
                       <button class="btn btn-primary float-rigth" role="tab" id="profile-tab" onclick="document.getElementById('profile-tab2').click();" data-toggle="tab" aria-expanded="false">Siguiente</button>
@@ -254,7 +254,7 @@
 
           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">    
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="certificate">Certificado:</label>
                   <input type="file" class="form-control" id="certificate" name="certificate" data-parsley-trigger="change" value="{{ old('centificate') }}"/>
                   @error('certificate')
@@ -264,7 +264,7 @@
                   @enderror
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="key_private">Llave Privada:</label>
                   <input type="file" class="form-control" id="key_private" name="key_private" data-parsley-trigger="change" value="{{ old('key_private') }}"/>
                   @error('key_private')
@@ -274,7 +274,7 @@
                   @enderror
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="password">Contraseña:</label>
                   <input type="password" id="password" name="password" class="form-control" data-parsley-trigger="change" value="{{ old('password') }}"/>
                   @error('password')
@@ -284,7 +284,7 @@
                   @enderror
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="name_pac">PAC:</label>
                   <input type="text" id="name_pac" name="name_pac" class="form-control" data-parsley-trigger="change" value="{{ old('name_pac') }}"/>
                   @error('name_pac')
@@ -294,7 +294,7 @@
                   @enderror
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="password_pac">Contraseña PAC:</label>
                   <input type="text" id="password_pac" name="password_pac" class="form-control" data-parsley-trigger="change" value="{{ old('password_pac') }}"/>
                   @error('password_pac')
@@ -309,7 +309,7 @@
                   </br>
                   <div class="actionBar">
                     <button class="btn btn-primary float-rigth" role="tab" onclick="document.getElementById('home-tab').click();" data-toggle="tab" aria-expanded="false">Anterior</button>
-                    <input type="submit" class="btn btn-primary float-rigth" value="Guardar">
+                    <input type="submit" class="btn btn-success float-rigth" value="Guardar">
                   </div>
                 </div>
               </div>      

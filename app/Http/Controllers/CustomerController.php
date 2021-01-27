@@ -55,7 +55,32 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bussine_id = Auth::user()->bussine_id;
+        $request->validate([
+            'bussine_name' => 'required|string|max:255',
+            'tradename' => 'required|string|max:255',
+            'rfc' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:customers',
+            'telephone' => 'required|numeric',
+            'usecfdi_id' => 'required|numeric',
+            'country_id' => 'required|numeric',
+            'state_id' => 'required|numeric',
+            'municipality_id' => 'required|numeric',
+            'location' => 'required|string|max:255',
+            'street' => 'required|string|max:255',
+            'colony' => 'required|string|max:255',
+            'zip' => 'required|string|max:255',
+            'no_exterior' => 'required|string|max:255',
+            'no_inside' => 'required|string|max:255',
+            'street_reference' => 'string|max:255'
+        ]);
+
+        $request['bussine_id'] = $bussine_id;
+        $request['type'] = 1; //Cliente
+
+        $customer = Customer::create($request->all());
+
+        return redirect()->route('customers.index')->with('success', 'Cliente creado');
     }
 
     /**

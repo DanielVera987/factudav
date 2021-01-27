@@ -31,7 +31,7 @@
       <div class="row">
         @if(session()->has('success'))
           <div class="alert alert-success">
-              {{ session()->get('success') }}
+            <strong>{{ session()->get('success') }}</strong>
           </div>
         @endif
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -65,17 +65,15 @@
                       <td>{{ $customer->country->abbreviation}}</td>
                       <td>{{ $customer->state->abbreviation ?? 'NaN'}}</td>
                       <td>
-                        <div class="btn-group btn-group-sm  ">
+                        <div class="btn-group btn-group-sm">
                           <button class="btn btn-info" type="button"><i class="fa fa-edit"></i></button>
-                          <button class="btn btn-danger" type="button"
-                            onclick="event.preventDefault(); document.getElementById('form_destroy').submit();">
-                            <i class="fa fa-trash-o"></i>
-                          </button>
 
-                          <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" id="form_destroy">
+                          <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
                             @csrf 
                             @method('delete')
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
                           </form>
+                          
                         </div>
                       </td>
                     </tr>
