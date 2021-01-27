@@ -143,7 +143,7 @@ class BussineController extends Controller
             'logo' => 'image',
         ]);
 
-        $bussine = Bussine::find($id);
+        $bussine = Bussine::findOrFail($id);
         $bussine->bussine_name = $request->bussine_name;
         $bussine->tradename = $request->tradename;
         $bussine->rfc = $request->rfc;
