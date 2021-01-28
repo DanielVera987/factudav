@@ -22,7 +22,7 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
-            'bussine_id' => $this->faker->randomDigit(),
+            'bussine_id' => 1,
             'bussine_name' => $this->faker->company(),
             'tradename' => $this->faker->companySuffix(),
             'rfc' => $this->faker->swiftBicNumber(),

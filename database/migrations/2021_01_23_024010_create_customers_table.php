@@ -24,7 +24,10 @@ class CreateCustomersTable extends Migration
             $table->string('rfc');
             $table->string('email')->unique();
             $table->string('telephone');
-            $table->string('usecfdi_id');
+            $table->foreignId('usecfdi_id')
+                ->reference('id')
+                ->on('usecfdis');
+                
             $table->foreignId('country_id')
                 ->reference('id')
                 ->on('contries');

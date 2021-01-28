@@ -20,15 +20,16 @@
 @section('content')
 <div class="page-title">
   <div class="title_left">
-    <h3>Agregar Cliente</h3>
+    <h3>Actualizar Cliente</h3>
   </div>
 
   <div class="title_right">
     
   </div>
 </div>
-<form id="demo-form" method="POST" action="{{ route('customers.store') }}" enctype="multipart/form-data" data-parsley-validate>
+<form id="demo-form" method="POST" action="{{ route('customers.update', $customer->id) }}" data-parsley-validate>
   @csrf
+  @method('put')
   <div class="x_panel">
     <div class="x_title">
       <div class="clearfix"></div>
@@ -55,7 +56,7 @@
               <div class="row">  
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="bussine_name">Razón Social *:</label>
-                  <input type="text" id="bussine_name" name="bussine_name" class="form-control" data-parsley-trigger="change" value="{{ old('bussine_name') }}" required />
+                  <input type="text" id="bussine_name" name="bussine_name" class="form-control" data-parsley-trigger="change" value="{{ $customer->bussine_name }}" required />
                   @error('bussine_name')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -65,7 +66,7 @@
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="tradename">Nombre Comercial * :</label>
-                  <input type="text" id="tradename" name="tradename" class="form-control" data-parsley-trigger="change" value="{{ old('tradename') }}" required />
+                  <input type="text" id="tradename" name="tradename" class="form-control" data-parsley-trigger="change" value="{{ $customer->tradename }}" required />
                   @error('tradename')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -77,7 +78,7 @@
               <div class="row">  
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="rfc">RFC * :</label>
-                  <input type="text" id="rfc" class="form-control" name="rfc" value="{{ old('rfc') }}" data-parsley-trigger="change" required />
+                  <input type="text" id="rfc" class="form-control" name="rfc" value="{{ $customer->rfc }}" data-parsley-trigger="change" required />
                   @error('rfc')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -87,7 +88,7 @@
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="email">Email * :</label>
-                  <input type="email" id="email" name="email" class="form-control" data-parsley-trigger="change" value="{{ old('email') }}" required />
+                  <input type="email" id="email" name="email" class="form-control" data-parsley-trigger="change" value="{{ $customer->email }}" required />
                   @error('email')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -99,7 +100,7 @@
               <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="telephone">Telefono *:</label>
-                  <input type="tel" id="telephone" class="form-control" name="telephone" value="{{ old('telephone') }}" data-parsley-trigger="change" required />
+                  <input type="tel" id="telephone" class="form-control" name="telephone" value="{{ $customer->telephone }}" data-parsley-trigger="change" required />
                   @error('telephone')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -109,9 +110,9 @@
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="usecfdi_id">Uso de CFDI *:</label>
-                  <select id="usecfdi_id" name="usecfdi_id" class="form-control select2" value="{{ old('usecfdi_id') }}" required data-parsley-trigger="change">
+                  <select id="usecfdi_id" name="usecfdi_id" class="form-control select2" value="{{ $customer->usecfdi_id }}" required data-parsley-trigger="change">
                     @foreach($usecfdis as $value)
-                      <option value="{{ $value->id }}">{{ $value->code  }} | {{ $value->name  }}</option>
+                      <option value="{{ $value->id }}" @if($value->id == $customer->usecfdi_id) selected  @endif>{{ $value->code  }} | {{ $value->name  }}</option>
                     @endforeach
                   </select>
                   @error('usecfdi_id')
@@ -142,7 +143,7 @@
                   <label for="country_id">País * :</label>
                   <select id="country_id" class="form-control" name="country_id" required data-parsley-trigger="change">
                     @foreach($contries as $value)
-                      <option value="{{ $value->id }}">{{ $value->name  }}</option>
+                      <option value="{{ $value->id }}" @if($value->id == $customer->country_id) selected  @endif>{{ $value->name  }}</option>
                     @endforeach
                   </select>
                   @error('country_id')
@@ -154,9 +155,9 @@
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="state_id">Estado *:</label>
-                  <select id="state_id" name="state_id" class="form-control select2" value="{{ old('state_id') }}" required data-parsley-trigger="change">
+                  <select id="state_id" name="state_id" class="form-control select2" value="{{ $customer->state_id }}" required data-parsley-trigger="change">
                     @foreach($states as $value)
-                      <option value="{{ $value->id }}">{{ $value->name  }}</option>
+                      <option value="{{ $value->id }}" @if($value->id == $customer->state_id) selected  @endif>{{ $value->name  }}</option>
                     @endforeach
                   </select>
                   @error('state_id')
@@ -170,7 +171,7 @@
               <div class="row">  
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="municipality_id">Municipio *:</label>
-                  <select id="municipality_id" name="municipality_id" class="form-control select2" value="{{ old('municipality_id') }}" required data-parsley-trigger="change">
+                  <select id="municipality_id" name="municipality_id" class="form-control select2" value="{{ $customer->municipality_id }}" required data-parsley-trigger="change">
                       <option value="" disabled>Seleccionar...</option>
                   </select>
                   @error('municipality_id')
@@ -182,7 +183,7 @@
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="no_inside">No. Interior * :</label>
-                  <input type="text" id="no_inside" name="no_inside" class="form-control" data-parsley-trigger="change" value="{{ old('no_inside') }}" required />
+                  <input type="text" id="no_inside" name="no_inside" class="form-control" data-parsley-trigger="change" value="{{ $customer->no_inside }}" required />
                   @error('no_inside')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -194,7 +195,7 @@
               <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="location">Localidad * :</label>
-                  <input type="text" id="location" name="location" class="form-control" data-parsley-trigger="change" value="{{ old('location') }}" required />
+                  <input type="text" id="location" name="location" class="form-control" data-parsley-trigger="change" value="{{ $customer->location }}" required />
                   @error('location')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -204,7 +205,7 @@
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="street">Calle * :</label>
-                  <input type="text" id="street" name="street" class="form-control" data-parsley-trigger="change" value="{{ old('street') }}" required />
+                  <input type="text" id="street" name="street" class="form-control" data-parsley-trigger="change" value="{{ $customer->street }}" required />
                   @error('street')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -216,7 +217,7 @@
               <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="colony">Colonia * :</label>
-                  <input type="text" id="colony" name="colony" class="form-control" data-parsley-trigger="change" value="{{ old('colony') }}" required />
+                  <input type="text" id="colony" name="colony" class="form-control" data-parsley-trigger="change" value="{{ $customer->colony }}" required />
                   @error('colony')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -226,7 +227,7 @@
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="zip">Código Postal * :</label>
-                  <input type="text" id="zip" name="zip" class="form-control" data-parsley-trigger="change" value="{{ old('zip') }}" required />
+                  <input type="text" id="zip" name="zip" class="form-control" data-parsley-trigger="change" value="{{ $customer->zip }}" required />
                   @error('zip')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -238,7 +239,7 @@
               <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="no_exterior">No. Exterior * :</label>
-                  <input type="text" id="no_exterior" name="no_exterior" class="form-control" data-parsley-trigger="change" value="{{ old('no_exterior') }}" required />
+                  <input type="text" id="no_exterior" name="no_exterior" class="form-control" data-parsley-trigger="change" value="{{ $customer->no_exterior }}" required />
                   @error('no_exterior')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -248,7 +249,7 @@
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="no_inside">No. Interior * :</label>
-                  <input type="text" id="no_inside" name="no_inside" class="form-control" data-parsley-trigger="change" value="{{ old('no_inside') }}" required />
+                  <input type="text" id="no_inside" name="no_inside" class="form-control" data-parsley-trigger="change" value="{{ $customer->no_inside }}" required />
                   @error('no_inside')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -260,7 +261,7 @@
               <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="street_reference">Referencias de domicilio:</label>
-                  <textarea id="street_reference" name="street_reference" class="form-control select2" value="{{ old('street_reference') }}"></textarea>
+                  <textarea id="street_reference" name="street_reference" class="form-control select2">{{ $customer->street_reference }}</textarea>
                   @error('street_reference')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>

@@ -39,4 +39,9 @@ class Customer extends Model
     {        
         return $this->belongsTo(State::class);
     }
+
+    public function usecfdi()
+    {
+        return $this->belongsTo(Usecfdi::class);
+    }
 }

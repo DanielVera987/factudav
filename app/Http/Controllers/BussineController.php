@@ -94,7 +94,7 @@ class BussineController extends Controller
      */
     public function edit($id)
     {
-        $bussine = Bussine::find($id);
+        $bussine = Bussine::findOrFail($id);
         $contries = Country::all();
         $states = State::all();
         $municipalities = Municipality::where('state_id', $bussine->state_id)->get();

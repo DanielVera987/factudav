@@ -18,7 +18,7 @@ class EditMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::user()->bussine_id != $request['setting']) {
-            return redirect()->route('home');
+            return abort(404);
         }
         return $next($request);
     }

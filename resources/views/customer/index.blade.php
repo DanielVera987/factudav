@@ -66,12 +66,12 @@
                       <td>{{ $customer->state->abbreviation ?? 'NaN'}}</td>
                       <td>
                         <div class="btn-group btn-group-sm">
-                          <button class="btn btn-info" type="button"><i class="fa fa-edit"></i></button>
+                          <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
 
                           <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
                             @csrf 
                             @method('delete')
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
                           </form>
                           
                         </div>

@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\Bussine;
 use App\Models\Customer;
 use Illuminate\Database\Seeder;
 
@@ -22,6 +20,7 @@ class DatabaseSeeder extends Seeder
             StateSeeder::class,
             MunicipalitySeeder::class,
             TaxRegimenSeeder::class,
+            UsecfdiSeeder::class,
             UserSeeder::class
         ]);
         

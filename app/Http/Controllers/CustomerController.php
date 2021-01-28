@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\State;
 use App\Models\Country;
+use App\Models\Usecfdi;
 use App\Models\Customer;
 use App\Models\TaxRegimen;
 use Illuminate\Http\Request;
@@ -39,11 +40,13 @@ class CustomerController extends Controller
         $contries = Country::all();
         $states = State::all();
         $tax_regimens = TaxRegimen::all();
+        $usecfdis = Usecfdi::all();
 
         return view('customer.create', [
             'contries' => $contries,
             'states' => $states,
             'tax_regimens' => $tax_regimens,
+            'usecfdis' => $usecfdis,
         ]);
     }
 
@@ -60,7 +63,7 @@ class CustomerController extends Controller
             'tradename' => 'required|string|max:255',
             'rfc' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:customers',
-            'telephone' => 'required|numeric',
+            'telephone' => 'required|string',
             'usecfdi_id' => 'required|numeric',
             'country_id' => 'required|numeric',
             'state_id' => 'required|numeric',
@@ -102,7 +105,18 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        $contries = Country::all();
+        $states = State::all();
+        $tax_regimens = TaxRegimen::all();
+        $usecfdis = Usecfdi::all();
+        
+        return view('customer.edit', [
+            'contries' => $contries,
+            'states' => $states,
+            'tax_regimens' => $tax_regimens,
+            'usecfdis' => $usecfdis,
+            'customer' => $customer
+        ]);
     }
 
     /**
@@ -118,8 +132,8 @@ class CustomerController extends Controller
             'bussine_name' => 'required|string|max:255',
             'tradename' => 'required|string|max:255',
             'rfc' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:customers',
-            'telephone' => 'required|numeric',
+            'email' => 'required|email|max:255|unique:customers,email,'.$customer->id,
+            'telephone' => 'required|string',
             'usecfdi_id' => 'required|numeric',
             'country_id' => 'required|numeric',
             'state_id' => 'required|numeric',

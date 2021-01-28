@@ -158,6 +158,19 @@ class CustomerTest extends TestCase
         ]);
     }
 
+    function test_view_edit_customer()
+    {
+        DB::table('customers')->truncate();
+        $this->authentication();
+
+        $customer = Customer::factory()->create();
+
+        $response = $this->get(route('customers.edit', $customer->id));
+        $response->assertStatus(200)
+                ->assertSee('Actualizar Cliente')
+                ->assertSee($customer->bussine_name);
+    }
+
     protected function authentication($bussine = 1)
     {
         DB::table('users')->truncate();
