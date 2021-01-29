@@ -53,4 +53,14 @@ class Bussine extends Model
     public function taxregimen() {
         return $this->belongsTo(TaxRegimen::class);
     }
+
+    public function tax()
+    {
+        return $this->hasMany(Tax::class);
+    }
+
+    public function currency()
+    {
+        return $this->hasMany(Currency::class);
+    }
 }

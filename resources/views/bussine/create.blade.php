@@ -29,7 +29,11 @@
         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
           <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Datos Generales</a>
           </li>
-          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Configuración Facturación</a>
+          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Facturación</a>
+          </li>
+          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Impuestos</a>
+          </li>
+          <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab4" data-toggle="tab" aria-expanded="false">Monedas</a>
           </li>
         </ul>
         <div id="myTabContent" class="tab-content">
@@ -44,6 +48,7 @@
                         <div class="profile_img">
                           <div id="crop-avatar">
                             <img class="img-responsive avatar-view center-block" src="{{ asset('/images/davadev.png') }}" width="200" id="previewlogo"  alt="Avatar" title="">
+                            <label for="logo">Logo * :</label>
                             <input type="file" name="logo" value="{{ old('logo') }}" id="logo" data-parsley-trigger="change" required>
                               @error('logo')
                                 <span class="invalid-feedback" role="alert">
@@ -309,10 +314,142 @@
                   </br>
                   <div class="actionBar">
                     <button class="btn btn-primary float-rigth" role="tab" onclick="document.getElementById('home-tab').click();" data-toggle="tab" aria-expanded="false">Anterior</button>
-                    <input type="submit" class="btn btn-success float-rigth" value="Guardar">
+                    <button class="btn btn-primary float-rigth" role="tab" id="profile-tab" onclick="document.getElementById('profile-tab3').click();" data-toggle="tab" aria-expanded="false">Siguiente</button>
                   </div>
                 </div>
               </div>      
+          </div>
+
+          <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">    
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <div style="float: right;">
+                      <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Agregar Moneda</button>
+                    </div>
+                    <!-- Small modal -->
+                    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+                      <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel2">Agregar Moneda</h4>
+                          </div>
+                          <div class="modal-body">
+                            <p>
+                              <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                  <label for="code_currency_modal">Codigo * <small>(ejemplo: MXN, USD, EUR)</small></label>
+                                  <input type="text" id="code_currency_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                  <label for="name_currency_modal">Nombre * <small>(ejemplo: peso mexicano)</small></label>
+                                  <input type="text" id="name_currency_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+                                </div>
+
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                  <label for="type_currency_modal">Tipo de cambio * <small>(ejemplo: 1.0, 21.23)</small></label>
+                                  <input type="text" id="type_currency_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+                                </div>
+                              </div>
+                            </p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">Agregar</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /modals -->
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table class="table table-striped" id="table_currency">
+                      <thead>
+                        <tr>
+                          <th>Codigo</th>
+                          <th>Nombre</th>
+                          <th>Tipo de Cambio</th>
+                          <th>Admin</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>MXN</td>
+                          <td>Peso mexicano</td>
+                          <td>$1.00</td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+
+              <br/>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                </br>
+                <div class="actionBar">
+                  <button class="btn btn-primary float-rigth" role="tab" onclick="document.getElementById('profile-tab2').click();" data-toggle="tab" aria-expanded="false">Anterior</button>
+                  <button class="btn btn-primary float-rigth" role="tab" id="profile-tab" onclick="document.getElementById('profile-tab4').click();" data-toggle="tab" aria-expanded="false">Siguiente</button>
+                </div>
+              </div>
+            </div>      
+          </div>
+
+          <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">    
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <div style="float: right;">
+                      <a href="#" class="btn btn-success" type="button">
+                        Agregar Impuesto
+                      </a>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Tasa</th>
+                          <th>Tipo factor</th>
+                          <th>Tipo</th>
+                          <th>Admin</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>IVA</td>
+                          <td>0.16</td>
+                          <td>Tasa</td>
+                          <td>Traslado</td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+
+              <br/>
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                </br>
+                <div class="actionBar">
+                  <button class="btn btn-primary float-rigth" role="tab" onclick="document.getElementById('profile-tab3').click();" data-toggle="tab" aria-expanded="false">Anterior</button>
+                  <input type="submit" class="btn btn-primary float-rigth" value="Guardar">
+                </div>
+              </div>
+            </div>      
           </div>
 
         </div>
@@ -334,8 +471,14 @@
     <script src="{{ asset('/vendors/switchery/dist/switchery.min.js') }}"></script>
     <!-- Select2 -->
     <script src="{{ asset('/vendors/select2/dist/js/select2.full.min.js') }}"></script>
+    <!-- Autosize -->
+    <script src="{{ asset('/vendors/autosize/dist/autosize.min.js') }}"></script>
+    <!-- jQuery autocomplete -->
+    <script src="{{ asset('/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js') }}"></script>
+    <!-- starrr -->
+    <script src="{{ asset('/vendors/starrr/dist/starrr.js') }}"></script>
     <!-- Country -->
-    {{--  <script src="{{ asset('/js/helpers/country.js') }}"></script>  --}}
+    <script src="{{ asset('/js/helpers/country.js') }}"></script>
     <script>
       let $select = document.getElementById('municipality_id');
       jQuery(document).ready(function($){
@@ -381,12 +524,4 @@
         });
       });
     </script>
-    <!-- Parsley -->
-    <script src="{{ asset('/vendors/parsleyjs/dist/parsley.min.js') }}"></script>
-    <!-- Autosize -->
-    <script src="{{ asset('/vendors/autosize/dist/autosize.min.js') }}"></script>
-    <!-- jQuery autocomplete -->
-    <script src="{{ asset('/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js') }}"></script>
-    <!-- starrr -->
-    <script src="{{ asset('/vendors/starrr/dist/starrr.js') }}"></script>
 @endsection

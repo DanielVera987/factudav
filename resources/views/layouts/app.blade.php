@@ -233,11 +233,13 @@
     <!-- bootstrap-daterangepicker -->
     <script src="{{ asset('/vendors/moment/min/moment.min.js') }}"></script>
     <script src="{{ asset('/vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <!-- Parsley -->
+    <script src="{{ asset('/vendors/parsleyjs/dist/parsley.min.js') }}"></script>
 
-    @yield('script')
-
+    
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('/js/custom.min.js') }}"></script>
+    @yield('script')
 	
   </body>
 </html>

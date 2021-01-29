@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tax;
+use App\Models\Currency;
 use App\Models\Customer;
 use Illuminate\Database\Seeder;
 
@@ -27,6 +29,8 @@ class DatabaseSeeder extends Seeder
         /* Call Factories */
         //User::factory(10)->create();  
         //Bussine::factory(1)->create();
+        Currency::factory()->create();
+        Tax::factory()->create();
         Customer::factory(10)->create();
     }
 }

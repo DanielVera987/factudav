@@ -16,7 +16,7 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('bussine_id')
-                ->reference('id')
+                ->references('id')
                 ->on('bussines');
             
             $table->string('bussine_name');
@@ -29,15 +29,15 @@ class CreateCustomersTable extends Migration
                 ->on('usecfdis');
                 
             $table->foreignId('country_id')
-                ->reference('id')
+                ->references('id')
                 ->on('contries');
 
             $table->foreignId('state_id')
-                ->reference('id')
+                ->references('id')
                 ->on('states');
                 
             $table->foreignId('municipality_id')
-                ->reference('id')
+                ->references('id')
                 ->on('municipalities');
             $table->string('location');
             $table->string('street');
