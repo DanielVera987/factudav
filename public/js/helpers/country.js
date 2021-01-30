@@ -1,4 +1,4 @@
-function init(){
+function init_currency(){
   var code_currency_modal = document.getElementById('code_currency_modal');
   var name_currency_modal = document.getElementById('name_currency_modal');
   var type_currency_modal = document.getElementById('type_currency_modal');
@@ -6,29 +6,87 @@ function init(){
 }
 
 function add_currency(){
-  init();
+  init_currency();
   add_children_node();
-  clean_input();
+  clean_input_currency();
   close_modal();
 }
 
 function add_children_node(){
   table_currency.insertRow(-1).innerHTML = `
     <tr>
-      <td>${code_currency_modal.value}</td>
-      <td>${name_currency_modal.value}</td>
-      <td>$ ${type_currency_modal.value}</td>
+      <td>
+        <input type="hidden" name="code_currency[]" value="${code_currency_modal.value}">
+        ${code_currency_modal.value}
+      </td>
+      <td>
+        <input type="hidden" name="name_currency[]" value="${name_currency_modal.value}">
+        ${name_currency_modal.value}
+      </td>
+      <td>
+        <input type="hidden" name="type_currency[]" value="${type_currency_modal.value}">
+        $ ${type_currency_modal.value}
+      </td>
       <td></td>
     <tr>
   `;
 }
 
-function clean_input(){
+function clean_input_currency(){
   code_currency_modal.value = null;
   name_currency_modal.value = null;
   type_currency_modal.value = null;
 }
 
-function close_modal(){
-  document.getElementById('close_currency').click();
+function close_modal(name = 'close_currency'){
+  document.getElementById(name).click();
+}
+
+function init_tax(){
+  var name_tax_modal = document.getElementById('name_tax_modal');
+  var tax_tax_modal = document.getElementById('tax_tax_modal');
+  var type_tax_modal = document.getElementById('type_tax_modal');
+  var factor_tax_modal = document.getElementById('factor_tax_modal');
+  var tasa_tax_modal = document.getElementById('tasa_tax_modal');
+  var table_tax = document.getElementById('table_tax');
+}
+
+function add_tax(){
+  init_tax();
+  add_children_tax();
+  clean_input_tax();
+  close_modal('close_tax');
+}
+
+function add_children_tax(){
+  table_tax.insertRow(-1).innerHTML = `
+    <tr>
+      <td>
+        <input type="hidden" name="name_tax[]" value="${name_tax_modal.value}">
+        ${name_tax_modal.value}
+      </td>
+      <td>
+        <input type="hidden" name="tasa_tax[]" value="${tasa_tax_modal.value}">
+        ${tasa_tax_modal.value}
+      </td>
+      <td>
+        <input type="hidden" name="factor_tax[]" value="${factor_tax_modal.value}">
+        ${factor_tax_modal.value}
+      </td>
+      <td>
+        <input type="hidden" name="type_tax[]" value="${type_tax_modal.value}">
+        ${type_tax_modal.value}
+      </td>
+      <input type="hidden" name="tax_tax[]" value="${tax_tax_modal.value}">
+      <td></td>
+    </tr>
+  `;
+}
+
+function clean_input_tax(){
+  name_tax_modal.value = null;
+  tax_tax_modal.value = null;
+  type_tax_modal.value = null
+  factor_tax_modal.value = null;
+  tasa_tax_modal.value = null;
 }
