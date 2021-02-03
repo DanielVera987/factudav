@@ -386,7 +386,8 @@
                             <td>{{ $value->code }}</td>
                             <td>{{ $value->name }}</td>
                             <td>$ {{ $value->exchange_rate }}</td>
-                            <td></td>
+                            <td>
+                            </td>
                         </tr>
                          @endforeach
                       </tbody>
@@ -496,7 +497,9 @@
                           <td>{{ $value->tasa }}</td>
                           <td>{{ $value->factor }}</td>
                           <td>{{ $value->type }}</td>
-                          <td></td>
+                          <td>
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="delete_tax(this, {{ $value->id }})"><i class="fa fa-trash-o"></i></button>
+                          </td>
                         </tr>
                           @endforeach
                       </tbody>
@@ -543,7 +546,7 @@
     <!-- starrr -->
     <script src="{{ asset('/vendors/starrr/dist/starrr.js') }}"></script>
     <!-- Country -->
-    <script src="{{ asset('/js/helpers/country.js') }}"></script>
+    <script src="{{ asset('/js/helpers/bussine.js') }}"></script>
     <script>
       let $select = document.getElementById('municipality_id');
       jQuery(document).ready(function($){

@@ -27,7 +27,9 @@ function add_children_node(){
         <input type="hidden" name="type_currency[]" value="${type_currency_modal.value}">
         $ ${type_currency_modal.value}
       </td>
-      <td></td>
+      <td>
+        <button type="button" class="btn btn-sm btn-danger" onclick="delete_currency(this)"><i class="fa fa-trash-o"></i></button>
+      </td>
     <tr>
   `;
 }
@@ -59,6 +61,7 @@ function add_tax(){
 }
 
 function add_children_tax(){
+  var rowCount = table_tax.rows.length;
   table_tax.insertRow(-1).innerHTML = `
     <tr>
       <td>
@@ -78,15 +81,14 @@ function add_children_tax(){
         ${type_tax_modal.value}
       </td>
       <input type="hidden" name="tax_tax[]" value="${tax_tax_modal.value}">
-      <td></td>
+      <td>
+        <button type="button" class="btn btn-sm btn-danger" onclick="delete_tax(this)"><i class="fa fa-trash-o"></i></button>
+      </td>
     </tr>
   `;
 }
 
 function clean_input_tax(){
   name_tax_modal.value = null;
-  tax_tax_modal.value = null;
-  type_tax_modal.value = null
-  factor_tax_modal.value = null;
   tasa_tax_modal.value = null;
 }

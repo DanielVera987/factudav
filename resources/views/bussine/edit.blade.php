@@ -390,7 +390,9 @@
                             <td>{{ $value->code }}</td>
                             <td>{{ $value->name }}</td>
                             <td>$ {{ $value->exchange_rate }}</td>
-                            <td></td>
+                            <td>
+                              <button type="button" class="btn btn-sm btn-danger" onclick="delete_currency(this, {{ $value->id }})"><i class="fa fa-trash-o"></i></button>
+                            </td>
                         </tr>
                          @endforeach
                       </tbody>
@@ -494,13 +496,15 @@
                         </tr>
                       </thead>
                       <tbody>
-                          @foreach($bussine->tax as $value)
+                          @foreach($bussine->tax as $key => $value)
                         <tr>
                           <td>{{ $value->name }}</td>
                           <td>{{ $value->tasa }}</td>
                           <td>{{ $value->factor }}</td>
                           <td>{{ $value->type }}</td>
-                          <td></td>
+                          <td>
+                            <button type="button" class="btn btn-sm btn-danger" onclick="delete_tax(this, {{ $value->id }})"><i class="fa fa-trash-o"></i></button>
+                          </td>
                         </tr>
                           @endforeach
                       </tbody>
@@ -547,7 +551,7 @@
     <!-- starrr -->
     <script src="{{ asset('/vendors/starrr/dist/starrr.js') }}"></script>
     <!-- Country -->
-    <script src="{{ asset('/js/helpers/country.js') }}"></script>
+    <script src="{{ asset('/js/helpers/bussine.js') }}"></script>
     <script>
       let $select = document.getElementById('municipality_id');
       jQuery(document).ready(function($){
@@ -590,7 +594,52 @@
             const objectURL = URL.createObjectURL(img);
             $("#previewlogo").attr('src',objectURL);
           });
+
         });
       });
+      
+      function delete_tax(e, id = null){
+        var table = document.getElementById('table_tax');
+        var td = e.parentNode;
+        var tr = td.parentNode;
+        var table = tr.parentNode;
+        var rowCount = table.rows.length;
+        
+        if (rowCount > 1) {
+          if (id) {
+            $.ajax({
+              url: "{{ url('/tax/') }}" + '/' + id,
+              type: 'GET',
+              success: function(result) {
+                table.removeChild(tr);
+              }
+            }); 
+          } else {
+            table.removeChild(tr);
+          }
+        }
+      }
+      
+      function delete_currency(e, id = null){
+        var table = document.getElementById('table_currency');
+        var td = e.parentNode;
+        var tr = td.parentNode;
+        var table = tr.parentNode;
+        var rowCount = table.rows.length;
+        
+        if (rowCount > 1) {
+          if (id) {
+            $.ajax({
+              url: "{{ url('/currency/') }}" + '/' + id,
+              type: 'GET',
+              success: function(result) {
+                table.removeChild(tr);
+              }
+            }); 
+          } else {
+            table.removeChild(tr);
+          }
+        }
+      }
     </script>
 @endsection

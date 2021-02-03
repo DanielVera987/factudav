@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tax;
 use App\Models\State;
 use App\Models\Bussine;
 use App\Models\Country;
@@ -11,8 +12,6 @@ use App\Models\Municipality;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class BussineController extends Controller
 {
@@ -30,7 +29,6 @@ class BussineController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -119,7 +117,6 @@ class BussineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request);
         $request->validate([
             'bussine_name' => 'required|string|max:255',
             'tradename' => 'required|string|max:255',
@@ -180,8 +177,8 @@ class BussineController extends Controller
 
         $bussine->save();
 
-        if (isset($request->name_currency)) $this->add_currency($request, $bussine->id);
-        if (isset($request->name_tax)) $this->add_tax($request, $bussine->id);
+        Currency::isCurrency($request, $id);
+        Tax::isTax($request, $id);
 
         return redirect()->route('settings.edit', $id)->with('message', 'Datos Guardados');
     }
@@ -256,27 +253,5 @@ class BussineController extends Controller
             'password_pac' => 'max:255',
             'logo' => 'image',
         ]);
-    }
-
-    protected function add_currency(Request $request, $bussine_id){
-        for($i = 0; $i <= count($request->name_currency); $i++) {
-            Currency::create([
-                'bussine_id' => $bussine_id,
-                'name' => $request->name_currency[$i] ?? 'NaN',
-                'code' => $request->code_currency[$i] ?? 'NaN',
-                'exchange_rate' => $request->type_currency[$i] ?? 'NaN'
-            ]);
-        }
-    }
-
-    protected function add_tax(Request $request, $bussine_id){
-        for($i = 0; $i <= count($request->name_tax); $i++) {
-            Currency::create([
-                'bussine_id' => $bussine_id,
-                'name' => $request->name_tax[$i] ?? 'NaN',
-                'code' => $request->code_tax[$i] ?? 'NaN',
-                'exchange_rate' => $request->type_tax[$i] ?? 'NaN'
-            ]);
-        }
-    }
+    }    
 }
