@@ -329,44 +329,6 @@
                       <div style="float: right;">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Agregar Moneda</button>
                       </div>
-                      <!-- Small modal -->
-                      <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-sm">
-                          <div class="modal-content">
-  
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                              </button>
-                              <h4 class="modal-title" id="myModalLabel2">Agregar Moneda</h4>
-                            </div>
-                            <div class="modal-body">
-                              <p>
-                                <div class="row">
-                                  <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label for="code_currency_modal">Codigo * <small>(ejemplo: MXN, USD, EUR)</small></label>
-                                    <input type="text" id="code_currency_modal" class="form-control" data-parsley-trigger="change" value=""/>
-                                  </div>
-
-                                  <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label for="name_currency_modal">Nombre * <small>(ejemplo: peso mexicano)</small></label>
-                                    <input type="text" id="name_currency_modal" class="form-control" data-parsley-trigger="change" value=""/>
-                                  </div>
-
-                                  <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label for="type_currency_modal">Tipo de cambio * <small>(ejemplo: 1.0, 21.23)</small></label>
-                                    <input type="text" id="type_currency_modal" class="form-control" data-parsley-trigger="change" value=""/>
-                                  </div>
-                                </div>
-                              </p>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" id="close_currency" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                              <button type="button" onclick="add_currency()" class="btn btn-primary">Agregar</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /modals -->
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -417,65 +379,6 @@
                       <div style="float: right;">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-tax-modal-sm">Agregar Impuesto</button>
                       </div>
-                      <!-- Small modal -->
-                      <div class="modal fade bs-tax-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-sm">
-                          <div class="modal-content">
-  
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-                              </button>
-                              <h4 class="modal-title" id="myModalLabel2">Agregar Impuesto</h4>
-                            </div>
-                            <div class="modal-body">
-                              <p>
-                                <div class="row">
-                                  <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label for="name_tax_modal">Nombre * <small>(ejemplo: iva retenido)</small></label>
-                                    <input type="text" id="name_tax_modal" class="form-control" data-parsley-trigger="change" value=""/>
-                                  </div>
-
-                                  <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label for="tax_tax_modal">Impuestos * <small>(ejemplo: iva o isr)</small></label>
-                                    <select id="tax_tax_modal" class="form-control" data-parsley-trigger="change">
-                                      <option value="iva">IVA</option>
-                                      <option value="isr">ISR</option>
-                                      <option value="ieps">IEPS</option>
-                                    </select>
-                                  </div>
-
-                                  <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label for="type_tax_modal">Tipo * <small>(ejemplo: traslado o retenido)</small></label>
-                                    <select id="type_tax_modal" class="form-control" data-parsley-trigger="change">
-                                      <option value="traslado">Traslado</option>
-                                      <option value="retenido">Retenido</option>
-                                    </select>
-                                  </div>
-
-                                  <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label for="factor_tax_modal">Factor * <small>(ejemplo: traslado o retenido)</small></label>
-                                    <select id="factor_tax_modal" class="form-control" data-parsley-trigger="change">
-                                      <option value="tasa">Tasa</option>
-                                      <option value="cuota">Cuota</option>
-                                      <option value="exento">Exento</option>
-                                    </select>
-                                  </div>
-
-                                  <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label for="tasa_tax_modal">Tasa * <small>(ejemplo: 0.16)</small></label>
-                                    <input type="text" id="tasa_tax_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
-                                  </div>
-                                </div>
-                              </p>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" id="close_tax" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                              <button type="button" onclick="add_tax()" class="btn btn-primary">Agregar</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- /modals -->
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -519,13 +422,111 @@
               </div>
             </div>      
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 </form>
+
+<!-- Small modal -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel2">Agregar Moneda</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label for="code_currency_modal">Codigo * <small>(ejemplo: MXN, USD, EUR)</small></label>
+              <input type="text" id="code_currency_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label for="name_currency_modal">Nombre * <small>(ejemplo: peso mexicano)</small></label>
+              <input type="text" id="name_currency_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label for="type_currency_modal">Tipo de cambio * <small>(ejemplo: 1.0, 21.23)</small></label>
+              <input type="text" id="type_currency_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+            </div>
+          </div>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="close_currency" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="add_currency()" class="btn btn-primary">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /modals -->
+
+<!-- Small modal -->
+<div class="modal fade bs-tax-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel2">Agregar Impuesto</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label for="name_tax_modal">Nombre * <small>(ejemplo: iva retenido)</small></label>
+              <input type="text" id="name_tax_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label for="tax_tax_modal">Impuestos * <small>(ejemplo: iva o isr)</small></label>
+              <select id="tax_tax_modal" class="form-control" data-parsley-trigger="change">
+                <option value="iva">IVA</option>
+                <option value="isr">ISR</option>
+                <option value="ieps">IEPS</option>
+              </select>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label for="type_tax_modal">Tipo * <small>(ejemplo: traslado o retenido)</small></label>
+              <select id="type_tax_modal" class="form-control" data-parsley-trigger="change">
+                <option value="traslado">Traslado</option>
+                <option value="retenido">Retenido</option>
+              </select>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label for="factor_tax_modal">Factor * <small>(ejemplo: traslado o retenido)</small></label>
+              <select id="factor_tax_modal" class="form-control" data-parsley-trigger="change">
+                <option value="tasa">Tasa</option>
+                <option value="cuota">Cuota</option>
+                <option value="exento">Exento</option>
+              </select>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <label for="tasa_tax_modal">Tasa * <small>(ejemplo: 0.16)</small></label>
+              <input type="text" id="tasa_tax_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+            </div>
+          </div>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="close_tax" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" onclick="add_tax()" class="btn btn-primary">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /modals -->
+@endsection
 @endsection
 
 @section('script')
@@ -591,5 +592,49 @@
           });
         });
       });
+
+      function delete_tax(e, id = null){
+        var table = document.getElementById('table_tax');
+        var td = e.parentNode;
+        var tr = td.parentNode;
+        var table = tr.parentNode;
+        var rowCount = table.rows.length;
+        
+        if (rowCount > 1) {
+          if (id) {
+            $.ajax({
+              url: "{{ url('/tax/') }}" + '/' + id,
+              type: 'GET',
+              success: function(result) {
+                table.removeChild(tr);
+              }
+            }); 
+          } else {
+            table.removeChild(tr);
+          }
+        }
+      }
+      
+      function delete_currency(e, id = null){
+        var table = document.getElementById('table_currency');
+        var td = e.parentNode;
+        var tr = td.parentNode;
+        var table = tr.parentNode;
+        var rowCount = table.rows.length;
+        
+        if (rowCount > 1) {
+          if (id) {
+            $.ajax({
+              url: "{{ url('/currency/') }}" + '/' + id,
+              type: 'GET',
+              success: function(result) {
+                table.removeChild(tr);
+              }
+            }); 
+          } else {
+            table.removeChild(tr);
+          }
+        }
+      }
     </script>
 @endsection

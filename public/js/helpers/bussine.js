@@ -13,6 +13,14 @@ function add_currency(){
 }
 
 function add_children_node(){
+  if( code_currency_modal.value == '' 
+      || name_currency_modal.value == '' 
+      || type_currency_modal.value == ''
+    ){
+    alert('Llenar todos los campos');
+    return;
+  }
+
   table_currency.insertRow(-1).innerHTML = `
     <tr>
       <td>
@@ -61,6 +69,16 @@ function add_tax(){
 }
 
 function add_children_tax(){
+  if( name_tax_modal.value == '' 
+      || tasa_tax_modal.value == ''
+      || factor_tax_modal.value == ''
+      || type_tax_modal.value == ''
+      || tax_tax_modal.value == ''
+    ){
+      alert('Llenar todos los campos');
+      return;
+  }
+
   var rowCount = table_tax.rows.length;
   table_tax.insertRow(-1).innerHTML = `
     <tr>
@@ -92,3 +110,11 @@ function clean_input_tax(){
   name_tax_modal.value = null;
   tasa_tax_modal.value = null;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('input[]').forEach( node => node.addEventListener('keypress', e => {
+    if(e.keyCode == 13) {
+      e.preventDefault();
+    }
+  }))
+});
