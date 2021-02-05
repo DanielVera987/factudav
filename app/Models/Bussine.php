@@ -63,4 +63,9 @@ class Bussine extends Model
     {
         return $this->hasMany(Currency::class);
     }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

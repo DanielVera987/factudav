@@ -22,8 +22,6 @@ class BussineFactory extends Factory
      */
     public function definition()
     {   
-        //$nameFile = $this->faker->image('public/images/logos', 480, 480);
-        //dd($nameFile);
         return [
             'bussine_name' => $this->faker->company(),
             'tradename' => $this->faker->company(),

@@ -452,17 +452,17 @@
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <label for="code_currency_modal">Codigo * <small>(ejemplo: MXN, USD, EUR)</small></label>
-              <input type="text" id="code_currency_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+              <input type="text" id="code_currency_modal" class="form-control" data-parsley-trigger="change" value=""/>
             </div>
 
             <div class="col-md-12 col-sm-12 col-xs-12">
               <label for="name_currency_modal">Nombre * <small>(ejemplo: peso mexicano)</small></label>
-              <input type="text" id="name_currency_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+              <input type="text" id="name_currency_modal" class="form-control" data-parsley-trigger="change" value=""/>
             </div>
 
             <div class="col-md-12 col-sm-12 col-xs-12">
               <label for="type_currency_modal">Tipo de cambio * <small>(ejemplo: 1.0, 21.23)</small></label>
-              <input type="text" id="type_currency_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+              <input type="text" id="type_currency_modal" class="form-control" data-parsley-trigger="change" value=""/>
             </div>
           </div>
         </p>
@@ -491,7 +491,7 @@
           <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
               <label for="name_tax_modal">Nombre * <small>(ejemplo: iva retenido)</small></label>
-              <input type="text" id="name_tax_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+              <input type="text" id="name_tax_modal" class="form-control" data-parsley-trigger="change" value=""/>
             </div>
 
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -522,7 +522,7 @@
 
             <div class="col-md-12 col-sm-12 col-xs-12">
               <label for="tasa_tax_modal">Tasa * <small>(ejemplo: 0.16)</small></label>
-              <input type="text" id="tasa_tax_modal" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+              <input type="text" id="tasa_tax_modal" class="form-control" data-parsley-trigger="change" value=""/>
             </div>
           </div>
         </p>

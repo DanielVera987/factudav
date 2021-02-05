@@ -23,13 +23,16 @@ class ProductFactory extends Factory
     {
         return [
             'bussine_id' => 1,
+            'code' => $this->faker->randomDigit(),
             'name' => $this->faker->name(),
             'description' => $this->faker->sentence(10),
-            'code' => $this->faker->randomDigit(),
             'stock' => $this->faker->randomDigit(),
-            'amount' => $this->faker->randomFloat($nbMaxDecimals = NULL),
-            'quantity' => $this->faker->randomDigit(),
+            'alert_stock' => $this->faker->randomDigit(),
+            'cost' => $this->faker->randomFloat($nbMaxDecimals = NULL),
+            'price' => $this->faker->randomFloat($nbMaxDecimals = NULL),
+            'tax_id' => $this->faker->randomDigit(),
             'image' => $this->faker->randomDigit(),
+            'is_active' => $this->faker->randomDigit(),
         ];
     }
 }

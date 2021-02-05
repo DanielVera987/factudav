@@ -18,13 +18,19 @@ class CreateProductsTable extends Migration
             $table->foreignId('bussine_id')
                 ->references('id')
                 ->on('bussines');
+                
+            $table->string('code');
             $table->string('name');
             $table->longText('description');
-            $table->string('code');
             $table->string('stock');
-            $table->string('amount');
-            $table->string('quantity');
+            $table->string('alert_stock');
+            $table->string('cost');
+            $table->string('price');
+            $table->foreignId('tax_id')
+                ->references('id')
+                ->on('tax');
             $table->string('image');
+            $table->string('is_active');
             $table->timestamps();
         });
     }
