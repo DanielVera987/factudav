@@ -6,6 +6,8 @@ use App\Models\Bussine;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -34,7 +36,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        
+        return view('products.create');
     }
 
     /**
@@ -47,22 +49,33 @@ class ProductController extends Controller
     {
         $request->validate([
             'code' => ['required', 'string' ,'max:255'],
-            'name' => ['required', 'string', 'max:255'], 
+            'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
             'stock' => ['required', 'numeric', 'max:255'],
             'alert_stock' => ['required', 'numeric', 'max:255'],
             'cost' => ['required', 'numeric', 'max:255'],
             'price' => ['required', 'numeric', 'max:255'],
             'tax_id' => ['required', 'numeric', 'max:255'],
-            'image' => ['required'],
+            'image' => ['required', 'image'],
             'is_active' => ['required']
         ]);
 
         $request['bussine_id'] = Auth::user()->bussine_id;
+        
+        $product = Product::create($request->all());
+        
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
 
-        Product::create($request->all());
+            $nameFile = time().'_'.$image->getClientOriginalName();
+            Storage::disk('products')->put($nameFile, File::get($image));
 
-        //return view('products.index')->with('success', 'Producto Creado');
+            $image = Product::find($product->id);
+            $image->image = $nameFile;
+            $image->save();
+        }
+        
+        return redirect(route('products.index'))->with('success', 'Producto Creado');
     }
 
     /**
@@ -130,7 +143,7 @@ class ProductController extends Controller
         if ($product->bussine_id == Auth::user()->bussine_id) {
             $product->delete();
 
-            //reuturn 
+            return redirect(route('products.index'))->with('success', 'Producto Eliminado'); 
         }
     }
 }

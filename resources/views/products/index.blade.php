@@ -57,13 +57,15 @@
                 <tbody>
                   @foreach($products as $product)
                     <tr>
-                      <td>{{ $product->image}}</td>
-                      <td>{{ $product->code}}</td>
-                      <td>{{ $product->nombre}}</td>
-                      <td>{{ $product->stock}}</td>
-                      <td>{{ $product->price}}</td>
-                      <td>{{ $product->cost}}</td>
-                      <td>{{ $product->is_active}}</td>
+                      <td>
+                        <img src="{{ $product->image }}" width="100"/>
+                      </td>
+                      <td>{{ $product->code }}</td>
+                      <td>{{ $product->nombre }}</td>
+                      <td>{{ $product->stock }}</td>
+                      <td>{{ $product->price }}</td>
+                      <td>{{ $product->cost }}</td>
+                      <td>{{ $product->is_active }}</td>
                       <td>
                         <div class="btn-group btn-group-sm">
                           <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
