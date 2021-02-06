@@ -46,6 +46,11 @@
                       <i class="fa fa-users"></i> Clientes
                     </a>
                   </li>
+                  <li>
+                    <a href="{{ route('products.index') }}">
+                      <i class="fa fa-cube"></i> Productos
+                    </a>
+                  </li>
                 </ul>
               </div>
         
