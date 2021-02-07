@@ -99,7 +99,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('products.edit', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -120,14 +123,30 @@ class ProductController extends Controller
             'cost' => ['required', 'numeric', 'max:255'],
             'price' => ['required', 'numeric', 'max:255'],
             'tax_id' => ['required', 'numeric', 'max:255'],
-            'image' => [''],
+            'image' => ['image'],
             'is_active' => ['required']
         ]);
 
         $product = Product::findOrFail($id);
+        $imgPrevius = $product->image;
+
         $product->update($request->all());
 
-        // return view('products.edit')->with();
+        if ($request->hasFile('image')) {
+            //delete previous image
+            if (Storage::disk('products')->exists($imgPrevius)) {
+                Storage::disk('products')->delete($imgPrevius);
+            }
+
+            //update new image
+            $image = $request->file('image');
+            $nameFile = time().'_'.$image->getClientOriginalName();
+            $product->image = $nameFile;    
+            $product->update();
+            Storage::disk('products')->put($nameFile, File::get($image));
+        }
+
+        return redirect(route('products.index'))->with('success', 'Producto Actualizado');
     }
 
     /**

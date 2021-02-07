@@ -1,3 +1,6 @@
 *
 !public/
+products/
+!products/default.png
+
 !.gitignore

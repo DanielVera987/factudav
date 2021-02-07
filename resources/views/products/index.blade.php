@@ -58,14 +58,18 @@
                   @foreach($products as $product)
                     <tr>
                       <td>
-                        <img src="{{ $product->image }}" width="100"/>
+                        @if(\Storage::disk('products')->exists("$product->image"))                        
+                          <img class="center-block" src="{{ asset('storage/products/'.$product->image) }}" width="50"/>
+                        @else
+                          <img class="center-block" src="{{ asset('storage/products/default.png') }}" width="50"/>
+                        @endif
                       </td>
-                      <td>{{ $product->code }}</td>
-                      <td>{{ $product->nombre }}</td>
-                      <td>{{ $product->stock }}</td>
-                      <td>{{ $product->price }}</td>
-                      <td>{{ $product->cost }}</td>
-                      <td>{{ $product->is_active }}</td>
+                      <td class="text-center">{{ $product->code }}</td>
+                      <td class="text-center">{{ $product->name }}</td>
+                      <td class="text-center">{{ $product->stock }}</td>
+                      <td class="text-center">{{ $product->price }}</td>
+                      <td class="text-center">{{ $product->cost }}</td>
+                      <td class="text-center"><span class="label @if($product->is_active == 'on') label-success @else label-warning @endif">{{ $product->is_active }}</span></td>
                       <td>
                         <div class="btn-group btn-group-sm">
                           <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>

@@ -38,7 +38,7 @@
                         <div class="center-block">
                             <div class="profile_img">
                                 <div id="crop-avatar">
-                                    <img class="img-responsive avatar-view center-block" src="{{ asset('/images/davadev.png') }}" width="200" id="previewlogo"  alt="Avatar" title="">
+                                    <img class="img-responsive avatar-view center-block" src="{{ asset('storage/products/default.png') }}" width="200" id="previewlogo"  alt="Avatar" title="">
                                     <label for="image">Imagen Producto * :</label>
                                     <input type="file" name="image" value="{{ old('image') }}" id="image" data-parsley-trigger="change" required>
                                         @error('image')

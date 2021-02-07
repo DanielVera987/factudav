@@ -6,9 +6,11 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Bussine;
 use App\Models\Product;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 
 class ProductTest extends TestCase
 {
@@ -43,15 +45,21 @@ class ProductTest extends TestCase
 
     public function test_load_view_create_product()
     {
+        $this->authentication();
         $response = $this->get(route('products.create'));
 
         $response->assertStatus(200)
-            ->assertSee('Crear producto');
+            ->assertSee('Nuevo Producto');
     }
 
     public function test_create_product()
     {
+        $this->withoutExceptionHandling();
         $this->authentication();
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
 
         $response = $this->post(route('products.store'), [
             'code' => '001',
@@ -62,9 +70,10 @@ class ProductTest extends TestCase
             'cost' => 30.00,
             'price' => 30.00,
             'tax_id' => 1,
-            'image' => 1,
+            'image' => $file,
             'is_active' => '0'
         ]);
+        Storage::disk('products')->assertExists(time().'_'.'avatar.jpg');
 
         $this->assertDatabaseHas('products', [
             'code' => '001'
@@ -94,6 +103,7 @@ class ProductTest extends TestCase
 
     public function test_update_product()
     {
+        $this->withoutExceptionHandling();
         $this->authentication();
 
         $product = Product::create([
@@ -106,12 +116,11 @@ class ProductTest extends TestCase
             'cost' => 30.00,
             'price' => 30.00,
             'tax_id' => 1,
-            'image' => 1,
+            'image' => '',
             'is_active' => '0'
         ]);
 
-        $this->put(route('products.update', $product->id), [
-            'bussine_id' => 1,
+        $response = $this->put(route('products.update', $product->id), [
             'code' => '002',
             'name' => 'coca',
             'description' => 'refresco',
@@ -120,7 +129,7 @@ class ProductTest extends TestCase
             'cost' => 30.00,
             'price' => 30.00,
             'tax_id' => 1,
-            'image' => 1,
+            'image' => '1',
             'is_active' => '0'
         ]);
 
