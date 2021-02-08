@@ -78,7 +78,7 @@ class ProductTest extends TestCase
         $this->assertDatabaseHas('products', [
             'code' => '001'
         ]);
-    }
+    }   
 
     public function test_show_product()
     {
@@ -101,7 +101,7 @@ class ProductTest extends TestCase
         $this->get(route('products.show', $product->id));
     }
 
-    public function test_update_product()
+    public function test_product_update_without_image()
     {
         $this->withoutExceptionHandling();
         $this->authentication();
@@ -120,7 +120,7 @@ class ProductTest extends TestCase
             'is_active' => '0'
         ]);
 
-        $response = $this->put(route('products.update', $product->id), [
+        $this->put(route('products.update', $product->id), [
             'code' => '002',
             'name' => 'coca',
             'description' => 'refresco',
@@ -129,9 +129,53 @@ class ProductTest extends TestCase
             'cost' => 30.00,
             'price' => 30.00,
             'tax_id' => 1,
-            'image' => '1',
+            'is_active' => '0'
+        ])->assertRedirect(route('products.index'))
+          ->assertSessionMissing(['success' => 'Producto Actualizado']);
+
+        $this->assertDatabaseHas('products', [
+            'code' => '002'
+        ]);
+    }
+
+    public function test_product_update_with_image()
+    {
+        $this->withoutExceptionHandling();
+        $this->authentication();
+
+        $product = Product::create([
+            'bussine_id' => 1,
+            'code' => '001',
+            'name' => 'coca',
+            'description' => 'refresco',
+            'stock' => 10,
+            'alert_stock' => 10,
+            'cost' => 30.00,
+            'price' => 30.00,
+            'tax_id' => 1,
+            'image' => 'default.png',
             'is_active' => '0'
         ]);
+
+        Storage::fake('products');
+
+        $image = UploadedFile::fake()->image('avatar.png');
+
+        $this->put(route('products.update', $product->id), [
+            'code' => '002',
+            'name' => 'coca',
+            'description' => 'refresco',
+            'stock' => 10,
+            'alert_stock' => 10,
+            'cost' => 30.00,
+            'price' => 30.00,
+            'tax_id' => 1,
+            'image' => $image,
+            'is_active' => '0'
+        ])->assertRedirect(route('products.index'))
+          ->assertSessionMissing(['success' => 'Producto Actualizado']);
+
+        Storage::disk('products')->assertExists(time().'_'.'avatar.png');
 
         $this->assertDatabaseHas('products', [
             'code' => '002'
@@ -168,7 +212,8 @@ class ProductTest extends TestCase
             'tax_id' => 1,
             'image' => 1,
             'is_active' => '0'
-        ]);
+        ])->assertRedirect(route('products.index'))
+          ->assertSessionMissing(['success' => 'Producto Eliminado']);
 
         $this->assertDeleted($product);
     }

@@ -134,7 +134,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             //delete previous image
-            if (Storage::disk('products')->exists($imgPrevius)) {
+            if (Storage::disk('products')->exists($imgPrevius) && $imgPrevius != 'default.png') {
                 Storage::disk('products')->delete($imgPrevius);
             }
 
