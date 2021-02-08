@@ -70,7 +70,7 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="code">Code * :</label>
-                            <input type="text" id="code" class="form-control" value="{{ $product->code }}" name="code" required />
+                            <input type="text" id="code" class="form-control" value="{{ $product->code }}" name="code" autocomplete="off" required />
                             @error('code')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -110,9 +110,10 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="tax_id">Impuesto * :</label>
-                            <select id="tax_id" name="tax_id" class="form-control" value="{{ $product->tax_id }}" required data-parsley-trigger="change">
-                                <option value="1">Moral</option>
-                                <option value="0">Fisica</option>
+                            <select id="tax_id" name="tax_id" class="form-control" required data-parsley-trigger="change">
+                                @foreach ($taxes as $tax)                                
+                                    <option value="{{ $tax->id }}" @if ($tax->id == $product->tax_id) selected @endif>{{ $tax->name }}</option>
+                                @endforeach
                             </select>
                             @error('tax_id')
                             <span class="invalid-feedback" role="alert">

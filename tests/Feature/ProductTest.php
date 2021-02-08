@@ -80,7 +80,7 @@ class ProductTest extends TestCase
         ]);
     }   
 
-    public function test_show_product()
+    public function show_product()
     {
         $this->authentication();
 
@@ -103,12 +103,13 @@ class ProductTest extends TestCase
 
     public function test_product_update_without_image()
     {
+        DB::table('products')->truncate();
         $this->withoutExceptionHandling();
         $this->authentication();
 
         $product = Product::create([
             'bussine_id' => 1,
-            'code' => '001',
+            'code' => '00100',
             'name' => 'coca',
             'description' => 'refresco',
             'stock' => 10,
@@ -121,7 +122,7 @@ class ProductTest extends TestCase
         ]);
 
         $this->put(route('products.update', $product->id), [
-            'code' => '002',
+            'code' => '00200',
             'name' => 'coca',
             'description' => 'refresco',
             'stock' => 10,
@@ -134,18 +135,19 @@ class ProductTest extends TestCase
           ->assertSessionMissing(['success' => 'Producto Actualizado']);
 
         $this->assertDatabaseHas('products', [
-            'code' => '002'
+            'code' => '00200'
         ]);
     }
 
     public function test_product_update_with_image()
     {
+        DB::table('products')->truncate();
         $this->withoutExceptionHandling();
         $this->authentication();
 
         $product = Product::create([
             'bussine_id' => 1,
-            'code' => '001',
+            'code' => '00100',
             'name' => 'coca',
             'description' => 'refresco',
             'stock' => 10,
@@ -162,7 +164,7 @@ class ProductTest extends TestCase
         $image = UploadedFile::fake()->image('avatar.png');
 
         $this->put(route('products.update', $product->id), [
-            'code' => '002',
+            'code' => '00200',
             'name' => 'coca',
             'description' => 'refresco',
             'stock' => 10,
@@ -178,7 +180,7 @@ class ProductTest extends TestCase
         Storage::disk('products')->assertExists(time().'_'.'avatar.png');
 
         $this->assertDatabaseHas('products', [
-            'code' => '002'
+            'code' => '00200'
         ]);
     }
 
@@ -216,6 +218,30 @@ class ProductTest extends TestCase
           ->assertSessionMissing(['success' => 'Producto Eliminado']);
 
         $this->assertDeleted($product);
+    }
+
+    public function test_function_generate_folio_without_products()
+    {
+        DB::table('products')->truncate();
+        $this->authentication();
+
+        Bussine::factory()->create(); 
+        
+
+        $folio = Product::generateFolio();
+        $this->assertSame($folio, '0000000001');
+    }
+
+    public function test_function_generate_folio_with_products()
+    {
+        DB::table('products')->truncate();
+        $this->authentication();
+
+        Bussine::factory()->create();
+        Product::factory(5)->create();
+
+        $folio = Product::generateFolio();
+        $this->assertSame($folio, '0000000006');
     }
 
     protected function authentication($bussine = 1)

@@ -24,6 +24,11 @@ class Tax extends Model
         return $this->belongsTo(Bussine::class);
     }
 
+    public function product()
+    {
+        return $this->hasMany(Tax::class);
+    }
+
     public static function isTax($request, $bussine_id) 
     {
         if (isset($request->name_tax)) {

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -26,5 +27,36 @@ class Product extends Model
     public function bussine() 
     {
         return $this->belongsTo(Bussine::class);
+    }
+
+    public function tax()
+    {
+        return $this->belongsTo(Tax::class);
+    }
+
+    public static function generateFolio()
+    {
+        $count = Product::where('bussine_id', Auth::user()->bussine_id)->count();
+        $folio = str_pad($count + 1, 10, '0', STR_PAD_LEFT);
+
+        if ($count > 0) {
+            if(self::isExistsFolio($folio)) {
+                $folio = str_pad(self::isExistsFolio($folio), 10, '0', STR_PAD_LEFT);
+            }
+        }
+
+        return $folio;
+    }
+
+    public static function isExistsFolio($folio)
+    {
+        $isExists = Product::where('bussine_id', Auth::user()->bussine_id)->where('code', $folio)->count();
+
+        if ($isExists > 0) {
+            $codeLast = Product::orderBy('id', 'DESC')->where('bussine_id', Auth::user()->bussine_id)->select('code')->take(1)->get();
+            return intval($codeLast[0]->code) + 1;
+        }
+
+        return false;
     }
 }

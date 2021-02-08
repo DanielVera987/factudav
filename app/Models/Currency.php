@@ -25,7 +25,7 @@ class Currency extends Model
     {
         if (isset($request->name_currency)) self::add_currency($request, $bussine_id);
     }
-
+    
     protected static function add_currency($request, $bussine_id)
     {
         for($i = 0; $i < count($request->name_currency); $i++) {

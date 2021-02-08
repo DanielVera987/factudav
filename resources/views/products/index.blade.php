@@ -69,7 +69,7 @@
                       <td class="text-center">{{ $product->stock }}</td>
                       <td class="text-center">{{ $product->price }}</td>
                       <td class="text-center">{{ $product->cost }}</td>
-                      <td class="text-center"><span class="label @if($product->is_active == 'on') label-success @else label-warning @endif">{{ $product->is_active }}</span></td>
+                      <td class="text-center"><span class="label @if($product->is_active == 'on') label-success @else label-warning @endif">{{ $product->is_active ?? 'off'}}</span></td>
                       <td>
                         <div class="btn-group btn-group-sm">
                           <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>

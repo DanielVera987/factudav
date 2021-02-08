@@ -65,7 +65,7 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="code">Code * :</label>
-                            <input type="text" id="code" class="form-control" value="{{ old('code') }}" name="code" required />
+                            <input type="text" id="code" class="form-control" value="{{ $folio }}" name="code" autocomplete="off" required />
                             @error('code')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -106,8 +106,9 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="tax_id">Impuesto * :</label>
                             <select id="tax_id" name="tax_id" class="form-control" value="{{ old('tax_id') }}" required data-parsley-trigger="change">
-                                <option value="1">Moral</option>
-                                <option value="0">Fisica</option>
+                                @foreach ($taxes as $tax)    
+                                    <option value="{{ $tax->id }}">{{ $tax->name }}</option>
+                                @endforeach
                             </select>
                             @error('tax_id')
                             <span class="invalid-feedback" role="alert">
@@ -139,7 +140,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label>
                                 <br>
-                                <input type="checkbox" name="is_active" class="js-switch" checked /> Activo
+                                <input type="checkbox" name="is_active" class="js-switch" /> Activo
                             </label>
                             @error('is_active')
                                 <span class="invalid-feedback" role="alert">

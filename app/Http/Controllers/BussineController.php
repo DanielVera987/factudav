@@ -221,6 +221,9 @@ class BussineController extends Controller
         $bussine->logo = $request->logo;
         $result = $bussine->save();
 
+        Currency::isCurrency($request, $bussine->id);
+        Tax::isTax($request, $bussine->id);
+
         return ($result)
             ? $bussine->id
             : redirect()->route('settings.create')->with('message', 'Error al guardar los datos');

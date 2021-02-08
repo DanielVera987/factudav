@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bussine;
 use App\Models\Product;
+use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -36,7 +37,13 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $taxes = Tax::where('bussine_id', Auth::user()->bussine_id)->get();
+        $folio = Product::generateFolio();
+
+        return view('products.create', [
+            'taxes' => $taxes,
+            'folio' => $folio
+        ]);
     }
 
     /**
@@ -57,7 +64,7 @@ class ProductController extends Controller
             'price' => ['required', 'numeric', 'max:255'],
             'tax_id' => ['required', 'numeric', 'max:255'],
             'image' => ['required', 'image'],
-            'is_active' => ['required']
+            'is_active' => ['nullable']
         ]);
 
         $request['bussine_id'] = Auth::user()->bussine_id;
@@ -86,7 +93,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
+        //$product = Product::findOrFail($id);
 
         //return view('products.show');
     }
@@ -100,8 +107,11 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
+        $taxes = Tax::where('bussine_id', Auth()->user()->bussine_id)->get();
+
         return view('products.edit', [
-            'product' => $product
+            'product' => $product,
+            'taxes' => $taxes
         ]);
     }
 
@@ -124,7 +134,7 @@ class ProductController extends Controller
             'price' => ['required', 'numeric', 'max:255'],
             'tax_id' => ['required', 'numeric', 'max:255'],
             'image' => ['image'],
-            'is_active' => ['required']
+            'is_active' => ['nullable']
         ]);
 
         $product = Product::findOrFail($id);
@@ -160,6 +170,10 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         if ($product->bussine_id == Auth::user()->bussine_id) {
+            if (Storage::disk('products')->exists($product->image) && $product->image != 'default.png') {
+                Storage::disk('products')->delete($product->image);
+            }
+
             $product->delete();
 
             return redirect(route('products.index'))->with('success', 'Producto Eliminado'); 

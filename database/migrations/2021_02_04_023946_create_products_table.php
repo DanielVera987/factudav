@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
                 ->references('id')
                 ->on('bussines');
                 
-            $table->string('code');
+            $table->string('code')->unique();
             $table->string('name');
             $table->longText('description');
             $table->string('stock');
@@ -30,7 +30,7 @@ class CreateProductsTable extends Migration
                 ->references('id')
                 ->on('tax');
             $table->string('image');
-            $table->string('is_active');
+            $table->string('is_active')->nullable();
             $table->timestamps();
         });
     }
