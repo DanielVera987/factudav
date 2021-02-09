@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BussineController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 
 Route::get('/', function () { return redirect()->route('login'); });
@@ -14,6 +15,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 Route::resource('/settings', BussineController::class);
 Route::resource('/customers', CustomerController::class);
 Route::resource('/products', ProductController::class);
+Route::resource('/invoices', InvoiceController::class);
 
 
 // Route for Ajax

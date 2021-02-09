@@ -18,12 +18,15 @@ class CreateInvoicesTable extends Migration
             $table->foreignId('bussine_id')
                 ->references('id')
                 ->on('bussines');
-            $table->string('folio');
+            $table->foreignId('customer_id')
+                ->references('id')
+                ->on('customers');
+            $table->string('folio')->unique();
             $table->string('way_to_pay');
             $table->string('currency_id');
             $table->string('payment_method_id');
             $table->string('usecfdi');
-            $table->date_format();
+            $table->string('date');
             $table->timestamps();
         });
     }

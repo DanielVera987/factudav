@@ -22,7 +22,15 @@ class DetailFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'bussine_id' => 1,
+            'invoice_id' => $this->faker->randomDigit(),
+            'product_id' => $this->faker->randomDigit(),
+            'prodserv_id' => $this->faker->randomDigit(),
+            'key_unit_id' => $this->faker->randomDigit(),
+            'description' => $this->faker->sentence(10),
+            'quantity' => $this->faker->randomDigit(),
+            'discount' => $this->faker->randomNumber(2, true),
+            'amount' => $this->faker->randomFloat(2, 10, 100),  
         ];
     }
 }

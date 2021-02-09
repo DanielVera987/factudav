@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Tax;
+use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\Currency;
 use App\Models\Customer;
+use App\Models\Detail;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -34,5 +36,7 @@ class DatabaseSeeder extends Seeder
         Tax::factory()->create();
         Product::factory()->create();
         Customer::factory(10)->create();
+        Invoice::factory(10)->create();
+        Detail::factory(10)->create();
     }
 }

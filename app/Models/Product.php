@@ -34,6 +34,11 @@ class Product extends Model
         return $this->belongsTo(Tax::class);
     }
 
+    public function detail()
+    {
+        return $this->hasMany(Detail::class);
+    }
+
     public static function generateFolio()
     {
         $count = Product::where('bussine_id', Auth::user()->bussine_id)->count();

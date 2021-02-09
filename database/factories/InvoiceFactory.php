@@ -22,7 +22,13 @@ class InvoiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'bussine_id' => 1,
+            'folio' => $this->faker->numberBetween($min = 1000, $max = 9000),
+            'way_to_pay' => $this->faker->randomDigit(),
+            'currency_id' => $this->faker->randomDigit(),
+            'payment_method_id' => $this->faker->randomDigit(),
+            'usecfdi' => $this->faker->randomDigit(),
+            'date' => $this->faker->dateTime(),
         ];
     }
 }

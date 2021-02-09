@@ -68,4 +68,14 @@ class Bussine extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function detail()
+    {
+        return $this->hasMany(Detail::class);
+    }
+
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }
