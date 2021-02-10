@@ -25,7 +25,7 @@ class CreateInvoicesTable extends Migration
             $table->string('way_to_pay');
             $table->string('currency_id');
             $table->string('payment_method_id');
-            $table->string('usecfdi');
+            $table->string('usecfdi_id');
             $table->string('date');
             $table->timestamps();
         });

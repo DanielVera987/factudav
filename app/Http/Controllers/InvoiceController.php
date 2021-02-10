@@ -42,12 +42,13 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $request->validate([
             'folio' => ['required', 'string', 'max:255', 'unique:invoices,folio'],
             'way_to_pay' => ['required', 'numeric', 'max:255'],
             'currency_id' => ['required', 'numeric', 'max:255'],
             'payment_method_id' => ['required', 'numeric','max:255'],
-            'usecfdi' => ['required', 'numeric', 'max:255'],
+            'usecfdi_id' => ['required', 'numeric', 'max:255'],
             'date' => ['required', 'date'],
             'customer_id.*' => ['required', 'numeric'],
             'product_id.*' => ['required', 'numeric'],
@@ -103,7 +104,7 @@ class InvoiceController extends Controller
             'way_to_pay' => ['required', 'numeric', 'max:255'],
             'currency_id' => ['required', 'numeric', 'max:255'],
             'payment_method_id' => ['required', 'numeric','max:255'],
-            'usecfdi' => ['required', 'numeric', 'max:255'],
+            'usecfdi_id' => ['required', 'numeric', 'max:255'],
             'date' => ['required', 'date'],
             'customer_id.*' => ['required', 'numeric'],
             'product_id.*' => ['required', 'numeric'],
@@ -120,6 +121,7 @@ class InvoiceController extends Controller
         $invoices->update($request->all());
 
         //programar en el modelo de detalles que actualice cada producto que se haya agregado
+
     }
 
     /**

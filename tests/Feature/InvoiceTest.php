@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Models\Detail;
+use App\Models\Invoice;
 use App\Models\Product;
 use Tests\TestCase;
 use App\Models\User;
@@ -45,7 +47,75 @@ class InvoiceTest extends TestCase
             'way_to_pay' => 1,
             'currency_id' => 1,
             'payment_method_id' => 1,
-            'usecfdi' => 1,
+            'date' => '23-08-13',
+            'customer_id' => 1,
+            'usecfdi_id' => 1,
+            'product_id' => [
+                '1',
+                '2'   
+            ],
+            'prodserv_id' => [
+                2,
+                3
+            ],
+            'key_unit_id' => [
+                2,
+                3
+            ],
+            'description' => [
+                'cocacola bien fria',
+                'pepsi bien fria'
+            ],
+            'quantity' => [
+                1,
+                2
+            ],
+            'discount' => [
+                1,
+                1
+            ],
+            'amount' => [
+                30,
+                25
+            ],
+        ]);
+
+        $this->assertDatabaseHas('invoices', [
+            'folio' => '0000000003'
+        ]);
+
+        $this->assertDatabaseHas('details', [
+            'invoice_id' => 1,
+            'description' => 'cocacola bien fria'
+        ]);
+
+        $this->assertDatabaseHas('details', [
+            'invoice_id' => 1,
+            'description' => 'pepsi bien fria'
+        ]);
+
+        $response->assertStatus(302)
+            ->assertRedirect(route('invoices.index'))
+            ->assertSee('Factura creada');
+    }
+
+    public function test_update_invoice()
+    {
+        $this->withoutExceptionHandling();
+        DB::table('invoices')->truncate();
+
+        $product = Product::factory(10)->create();
+        Invoice::factory()->create();
+        Detail::factory()->create();
+
+        $this->authentication();
+        
+        $response = $this->put(route('invoices.update', $product->id), [
+            'folio' => '0000000003',
+            'way_to_pay' => 1,
+            'currency_id' => 1,
+            'payment_method_id' => 1,
+            'usecfdi_id' => 1,
             'date' => '23-08-13',
             'customer_id' => 1,
             'product_id' => [

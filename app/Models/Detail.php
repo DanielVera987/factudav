@@ -52,4 +52,11 @@ class Detail extends Model
             ]);
         }
     }
+
+    public static function updateDetail($invoiceId, $request)
+    {
+        Invoice::with('detail')->findOrFail($invoiceId);
+
+        
+    }
 }

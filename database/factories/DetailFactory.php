@@ -23,7 +23,7 @@ class DetailFactory extends Factory
     {
         return [
             'bussine_id' => 1,
-            'invoice_id' => $this->faker->randomDigit(),
+            'invoice_id' => 1,
             'product_id' => $this->faker->randomDigit(),
             'prodserv_id' => $this->faker->randomDigit(),
             'key_unit_id' => $this->faker->randomDigit(),
