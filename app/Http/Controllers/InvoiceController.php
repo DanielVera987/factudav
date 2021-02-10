@@ -116,8 +116,6 @@ class InvoiceController extends Controller
         ]);
         $bussine_id = Auth::user()->bussine_id;
 
-        $request['bussine_id'] = $bussine_id;
-
         $invoices = Invoice::where('bussine_id', $bussine_id)->findOrFail($id);
         $invoices->update($request->all());
 
