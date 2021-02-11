@@ -29,4 +29,14 @@ class Invoice extends Model
     {
         return $this->hasMany(Detail::class);
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
+    }
 }

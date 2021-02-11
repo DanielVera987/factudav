@@ -12,7 +12,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>FactuDav</span></a>
             </div>
         
             <div class="clearfix"></div>
@@ -42,6 +42,11 @@
                     </a>
                   </li>
                   <li>
+                    <a href="{{ route('invoices.index') }}">
+                      <i class="fa fa-file-text"></i> Facturas
+                    </a>
+                  </li>
+                  <li>
                     <a href="{{ route('customers.index') }}">
                       <i class="fa fa-users"></i> Clientes
                     </a>
@@ -51,6 +56,7 @@
                       <i class="fa fa-cube"></i> Productos
                     </a>
                   </li>
+                  
                 </ul>
               </div>
         

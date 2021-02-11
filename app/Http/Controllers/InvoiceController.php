@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bussine;
 use App\Models\Detail;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
@@ -21,7 +22,8 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        //
+        $invoices = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->get();
+        return view('invoices.index', compact('invoices'));
     }
 
     /**
@@ -31,7 +33,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('invoices.create');
     }
 
     /**

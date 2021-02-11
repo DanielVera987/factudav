@@ -44,4 +44,9 @@ class Customer extends Model
     {
         return $this->belongsTo(Usecfdi::class);
     }
+
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

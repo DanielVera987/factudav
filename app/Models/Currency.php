@@ -21,6 +21,11 @@ class Currency extends Model
         return $this->belongsTo(Bussine::class);
     }
 
+    public function invoice()
+    {
+        return $this->hasMany(Currency::class);
+    }
+
     public static function isCurrency($request, $bussine_id)
     {
         if (isset($request->name_currency)) self::add_currency($request, $bussine_id);
