@@ -30,6 +30,8 @@ class ProductTest extends TestCase
     public function test_load_view_index_product_with_autentication()
     {
         $this->withExceptionHandling();
+        DB::table('products')->truncate();
+
         $this->authentication();
 
         $bussine = Bussine::factory()->create();

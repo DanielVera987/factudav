@@ -41,8 +41,7 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //dd($request);
+    {   
         $request->validate([
             'folio' => ['required', 'string', 'max:255', 'unique:invoices,folio'],
             'way_to_pay' => ['required', 'numeric', 'max:255'],
@@ -99,7 +98,7 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        /* $request->validate([
             'folio' => ['required', 'string', 'max:255', 'unique:invoices,folio'],
             'way_to_pay' => ['required', 'numeric', 'max:255'],
             'currency_id' => ['required', 'numeric', 'max:255'],
@@ -119,9 +118,9 @@ class InvoiceController extends Controller
 
         $invoices = Invoice::where('bussine_id', $bussine_id)->findOrFail($id);
         $invoices->update($request->all());
-
+ */
         //programar en el modelo de detalles que actualice cada producto que se haya agregado
-
+        
     }
 
     /**

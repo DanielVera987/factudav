@@ -15,7 +15,7 @@ class Invoice extends Model
         'way_to_pay',
         'currency_id',
         'payment_method_id',
-        'usecfdi',
+        'usecfdi_id',
         'date',
         'customer_id',
     ];

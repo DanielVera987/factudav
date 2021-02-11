@@ -55,8 +55,12 @@ class Detail extends Model
 
     public static function updateDetail($invoiceId, $request)
     {
-        Invoice::with('detail')->findOrFail($invoiceId);
-
-        
+        foreach ($request as $key => $value) {
+            if (isset($data['details_id'])) {
+                $detail = Detail::findOrFile($data['details_id']);
+                $detail->
+            }
+        }
+        Invoice::with('detail')->findOrFail($invoiceId);       
     }
 }
