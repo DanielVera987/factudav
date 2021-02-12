@@ -31,7 +31,8 @@ class InvoiceTest extends TestCase
         $this->authentication();
         
         $response = $this->get('/invoices');
-        $response->assertStatus(200);
+        $response->assertStatus(200)
+            ->assertSee('Listado De Facturas');
     }
     
     public function test_create_invoice()

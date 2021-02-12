@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bussine;
 use App\Models\Detail;
+use App\Models\Bussine;
 use App\Models\Invoice;
+use App\Models\Currency;
+use App\Models\Municipality;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +36,13 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        return view('invoices.create');
+        $currencies = Currency::where('bussine_id', Auth::user()->bussine_id)->get();
+        $states = State::where('country_id', 1)->get();
+
+        return view('invoices.create', [
+            'currencies' => $currencies,
+            'states' => $states,
+        ]);
     }
 
     /**
