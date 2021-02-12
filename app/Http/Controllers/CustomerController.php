@@ -94,7 +94,17 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        
+        $cust = [];
+        $cust['rfc'] = $customer->rfc;
+        $cust['bussine_name'] = $customer->bussine_name;
+        $cust['zip'] = $customer->zip;
+        $cust['street'] = $customer->street;
+        $cust['no_exterior'] = $customer->no_exterior;
+        $cust['no_inside'] = $customer->no_inside;
+        $cust['state'] = $customer->state->name;
+        $cust['municipality'] = $customer->municipality_id;
+
+        return json_encode($cust, JSON_FORCE_OBJECT);
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Models\Detail;
 use App\Models\Bussine;
 use App\Models\Invoice;
 use App\Models\Currency;
+use App\Models\Customer;
 use App\Models\Municipality;
 use App\Models\State;
 use Illuminate\Http\Request;
@@ -38,10 +39,12 @@ class InvoiceController extends Controller
     {
         $currencies = Currency::where('bussine_id', Auth::user()->bussine_id)->get();
         $states = State::where('country_id', 1)->get();
+        $customers = Customer::where('bussine_id', Auth::user()->bussine_id)->get();
 
         return view('invoices.create', [
             'currencies' => $currencies,
             'states' => $states,
+            'customers' => $customers
         ]);
     }
 
