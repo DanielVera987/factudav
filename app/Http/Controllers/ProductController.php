@@ -91,11 +91,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Product $product)
     {
-        //$product = Product::findOrFail($id);
-
-        //return view('products.show');
+        $produ = [];
+        $produ['description'] = $product->description;
+        $produ['price'] = $product->price;
+        return json_encode($produ);
     }
 
     /**

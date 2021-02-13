@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tax;
+use App\Models\State;
 use App\Models\Detail;
 use App\Models\Bussine;
 use App\Models\Invoice;
+use App\Models\Product;
 use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\Municipality;
-use App\Models\State;
+use App\Models\Usecfdi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,11 +43,17 @@ class InvoiceController extends Controller
         $currencies = Currency::where('bussine_id', Auth::user()->bussine_id)->get();
         $states = State::where('country_id', 1)->get();
         $customers = Customer::where('bussine_id', Auth::user()->bussine_id)->get();
+        $products = Product::where('bussine_id', Auth::user()->bussine_id)->get();
+        $taxes = Tax::where('bussine_id', Auth::user()->bussine_id)->get();
+        $usecfdi = Usecfdi::all();
 
         return view('invoices.create', [
             'currencies' => $currencies,
             'states' => $states,
-            'customers' => $customers
+            'customers' => $customers,
+            'products' => $products,
+            'taxes' => $taxes,
+            'usecfdi' => $usecfdi
         ]);
     }
 

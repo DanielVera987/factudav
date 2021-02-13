@@ -6,6 +6,7 @@ use App\Models\State;
 use App\Models\Country;
 use App\Models\Usecfdi;
 use App\Models\Customer;
+use App\Models\Municipality;
 use App\Models\TaxRegimen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -94,6 +95,8 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
+        if($customer->bussine_id != Auth::user()->bussine_id) return abort(401);
+        
         $cust = [];
         $cust['rfc'] = $customer->rfc;
         $cust['bussine_name'] = $customer->bussine_name;
@@ -102,7 +105,9 @@ class CustomerController extends Controller
         $cust['no_exterior'] = $customer->no_exterior;
         $cust['no_inside'] = $customer->no_inside;
         $cust['state'] = $customer->state->name;
-        $cust['municipality'] = $customer->municipality_id;
+
+        $municipality = Municipality::findOrFail($customer->municipality_id);
+        $cust['municipality'] = $municipality->name;
 
         return json_encode($cust, JSON_FORCE_OBJECT);
     }

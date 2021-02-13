@@ -110,9 +110,13 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="telephone">Uso del CFDI *:</label>
-                    <input type="tel" id="telephone" class="form-control" name="telephone" value="{{ old('telephone') }}" data-parsley-trigger="change" required />
-                    @error('telephone')
+                    <label for="usecfdi_id">Uso del CFDI *:</label>
+                    <select id="usecfdi_id" name="currency_id" class="form-control select2" value="{{ old('usecfdi_id') }}" required data-parsley-trigger="change">
+                      @foreach($usecfdi as $value)
+                        <option value="{{ $value->id }}">{{ $value->code }} - {{ $value->name }}</option>
+                      @endforeach
+                    </select>
+                    @error('usecfdi_id')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
@@ -137,14 +141,14 @@
 
                 <div class="row">  
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                    <label for="customer_id">Buscador de Clientes *:</label>
+                    <label for="search_customer">Buscador de Clientes *:</label>
                     <select id="search_customer" name="customer_id" class="form-control select2" required data-parsley-trigger="change">
                         <option value="" selected disabled>Escribe para comenzar a buscar</option>
                         @foreach ($customers as $value)
                           <option value="{{ $value->id }}">{{ $value->bussine_name }}</option>
                         @endforeach
                     </select>
-                    @error('customer_id')
+                    @error('search_customer')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -155,7 +159,7 @@
                 <div class="row">  
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <label for="rfc">RFC * :</label>
-                        <input type="text" id="rfc" class="form-control" name="rfc" value="{{ old('rfc') }}" data-parsley-trigger="change" required />
+                        <input type="text" id="rfc" class="form-control" name="rfc" value="{{ old('rfc') }}" data-parsley-trigger="change" required readonly="readonly"/>
                         @error('rfc')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -165,7 +169,7 @@
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <label for="bussine_name">Razón Social * :</label>
-                        <input type="text" id="bussine_name" name="bussine_name" class="form-control" data-parsley-trigger="change" value="{{ old('bussine_name') }}" required />
+                        <input type="text" id="bussine_name" name="bussine_name" class="form-control" data-parsley-trigger="change" value="{{ old('bussine_name') }}" required readonly="readonly"/>
                         @error('bussine_name')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -175,7 +179,7 @@
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <label for="zip">Codigo Postal * :</label>
-                        <input type="text" id="zip" name="zip" class="form-control" data-parsley-trigger="change" value="{{ old('zip') }}" required />
+                        <input type="text" id="zip" name="zip" class="form-control" data-parsley-trigger="change" value="{{ old('zip') }}" required readonly="readonly"/>
                         @error('zip')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -187,7 +191,7 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <label for="street">Calle *:</label>
-                        <input type="text" id="street" class="form-control" name="street" value="{{ old('street') }}" data-parsley-trigger="change" required />
+                        <input type="text" id="street" class="form-control" name="street" value="{{ old('street') }}" data-parsley-trigger="change" required readonly="readonly"/>
                         @error('street')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -197,7 +201,7 @@
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <label for="no_exterior">No. Exterior *:</label>
-                        <input type="text" id="no_exterior" class="form-control" name="no_exterior" value="{{ old('no_exterior') }}" data-parsley-trigger="change" required />
+                        <input type="text" id="no_exterior" class="form-control" name="no_exterior" value="{{ old('no_exterior') }}" data-parsley-trigger="change" required readonly="readonly"/>
                         @error('no_exterior')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -207,7 +211,7 @@
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <label for="no_inside">No. Interior *:</label>
-                        <input type="text" id="no_inside" class="form-control" name="no_inside" value="{{ old('no_inside') }}" data-parsley-trigger="change" required />
+                        <input type="text" id="no_inside" class="form-control" name="no_inside" value="{{ old('no_inside') }}" data-parsley-trigger="change" required readonly="readonly"/>
                         @error('no_inside')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -218,29 +222,13 @@
 
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="telephone">Estado *:</label>
-                        <select id="usecfdi_id" name="usecfdi_id" class="form-control select2" value="{{ old('usecfdi_id') }}" required data-parsley-trigger="change">
-                          @foreach($states as $value)
-                            <option value="{{ $value->id }}">{{ $value->name }}</option>
-                          @endforeach
-                        </select>
-                        @error('telephone')
-                          <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                          </span>
-                        @enderror
+                        <label for="state_id">Estado *:</label>
+                        <input type="text" id="state_id" class="form-control" name="state_id" value="{{ old('state_id') }}" data-parsley-trigger="change" required readonly="readonly"/>
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <label for="municipality_id">Municipio *:</label>
-                        <select id="municipality_id" name="municipality_id" class="form-control select2" value="{{ old('municipality_id') }}" required data-parsley-trigger="change">
-                            <option value=""></option>
-                        </select>
-                        @error('municipality_id')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <input type="text" id="municipality_id" class="form-control" name="municipality_id" value="{{ old('municipality_id') }}" data-parsley-trigger="change" required readonly="readonly"/>
                     </div>
                 </div>
 
@@ -261,7 +249,12 @@
             <div class="row">  
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <label for="search_product">Buscador de Producto *:</label>
-                <input type="text" id="search_product" name="search_product" class="form-control" data-parsley-trigger="change" value="{{ old('search_product') }}" placeholder="Escribe para empezar a buscar" placeholder="Escribe para comenzar a buscar" required />
+                <select id="search_product" name="search_product" class="form-control select2">
+                  <option value="" selected disabled>Escribe para comenzar a buscar</option>
+                  @foreach ($products as $value)
+                    <option value="{{ $value->id }}">{{ $value->name }}</option>
+                  @endforeach
+              </select>
                 @error('search_product')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -273,7 +266,7 @@
             <div class="row">  
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="quantity">Cantidad * :</label>
-                    <input type="text" id="quantity" class="form-control" name="quantity" value="{{ old('quantity') }}" data-parsley-trigger="change" required />
+                    <input type="text" id="quantity" class="form-control" name="quantity" data-parsley-trigger="change" required />
                     @error('quantity')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -282,9 +275,9 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="email">Descripción * :</label>
-                    <input type="email" id="email" name="email" class="form-control" data-parsley-trigger="change" value="{{ old('email') }}" required />
-                    @error('email')
+                    <label for="description">Descripción * :</label>
+                    <input type="text" id="description" name="description" class="form-control" data-parsley-trigger="change" required />
+                    @error('description')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -292,9 +285,9 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="email">Descuento * :</label>
-                    <input type="email" id="email" name="email" class="form-control" data-parsley-trigger="change" value="{{ old('email') }}" required />
-                    @error('email')
+                    <label for="discount">Descuento * :</label>
+                    <input type="text" id="discount" name="discount" class="form-control" data-parsley-trigger="change" required />
+                    @error('discount')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -304,9 +297,9 @@
 
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="telephone">Precio *:</label>
-                    <input type="tel" id="telephone" class="form-control" name="telephone" value="{{ old('telephone') }}" data-parsley-trigger="change" required />
-                    @error('telephone')
+                    <label for="price">Precio *:</label>
+                    <input type="tel" id="price" class="form-control" name="price" data-parsley-trigger="change" required />
+                    @error('price')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -314,11 +307,11 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="usecfdi_id">Clave producto/servicio *:</label>
-                    <select id="usecfdi_id" name="usecfdi_id" class="form-control select2" value="{{ old('usecfdi_id') }}" required data-parsley-trigger="change">
+                    <label for="prodserv_id">Clave producto/servicio *:</label>
+                    <select id="prodserv_id" name="prodserv_id" class="form-control select2" value="{{ old('prodserv_id') }}" required data-parsley-trigger="change">
                         <option value="">2121</option>
                     </select>
-                    @error('usecfdi_id')
+                    @error('prodserv_id')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -326,11 +319,11 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="usecfdi_id">Clave Unidad *:</label>
-                    <select id="usecfdi_id" name="usecfdi_id" class="form-control select2" value="{{ old('usecfdi_id') }}" required data-parsley-trigger="change">
+                    <label for="key_unit_id">Clave Unidad *:</label>
+                    <select id="key_unit_id" name="key_unit_id" class="form-control select2" required data-parsley-trigger="change">
                         <option value="">2121</option>
                     </select>
-                    @error('usecfdi_id')
+                    @error('key_unit_id')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -341,12 +334,13 @@
             <div class="row">
               <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="telephone">Impuestos *:</label>
-
+                @foreach($taxes as $value)                  
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="tax_id" value="" class="flat"> Checked
+                      <input type="checkbox" name="tax_id" value="{{ $value->id }}" class="flat"> &nbsp;<strong>{{ $value->name }}</strong> ({{ $value->type }} {{ $value->tasa }} {{ $value->factor }})
                     </label>
                   </div>
+                @endforeach
               </div>
             </div>
 
@@ -382,21 +376,10 @@
     <!-- Country -->
     {{--  <script src="{{ asset('/js/helpers/country.js') }}"></script>  --}}
     <script>
-      let $select = document.getElementById('municipality_id');
       jQuery(document).ready(function($){
         $(document).ready(function() {
-          $('#taxregimen_id').select2();
-          $('#country_id').select2();
-          $('#state_id').select2();
-          $('#municipality_id').select2();
           $('#search_customer').select2();
-
-          $('#state_id').on('change', function () {
-            $.get( "{{ url('/municipalities/') }}" + '/' + $('#state_id').val(), function( data ) {
-              remove();
-              change(data);
-            });
-          });
+          $('#search_product').select2();
 
           $('#search_customer').on('change', function () {
             $.get( "{{ url('/customers/') }}" + '/' + $('#search_customer').val(), function( data ) {
@@ -407,41 +390,17 @@
               $('#street').val(data.street);
               $('#no_exterior').val(data.no_exterior);
               $('#no_inside').val(data.no_inside);
-              add_state_select(data.name);
+              $('#state_id').val(data.state);
+              $('#municipality_id').val(data.municipality);
             });
           });
 
-          let add_state_select = nameState => {
-            let option = document.createElement('option');
-            option.value = nameState;
-            option.text = nameState;
-            $select.appendChild(option);
-          }
-
-          let remove = () => {
-            for (let i = $select.options.length; i >= 0; i--) {
-              $select.remove(i);
-            }
-          };
-
-          let change = (data) => {
-            for(let x in data) {
-              let option = document.createElement('option');
-              option.value = data[x].id;
-              option.text = data[x].name;
-              $select.appendChild(option);
-            }
-          };
-
-          $("#logo").on('change', function(e) {
-            let x = e.target;
-            if (!x.files || !x.files.length) {
-              return false;
-            }
-
-            let img = x.files[0];
-            const objectURL = URL.createObjectURL(img);
-            $("#previewlogo").attr('src',objectURL);
+          $('#search_product').on('change', function () {
+            $.get( "{{ url('/products/') }}" + '/' + $('#search_product').val(), function( data ) {
+              data = JSON.parse(data);
+              $('#description').val(data.description);
+              $('#price').val(data.price);
+            });
           });
         });
       });
