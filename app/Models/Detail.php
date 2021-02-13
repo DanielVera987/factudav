@@ -58,7 +58,6 @@ class Detail extends Model
         foreach ($request as $key => $value) {
             if (isset($data['details_id'])) {
                 $detail = Detail::findOrFile($data['details_id']);
-                $detail->
             }
         }
         Invoice::with('detail')->findOrFail($invoiceId);       

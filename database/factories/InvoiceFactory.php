@@ -25,7 +25,7 @@ class InvoiceFactory extends Factory
             'bussine_id' => 1,
             'customer_id' => 1,
             'folio' => $this->faker->numberBetween($min = 1000, $max = 9000),
-            'way_to_pay' => $this->faker->randomDigit(),
+            'way_to_pay_id' => $this->faker->randomDigit(),
             'currency_id' => $this->faker->randomDigit(),
             'payment_method_id' => $this->faker->randomDigit(),
             'usecfdi_id' => $this->faker->randomDigit(),

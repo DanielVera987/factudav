@@ -12,7 +12,7 @@ class Invoice extends Model
     protected $fillable = [
         'bussine_id',
         'folio',
-        'way_to_pay',
+        'way_to_pay_id',
         'currency_id',
         'payment_method_id',
         'usecfdi_id',
@@ -38,5 +38,20 @@ class Invoice extends Model
     public function currency()
     {
         return $this->belongsTo(Currency::class);
+    }
+
+    public function usecfdi()
+    {
+        return $this->belongsTo(Usecfdi::class);
+    }
+
+    public function paymentmethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
+    }
+
+    public function waytopay()
+    {
+        return $this->belongsTo(WayToPay::class);
     }
 }

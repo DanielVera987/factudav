@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             MunicipalitySeeder::class,
             TaxRegimenSeeder::class,
             UsecfdiSeeder::class,
+            PaymentMethodSeeder::class,
+            WayToPaySeeder::class,
             UserSeeder::class
         ]);
         
