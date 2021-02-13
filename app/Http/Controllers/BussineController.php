@@ -29,6 +29,7 @@ class BussineController extends Controller
      */
     public function index()
     {
+        return redirect()->route('home');
     }
 
     /**
@@ -82,7 +83,7 @@ class BussineController extends Controller
      */
     public function show(Bussine $bussine)
     {
-        //
+        return redirect()->route('home');
     }
 
     /**
@@ -191,7 +192,7 @@ class BussineController extends Controller
      */
     public function destroy(Bussine $bussine)
     {
-        //
+        return redirect()->route('home');
     }
 
     protected function createBussine($request)

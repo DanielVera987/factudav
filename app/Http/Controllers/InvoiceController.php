@@ -11,7 +11,9 @@ use App\Models\Product;
 use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\Municipality;
+use App\Models\PaymentMethod;
 use App\Models\Usecfdi;
+use App\Models\WayToPay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -46,6 +48,8 @@ class InvoiceController extends Controller
         $products = Product::where('bussine_id', Auth::user()->bussine_id)->get();
         $taxes = Tax::where('bussine_id', Auth::user()->bussine_id)->get();
         $usecfdi = Usecfdi::all();
+        $wayToPays = WayToPay::all();
+        $paymentMethods = PaymentMethod::all();
 
         return view('invoices.create', [
             'currencies' => $currencies,
@@ -53,7 +57,9 @@ class InvoiceController extends Controller
             'customers' => $customers,
             'products' => $products,
             'taxes' => $taxes,
-            'usecfdi' => $usecfdi
+            'usecfdi' => $usecfdi,
+            'waytopays' => $wayToPays,
+            'paymentmethods' => $paymentMethods
         ]);
     }
 

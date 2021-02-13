@@ -56,6 +56,12 @@
                       <i class="fa fa-cube"></i> Productos
                     </a>
                   </li>
+
+                  <li>
+                    <a href="{{ route('products.index') }}">
+                      <i class="fa fa-cog"></i> Configuración
+                    </a>
+                  </li>
                   
                 </ul>
               </div>

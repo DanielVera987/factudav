@@ -64,9 +64,13 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                  <label for="tradename">Forma de Pago * :</label>
-                  <input type="text" id="tradename" name="tradename" class="form-control" data-parsley-trigger="change" value="{{ old('tradename') }}" required />
-                  @error('tradename')
+                  <label for="way_to_pays_id">Forma de Pago * :</label>
+                  <select id="way_to_pays_id" name="way_to_pays_id" class="form-control select2" value="{{ old('way_to_pays_id') }}" required data-parsley-trigger="change">
+                    @foreach($waytopays as $value)
+                      <option value="{{ $value->id }}">{{ $value->code }} - {{ $value->name }}</option>
+                    @endforeach
+                  </select>
+                  @error('way_to_pays_id')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
@@ -101,8 +105,12 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="email">Metodo de Pago * :</label>
-                  <input type="email" id="email" name="email" class="form-control" data-parsley-trigger="change" value="{{ old('email') }}" required />
-                  @error('email')
+                  <select id="payment_methods_id" name="payment_methods_id" class="form-control select2" value="{{ old('payment_methods_id') }}" required data-parsley-trigger="change">
+                    @foreach($paymentmethods as $value)
+                      <option value="{{ $value->id }}">{{ $value->code }} - {{ $value->name }}</option>
+                    @endforeach
+                  </select>
+                  @error('payment_methods_id')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
@@ -126,9 +134,9 @@
 
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="usecfdi_id">Fecha *:</label>
-                        <input type="tel" id="telephone" class="form-control" name="telephone" value="{{ old('telephone') }}" data-parsley-trigger="change" required />                        
-                        @error('usecfdi_id')
+                        <label for="date">Fecha *:</label>
+                        <input type="text" id="date" class="form-control" name="date" value="{{ old('date') }}" data-parsley-trigger="change" required />                        
+                        @error('date')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -373,11 +381,17 @@
     <script src="{{ asset('/vendors/switchery/dist/switchery.min.js') }}"></script>
     <!-- Select2 -->
     <script src="{{ asset('/vendors/select2/dist/js/select2.full.min.js') }}"></script>
+    <!-- Moment -->
+    <script src="{{ asset('/vendors/moment/min/moment.min.js') }}"></script>
     <!-- Country -->
     {{--  <script src="{{ asset('/js/helpers/country.js') }}"></script>  --}}
     <script>
       jQuery(document).ready(function($){
         $(document).ready(function() {
+          //Momentjs
+          $('#date').val(moment().format('YYYY-MM-DDTHH:mm:ss'));
+          
+          //Select2
           $('#search_customer').select2();
           $('#search_product').select2();
 

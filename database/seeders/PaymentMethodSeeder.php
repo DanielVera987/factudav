@@ -20,11 +20,6 @@ class PaymentMethodSeeder extends Seeder
         ]);
 
         PaymentMethod::create([
-            'code' => 'PIP',
-            'name' => 'Pago Inicial y Parcialidades'
-        ]);
-
-        PaymentMethod::create([
             'code' => 'PPD',
             'name' => 'Pago en Parcialidades o Diferido'
         ]);
