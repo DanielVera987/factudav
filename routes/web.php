@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', function () { return redirect()->route('login'); });
 
@@ -25,3 +26,5 @@ Route::get('/tax/{id}', [DashboardController::class, 'deleteTax'])
   ->where(['id' => '[0-9]+']);
 Route::get('/currency/{id}', [DashboardController::class, 'deleteCurrency'])
   ->where(['id' => '[0-9]+']);
+Route::get('/searchUnit', [SearchController::class, 'searchUnits']);
+Route::get('/searchCustomers', [SearchController::class, 'searchCustomers']);

@@ -60,7 +60,7 @@ class InvoiceTest extends TestCase
                 2,
                 3
             ],
-            'key_unit_id' => [
+            'unit_id' => [
                 2,
                 3
             ],
@@ -130,7 +130,7 @@ class InvoiceTest extends TestCase
                 2,
                 3
             ],
-            'key_unit_id' => [
+            'unit_id' => [
                 2,
                 3
             ],

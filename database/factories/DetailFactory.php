@@ -26,7 +26,7 @@ class DetailFactory extends Factory
             'invoice_id' => 1,
             'product_id' => $this->faker->randomDigit(),
             'prodserv_id' => $this->faker->randomDigit(),
-            'key_unit_id' => $this->faker->randomDigit(),
+            'unit_id' => $this->faker->randomDigit(),
             'description' => $this->faker->sentence(10),
             'quantity' => $this->faker->randomDigit(),
             'discount' => $this->faker->randomNumber(2, true),

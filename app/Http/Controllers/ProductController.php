@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tax;
+use App\Models\Unit;
 use App\Models\Bussine;
 use App\Models\Product;
-use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -37,12 +38,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $taxes = Tax::where('bussine_id', Auth::user()->bussine_id)->get();
-        $folio = Product::generateFolio();
-
         return view('products.create', [
-            'taxes' => $taxes,
-            'folio' => $folio
+            'folio' => Product::generateFolio()
         ]);
     }
 
@@ -62,7 +59,7 @@ class ProductController extends Controller
             'alert_stock' => ['required', 'numeric', 'max:255'],
             'cost' => ['required', 'numeric', 'max:255'],
             'price' => ['required', 'numeric', 'max:255'],
-            'tax_id' => ['required', 'numeric', 'max:255'],
+            'unit_id' => ['required', 'numeric', 'max:255'],
             'image' => ['required', 'image'],
             'is_active' => ['nullable']
         ]);
@@ -93,10 +90,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $produ = [];
-        $produ['description'] = $product->description;
-        $produ['price'] = $product->price;
-        return json_encode($produ);
+        return redirect()->route('home');
     }
 
     /**
@@ -107,12 +101,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        $taxes = Tax::where('bussine_id', Auth()->user()->bussine_id)->get();
+        $product = Product::with('unit')->where('bussine_id', Auth()->user()->bussine_id)->findOrFail($id);
 
         return view('products.edit', [
             'product' => $product,
-            'taxes' => $taxes
         ]);
     }
 
@@ -133,7 +125,7 @@ class ProductController extends Controller
             'alert_stock' => ['required', 'numeric', 'max:255'],
             'cost' => ['required', 'numeric', 'max:255'],
             'price' => ['required', 'numeric', 'max:255'],
-            'tax_id' => ['required', 'numeric', 'max:255'],
+            'unit_id' => ['required', 'numeric', 'max:255'],
             'image' => ['image'],
             'is_active' => ['nullable']
         ]);

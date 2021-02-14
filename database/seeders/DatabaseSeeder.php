@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             UsecfdiSeeder::class,
             PaymentMethodSeeder::class,
             WayToPaySeeder::class,
+            UnitSeeder::class,
             UserSeeder::class
         ]);
         

@@ -30,7 +30,7 @@ class ProductFactory extends Factory
             'alert_stock' => $this->faker->randomDigit(),
             'cost' => $this->faker->randomFloat($nbMaxDecimals = NULL),
             'price' => $this->faker->randomFloat($nbMaxDecimals = NULL),
-            'tax_id' => $this->faker->randomDigit(),
+            'unit_id' => $this->faker->randomDigit(),
             'image' => $this->faker->randomDigit(),
             'is_active' => $this->faker->randomDigit(),
         ];

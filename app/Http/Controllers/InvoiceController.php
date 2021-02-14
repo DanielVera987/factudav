@@ -81,7 +81,7 @@ class InvoiceController extends Controller
             'customer_id.*' => ['required', 'numeric'],
             'product_id.*' => ['required', 'numeric'],
             'prodserv_id.*' => ['required', 'numeric'],
-            'key_unit_id.*' => ['required', 'numeric'],
+            'unit_id.*' => ['required', 'numeric'],
             'description.*' => ['required', 'string', 'max:255'],
             'quantity.*' => ['required', 'numeric'],
             'discount.*' => ['required', 'numeric'],

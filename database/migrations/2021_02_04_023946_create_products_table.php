@@ -26,9 +26,9 @@ class CreateProductsTable extends Migration
             $table->string('alert_stock');
             $table->string('cost');
             $table->string('price');
-            $table->foreignId('tax_id')
+            $table->foreignId('unit_id')
                 ->references('id')
-                ->on('tax');
+                ->on('units');
             $table->string('image');
             $table->string('is_active')->nullable();
             $table->timestamps();

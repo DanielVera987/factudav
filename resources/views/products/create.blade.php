@@ -7,6 +7,8 @@
     <link href="{{ asset('/vendors/switchery/dist/switchery.min.css') }}" rel="stylesheet">
     <!-- starrr -->
     <link href="{{ asset('/vendors/starrr/dist/starrr.css') }}" rel="stylesheet">
+    <!-- select2 -->
+    <link href="{{ asset('/vendors/select2/dist/css/select2.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -104,13 +106,9 @@
                         </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <label for="tax_id">Impuesto * :</label>
-                            <select id="tax_id" name="tax_id" class="form-control" value="{{ old('tax_id') }}" required data-parsley-trigger="change">
-                                @foreach ($taxes as $tax)    
-                                    <option value="{{ $tax->id }}">{{ $tax->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('tax_id')
+                            <label for="unit_id">Unidad de Medida * :</label>
+                            <select id="unit_id" name="unit_id" class="form-control" value="{{ old('unit_id') }}" required data-parsley-trigger="change"></select>
+                            @error('unit_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -197,6 +195,26 @@
             const objectURL = URL.createObjectURL(img);
             $("#previewlogo").attr('src',objectURL);
           });
+
+            $('#unit_id').select2({
+                placeholder: 'Escribe para comenzar a buscar',
+                ajax: {
+                    url: '/searchUnit',
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    text: `${item.code} - ${item.name}`,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
         });
       });
 

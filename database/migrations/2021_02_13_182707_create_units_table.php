@@ -17,6 +17,8 @@ class CreateUnitsTable extends Migration
             $table->id();
             $table->string('code');
             $table->string('name');
+            $table->string('simbol')->nullable();
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

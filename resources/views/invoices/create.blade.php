@@ -327,11 +327,11 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="key_unit_id">Clave Unidad *:</label>
-                    <select id="key_unit_id" name="key_unit_id" class="form-control select2" required data-parsley-trigger="change">
+                    <label for="unit_id">Clave Unidad *:</label>
+                    <select id="unit_id" name="unit_id" class="form-control select2" required data-parsley-trigger="change">
                         <option value="">2121</option>
                     </select>
-                    @error('key_unit_id')
+                    @error('unit_id')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -391,23 +391,7 @@
           //Momentjs
           $('#date').val(moment().format('YYYY-MM-DDTHH:mm:ss'));
           
-          //Select2
-          $('#search_customer').select2();
           $('#search_product').select2();
-
-          $('#search_customer').on('change', function () {
-            $.get( "{{ url('/customers/') }}" + '/' + $('#search_customer').val(), function( data ) {
-              data = JSON.parse(data);
-              $('#rfc').val(data.rfc);
-              $('#bussine_name').val(data.bussine_name);
-              $('#zip').val(data.zip);
-              $('#street').val(data.street);
-              $('#no_exterior').val(data.no_exterior);
-              $('#no_inside').val(data.no_inside);
-              $('#state_id').val(data.state);
-              $('#municipality_id').val(data.municipality);
-            });
-          });
 
           $('#search_product').on('change', function () {
             $.get( "{{ url('/products/') }}" + '/' + $('#search_product').val(), function( data ) {
@@ -415,6 +399,46 @@
               $('#description').val(data.description);
               $('#price').val(data.price);
             });
+          });
+
+          $('#unit_id').select2({
+            placeholder: 'Escribe para comenzar a buscar',
+            ajax: {
+                url: '/searchUnit',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: `${item.code} - ${item.name}`,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+          });
+
+          $('#search_customer').select2({
+            placeholder: 'Escribe para comenzar a buscar',
+            ajax: {
+                url: '/searchCustomers',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: `${item.bussine_name}`,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
           });
         });
       });

@@ -25,7 +25,9 @@ class CreateDetailsTable extends Migration
                 ->references('id')
                 ->on('products');
             $table->string('prodserv_id');
-            $table->string('key_unit_id');
+            $table->foreignId('unit_id')
+                ->references('id')
+                ->on('units');
             $table->string('description');
             $table->string('quantity');
             $table->string('discount');

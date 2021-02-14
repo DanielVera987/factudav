@@ -7,6 +7,8 @@
     <link href="{{ asset('/vendors/switchery/dist/switchery.min.css') }}" rel="stylesheet">
     <!-- starrr -->
     <link href="{{ asset('/vendors/starrr/dist/starrr.css') }}" rel="stylesheet">
+    <!-- select2 -->
+    <link href="{{ asset('/vendors/select2/dist/css/select2.min.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -109,13 +111,11 @@
                         </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <label for="tax_id">Impuesto * :</label>
-                            <select id="tax_id" name="tax_id" class="form-control" required data-parsley-trigger="change">
-                                @foreach ($taxes as $tax)                                
-                                    <option value="{{ $tax->id }}" @if ($tax->id == $product->tax_id) selected @endif>{{ $tax->name }}</option>
-                                @endforeach
+                            <label for="unit_id">Unidad de Medida * :</label>
+                            <select id="unit_id" name="unit_id" class="form-control" required data-parsley-trigger="change">
+                                <option value="{{ $product->unit->id }}" selected>{{ $product->unit->code }} - {{ $product->unit->name }}</option>
                             </select>
-                            @error('tax_id')
+                            @error('unit_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -192,16 +192,36 @@
       let $select = document.getElementById('municipality_id');
       jQuery(document).ready(function($){
         $(document).ready(function() {
-          $("#image").on('change', function(e) {
-            let x = e.target;
-            if (!x.files || !x.files.length) {
-              return false;
-            }
+            $("#image").on('change', function(e) {
+                let x = e.target;
+                if (!x.files || !x.files.length) {
+                return false;
+                }
 
-            let img = x.files[0];
-            const objectURL = URL.createObjectURL(img);
-            $("#previewlogo").attr('src',objectURL);
-          });
+                let img = x.files[0];
+                const objectURL = URL.createObjectURL(img);
+                $("#previewlogo").attr('src',objectURL);
+            });
+
+            $('#unit_id').select2({
+                placeholder: 'Escribe para comenzar a buscar',
+                ajax: {
+                    url: '/searchUnit',
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    text: `${item.code} - ${item.name}`,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                }
+            });
         });
       });
 

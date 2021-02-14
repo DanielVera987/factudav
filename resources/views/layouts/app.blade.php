@@ -58,7 +58,7 @@
                   </li>
 
                   <li>
-                    <a href="{{ route('products.index') }}">
+                    <a href="{{ route('settings.create') }}">
                       <i class="fa fa-cog"></i> Configuración
                     </a>
                   </li>

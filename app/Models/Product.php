@@ -19,7 +19,7 @@ class Product extends Model
         'alert_stock',
         'cost',
         'price',
-        'tax_id',
+        'unit_id',
         'image',
         'is_active'
     ];
@@ -29,9 +29,9 @@ class Product extends Model
         return $this->belongsTo(Bussine::class);
     }
 
-    public function tax()
+    public function unit()
     {
-        return $this->belongsTo(Tax::class);
+        return $this->belongsTo(Unit::class);
     }
 
     public function detail()
