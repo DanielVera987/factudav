@@ -19,22 +19,22 @@
     <div class="x_title">
       <h2><i class="fa fa-institution"></i> Configuración General</h2>
       <div class="clearfix"></div>
-      @if(session()->has('message'))
+      @if(session()->has('success'))
         <div class="alert alert-success">
-            {{ session()->get('message') }}
+            {{ session()->get('success') }}
         </div>
       @endif
     </div>
     <div class="x_content">
       <div class="" role="tabpanel" data-example-id="togglable-tabs">
         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Datos Generales</a>
+          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-cog"></i> Datos Generales</a>
           </li>
-          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Facturación</a>
+          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false"><i class="fa fa-file-text"></i> Facturación</a>
           </li>
-          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Monedas</a>
+          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false"><i class="fa fa-money"></i> Monedas</a>
           </li>
-          <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab4" data-toggle="tab" aria-expanded="false">Impuestos</a>
+          <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab4" data-toggle="tab" aria-expanded="false"><i class="fa fa-file"></i> Impuestos</a>
           </li>
         </ul>
         <div id="myTabContent" class="tab-content">

@@ -18,23 +18,15 @@
 @endsection
 
 @section('content')
-<div class="page-title">
-  <div class="title_left">
-    <h3>Agregar Factura</h3>
-  </div>
-
-  <div class="title_right">
-    
-  </div>
-</div>
 <form id="demo-form" method="POST" action="{{ route('customers.store') }}" enctype="multipart/form-data" data-parsley-validate>
   @csrf
   <div class="x_panel">
     <div class="x_title">
+      <h2><i class="fa fa-file-text"></i> Agregar Factura</h2>
       <div class="clearfix"></div>
-      @if(session()->has('message'))
+      @if(session()->has('success'))
         <div class="alert alert-success">
-            {{ session()->get('message') }}
+            {{ session()->get('success') }}
         </div>
       @endif
     </div>
@@ -145,7 +137,7 @@
                 </div>
               
                 <hr>
-                <h3>Datos del cliente</h3>
+                <h2>Datos del cliente</h2>
 
                 <div class="row">  
                     <div class="col-md-12 col-sm-12 col-xs-12">

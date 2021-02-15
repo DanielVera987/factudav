@@ -18,24 +18,16 @@
 @endsection
 
 @section('content')
-<div class="page-title">
-  <div class="title_left">
-    <h3>Actualizar Cliente</h3>
-  </div>
-
-  <div class="title_right">
-    
-  </div>
-</div>
 <form id="demo-form" method="POST" action="{{ route('customers.update', $customer->id) }}" data-parsley-validate>
   @csrf
   @method('put')
   <div class="x_panel">
     <div class="x_title">
+      <h2><i class="fa fa-users"></i> Actualizar Cliente</h2>
       <div class="clearfix"></div>
-      @if(session()->has('message'))
+      @if(session()->has('success'))
         <div class="alert alert-success">
-            {{ session()->get('message') }}
+            {{ session()->get('success') }}
         </div>
       @endif
     </div>

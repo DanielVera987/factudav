@@ -12,31 +12,23 @@
 @section('content')
   <!-- page content -->
     <div class="">
-      <div class="page-title">
-        <div class="title_left">
-          <h3>Listado De Clientes</h3>
-        </div>
-
-        <div class="title_right">
-          <div style="float: right;">
-            <a href="{{ route('customers.create') }}" class="btn btn-success" type="button">
-              Crear Nuevo
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="clearfix"></div>
-
       <div class="row">
-        @if(session()->has('success'))
-          <div class="alert alert-success">
-            <strong>{{ session()->get('success') }}</strong>
-          </div>
-        @endif
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
-            <div class="x_title"></div>
+            <div class="x_title">
+              <h2><i class="fa fa-users"></i> Listado De Clientes</h2>
+              <div style="float: right;">
+                <a href="{{ route('customers.create') }}" class="btn btn-success" type="button">
+                  Crear Nuevo
+                </a>
+              </div>
+              <div class="clearfix"></div>
+              @if(session()->has('success'))
+                <div class="alert alert-success">
+                  <strong>{{ session()->get('success') }}</strong>
+                </div>
+              @endif
+            </div>
             <div class="x_content">
               <p class="text-muted font-13 m-b-30"></p>
     

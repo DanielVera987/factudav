@@ -17,7 +17,7 @@
   @method('put')
   <div class="x_panel">
     <div class="x_title">
-      <h2><i class="fa fa-institution"></i> Nuevo Producto</h2>
+      <h2><i class="fa fa-cubes"></i> Actualizar Producto</h2>
       <div class="clearfix"></div>
       @if(session()->has('message'))
         <div class="alert alert-success">

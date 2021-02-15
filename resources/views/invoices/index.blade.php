@@ -13,31 +13,25 @@
 @section('content')
   <!-- page content -->
     <div class="">
-      <div class="page-title">
-        <div class="title_left">
-          <h3>Listado De Facturas</h3>
-        </div>
-
-        <div class="title_right">
-          <div style="float: right;">
-            <a href="{{ route('invoices.create') }}" class="btn btn-success" type="button">
-              Crear Nuevo
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="clearfix"></div>
-
       <div class="row">
-        @if(session()->has('success'))
-          <div class="alert alert-success">
-            <strong>{{ session()->get('success') }}</strong>
-          </div>
-        @endif
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
-            <div class="x_title"></div>
+            <div class="x_title">
+              <h2><i class="fa fa-file-text"></i> Listado De Facturas</h2>
+              <div class="title_right">
+                <div style="float: right;">
+                  <a href="{{ route('invoices.create') }}" class="btn btn-success" type="button">
+                    Crear Nuevo
+                  </a>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              @if(session()->has('success'))
+                <div class="alert alert-success">
+                  <strong>{{ session()->get('success') }}</strong>
+                </div>
+              @endif
+            </div>
             <div class="x_content">
               <p class="text-muted font-13 m-b-30"></p>
     

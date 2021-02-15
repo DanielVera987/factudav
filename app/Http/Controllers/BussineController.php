@@ -72,7 +72,7 @@ class BussineController extends Controller
         Auth::user()->bussine_id = $bussineId;
         Auth::user()->save();
 
-        return redirect()->route('settings.edit', $bussineId)->with('message', 'Datos Guardados');
+        return redirect()->route('settings.edit', $bussineId)->with('success', 'Datos Guardados');
     }
 
     /**
@@ -181,7 +181,7 @@ class BussineController extends Controller
         Currency::isCurrency($request, $id);
         Tax::isTax($request, $id);
 
-        return redirect()->route('settings.edit', $id)->with('message', 'Datos Guardados');
+        return redirect()->route('settings.edit', $id)->with('success', 'Datos Guardados');
     }
 
     /**
@@ -227,7 +227,7 @@ class BussineController extends Controller
 
         return ($result)
             ? $bussine->id
-            : redirect()->route('settings.create')->with('message', 'Error al guardar los datos');
+            : redirect()->route('settings.create')->with('success', 'Error al guardar los datos');
             
     }
 
