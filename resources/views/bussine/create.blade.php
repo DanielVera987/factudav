@@ -31,9 +31,9 @@
           </li>
           <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false"><i class="fa fa-file-text"></i> Facturación</a>
           </li>
-          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab4" data-toggle="tab" aria-expanded="false"><i class="fa fa-money"></i> Monedas</a>
+          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false"><i class="fa fa-money"></i> Monedas</a>
           </li>
-          <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false"><i class="fa fa-file"></i> Impuestos</a>
+          <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab4" data-toggle="tab" aria-expanded="false"><i class="fa fa-file"></i> Impuestos</a>
           </li>
         </ul>
         <div id="myTabContent" class="tab-content">

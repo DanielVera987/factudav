@@ -64,6 +64,10 @@ class ProductController extends Controller
             'is_active' => ['nullable']
         ]);
 
+        if ($request->stock <= $request->alert_stock) {
+            return back()->with('warning', 'El stock debe ser mayor a la alerta de stock');
+        }
+
         $request['bussine_id'] = Auth::user()->bussine_id;
         
         $product = Product::create($request->all());

@@ -39,6 +39,11 @@ class Product extends Model
         return $this->hasMany(Detail::class);
     }
 
+    public function produserv()
+    {
+        return $this->belongsTo(ProduServ::class);
+    }
+
     public static function generateFolio()
     {
         $count = Product::where('bussine_id', Auth::user()->bussine_id)->count();

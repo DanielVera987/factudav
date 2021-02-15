@@ -42,6 +42,11 @@ class Detail extends Model
         return $this->belongsTo(Unit::class);
     }
 
+    public function produserv()
+    {
+        return $this->belongsTo(ProduServ::class);
+    }
+
     public static function createDetail($invoiceId, $request)
     {
         foreach ($request['product_id'] as $key => $value) {

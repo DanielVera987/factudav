@@ -18,9 +18,9 @@
     <div class="x_title">
       <h2><i class="fa fa-cubes"></i> Nuevo Producto</h2>
       <div class="clearfix"></div>
-      @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
+      @if(session()->has('warning'))
+        <div class="alert alert-warning">
+            {{ session()->get('warning') }}
         </div>
       @endif
     </div>
