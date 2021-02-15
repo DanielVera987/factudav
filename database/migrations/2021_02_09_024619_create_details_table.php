@@ -24,7 +24,9 @@ class CreateDetailsTable extends Migration
             $table->foreignId('product_id')
                 ->references('id')
                 ->on('products');
-            $table->string('prodserv_id');
+            $table->foreignId('produserv_id')
+                ->references('id')
+                ->on('produ_servs');
             $table->foreignId('unit_id')
                 ->references('id')
                 ->on('units');

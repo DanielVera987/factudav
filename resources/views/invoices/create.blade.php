@@ -249,12 +249,7 @@
             <div class="row">  
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <label for="search_product">Buscador de Producto *:</label>
-                <select id="search_product" name="search_product" class="form-control select2">
-                  <option value="" selected disabled>Escribe para comenzar a buscar</option>
-                  @foreach ($products as $value)
-                    <option value="{{ $value->id }}">{{ $value->name }}</option>
-                  @endforeach
-              </select>
+                <select id="search_product" name="search_product" class="form-control select2"></select>
                 @error('search_product')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -307,11 +302,10 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="prodserv_id">Clave producto/servicio *:</label>
-                    <select id="prodserv_id" name="prodserv_id" class="form-control select2" value="{{ old('prodserv_id') }}" required data-parsley-trigger="change">
-                        <option value="">2121</option>
+                    <label for="produserv_id">Clave producto/servicio *:</label>
+                    <select id="produserv_id" name="produserv_id" class="form-control select2" value="{{ old('produserv_id') }}" required data-parsley-trigger="change">
                     </select>
-                    @error('prodserv_id')
+                    @error('produserv_id')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -320,9 +314,7 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="unit_id">Clave Unidad *:</label>
-                    <select id="unit_id" name="unit_id" class="form-control select2" required data-parsley-trigger="change">
-                        <option value="">2121</option>
-                    </select>
+                    <select id="unit_id" name="unit_id" class="form-control select2" required data-parsley-trigger="change"></select>
                     @error('unit_id')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -344,12 +336,49 @@
               </div>
             </div>
 
+            <div class="title_right">
+              <div style="float: right;">
+                <a href="{{ route('invoices.create') }}" class="btn btn-success" type="button">
+                  <i class="fa fa-plus"></i> Agregar concepto
+                </a>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <hr>
+
+            <div class="title_right">
+              <div style="float: right;">
+                <table class="table" style="font-size: 18px;">
+                  <tr>
+                    <td>Subtotal: </td>
+                    <td>0.00</td>
+                  </tr>
+                  <tr>
+                    <td>Descuento: </td>
+                    <td>0.00</td>
+                  </tr>
+                  <tr>
+                    <td>Retenciones: </td>
+                    <td>0.00</td>
+                  </tr>
+                  <tr>
+                    <td>Traslados: </td>
+                    <td>0.00</td>
+                  </tr>
+                  <tr>
+                    <td style="font-size: 20px;"><strong>Total: </strong> </td>
+                    <td style="font-size: 20px;"><strong>0.00</strong></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-md-12">
                 </br>
                 <div class="actionBar">
                   <button class="btn btn-primary float-rigth" role="tab" onclick="document.getElementById('home-tab').click();" data-toggle="tab" aria-expanded="false">Anterior</button>
-                  <input type="submit" class="btn btn-success float-rigth" value="Guardar">
+                  <input type="submit" class="btn btn-success float-rigth" value="Timbrar Factura">
                 </div>
               </div>
             </div>   
@@ -383,14 +412,62 @@
           //Momentjs
           $('#date').val(moment().format('YYYY-MM-DDTHH:mm:ss'));
           
-          $('#search_product').select2();
+          $('#search_product').select2({
+            placeholder: 'Escribe para comenzar a buscar',
+            ajax: {
+                url: '/searchProducts',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: `${item.name}`,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+          });
 
           $('#search_product').on('change', function () {
             $.get( "{{ url('/products/') }}" + '/' + $('#search_product').val(), function( data ) {
-              data = JSON.parse(data);
+              $('#quantity').val(1);
               $('#description').val(data.description);
+              $('#discount').val(0)
               $('#price').val(data.price);
+              $('#produserv_id').prepend($('<option />', {
+                text: `${data.produserv_code} - ${data.produserv_name}`,
+                value: data.produserv_id,
+              }));
+
+              $('#unit_id').prepend($('<option />', {
+                text: `${data.unit_code} - ${data.unit_name}`,
+                value: data.unit_id,
+              }));
             });
+          });
+
+          $('#produserv_id').select2({
+            placeholder: 'Escribe para comenzar a buscar',
+            ajax: {
+                url: '/searchProduServ',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: `${item.code} - ${item.name}`,
+                                id: item.id
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
           });
 
           $('#unit_id').select2({
@@ -428,10 +505,25 @@
                             }
                         })
                     };
+
                 },
                 cache: true
             }
           });
+
+          $('#search_customer').on('change', function () {
+            $.get("{{ url('/customers/') }}" + '/' + $('#search_customer').val(), function(data) {
+              $('#rfc').val(data.rfc);
+              $('#bussine_name').val(data.bussine_name);
+              $('#zip').val(data.zip);
+              $('#street').val(data.street);
+              $('#no_exterior').val(data.no_exterior);
+              $('#no_inside').val(data.no_inside);
+              $('#state_id').val(data.state);
+              $('#municipality_id').val(data.municipality);
+            })
+          });
+
         });
       });
     </script>

@@ -28,3 +28,5 @@ Route::get('/currency/{id}', [DashboardController::class, 'deleteCurrency'])
   ->where(['id' => '[0-9]+']);
 Route::get('/searchUnit', [SearchController::class, 'searchUnits']);
 Route::get('/searchCustomers', [SearchController::class, 'searchCustomers']);
+Route::get('/searchProduServ', [SearchController::class, 'searchProduServ']);
+Route::get('/searchProducts', [SearchController::class, 'searchProducts']);

@@ -71,6 +71,7 @@ class ProductTest extends TestCase
             'alert_stock' => 10,
             'cost' => 30.00,
             'price' => 30.00,
+            'produserv_id' => 1,
             'unit_id' => 1,
             'image' => $file,
             'is_active' => '0'
@@ -95,6 +96,7 @@ class ProductTest extends TestCase
             'alert_stock' => 10,
             'cost' => 30.00,
             'price' => 30.00,
+            'produserv_id' => 1,
             'unit_id' => 1,
             'image' => 1,
             'is_active' => '0'
@@ -118,6 +120,7 @@ class ProductTest extends TestCase
             'alert_stock' => 10,
             'cost' => 30.00,
             'price' => 30.00,
+            'produserv_id' => 1,
             'unit_id' => 1,
             'image' => '',
             'is_active' => '0'
@@ -131,6 +134,7 @@ class ProductTest extends TestCase
             'alert_stock' => 10,
             'cost' => 30.00,
             'price' => 30.00,
+            'produserv_id' => 1,
             'unit_id' => 1,
             'is_active' => '0'
         ])->assertRedirect(route('products.index'))
@@ -156,6 +160,7 @@ class ProductTest extends TestCase
             'alert_stock' => 10,
             'cost' => 30.00,
             'price' => 30.00,
+            'produserv_id' => 1,
             'unit_id' => 1,
             'image' => 'default.png',
             'is_active' => '0'
@@ -173,6 +178,7 @@ class ProductTest extends TestCase
             'alert_stock' => 10,
             'cost' => 30.00,
             'price' => 30.00,
+            'produserv_id' => 1,
             'unit_id' => 1,
             'image' => $image,
             'is_active' => '0'
@@ -199,6 +205,7 @@ class ProductTest extends TestCase
             'alert_stock' => 10,
             'cost' => 30.00,
             'price' => 30.00,
+            'produserv_id' => 1,
             'unit_id' => 1,
             'image' => 1,
             'is_active' => '0'
@@ -213,6 +220,7 @@ class ProductTest extends TestCase
             'alert_stock' => 10,
             'cost' => 30.00,
             'price' => 30.00,
+            'produserv_id' => 1,
             'unit_id' => 1,
             'image' => 1,
             'is_active' => '0'

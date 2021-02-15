@@ -19,6 +19,7 @@ class Product extends Model
         'alert_stock',
         'cost',
         'price',
+        'produserv_id',
         'unit_id',
         'image',
         'is_active'

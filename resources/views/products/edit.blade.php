@@ -80,7 +80,7 @@
                             @enderror
                         </div>
                     
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <label for="description">Descripción * :</label>
                             <input type="text" id="description" class="form-control" value="{{ $product->description }}" name="description" required />
                             @error('description')
@@ -107,6 +107,18 @@
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <label for="produserv_id">Producto/Servicio * :</label>
+                            <select id="produserv_id" name="produserv_id" class="form-control" value="{{ old('produserv_id') }}" required data-parsley-trigger="change">
+                                <option value="{{ $product->produserv->id }}" selected>{{ $product->produserv->code }} - {{ $product->produserv->name }}</option>
+                            </select>
+                            @error('produserv_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                             @enderror
                         </div>
 
@@ -201,6 +213,26 @@
                 let img = x.files[0];
                 const objectURL = URL.createObjectURL(img);
                 $("#previewlogo").attr('src',objectURL);
+            });
+
+            $('#produserv_id').select2({
+                placeholder: 'Escribe para comenzar a buscar',
+                ajax: {
+                    url: '/searchProduServ',
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (item) {
+                                return {
+                                    text: `${item.code} - ${item.name}`,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    },
+                    cache: true
+                }
             });
 
             $('#unit_id').select2({

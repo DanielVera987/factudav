@@ -95,7 +95,23 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return redirect()->route('home');
+        if($customer->bussine_id != Auth::user()->bussine_id) {
+            return abort(404);
+        }
+
+        $cust = [];
+        $cust['rfc'] = $customer->rfc;
+        $cust['bussine_name'] = $customer->bussine_name;
+        $cust['zip'] = $customer->zip;
+        $cust['street'] = $customer->street;
+        $cust['no_exterior'] = $customer->no_exterior;
+        $cust['no_inside'] = $customer->no_inside;
+        $cust['state'] = $customer->state->name;
+
+        $munici = Municipality::find($customer->municipality_id);
+        $cust['municipality'] = $munici->name;
+        
+        return $cust;
     }
 
     /**

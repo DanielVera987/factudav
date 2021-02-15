@@ -59,7 +59,8 @@ class ProductController extends Controller
             'alert_stock' => ['required', 'numeric', 'max:255'],
             'cost' => ['required', 'numeric', 'max:255'],
             'price' => ['required', 'numeric', 'max:255'],
-            'unit_id' => ['required', 'numeric', 'max:255'],
+            'produserv_id' => ['required', 'numeric'],
+            'unit_id' => ['required', 'numeric'],
             'image' => ['required', 'image'],
             'is_active' => ['nullable']
         ]);
@@ -94,7 +95,22 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return redirect()->route('home');
+        if($product->bussine_id != Auth::user()->bussine_id) {
+            return abort(404);
+        }
+
+        $produ = [];
+        $produ['name'] = $product->name;    
+        $produ['description'] = $product->description;
+        $produ['price'] = $product->price;
+        $produ['produserv_id'] = $product->produserv_id;
+        $produ['produserv_code'] = $product->produserv->code;
+        $produ['produserv_name'] = $product->produserv->name;
+        $produ['unit_id'] = $product->unit_id;
+        $produ['unit_code'] = $product->unit->code;
+        $produ['unit_name'] = $product->unit->name;
+
+        return $produ;
     }
 
     /**
@@ -129,7 +145,8 @@ class ProductController extends Controller
             'alert_stock' => ['required', 'numeric', 'max:255'],
             'cost' => ['required', 'numeric', 'max:255'],
             'price' => ['required', 'numeric', 'max:255'],
-            'unit_id' => ['required', 'numeric', 'max:255'],
+            'produserv_id' => ['required', 'numeric'],
+            'unit_id' => ['required', 'numeric'],
             'image' => ['image'],
             'is_active' => ['nullable']
         ]);

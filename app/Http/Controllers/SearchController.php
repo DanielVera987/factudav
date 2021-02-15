@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
-use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Customer;
+use App\Models\ProduServ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -52,12 +53,28 @@ class SearchController extends Controller
 
         if ($request->has('q')) {
             $search = $request->q;
-            $products = Product::select('id', 'description', 'price')
+            $products = Product::select('id', 'name', 'description', 'price')
                      ->where('bussine_id', Auth::user()->bussine_id)
-                     ->where('code', 'LIKE', "%$search%")
-                     ->orWhere('name', 'LIKE', "%$search%")
+                     ->where('name', 'LIKE', "%$search%")
+                     ->orWhere('code', 'LIKE', "%$search%")
                      ->get();
         }
         return response()->json($products);
+    }
+
+    public function searchProduServ(Request $request)
+    {
+        $produserv = [];
+
+        if ($request->has('q')) {
+            $search = $request->q;
+            $produserv = ProduServ::select('id', 'code', 'name')
+                     ->where('code', 'LIKE', "%$search%")
+                     ->orWhere('name', 'LIKE', "%$search%")
+                     ->orWhere('similarwords', 'LIKE', "%$search%")
+                     ->take(100)
+                     ->get();
+        }
+        return response()->json($produserv);
     }
 }

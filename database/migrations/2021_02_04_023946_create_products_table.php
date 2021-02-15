@@ -20,12 +20,15 @@ class CreateProductsTable extends Migration
                 ->on('bussines');
                 
             $table->string('code')->unique();
-            $table->string('name');
+            $table->string('name');   
             $table->longText('description');
             $table->string('stock');
             $table->string('alert_stock');
             $table->string('cost');
             $table->string('price');
+            $table->foreignId('produserv_id')
+                ->references('id')
+                ->on('produ_servs');
             $table->foreignId('unit_id')
                 ->references('id')
                 ->on('units');
