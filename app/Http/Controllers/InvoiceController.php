@@ -71,14 +71,16 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {   
+        dd($request);
         $request->validate([
-            'folio' => ['required', 'string', 'max:255', 'unique:invoices,folio'],
-            'way_to_pay' => ['required', 'numeric', 'max:255'],
-            'currency_id' => ['required', 'numeric', 'max:255'],
-            'payment_method_id' => ['required', 'numeric','max:255'],
-            'usecfdi_id' => ['required', 'numeric', 'max:255'],
-            'date' => ['required', 'date'],
-            'customer_id.*' => ['required', 'numeric'],
+            'serie' => ['required', 'string'],/*LISTO*/
+            'folio' => ['required', 'string', 'max:255', 'unique:invoices,folio'], /*LISTO*/
+            'way_to_pay_id' => ['required', 'numeric', 'max:255'],/*LISTO*/
+            'currency_id' => ['required', 'numeric', 'max:255'],/*LISTO*/
+            'payment_method_id' => ['required', 'numeric','max:255'],/*LISTO*/
+            'usecfdi_id' => ['required', 'numeric', 'max:255'],/*LISTO*/
+            'date' => ['required', 'date'],/*LISTO*/
+            'customer_id' => ['required', 'numeric'],/*LISTO*/
             'product_id.*' => ['required', 'numeric'],
             'prodserv_id.*' => ['required', 'numeric'],
             'unit_id.*' => ['required', 'numeric'],

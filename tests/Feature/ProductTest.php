@@ -68,7 +68,7 @@ class ProductTest extends TestCase
             'name' => 'coca',
             'description' => 'refresco',
             'stock' => 10,
-            'alert_stock' => 10,
+            'alert_stock' => 2,
             'cost' => 30.00,
             'price' => 30.00,
             'produserv_id' => 1,
@@ -76,8 +76,9 @@ class ProductTest extends TestCase
             'image' => $file,
             'is_active' => '0'
         ]);
-        Storage::disk('products')->assertExists(time().'_'.'avatar.jpg');
 
+        Storage::disk('products')->assertExists(time().'_'.'avatar.jpg');
+        
         $this->assertDatabaseHas('products', [
             'code' => '001'
         ]);

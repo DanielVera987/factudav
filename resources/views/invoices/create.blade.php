@@ -10,6 +10,9 @@
     <!-- starrr -->
     <link href="{{ asset('/vendors/starrr/dist/starrr.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('/vendors/pnotify/dist/pnotify.css') }}" rel="stylesheet">
+    <link href="{{ asset('/vendors/pnotify/dist/pnotify.buttons.css') }}" rel="stylesheet">
+    <link href="{{ asset('/vendors/pnotify/dist/pnotify.nonblock.css') }}" rel="stylesheet">
     <style>
       .select2 {
         width:100%!important;
@@ -18,7 +21,7 @@
 @endsection
 
 @section('content')
-<form id="demo-form" method="POST" action="{{ route('customers.store') }}" enctype="multipart/form-data" data-parsley-validate>
+<form id="demo-form" method="POST" action="{{ route('invoices.store') }}" enctype="multipart/form-data" data-parsley-validate>
   @csrf
   <div class="x_panel">
     <div class="x_title">
@@ -56,13 +59,13 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                  <label for="way_to_pays_id">Forma de Pago * :</label>
-                  <select id="way_to_pays_id" name="way_to_pays_id" class="form-control select2" value="{{ old('way_to_pays_id') }}" required data-parsley-trigger="change">
+                  <label for="way_to_pay_id">Forma de Pago * :</label>
+                  <select id="way_to_pay_id" name="way_to_pay_id" class="form-control select2" value="{{ old('way_to_pays_id') }}" required data-parsley-trigger="change">
                     @foreach($waytopays as $value)
                       <option value="{{ $value->id }}">{{ $value->code }} - {{ $value->name }}</option>
                     @endforeach
                   </select>
-                  @error('way_to_pays_id')
+                  @error('way_to_pay_id')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
@@ -96,13 +99,13 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                  <label for="email">Metodo de Pago * :</label>
-                  <select id="payment_methods_id" name="payment_methods_id" class="form-control select2" value="{{ old('payment_methods_id') }}" required data-parsley-trigger="change">
+                  <label for="payment_method_id">Metodo de Pago * :</label>
+                  <select id="payment_method_id" name="payment_method_id" class="form-control select2" value="{{ old('payment_method_id') }}" required data-parsley-trigger="change">
                     @foreach($paymentmethods as $value)
                       <option value="{{ $value->id }}">{{ $value->code }} - {{ $value->name }}</option>
                     @endforeach
                   </select>
-                  @error('payment_methods_id')
+                  @error('payment_method_id')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
                     </span>
@@ -111,7 +114,7 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="usecfdi_id">Uso del CFDI *:</label>
-                    <select id="usecfdi_id" name="currency_id" class="form-control select2" value="{{ old('usecfdi_id') }}" required data-parsley-trigger="change">
+                    <select id="usecfdi_id" name="usecfdi_id" class="form-control select2" value="{{ old('usecfdi_id') }}" required data-parsley-trigger="change">
                       @foreach($usecfdi as $value)
                         <option value="{{ $value->id }}">{{ $value->code }} - {{ $value->name }}</option>
                       @endforeach
@@ -143,12 +146,11 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                     <label for="search_customer">Buscador de Clientes *:</label>
                     <select id="search_customer" name="customer_id" class="form-control select2" required data-parsley-trigger="change">
-                        <option value="" selected disabled>Escribe para comenzar a buscar</option>
                         @foreach ($customers as $value)
                           <option value="{{ $value->id }}">{{ $value->bussine_name }}</option>
                         @endforeach
                     </select>
-                    @error('search_customer')
+                    @error('customer_id')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -158,9 +160,9 @@
 
                 <div class="row">  
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="rfc">RFC * :</label>
-                        <input type="text" id="rfc" class="form-control" name="rfc" value="{{ old('rfc') }}" data-parsley-trigger="change" required readonly="readonly"/>
-                        @error('rfc')
+                        <label for="rfc_search">RFC * :</label>
+                        <input type="text" id="rfc_search" class="form-control" value="{{ old('rfc_search') }}" data-parsley-trigger="change" required readonly="readonly"/>
+                        @error('rfc_search')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -168,9 +170,9 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="bussine_name">Razón Social * :</label>
-                        <input type="text" id="bussine_name" name="bussine_name" class="form-control" data-parsley-trigger="change" value="{{ old('bussine_name') }}" required readonly="readonly"/>
-                        @error('bussine_name')
+                        <label for="bussine_name_search">Razón Social * :</label>
+                        <input type="text" id="bussine_name_search" class="form-control" data-parsley-trigger="change" value="{{ old('bussine_name_search') }}" required readonly="readonly"/>
+                        @error('bussine_name_search')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -178,41 +180,9 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="zip">Codigo Postal * :</label>
-                        <input type="text" id="zip" name="zip" class="form-control" data-parsley-trigger="change" value="{{ old('zip') }}" required readonly="readonly"/>
-                        @error('zip')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="street">Calle *:</label>
-                        <input type="text" id="street" class="form-control" name="street" value="{{ old('street') }}" data-parsley-trigger="change" required readonly="readonly"/>
-                        @error('street')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="no_exterior">No. Exterior *:</label>
-                        <input type="text" id="no_exterior" class="form-control" name="no_exterior" value="{{ old('no_exterior') }}" data-parsley-trigger="change" required readonly="readonly"/>
-                        @error('no_exterior')
-                            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="no_inside">No. Interior *:</label>
-                        <input type="text" id="no_inside" class="form-control" name="no_inside" value="{{ old('no_inside') }}" data-parsley-trigger="change" required readonly="readonly"/>
-                        @error('no_inside')
+                        <label for="zip_search">Codigo Postal * :</label>
+                        <input type="text" id="zip_search" class="form-control" data-parsley-trigger="change" value="{{ old('zip_search') }}" required readonly="readonly"/>
+                        @error('zip_search')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -222,13 +192,45 @@
 
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="state_id">Estado *:</label>
-                        <input type="text" id="state_id" class="form-control" name="state_id" value="{{ old('state_id') }}" data-parsley-trigger="change" required readonly="readonly"/>
+                        <label for="street_search">Calle *:</label>
+                        <input type="text" id="street_search" class="form-control" value="{{ old('street_search') }}" data-parsley-trigger="change" required readonly="readonly"/>
+                        @error('street_search')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="municipality_id">Municipio *:</label>
-                        <input type="text" id="municipality_id" class="form-control" name="municipality_id" value="{{ old('municipality_id') }}" data-parsley-trigger="change" required readonly="readonly"/>
+                        <label for="no_exterior_search">No. Exterior *:</label>
+                        <input type="text" id="no_exterior_search" class="form-control" value="{{ old('no_exterior_search') }}" data-parsley-trigger="change" required readonly="readonly"/>
+                        @error('no_exterior_search')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <label for="no_inside_search">No. Interior *:</label>
+                        <input type="text" id="no_inside_search" class="form-control" value="{{ old('no_inside_search') }}" data-parsley-trigger="change" required readonly="readonly"/>
+                        @error('no_inside_search')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <label for="state_id_search">Estado *:</label>
+                        <input type="text" id="state_id_search" class="form-control" value="{{ old('state_id_search') }}" data-parsley-trigger="change" required readonly="readonly"/>
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <label for="municipality_id_search">Municipio *:</label>
+                        <input type="text" id="municipality_id_search" class="form-control" value="{{ old('municipality_id_search') }}" data-parsley-trigger="change" required readonly="readonly"/>
                     </div>
                 </div>
 
@@ -249,7 +251,7 @@
             <div class="row">  
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <label for="search_product">Buscador de Producto *:</label>
-                <select id="search_product" name="search_product" class="form-control select2"></select>
+                <select id="search_product" class="form-control select2"></select>
                 @error('search_product')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -260,9 +262,9 @@
 
             <div class="row">  
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="quantity">Cantidad * :</label>
-                    <input type="text" id="quantity" class="form-control" name="quantity" data-parsley-trigger="change" required />
-                    @error('quantity')
+                    <label for="quantity_search">Cantidad * :</label>
+                    <input type="text" id="quantity_search" class="form-control" />
+                    @error('quantity_search')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -270,9 +272,9 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="description">Descripción * :</label>
-                    <input type="text" id="description" name="description" class="form-control" data-parsley-trigger="change" required />
-                    @error('description')
+                    <label for="description_search">Descripción * :</label>
+                    <input type="text" id="description_search" class="form-control" />
+                    @error('description_search')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -280,9 +282,9 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="discount">Descuento * :</label>
-                    <input type="text" id="discount" name="discount" class="form-control" data-parsley-trigger="change" required />
-                    @error('discount')
+                    <label for="discount_search">Descuento * :</label>
+                    <input type="text" id="discount_search" class="form-control" />
+                    @error('discount_search')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -292,9 +294,9 @@
 
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="price">Precio *:</label>
-                    <input type="tel" id="price" class="form-control" name="price" data-parsley-trigger="change" required />
-                    @error('price')
+                    <label for="price_search">Precio *:</label>
+                    <input type="tel" id="price_search" class="form-control" />
+                    @error('price_search')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -302,10 +304,10 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="produserv_id">Clave producto/servicio *:</label>
-                    <select id="produserv_id" name="produserv_id" class="form-control select2" value="{{ old('produserv_id') }}" required data-parsley-trigger="change">
+                    <label for="produserv_id_search">Clave producto/servicio *:</label>
+                    <select id="produserv_id_search" class="form-control select2" value="{{ old('produserv_id_search') }}">
                     </select>
-                    @error('produserv_id')
+                    @error('produserv_id_search')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -313,9 +315,9 @@
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <label for="unit_id">Clave Unidad *:</label>
-                    <select id="unit_id" name="unit_id" class="form-control select2" required data-parsley-trigger="change"></select>
-                    @error('unit_id')
+                    <label for="unit_id_search">Clave Unidad *:</label>
+                    <select id="unit_id_search" class="form-control select2"></select>
+                    @error('unit_id_search')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                         </span>
@@ -338,24 +340,34 @@
 
             <div class="title_right">
               <div style="float: right;">
-                <a href="{{ route('invoices.create') }}" class="btn btn-success" type="button">
+                <button class="btn btn-success" type="button" onclick="init_add_concept()">
                   <i class="fa fa-plus"></i> Agregar concepto
-                </a>
+                </button>
               </div>
             </div>
             <div class="clearfix"></div>
-            <hr>
+            <br>
 
+            <!-- DIV CONCEPTOS -->
+            <div id="divConceptos">
+
+            </div>
+            <!-- /DIV CONCEPTOS -->
+
+            <hr>
+            <div class="clearfix"></div>
+
+            <!-- TOTALES -->
             <div class="title_right">
               <div style="float: right;">
                 <table class="table" style="font-size: 18px;">
                   <tr>
                     <td>Subtotal: </td>
-                    <td>0.00</td>
+                    <td><p id="txt_subtotal">0.00</p></td>
                   </tr>
                   <tr>
                     <td>Descuento: </td>
-                    <td>0.00</td>
+                    <td><p id="txt_descuento">0.00</p></td>
                   </tr>
                   <tr>
                     <td>Retenciones: </td>
@@ -372,7 +384,11 @@
                 </table>
               </div>
             </div>
+            <!-- /TOTALES -->
 
+            <div class="clearfix"></div>
+
+            <!-- BOTONES -->
             <div class="row">
               <div class="col-md-12">
                 </br>
@@ -382,6 +398,8 @@
                 </div>
               </div>
             </div>   
+            <!-- /BOTONES -->
+
           </div>
 
         </div>
@@ -392,6 +410,8 @@
 @endsection
 
 @section('script')
+    <!-- DecimalJS -->
+    <script src="{{ asset('/vendors/decimal.js/decimal.min.js') }}"></script>
     <!-- bootstrap-wysiwyg -->
     <script src="{{ asset('/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js') }}"></script>
     <script src="{{ asset('/vendors/jquery.hotkeys/jquery.hotkeys.js') }}"></script>
@@ -404,8 +424,8 @@
     <script src="{{ asset('/vendors/select2/dist/js/select2.full.min.js') }}"></script>
     <!-- Moment -->
     <script src="{{ asset('/vendors/moment/min/moment.min.js') }}"></script>
-    <!-- Country -->
-    {{--  <script src="{{ asset('/js/helpers/country.js') }}"></script>  --}}
+    <!-- invoices -->
+    <script src="{{ asset('/js/helpers/invoices.js') }}"></script>
     <script>
       jQuery(document).ready(function($){
         $(document).ready(function() {
@@ -434,23 +454,23 @@
 
           $('#search_product').on('change', function () {
             $.get( "{{ url('/products/') }}" + '/' + $('#search_product').val(), function( data ) {
-              $('#quantity').val(1);
-              $('#description').val(data.description);
-              $('#discount').val(0)
-              $('#price').val(data.price);
-              $('#produserv_id').prepend($('<option />', {
+              $('#quantity_search').val(1);
+              $('#description_search').val(data.description);
+              $('#discount_search').val(0)
+              $('#price_search').val(data.price);
+              $('#produserv_id_search').prepend($('<option />', {
                 text: `${data.produserv_code} - ${data.produserv_name}`,
                 value: data.produserv_id,
               }));
 
-              $('#unit_id').prepend($('<option />', {
+              $('#unit_id_search').prepend($('<option />', {
                 text: `${data.unit_code} - ${data.unit_name}`,
                 value: data.unit_id,
               }));
             });
           });
 
-          $('#produserv_id').select2({
+          $('#produserv_id_search').select2({
             placeholder: 'Escribe para comenzar a buscar',
             ajax: {
                 url: '/searchProduServ',
@@ -470,7 +490,7 @@
             }
           });
 
-          $('#unit_id').select2({
+          $('#unit_id_search').select2({
             placeholder: 'Escribe para comenzar a buscar',
             ajax: {
                 url: '/searchUnit',
@@ -513,14 +533,14 @@
 
           $('#search_customer').on('change', function () {
             $.get("{{ url('/customers/') }}" + '/' + $('#search_customer').val(), function(data) {
-              $('#rfc').val(data.rfc);
-              $('#bussine_name').val(data.bussine_name);
-              $('#zip').val(data.zip);
-              $('#street').val(data.street);
-              $('#no_exterior').val(data.no_exterior);
-              $('#no_inside').val(data.no_inside);
-              $('#state_id').val(data.state);
-              $('#municipality_id').val(data.municipality);
+              $('#rfc_search').val(data.rfc);
+              $('#bussine_name_search').val(data.bussine_name);
+              $('#zip_search').val(data.zip);
+              $('#street_search').val(data.street);
+              $('#no_exterior_search').val(data.no_exterior);
+              $('#no_inside_search').val(data.no_inside);
+              $('#state_id_search').val(data.state);
+              $('#municipality_id_search').val(data.municipality);
             })
           });
 
@@ -535,4 +555,7 @@
     <script src="{{ asset('/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js') }}"></script>
     <!-- starrr -->
     <script src="{{ asset('/vendors/starrr/dist/starrr.js') }}"></script>
+
+    <script src="{{ asset('/vendors/pnotify/dist/pnotify.js') }}"></script>
+    <script src="{{ asset('/vendors/pnotify/dist/pnotify.buttons.js') }}"></script>
 @endsection
