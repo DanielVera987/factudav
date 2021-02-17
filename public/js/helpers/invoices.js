@@ -1,14 +1,16 @@
+var numDetail = 0;
+
 function init_add_concept()
 {
-    if (! load_inputs()){ return false; }
+    if (! load_inputs()){ return false; }   
     add_concept();
     clean_inputs();
-    calculate_totals();
+    
+    numDetail++;
 }
 
 function load_inputs()
 {
-    var product_id = document.querySelector('#search_product');
     var quantity_search = document.querySelector('#quantity_search');
     var description_search = document.querySelector('#description_search');
     var discount_search = document.querySelector('#discount_search');
@@ -36,57 +38,50 @@ function load_inputs()
 
 function add_concept() 
 {
-    $('#divConceptos').append(`
-        <div class="x_panel">
-            <div class="x_title">
-                <h2><strong>${description_search.value}</strong></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li class="bg bg-red" onclick="$(this).parent().parent().parent().remove(); calculate_totals()"><a class="close-link"><i class="fa fa-close"></i></a></li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <h6><strong>Clave prod/serv:</strong> ${produserv_id_search.textContent}</h6>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <h6><strong>Cantidad:</strong> ${quantity_search.value}</h6>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <h6><strong>Descuento:</strong> ${discount_search.value}</h6>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <h6><strong>Clave unidad: </strong> ${unit_id_search.textContent}</h6>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <h6><strong>Precio: </strong> $ ${price_search.value}</h6>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <h6><strong>Importe: </strong> $ 30</h6>
-                    </div>
-                </div>
-                <input type="hidden" name="discount[]" class="discount_hidden" value="${discount_search.value}" />
-                <input type="hidden" name="amount[]" class="amount_hidden" value="${price_search.value}" />
-                <input type="hidden" name="product_id[]" class="product_id_hidden" value="${document.querySelector('#search_product').value}" />
-                <input type="hidden" name="prodserv_id[]" class="prodserv_id_hidden" value="${produserv_id_search.value}" />
-                <input type="hidden" name="unit_id[]" class="unit_id_hidden" value="${unit_id_search.value}" />
-                <input type="hidden" name="description[]" class="description_hidden" value="${description_search.value}" />
-                <input type="hidden" name="quantity[]" class="quantity_hidden" value="${quantity_search.value}" />
-            </div>
-        </div>
-    `);
+    let product_id = (document.querySelector('#search_product').value != '') ? document.querySelector('#search_product').value : 0 ;
+
+    //verify taxes
+    let taxes = [];
+    let taxesCheck = document.getElementsByClassName('impuestos_search');
+    for (let i = 0; i < taxesCheck.length; i++) {
+        if(taxesCheck[i].checked) {
+           taxes.push(taxesCheck[i].value);    
+        }
+    }
+
+    let url = '/json/convertHtml';
+    let data = {
+        product_id:  product_id,
+        quantity: quantity_search.value,
+        description: description_search.value,
+        discount: discount_search.value,
+        price: price_search.value,
+        produserv_id: produserv_id_search.value,
+        unit_id: unit_id_search.value,
+        numDetail: numDetail,
+        taxes: taxes
+    };
+
+    console.log(data);
+
+    $.get(url, data, function (data) {
+        $('#divConceptos').append(data)
+
+        calculate_totals();
+    });
 }
 
 function clean_inputs()
 {
-    document.querySelector('#search_product').value = null;
+    document.querySelector('#search_product').textContent = '';
     document.querySelector('#quantity_search').value = '';
     document.querySelector('#description_search').value = '';
     document.querySelector('#discount_search').value = '';
     document.querySelector('#price_search').value = '';
-    document.querySelector('#produserv_id_search');
-    document.querySelector('#unit_id_search');
+    document.querySelector('#produserv_id_search').value = '';
+    document.querySelector('#unit_id_search').value = '';
+    document.querySelector('#produserv_id_search').textContent = '';
+    document.querySelector('#unit_id_search').textContent = '';
 }
 
 function calculate_totals()
@@ -106,8 +101,8 @@ function calculate_totals()
     total = parseFloat(subTotal) - parseFloat(descuento);
 
     document.getElementById('txt_total').innerHTML = total.toFixed(2);
-    console.log(subTotal);
-    console.log(descuento);
+    console.log('Subtotal: ' + subTotal);
+    console.log('Descuento: ' + descuento);
 }
 
 function calDescuento(length) 
@@ -128,7 +123,8 @@ function calSubTotal(length)
 
     for (let i = 0; i < length; i++) {
         let amount = document.getElementsByClassName('amount_hidden')[i].value;
-        subTotal += parseFloat(amount);
+        let qty = document.getElementsByClassName('quantity_hidden')[i].value
+        subTotal += parseFloat(amount * qty);
     }
 
     document.getElementById('txt_subtotal').innerHTML = subTotal.toFixed(2);

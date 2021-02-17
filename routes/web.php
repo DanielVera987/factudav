@@ -30,3 +30,4 @@ Route::get('/searchUnit', [SearchController::class, 'searchUnits']);
 Route::get('/searchCustomers', [SearchController::class, 'searchCustomers']);
 Route::get('/searchProduServ', [SearchController::class, 'searchProduServ']);
 Route::get('/searchProducts', [SearchController::class, 'searchProducts']);
+Route::get('/json/convertHtml', [SearchController::class, 'convertDetailHtml']);

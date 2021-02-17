@@ -263,7 +263,7 @@
             <div class="row">  
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="quantity_search">Cantidad * :</label>
-                    <input type="text" id="quantity_search" class="form-control" />
+                    <input type="number" min="1" id="quantity_search" class="form-control" />
                     @error('quantity_search')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -283,7 +283,7 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="discount_search">Descuento * :</label>
-                    <input type="text" id="discount_search" class="form-control" />
+                    <input type="number" min="0" id="discount_search" class="form-control" />
                     @error('discount_search')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -295,7 +295,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="price_search">Precio *:</label>
-                    <input type="tel" id="price_search" class="form-control" />
+                    <input type="number" min='1' id="price_search" class="form-control" />
                     @error('price_search')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -327,11 +327,14 @@
 
             <div class="row">
               <div class="col-md-4 col-sm-4 col-xs-12">
-                  <label for="telephone">Impuestos *:</label>
+                  <label for="impuestos">Impuestos *:</label>
                 @foreach($taxes as $value)                  
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" name="tax_id" value="{{ $value->id }}" class="flat"> &nbsp;<strong>{{ $value->name }}</strong> ({{ $value->type }} {{ $value->tasa }} {{ $value->factor }})
+                      <input type="checkbox" 
+                             class="impuestos_search" 
+                             value="{{ $value->id }}" 
+                      /> &nbsp;<strong>{{ $value->name }}</strong> ({{ $value->type }} {{ $value->tasa }} {{ $value->factor }})
                     </label>
                   </div>
                 @endforeach
@@ -455,6 +458,7 @@
           $('#search_product').on('change', function () {
             $.get( "{{ url('/products/') }}" + '/' + $('#search_product').val(), function( data ) {
               $('#quantity_search').val(1);
+              $('#quantity_search').focus();
               $('#description_search').val(data.description);
               $('#discount_search').val(0)
               $('#price_search').val(data.price);
