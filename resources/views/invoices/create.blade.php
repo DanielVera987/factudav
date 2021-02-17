@@ -379,7 +379,7 @@
                   </tr>
                   <tr>
                     <td style="font-size: 20px;"><strong>Total: </strong> </td>
-                    <td style="font-size: 20px;"><strong>0.00</strong></td>
+                    <td style="font-size: 20px;"><strong><p id="txt_total">0.00</p></strong></td>
                   </tr>
                 </table>
               </div>

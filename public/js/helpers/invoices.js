@@ -16,8 +16,7 @@ function load_inputs()
     var produserv_id_search = document.querySelector('#produserv_id_search');
     var unit_id_search = document.querySelector('#unit_id_search');
 
-    if (product_id.value.trim() == ''
-        || quantity_search.value.trim() == ''  
+    if (quantity_search.value.trim() == ''  
         || description_search.value.trim() == ''  
         || discount_search.value.trim() == ''
         || price_search.value.trim() == ''  
@@ -42,7 +41,7 @@ function add_concept()
             <div class="x_title">
                 <h2><strong>${description_search.value}</strong></h2>
                 <ul class="nav navbar-right panel_toolbox">
-                    <li class="bg bg-red" onclick="$(this).parent().parent().parent().remove();"><a class="close-link"><i class="fa fa-close"></i></a></li>
+                    <li class="bg bg-red" onclick="$(this).parent().parent().parent().remove(); calculate_totals()"><a class="close-link"><i class="fa fa-close"></i></a></li>
                 </ul>
                 <div class="clearfix"></div>
             </div>
@@ -92,44 +91,53 @@ function clean_inputs()
 
 function calculate_totals()
 {
+    let length = 0;
+    let descuento = 0;
+    let subTotal = 0;
+    let totalImpuestosRetenidos = 0;
+    let totalImpuestosTrasladados = 0;
+    let total = 0;
     clear_txts();
-    let length = document.getElementsByClassName('prodserv_id_hidden').length;
-    let descuento = calDescuento(length);
-    let subTotal = calSubTotal(length, descuento);
 
+    length = document.getElementsByClassName('prodserv_id_hidden').length;
+    descuento = calDescuento(length);
+    subTotal = calSubTotal(length);
 
+    total = parseFloat(subTotal) - parseFloat(descuento);
 
+    document.getElementById('txt_total').innerHTML = total.toFixed(2);
     console.log(subTotal);
     console.log(descuento);
 }
 
-let calDescuento = (length) => {
-    let cal = new Decimal(0);
+function calDescuento(length) 
+{
     let descuento = 0;
 
     for (let i = 0; i < length; i++) {
         let amount = document.getElementsByClassName('discount_hidden')[i].value;
-        descuento += cal.plus(amount).toNumber();
+        if (amount > 0 && amount != '') descuento += parseFloat(amount);
     }
-    document.getElementById('txt_descuento').innerHTML = descuento;
-    return descuento;
+    document.getElementById('txt_descuento').innerHTML = descuento.toFixed(2);
+    return Decimal(descuento).toNumber();
 }
 
-function calSubTotal(length, descuento)
+function calSubTotal(length)
 {
-    let cal = new Decimal(0);
     let subTotal = 0;
 
     for (let i = 0; i < length; i++) {
         let amount = document.getElementsByClassName('amount_hidden')[i].value;
-        subTotal += cal.plus(amount).toNumber();
+        subTotal += parseFloat(amount);
     }
 
-    document.getElementById('txt_subtotal').innerHTML = subTotal;
-    return subTotal;
+    document.getElementById('txt_subtotal').innerHTML = subTotal.toFixed(2);
+    return Decimal(subTotal).toNumber();
 }
 
 function clear_txts()
 {
     document.getElementById('txt_subtotal').innerHTML = '';
+    document.getElementById('txt_descuento').innerHTML = '';
+    document.getElementById('txt_total').innerHTML = '';
 }
