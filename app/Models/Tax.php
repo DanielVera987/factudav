@@ -12,6 +12,7 @@ class Tax extends Model
 
     protected $fillable = [
         'bussine_id',
+        'code',
         'name',
         'tax',
         'type',
@@ -39,8 +40,21 @@ class Tax extends Model
     public static function add_tax($request, $bussine_id)
     {
         for($i = 0; $i < count($request->name_tax); $i++) {
+            $code = '002';
+            switch( $request->tax_tax[$i]) {
+                case "isr":
+                    $code = '001';
+                    break;
+                case "iva":
+                    $code = '002';
+                    break;
+                case "ieps": 
+                    $code = '003';
+                    break;
+            }
             Tax::create([
                 'bussine_id' => $bussine_id,
+                'code' => $code,
                 'name' => $request->name_tax[$i] ?? 'NaN',
                 'tax' => $request->tax_tax[$i] ?? 'NaN',
                 'type' => $request->type_tax[$i] ?? 'NaN',

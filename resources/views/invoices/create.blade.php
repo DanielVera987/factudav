@@ -374,11 +374,11 @@
                   </tr>
                   <tr>
                     <td>Retenciones: </td>
-                    <td>0.00</td>
+                    <td><p id="txt_retenciones">0.00</p></td>
                   </tr>
                   <tr>
                     <td>Traslados: </td>
-                    <td>0.00</td>
+                    <td><p id="txt_traslados">0.00</p></td>
                   </tr>
                   <tr>
                     <td style="font-size: 20px;"><strong>Total: </strong> </td>

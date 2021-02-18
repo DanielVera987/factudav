@@ -62,11 +62,8 @@ function add_concept()
         taxes: taxes
     };
 
-    console.log(data);
-
     $.get(url, data, function (data) {
         $('#divConceptos').append(data)
-        console.log("Response: " + data);
         calculate_totals();
     });
 }
@@ -98,11 +95,30 @@ function calculate_totals()
     descuento = calDescuento(length);
     subTotal = calSubTotal(length);
 
-    total = parseFloat(subTotal) - parseFloat(descuento);
+    let type = document.getElementsByClassName('tax_type_hidden');
+    for (let i = 0; i < type.length; i++) {
+        let importeConcepto = document.getElementsByClassName('importeconcepto')[i].value;
+        let tasa = document.getElementsByClassName('tax_tasa_hidden')[i].value;
+        let tax = document.getElementsByClassName('tax_name_hidden')[i].value; //isr, iva, ieps
 
+        let importeImpuesto = myRound(importeConcepto * tasa, 2);
+
+        if (type[i].value == 'traslado') {
+            totalImpuestosTrasladados += myRound(importeImpuesto, 2);
+        } else if(type[i].value == 'retenido' && tax == 'iva') {
+            totalImpuestosRetenidos += myRound(totalImpuestosTrasladados * 2 / 3, 2);
+        } else {
+            totalImpuestosRetenidos += myRound(importeImpuesto, 2);
+            console.log(myRound(importeImpuesto, 2));
+        }
+    }
+
+    total = parseFloat(subTotal) - parseFloat(descuento);
+    total = parseFloat(total) - parseFloat(totalImpuestosRetenidos) + parseFloat(totalImpuestosTrasladados);
+
+    document.getElementById('txt_retenciones').innerHTML = totalImpuestosRetenidos.toFixed(2);
+    document.getElementById('txt_traslados').innerHTML = totalImpuestosTrasladados.toFixed(2);
     document.getElementById('txt_total').innerHTML = total.toFixed(2);
-    console.log('Subtotal: ' + subTotal);
-    console.log('Descuento: ' + descuento);
 }
 
 function calDescuento(length) 
@@ -131,9 +147,46 @@ function calSubTotal(length)
     return Decimal(subTotal).toNumber();
 }
 
+function calImpuestosRetenidos()
+{
+    let totalImpuestosRetenidos = 0;
+    let type = document.getElementsByClassName('tax_type_hidden');
+    for (let i = 0; i < type.length; i++) {
+        if (type[i].value == 'retenido') {
+            let importeConcepto = document.getElementsByClassName('importeconcepto')[i].value;
+            let tasa = document.getElementsByClassName('tax_tasa_hidden')[i].value;
+
+            totalImpuestosRetenidos += parseFloat(tasa) * parseFloat(importeConcepto);
+        }
+    }
+
+    return parseFloat(totalImpuestosRetenidos);
+}
+
+function calImpuestosTrasladado()
+{
+    let totalImpuestosRetenidos = 0;
+    let type = document.getElementsByClassName('tax_type_hidden');
+    for (let i = 0; i < type.length; i++) {
+        if (type[i].value == 'trasladado') {
+            let importeConcepto = document.getElementsByClassName('importeconcepto')[i].value;
+            let tasa = document.getElementsByClassName('tax_tasa_hidden')[i].value;
+
+            totalImpuestosRetenidos += parseFloat(tasa) * parseFloat(importeConcepto);
+        }
+    }
+
+    return parseFloat(totalImpuestosRetenidos);
+}
+
 function clear_txts()
 {
     document.getElementById('txt_subtotal').innerHTML = '';
     document.getElementById('txt_descuento').innerHTML = '';
     document.getElementById('txt_total').innerHTML = '';
+}
+
+function myRound(number, pos) {
+    var f = Math.pow(10, pos);
+    return Math.round(number * f) / f;
 }

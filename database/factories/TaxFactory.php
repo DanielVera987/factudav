@@ -23,6 +23,7 @@ class TaxFactory extends Factory
     {
         return [
             'bussine_id' => 1, //default
+            'code' => 002,
             'name' => 'iva trasladado',
             'tax' => 'iva',
             'type' => 'traslado',

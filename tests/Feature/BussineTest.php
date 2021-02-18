@@ -190,7 +190,7 @@ class BussineTest extends TestCase
     function test_edit_company_user_relationship_with_currencies_and_taxies()
     {
         //$this->markTestIncomplete();
-        $this->withExceptionHandling();
+        $this->withoutExceptionHandling();
         DB::table('users')->truncate();
         DB::table('bussines')->truncate();
         

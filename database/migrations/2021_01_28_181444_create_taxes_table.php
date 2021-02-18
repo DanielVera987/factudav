@@ -19,7 +19,8 @@ class CreateTaxesTable extends Migration
                 ->references('id')
                 ->on('bussines');
             $table->string('name');
-            $table->set('tax', ['iva', 'isr', 'ieps']);
+            $table->set('code', ['001', '002', '003']);
+            $table->set('tax', ['isr', 'iva', 'ieps']);
             $table->set('type', ['traslado', 'retenido']);
             $table->set('factor', ['tasa', 'cuota', 'exento']);
             $table->string('tasa');
