@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tax;
 use App\Models\Unit;
 use App\Models\Product;
 use App\Models\Customer;
@@ -80,21 +81,8 @@ class SearchController extends Controller
 
     public function convertDetailHtml(Request $request) 
     {
-        /* 
-            description: "coca bien fria"
-            discount: "0"
-            numDetail: 1
-            price: "35"
-            product_id: "2"
-            produserv_id: "26715"
-            quantity: "1"
-            taxes: Array(2)
-                0: "1"
-                1: "2"
-            unit_id: "1070"
-        */
         $data = $request;
-        if ( is_numeric(intval( $data['product_id'] )) ) {
+        if ( is_numeric(intval( $data['product_id'] )) && $data['product_id'] > 0) {
             $produc = Product::where('bussine_id', Auth::user()->bussine_id)->find($data['product_id']);
             if (! $produc) return abort(404);
         }
@@ -130,24 +118,44 @@ class SearchController extends Controller
                         </div>
                         <div class='col-md-4 col-sm-4 col-xs-12'>
                             <h6><strong>Importe: </strong> $ {$importe}</h6>
-                        </div>
-                        <div class='col-md-4 col-sm-4 col-xs-12'>
-                            <h6><strong>Impuestos: </strong> 002 iva trasladado (Traslado 0.160000 Tasa)</h6>
-                        </div>
-                    </div>
-                    <input type='hidden' name='detail[{$data['numDetail']}][discount]'    id='detail[{$data['numDetail']}][discount]'    class='discount_hidden'    value='{$data['discount']}' />
-                    <input type='hidden' name='detail[{$data['numDetail']}][amount]'      id='detail[{$data['numDetail']}][amount]'      class='amount_hidden'      value='{$data['price']}' />
-                    <input type='hidden' name='detail[{$data['numDetail']}][product_id]'  id='detail[{$data['numDetail']}][product_id]'  class='product_id_hidden'  value='{$data['product_id']}' />
-                    <input type='hidden' name='detail[{$data['numDetail']}][prodserv_id]' id='detail[{$data['numDetail']}][prodserv_id]' class='prodserv_id_hidden' value='{$data['produserv_id']}' />
-                    <input type='hidden' name='detail[{$data['numDetail']}][unit_id]'     id='detail[{$data['numDetail']}][unit_id]'     class='unit_id_hidden'     value='{$data['unit_id']}' />
-                    <input type='hidden' name='detail[{$data['numDetail']}][description]' id='detail[{$data['numDetail']}][description]' class='description_hidden' value='{$data['description']}' />
-                    <input type='hidden' name='detail[{$data['numDetail']}][quantity]'    id='detail[{$data['numDetail']}][quantity]'    class='quantity_hidden'    value='{$data['quantity']}' />
+                        </div>";
 
-                    <input type='hidden' name='detail[{$data['numDetail']}].taxes[][type]'   id='detail[{$data['numDetail']}].taxes[][type]'   class='tax_type_hidden'   value='' />
-                    <input type='hidden' name='detail[{$data['numDetail']}].taxes[][factor]' id='detail[{$data['numDetail']}].taxes[][factor]' class='tax_factor_hidden' value='' />
-                    <input type='hidden' name='detail[{$data['numDetail']}].taxes[][tasa]'   id='detail[{$data['numDetail']}].taxes[][tasa]'   class='tax_tasa_hidden'   value='' />
-                    <input type='hidden' name='detail[{$data['numDetail']}].taxes[][name]'   id='detail[{$data['numDetail']}].taxes[][name]'   class='tax_name_hidden'   value='' />
+        if (isset($data['taxes'])) {
+            $taxes = $data['taxes'];
+            foreach($taxes as $key => $value) {
+                $tax = Tax::where('bussine_id', Auth::user()->bussine_id)->find($value);
+                $response .= "<div class='col-md-12 col-sm-12 col-xs-12'>
+                            <h6><strong>Impuestos: </strong> 002 {$tax->name} ({$tax->type} {$tax->tasa} {$tax->factor})</h6>
+                        </div>";
+            }
+        }
+           
 
+        $response .= "</div>
+                    <input type='hidden' name='detail[{$data['numDetail']}][discount]'    id='detail[][discount]'    class='discount_hidden'    value='{$data['discount']}' />
+                    <input type='hidden' name='detail[{$data['numDetail']}][amount]'      id='detail[][amount]'      class='amount_hidden'      value='{$data['price']}' />
+                    <input type='hidden' name='detail[{$data['numDetail']}][product_id]'  id='detail[][product_id]'  class='product_id_hidden'  value='{$data['product_id']}' />
+                    <input type='hidden' name='detail[{$data['numDetail']}][prodserv_id]' id='detail[][prodserv_id]' class='prodserv_id_hidden' value='{$data['produserv_id']}' />
+                    <input type='hidden' name='detail[{$data['numDetail']}][unit_id]'     id='detail[][unit_id]'     class='unit_id_hidden'     value='{$data['unit_id']}' />
+                    <input type='hidden' name='detail[{$data['numDetail']}][description]' id='detail[][description]' class='description_hidden' value='{$data['description']}' />
+                    <input type='hidden' name='detail[{$data['numDetail']}][quantity]'    id='detail[][quantity]'    class='quantity_hidden'    value='{$data['quantity']}' />";
+
+        if (isset($data['taxes'])) {
+            $taxes = $data['taxes'];
+
+            foreach($taxes as $key => $value) {
+                $tax = Tax::where('bussine_id', Auth::user()->bussine_id)->find($value);
+                $response .= "
+                    <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][type]'   id='detail[{$data['numDetail']}][taxes][{$key}][type]'   class='tax_type_hidden'   value='{$tax->type}' />
+                    <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][factor]' id='detail[{$data['numDetail']}][taxes][{$key}][factor]' class='tax_factor_hidden' value='{$tax->factor}' />
+                    <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][tasa]'   id='detail[{$data['numDetail']}][taxes][{$key}][tasa]'   class='tax_tasa_hidden'   value='{$tax->tasa}' />
+                    <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][name]'   id='detail[{$data['numDetail']}][taxes][{$key}][name]'   class='tax_name_hidden'   value='{$tax->name}' />
+                    <input type='hidden' class='importeconcepto' value='{$importe}' />
+                ";
+            }
+        }
+
+        $response .= "
                 </div>
             </div>
         ";

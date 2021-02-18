@@ -66,7 +66,7 @@ function add_concept()
 
     $.get(url, data, function (data) {
         $('#divConceptos').append(data)
-
+        console.log("Response: " + data);
         calculate_totals();
     });
 }
