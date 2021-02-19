@@ -131,7 +131,6 @@ class SearchController extends Controller
                               </div>";
             }
         }
-           
 
         $response .= "</div>
                     <input type='hidden' name='detail[{$data['numDetail']}][discount]'    id='detail[][discount]'    class='discount_hidden'    value='{$data['discount']}' />
@@ -151,9 +150,8 @@ class SearchController extends Controller
                     <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][type]'   id='detail[{$data['numDetail']}][taxes][{$key}][type]'   class='tax_type_hidden'   value='{$tax->type}' />
                     <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][factor]' id='detail[{$data['numDetail']}][taxes][{$key}][factor]' class='tax_factor_hidden' value='{$tax->factor}' />
                     <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][tasa]'   id='detail[{$data['numDetail']}][taxes][{$key}][tasa]'   class='tax_tasa_hidden'   value='{$tax->tasa}' />
-                    <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][tax]'   id='detail[{$data['numDetail']}][taxes][{$key}][tax]'   class='tax_name_hidden'   value='{$tax->tax}' />
-                    <input type='hidden' class='importeconcepto' value='{$importe}' />
-                ";
+                    <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][tax]'    id='detail[{$data['numDetail']}][taxes][{$key}][tax]'    class='tax_name_hidden'   value='{$tax->tax}' />
+                    <input type='hidden' class='importeconcepto' value='{$importe}' />";
             }
         }
 

@@ -71,7 +71,6 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {   
-        dd($request);
         $request->validate([
             'serie' => ['required', 'string'],/*LISTO*/
             'folio' => ['required', 'string', 'max:255', 'unique:invoices,folio'], /*LISTO*/
@@ -79,16 +78,23 @@ class InvoiceController extends Controller
             'currency_id' => ['required', 'numeric', 'max:255'],/*LISTO*/
             'payment_method_id' => ['required', 'numeric','max:255'],/*LISTO*/
             'usecfdi_id' => ['required', 'numeric', 'max:255'],/*LISTO*/
-            'date' => ['required', 'date'],/*LISTO*/
+            'date' => ['required', 'date_format:Y-m-d\TH:i:s'],/*LISTO*/
             'customer_id' => ['required', 'numeric'],/*LISTO*/
-            'product_id.*' => ['required', 'numeric'],
-            'prodserv_id.*' => ['required', 'numeric'],
-            'unit_id.*' => ['required', 'numeric'],
-            'description.*' => ['required', 'string', 'max:255'],
-            'quantity.*' => ['required', 'numeric'],
-            'discount.*' => ['required', 'numeric'],
-            'amount.*' => ['required', 'numeric']
+            'detail.*' => ['required'],
+            'detail.*.discount' => ['required'],
+            'detail.*.amount' => ['required'],
+            'detail.*.product_id' => ['required'],
+            'detail.*.prodserv_id' => ['required'],
+            'detail.*.unit_id' => ['required'],
+            'detail.*.description' => ['required'],
+            'detail.*.quantity' => ['required'],
+            'detail.*.taxes.*' => ['required'],
+            'detail.*.taxes.*.type' => [''],
+            'detail.*.taxes.*.factor' => [''],
+            'detail.*.taxes.*.tax' => [''],
         ]);
+        dd($request);
+
         $request['bussine_id'] = Auth::user()->bussine_id;
 
         $invoice = Invoice::create($request->all());

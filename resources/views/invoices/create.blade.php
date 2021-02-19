@@ -326,9 +326,10 @@
             </div>
 
             <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12"><label for="impuestos">Impuestos *:</label></div>
               <div class="col-md-4 col-sm-4 col-xs-12">
-                  <label for="impuestos">Impuestos *:</label>
-                @foreach($taxes as $value)                  
+              @foreach($taxes as $value)                  
+                  @if($value->type == 'traslado')
                   <div class="checkbox">
                     <label>
                       <input type="checkbox" 
@@ -337,6 +338,22 @@
                       /> &nbsp;<strong>{{ $value->name }}</strong> ({{ $value->type }} {{ $value->tasa }} {{ $value->factor }})
                     </label>
                   </div>
+                  @endif
+              @endforeach
+              </div>
+
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                @foreach($taxes as $value)                  
+                    @if($value->type == 'retenido')
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" 
+                               class="impuestos_search" 
+                               value="{{ $value->id }}" 
+                        /> &nbsp;<strong>{{ $value->name }}</strong> ({{ $value->type }} {{ $value->tasa }} {{ $value->factor }})
+                      </label>
+                    </div>
+                    @endif
                 @endforeach
               </div>
             </div>

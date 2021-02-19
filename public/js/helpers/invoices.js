@@ -95,22 +95,28 @@ function calculate_totals()
     descuento = calDescuento(length);
     subTotal = calSubTotal(length);
 
+    console.log('Subtotal: ', subTotal);
+
     let type = document.getElementsByClassName('tax_type_hidden');
     for (let i = 0; i < type.length; i++) {
         let importeConcepto = document.getElementsByClassName('importeconcepto')[i].value;
-        let tasa = document.getElementsByClassName('tax_tasa_hidden')[i].value;
+        let tasa = document.getElementsByClassName('tax_tasa_hidden')[i].value; //0.16, 0.10
         let tax = document.getElementsByClassName('tax_name_hidden')[i].value; //isr, iva, ieps
 
         let importeImpuesto = myRound(importeConcepto * tasa, 2);
 
         if (type[i].value == 'traslado') {
+            var traslado = myRound(importeImpuesto, 2);
             totalImpuestosTrasladados += myRound(importeImpuesto, 2);
         } else if(type[i].value == 'retenido' && tax == 'iva') {
-            totalImpuestosRetenidos += myRound(totalImpuestosTrasladados * 2 / 3, 2);
+            totalImpuestosRetenidos += myRound(traslado * 2 / 3, 2);
         } else {
             totalImpuestosRetenidos += myRound(importeImpuesto, 2);
-            console.log(myRound(importeImpuesto, 2));
         }
+
+        console.log('importeImpuesto: ', importeImpuesto);
+        console.log('totalImpuestosTrasladados: ', totalImpuestosTrasladados);
+        console.log('totalImpuestosRetenidos: ', totalImpuestosRetenidos);
     }
 
     total = parseFloat(subTotal) - parseFloat(descuento);
@@ -126,8 +132,8 @@ function calDescuento(length)
     let descuento = 0;
 
     for (let i = 0; i < length; i++) {
-        let amount = document.getElementsByClassName('discount_hidden')[i].value;
-        if (amount > 0 && amount != '') descuento += parseFloat(amount);
+        let discount = document.getElementsByClassName('discount_hidden')[i].value;
+        if (discount > 0 && discount != '') descuento += myRound(discount, 2);
     }
     document.getElementById('txt_descuento').innerHTML = descuento.toFixed(2);
     return Decimal(descuento).toNumber();
@@ -140,7 +146,7 @@ function calSubTotal(length)
     for (let i = 0; i < length; i++) {
         let amount = document.getElementsByClassName('amount_hidden')[i].value;
         let qty = document.getElementsByClassName('quantity_hidden')[i].value
-        subTotal += parseFloat(amount * qty);
+        subTotal += myRound(amount * qty, 2);
     }
 
     document.getElementById('txt_subtotal').innerHTML = subTotal.toFixed(2);
