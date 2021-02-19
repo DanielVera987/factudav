@@ -151,6 +151,7 @@ class SearchController extends Controller
                     <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][factor]' id='detail[{$data['numDetail']}][taxes][{$key}][factor]' class='tax_factor_hidden' value='{$tax->factor}' />
                     <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][tasa]'   id='detail[{$data['numDetail']}][taxes][{$key}][tasa]'   class='tax_tasa_hidden'   value='{$tax->tasa}' />
                     <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][tax]'    id='detail[{$data['numDetail']}][taxes][{$key}][tax]'    class='tax_name_hidden'   value='{$tax->tax}' />
+                    <input type='hidden' name='detail[{$data['numDetail']}][taxes][{$key}][id]'    id='detail[{$data['numDetail']}][taxes][{$key}][id]'    class='tax_id_hidden'   value='{$tax->id}' />
                     <input type='hidden' class='importeconcepto' value='{$importe}' />";
             }
         }

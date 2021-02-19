@@ -8,14 +8,15 @@ use App\Models\Detail;
 use App\Models\Bussine;
 use App\Models\Invoice;
 use App\Models\Product;
+use App\Models\Usecfdi;
 use App\Models\Currency;
 use App\Models\Customer;
-use App\Models\Municipality;
-use App\Models\PaymentMethod;
-use App\Models\Usecfdi;
 use App\Models\WayToPay;
+use App\Models\Municipality;
 use Illuminate\Http\Request;
+use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\InvoiceRequest;
 
 class InvoiceController extends Controller
 {
@@ -69,38 +70,13 @@ class InvoiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InvoiceRequest $request)
     {   
-        $request->validate([
-            'serie' => ['required', 'string'],/*LISTO*/
-            'folio' => ['required', 'string', 'max:255', 'unique:invoices,folio'], /*LISTO*/
-            'way_to_pay_id' => ['required', 'numeric', 'max:255'],/*LISTO*/
-            'currency_id' => ['required', 'numeric', 'max:255'],/*LISTO*/
-            'payment_method_id' => ['required', 'numeric','max:255'],/*LISTO*/
-            'usecfdi_id' => ['required', 'numeric', 'max:255'],/*LISTO*/
-            'date' => ['required', 'date_format:Y-m-d\TH:i:s'],/*LISTO*/
-            'customer_id' => ['required', 'numeric'],/*LISTO*/
-            'detail.*' => ['required'],
-            'detail.*.discount' => ['required'],
-            'detail.*.amount' => ['required'],
-            'detail.*.product_id' => ['required'],
-            'detail.*.prodserv_id' => ['required'],
-            'detail.*.unit_id' => ['required'],
-            'detail.*.description' => ['required'],
-            'detail.*.quantity' => ['required'],
-            'detail.*.taxes.*' => ['required'],
-            'detail.*.taxes.*.type' => [''],
-            'detail.*.taxes.*.factor' => [''],
-            'detail.*.taxes.*.tax' => [''],
-        ]);
-        dd($request);
-
         $request['bussine_id'] = Auth::user()->bussine_id;
 
         $invoice = Invoice::create($request->all());
-
         Detail::createDetail($invoice->id, $request);
-
+        
         return redirect()->route('invoices.index')->with(['success', 'Factura Creada']);
     }
 

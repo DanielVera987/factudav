@@ -53,8 +53,8 @@
                     <tr>
                       <td class="text-center">{{ $invoice->folio }}</td>
                       <td class="text-center">{{ $invoice->customer->bussine_name }}</td>
+                      <td class="text-center">{{ $invoice->date ?? '' }}</td>
                       <td class="text-center">{{ $invoice->currency->code ?? '' }}</td>
-                      <td class="text-center">{{ $invoice->payment_method_id }}</td>
                       <td class="text-center"><span class="label label-success">Pagado</span></td>
                       <td></td>
                       <td class="text-center" width="5%">

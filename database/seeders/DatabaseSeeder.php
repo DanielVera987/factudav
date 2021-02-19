@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\Detail;
+use App\Models\TaxDetail;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -42,5 +43,6 @@ class DatabaseSeeder extends Seeder
         Customer::factory(10)->create();
         Invoice::factory(10)->create();
         Detail::factory(10)->create();
+        TaxDetail::factory(5)->create();
     }
 }

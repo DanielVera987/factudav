@@ -27,9 +27,19 @@
     <div class="x_title">
       <h2><i class="fa fa-file-text"></i> Agregar Factura</h2>
       <div class="clearfix"></div>
+      <br>
       @if(session()->has('success'))
         <div class="alert alert-success">
             {{ session()->get('success') }}
+        </div>
+      @endif
+      @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
       @endif
     </div>
@@ -145,10 +155,7 @@
                 <div class="row">  
                     <div class="col-md-12 col-sm-12 col-xs-12">
                     <label for="search_customer">Buscador de Clientes *:</label>
-                    <select id="search_customer" name="customer_id" class="form-control select2" required data-parsley-trigger="change">
-                        @foreach ($customers as $value)
-                          <option value="{{ $value->id }}">{{ $value->bussine_name }}</option>
-                        @endforeach
+                    <select id="search_customer" name="customer_id" class="form-control select2" required data-parsley-trigger="change">   
                     </select>
                     @error('customer_id')
                         <span class="invalid-feedback" role="alert">
