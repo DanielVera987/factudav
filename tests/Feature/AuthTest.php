@@ -77,7 +77,7 @@ class AuthTest extends TestCase
                 'password' => '12345678'
             ])
             ->assertRedirect('/login')
-            ->assertSessionHasErrors(['email' => 'These credentials do not match our records.']);
+            ->assertSessionHasErrors(['email' => 'Estas credenciales no coinciden con nuestros registros.']);
     }
 
     function test_password_incorrect() 
@@ -88,7 +88,7 @@ class AuthTest extends TestCase
                 'password' => 'passincorrect'
             ])
             ->assertRedirect('/login')
-            ->assertSessionHasErrors(['email' => 'These credentials do not match our records.']);
+            ->assertSessionHasErrors(['email' => 'Estas credenciales no coinciden con nuestros registros.']);
     }
 
     function test_load_view_register()
