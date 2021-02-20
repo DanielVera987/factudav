@@ -9,7 +9,9 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ProductUpdateRequest;
 
 class ProductController extends Controller
 {
@@ -49,22 +51,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $request->validate([
-            'code' => ['required', 'string' ,'max:255'],
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
-            'stock' => ['required', 'numeric', 'max:255'],
-            'alert_stock' => ['required', 'numeric', 'max:255'],
-            'cost' => ['required', 'numeric', 'max:255'],
-            'price' => ['required', 'numeric', 'max:255'],
-            'produserv_id' => ['required', 'numeric'],
-            'unit_id' => ['required', 'numeric'],
-            'image' => ['required', 'image'],
-            'is_active' => ['nullable']
-        ]);
-
         if ($request->stock <= $request->alert_stock) {
             return back()->with('warning', 'El stock debe ser mayor a la alerta de stock');
         }
@@ -135,21 +123,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, $id)
     {
-        $request->validate([
-            'code' => ['required', 'string' ,'max:255'],
-            'name' => ['required', 'string', 'max:255'], 
-            'description' => ['required', 'string', 'max:255'],
-            'stock' => ['required', 'numeric', 'max:255'],
-            'alert_stock' => ['required', 'numeric', 'max:255'],
-            'cost' => ['required', 'numeric', 'max:255'],
-            'price' => ['required', 'numeric', 'max:255'],
-            'produserv_id' => ['required', 'numeric'],
-            'unit_id' => ['required', 'numeric'],
-            'image' => ['image'],
-            'is_active' => ['nullable']
-        ]);
+        if ($request->stock <= $request->alert_stock) {
+            return back()->with('warning', 'El stock debe ser mayor a la alerta de stock');
+        }
 
         $product = Product::findOrFail($id);
         $imgPrevius = $product->image;

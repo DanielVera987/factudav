@@ -19,9 +19,14 @@
     <div class="x_title">
       <h2><i class="fa fa-cubes"></i> Actualizar Producto</h2>
       <div class="clearfix"></div>
-      @if(session()->has('message'))
+      @if(session()->has('success'))
         <div class="alert alert-success">
-            {{ session()->get('message') }}
+            {{ session()->get('success') }}
+        </div>
+      @endif
+      @if(session()->has('warning'))
+        <div class="alert alert-warning">
+            {{ session()->get('warning') }}
         </div>
       @endif
     </div>
@@ -47,9 +52,9 @@
                                       <img class="img-responsive avatar-view center-block" src="{{ asset('storage/products/default.png') }}" width="200" id="previewlogo"  alt="Avatar" title="">
                                     @endif
                                     <label for="image">Imagen Producto :</label>
-                                    <input type="file" name="image" value="{{ old('image') }}" id="image">
+                                    <input type="file" name="image" class="@error('image') parsley-error @enderror" value="{{ old('image') }}" id="image">
                                         @error('image')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback red" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
@@ -62,9 +67,9 @@
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="name">Nombre* :</label>
-                            <input type="text" id="name" class="form-control" value="{{ $product->name }}" name="name" required />
+                            <input type="text" id="name" class="form-control @error('name') parsley-error @enderror" value="{{ $product->name }}" name="name" required />
                             @error('name')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback red" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -72,9 +77,9 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="code">Code * :</label>
-                            <input type="text" id="code" class="form-control" value="{{ $product->code }}" name="code" autocomplete="off" required />
+                            <input type="text" id="code" class="form-control @error('code') parsley-error @enderror" value="{{ $product->code }}" name="code" autocomplete="off" required />
                             @error('code')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback red" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -82,9 +87,9 @@
                     
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <label for="description">Descripción * :</label>
-                            <input type="text" id="description" class="form-control" value="{{ $product->description }}" name="description" required />
+                            <input type="text" id="description" class="form-control @error('description') parsley-error @enderror" value="{{ $product->description }}" name="description" required />
                             @error('description')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback red" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -92,9 +97,9 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="cost">Costo * :</label>
-                            <input type="text" id="cost" class="form-control" name="cost" value="{{ $product->cost }}" data-parsley-trigger="change" required />
+                            <input type="text" id="cost" class="form-control @error('cost') parsley-error @enderror" name="cost" value="{{ $product->cost }}" data-parsley-trigger="change" required />
                             @error('cost')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback red" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -102,9 +107,9 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="price">Precio * :</label>
-                            <input type="text" id="price" class="form-control" name="price" value="{{ $product->price }}" data-parsley-trigger="change" required />
+                            <input type="text" id="price" class="form-control @error('price') parsley-error @enderror" name="price" value="{{ $product->price }}" data-parsley-trigger="change" required />
                             @error('price')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback red" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -112,11 +117,11 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="produserv_id">Producto/Servicio * :</label>
-                            <select id="produserv_id" name="produserv_id" class="form-control" value="{{ old('produserv_id') }}" required data-parsley-trigger="change">
+                            <select id="produserv_id" name="produserv_id" class="form-control @error('produserv_id') parsley-error @enderror" value="{{ old('produserv_id') }}" required data-parsley-trigger="change">
                                 <option value="{{ $product->produserv->id }}" selected>{{ $product->produserv->code }} - {{ $product->produserv->name }}</option>
                             </select>
                             @error('produserv_id')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback red" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -124,11 +129,11 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="unit_id">Unidad de Medida * :</label>
-                            <select id="unit_id" name="unit_id" class="form-control" required data-parsley-trigger="change">
+                            <select id="unit_id" name="unit_id" class="form-control @error('unit_id') parsley-error @enderror" required data-parsley-trigger="change">
                                 <option value="{{ $product->unit->id }}" selected>{{ $product->unit->code }} - {{ $product->unit->name }}</option>
                             </select>
                             @error('unit_id')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback red" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -136,9 +141,9 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="stock">Stock * :</label>
-                            <input type="text" id="stock" class="form-control" name="stock" value="{{ $product->stock }}" data-parsley-trigger="change" required />
+                            <input type="text" id="stock" class="form-control @error('stock') parsley-error @enderror" name="stock" value="{{ $product->stock }}" data-parsley-trigger="change" required />
                             @error('stock')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback red" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -146,9 +151,9 @@
         
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="alert_stock">Alerta Stock *:</label>
-                            <input type="text" id="alert_stock" name="alert_stock" class="form-control" data-parsley-trigger="change" value="{{ $product->alert_stock }}" required />
+                            <input type="text" id="alert_stock" name="alert_stock" class="form-control @error('alert_stock') parsley-error @enderror" data-parsley-trigger="change" value="{{ $product->alert_stock }}" required />
                             @error('alert_stock')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback red" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -160,7 +165,7 @@
                                 <input type="checkbox" name="is_active" class="js-switch" @if($product->is_active == 'on') checked @endif/> Activo
                             </label>
                             @error('is_active')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback red" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
                             @enderror

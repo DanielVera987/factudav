@@ -56,7 +56,7 @@
                       <td class="text-center">{{ $invoice->date ?? '' }}</td>
                       <td class="text-center">{{ $invoice->currency->code ?? '' }}</td>
                       <td class="text-center"><span class="label label-success">Pagado</span></td>
-                      <td></td>
+                      <td class="text-center">$ {{ App\Models\Invoice::getAmountInvoice($invoice->id) }}</td>
                       <td class="text-center" width="5%">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">

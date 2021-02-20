@@ -54,4 +54,14 @@ class Invoice extends Model
     {
         return $this->belongsTo(WayToPay::class);
     }
+
+    public static function getAmountInvoice($invoice_id) {
+        $details = Detail::select('quantity', 'amount')->where('invoice_id', $invoice_id)->get();
+        $sumaAmount = 0;
+        foreach ($details as $value){
+            $sumaAmount += intval($value->quantity) * $value->amount;
+        }
+
+        return round($sumaAmount, 2);
+    }
 }

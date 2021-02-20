@@ -2491,32 +2491,33 @@ if (typeof NProgress != 'undefined') {
 				
 				var handleDataTableButtons = function() {
 				  if ($("#datatable-buttons").length) {
-					$("#datatable-buttons").DataTable({
-					  dom: "Blfrtip",
-					  buttons: [
-						{
-						  extend: "copy",
-						  className: "btn-sm"
-						},
-						{
-						  extend: "csv",
-						  className: "btn-sm"
-						},
-						{
-						  extend: "excel",
-						  className: "btn-sm"
-						},
-						{
-						  extend: "pdfHtml5",
-						  className: "btn-sm"
-						},
-						{
-						  extend: "print",
-						  className: "btn-sm"
-						},
-					  ],
-					  responsive: true
-					});
+						$("#datatable-buttons").DataTable({
+							dom: "Blfrtip",
+							buttons: [
+							{
+								extend: "copy",
+								className: "btn-sm"
+							},
+							{
+								extend: "csv",
+								className: "btn-sm"
+							},
+							{
+								extend: "excel",
+								className: "btn-sm"
+							},
+							{
+								extend: "pdfHtml5",
+								className: "btn-sm"
+							},
+							{
+								extend: "print",
+								className: "btn-sm"
+							},
+							],
+							responsive: true,
+							'order': [[ 1, 'desc' ]],
+						});
 				  }
 				};
 
@@ -2551,8 +2552,9 @@ if (typeof NProgress != 'undefined') {
 
 				var $datatable = $('#datatable-checkbox');
 
+
 				$datatable.dataTable({
-				  'order': [[ 1, 'asc' ]],
+				  'order': [[ 1, 'desc' ]],
 				  'columnDefs': [
 					{ orderable: false, targets: [0] }
 				  ]

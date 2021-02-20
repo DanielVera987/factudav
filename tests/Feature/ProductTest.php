@@ -82,7 +82,314 @@ class ProductTest extends TestCase
         $this->assertDatabaseHas('products', [
             'code' => '001'
         ]);
-    }   
+    }  
+
+    public function test_create_product_error_code_require()
+    {
+        //$this->withoutExceptionHandling();
+        $this->authentication();
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                //'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $file,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.create'))
+            ->assertSessionHasErrors(['code' => 'El campo Code es obligatorio.']);
+    } 
+
+    public function test_create_product_error_name_require()
+    {
+        //$this->withoutExceptionHandling();
+        $this->authentication();
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                'code' => '001',
+                //'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $file,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.create'))
+            ->assertSessionHasErrors(['name' => 'El campo Nombre es obligatorio.']);
+    } 
+
+    public function test_create_product_error_description_require()
+    {
+        //$this->withoutExceptionHandling();
+        $this->authentication();
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                'code' => '001',
+                'name' => 'coca',
+                //'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $file,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.create'))
+            ->assertSessionHasErrors(['description' => 'El campo Descripción es obligatorio.']);
+    } 
+
+    public function test_create_product_error_stock_require()
+    {
+        //$this->withoutExceptionHandling();
+        $this->authentication();
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => null,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $file,
+                'is_active' => '0'
+            ]);
+
+        $response->assertRedirect(route('products.create'))
+            ->assertSessionHasErrors(['stock' => 'El campo Stock es obligatorio.']);
+    }
+
+    public function test_create_product_error_alert_stock_require()
+    {
+        //$this->withoutExceptionHandling();
+        $this->authentication();
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => null,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $file,
+                'is_active' => '0'
+            ]);
+
+        $response->assertRedirect(route('products.create'))
+            ->assertSessionHasErrors(['alert_stock' => 'El campo Alerta Stock es obligatorio.']);
+    }
+
+    public function test_create_product_error_cost_require()
+    {
+        //$this->withoutExceptionHandling();
+        $this->authentication();
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 7,
+                //'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $file,
+                'is_active' => '0'
+            ]);
+
+        $response->assertRedirect(route('products.create'))
+            ->assertSessionHasErrors(['cost' => 'El campo Costo es obligatorio.']);
+    }
+
+    public function test_create_product_error_price_require()
+    {
+        //$this->withoutExceptionHandling();
+        $this->authentication();
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 7,
+                'cost' => 30.00,
+                //'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $file,
+                'is_active' => '0'
+            ]);
+
+        $response->assertRedirect(route('products.create'))
+            ->assertSessionHasErrors(['price' => 'El campo Precio es obligatorio.']);
+    }
+
+    public function test_create_product_error_produserv_id_require()
+    {
+        //$this->withoutExceptionHandling();
+        $this->authentication();
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 7,
+                'cost' => 30.00,
+                'price' => 30.00,
+                //'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $file,
+                'is_active' => '0'
+            ]);
+
+        $response->assertRedirect(route('products.create'))
+            ->assertSessionHasErrors(['produserv_id' => 'El campo Producto/Servicio es obligatorio.']);
+    }
+
+    public function test_create_product_error_unit_id_require()
+    {
+        //$this->withoutExceptionHandling();
+        $this->authentication();
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 7,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                //'unit_id' => 1,
+                'image' => $file,
+                'is_active' => '0'
+            ]);
+
+        $response->assertRedirect(route('products.create'))
+            ->assertSessionHasErrors(['unit_id' => 'El campo Unidad de Medida es obligatorio.']);
+    }
+
+    public function test_create_product_error_image_require()
+    {
+        //$this->withoutExceptionHandling();
+        $this->authentication();
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 7,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                //'image' => $file,
+                'is_active' => '0'
+            ]);
+
+        $response->assertRedirect(route('products.create'))
+            ->assertSessionHasErrors(['image' => 'El campo Imagen es obligatorio.']);
+    }
+
+    public function test_create_product_warning_stock_less_alert_stock()
+    {
+        DB::table('products')->truncate();
+        $this->withoutExceptionHandling();
+        $this->authentication();
+
+        Storage::fake('products');
+
+        $image = UploadedFile::fake()->image('avatar.png');
+
+        $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                'code' => '00200',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 11,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $image,
+                'is_active' => '0'
+            ])->assertRedirect(route('products.create'))
+            ->assertSessionHas(['warning' => 'El stock debe ser mayor a la alerta de stock']);
+    }
 
     public function show_product()
     {
@@ -106,6 +413,411 @@ class ProductTest extends TestCase
         $this->get(route('products.show', $product->id));
     }
 
+    public function test_update_product_error_code_require()
+    {
+        //$this->withoutExceptionHandling();
+        //$this->markTestIncomplete();
+        DB::table('products')->truncate();
+        $this->authentication();
+
+        $product = Product::create([
+            'bussine_id' => 1,
+            'code' => '00100',
+            'name' => 'coca',
+            'description' => 'refresco',
+            'stock' => 10,
+            'alert_stock' => 5,
+            'cost' => 30.00,
+            'price' => 30.00,
+            'produserv_id' => 1,
+            'unit_id' => 1,
+            'image' => 'default.png',
+            'is_active' => '0'
+        ]);
+
+        Storage::fake('products');
+
+        $image = UploadedFile::fake()->image('avatar.png');
+
+        $response = $this->from(route('products.edit', $product->id))
+            ->put(route('products.update', $product->id), [
+                //'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $image,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.edit', $product->id))
+            ->assertSessionHasErrors(['code' => 'El campo Code es obligatorio.']);
+    }
+
+    public function test_update_product_error_name_require()
+    {
+        //$this->withoutExceptionHandling();
+        //$this->markTestIncomplete();
+        DB::table('products')->truncate();
+        $this->authentication();
+
+        $product = Product::create([
+            'bussine_id' => 1,
+            'code' => '00100',
+            'name' => 'coca',
+            'description' => 'refresco',
+            'stock' => 10,
+            'alert_stock' => 5,
+            'cost' => 30.00,
+            'price' => 30.00,
+            'produserv_id' => 1,
+            'unit_id' => 1,
+            'image' => 'default.png',
+            'is_active' => '0'
+        ]);
+
+        Storage::fake('products');
+
+        $image = UploadedFile::fake()->image('avatar.png');
+
+        $response = $this->from(route('products.edit', $product->id))
+            ->put(route('products.update', $product->id), [
+                'code' => '001',
+                //'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $image,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.edit', $product->id))
+            ->assertSessionHasErrors(['name' => 'El campo Nombre es obligatorio.']);
+    }
+
+    public function test_update_product_error_description_require()
+    {
+        //$this->withoutExceptionHandling();
+        //$this->markTestIncomplete();
+        DB::table('products')->truncate();
+        $this->authentication();
+
+        $product = Product::create([
+            'bussine_id' => 1,
+            'code' => '00100',
+            'name' => 'coca',
+            'description' => 'refresco',
+            'stock' => 10,
+            'alert_stock' => 5,
+            'cost' => 30.00,
+            'price' => 30.00,
+            'produserv_id' => 1,
+            'unit_id' => 1,
+            'image' => 'default.png',
+            'is_active' => '0'
+        ]);
+
+        Storage::fake('products');
+
+        $image = UploadedFile::fake()->image('avatar.png');
+
+        $response = $this->from(route('products.edit', $product->id))
+            ->put(route('products.update', $product->id), [
+                'code' => '001',
+                'name' => 'coca',
+                //'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $image,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.edit', $product->id))
+            ->assertSessionHasErrors(['description' => 'El campo Descripción es obligatorio.']);
+    }
+
+    public function test_update_product_error_stock_require()
+    {
+        //$this->withoutExceptionHandling();
+        //$this->markTestIncomplete();
+        DB::table('products')->truncate();
+        $this->authentication();
+
+        $product = Product::create([
+            'bussine_id' => 1,
+            'code' => '00100',
+            'name' => 'coca',
+            'description' => 'refresco',
+            'stock' => 10,
+            'alert_stock' => 5,
+            'cost' => 30.00,
+            'price' => 30.00,
+            'produserv_id' => 1,
+            'unit_id' => 1,
+            'image' => 'default.png',
+            'is_active' => '0'
+        ]);
+
+        Storage::fake('products');
+
+        $image = UploadedFile::fake()->image('avatar.png');
+
+        $response = $this->from(route('products.edit', $product->id))
+            ->put(route('products.update', $product->id), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                //'stock' => 10,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $image,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.edit', $product->id))
+            ->assertSessionHasErrors(['stock' => 'El campo Stock es obligatorio.']);
+    }
+
+    public function test_update_product_error_alert_stock_require()
+    {
+        //$this->withoutExceptionHandling();
+        //$this->markTestIncomplete();
+        DB::table('products')->truncate();
+        $this->authentication();
+
+        $product = Product::create([
+            'bussine_id' => 1,
+            'code' => '00100',
+            'name' => 'coca',
+            'description' => 'refresco',
+            'stock' => 10,
+            'alert_stock' => 5,
+            'cost' => 30.00,
+            'price' => 30.00,
+            'produserv_id' => 1,
+            'unit_id' => 1,
+            'image' => 'default.png',
+            'is_active' => '0'
+        ]);
+
+        Storage::fake('products');
+
+        $image = UploadedFile::fake()->image('avatar.png');
+
+        $response = $this->from(route('products.edit', $product->id))
+            ->put(route('products.update', $product->id), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                //'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $image,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.edit', $product->id))
+            ->assertSessionHasErrors(['alert_stock' => 'El campo Alerta Stock es obligatorio.']);
+    }
+
+    public function test_update_product_error_cost_require()
+    {
+        //$this->withoutExceptionHandling();
+        //$this->markTestIncomplete();
+        DB::table('products')->truncate();
+        $this->authentication();
+
+        $product = Product::create([
+            'bussine_id' => 1,
+            'code' => '00100',
+            'name' => 'coca',
+            'description' => 'refresco',
+            'stock' => 10,
+            'alert_stock' => 5,
+            'cost' => 30.00,
+            'price' => 30.00,
+            'produserv_id' => 1,
+            'unit_id' => 1,
+            'image' => 'default.png',
+            'is_active' => '0'
+        ]);
+
+        Storage::fake('products');
+
+        $image = UploadedFile::fake()->image('avatar.png');
+
+        $response = $this->from(route('products.edit', $product->id))
+            ->put(route('products.update', $product->id), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 2,
+                //'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $image,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.edit', $product->id))
+            ->assertSessionHasErrors(['cost' => 'El campo Costo es obligatorio.']);
+    }
+
+    public function test_update_product_error_price_require()
+    {
+        //$this->withoutExceptionHandling();
+        //$this->markTestIncomplete();
+        DB::table('products')->truncate();
+        $this->authentication();
+
+        $product = Product::create([
+            'bussine_id' => 1,
+            'code' => '00100',
+            'name' => 'coca',
+            'description' => 'refresco',
+            'stock' => 10,
+            'alert_stock' => 5,
+            'cost' => 30.00,
+            'price' => 30.00,
+            'produserv_id' => 1,
+            'unit_id' => 1,
+            'image' => 'default.png',
+            'is_active' => '0'
+        ]);
+
+        Storage::fake('products');
+
+        $image = UploadedFile::fake()->image('avatar.png');
+
+        $response = $this->from(route('products.edit', $product->id))
+            ->put(route('products.update', $product->id), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                //'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $image,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.edit', $product->id))
+            ->assertSessionHasErrors(['price' => 'El campo Precio es obligatorio.']);
+    }
+
+    public function test_update_product_error_produserv_id_require()
+    {
+        //$this->withoutExceptionHandling();
+        //$this->markTestIncomplete();
+        DB::table('products')->truncate();
+        $this->authentication();
+
+        $product = Product::create([
+            'bussine_id' => 1,
+            'code' => '00100',
+            'name' => 'coca',
+            'description' => 'refresco',
+            'stock' => 10,
+            'alert_stock' => 5,
+            'cost' => 30.00,
+            'price' => 30.00,
+            'produserv_id' => 1,
+            'unit_id' => 1,
+            'image' => 'default.png',
+            'is_active' => '0'
+        ]);
+
+        Storage::fake('products');
+
+        $image = UploadedFile::fake()->image('avatar.png');
+
+        $response = $this->from(route('products.edit', $product->id))
+            ->put(route('products.update', $product->id), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                //'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $image,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.edit', $product->id))
+            ->assertSessionHasErrors(['produserv_id' => 'El campo Producto/Servicio es obligatorio.']);
+    }
+
+    public function test_update_product_error_unit_id_require()
+    {
+        //$this->withoutExceptionHandling();
+        //$this->markTestIncomplete();
+        DB::table('products')->truncate();
+        $this->authentication();
+
+        $product = Product::create([
+            'bussine_id' => 1,
+            'code' => '00100',
+            'name' => 'coca',
+            'description' => 'refresco',
+            'stock' => 10,
+            'alert_stock' => 5,
+            'cost' => 30.00,
+            'price' => 30.00,
+            'produserv_id' => 1,
+            'unit_id' => 1,
+            'image' => 'default.png',
+            'is_active' => '0'
+        ]);
+
+        Storage::fake('products');
+
+        $image = UploadedFile::fake()->image('avatar.png');
+
+        $response = $this->from(route('products.edit', $product->id))
+            ->put(route('products.update', $product->id), [
+                'code' => '001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                //'unit_id' => 1,
+                'image' => $image,
+                'is_active' => '0'
+            ]);
+        
+        $response->assertRedirect(route('products.edit', $product->id))
+            ->assertSessionHasErrors(['unit_id' => 'El campo Unidad de Medida es obligatorio.']);
+    }
+
     public function test_product_update_without_image()
     {
         DB::table('products')->truncate();
@@ -118,7 +830,7 @@ class ProductTest extends TestCase
             'name' => 'coca',
             'description' => 'refresco',
             'stock' => 10,
-            'alert_stock' => 10,
+            'alert_stock' => 5,
             'cost' => 30.00,
             'price' => 30.00,
             'produserv_id' => 1,
@@ -132,7 +844,7 @@ class ProductTest extends TestCase
             'name' => 'coca',
             'description' => 'refresco',
             'stock' => 10,
-            'alert_stock' => 10,
+            'alert_stock' => 5,
             'cost' => 30.00,
             'price' => 30.00,
             'produserv_id' => 1,
@@ -158,7 +870,7 @@ class ProductTest extends TestCase
             'name' => 'coca',
             'description' => 'refresco',
             'stock' => 10,
-            'alert_stock' => 10,
+            'alert_stock' => 5,
             'cost' => 30.00,
             'price' => 30.00,
             'produserv_id' => 1,
@@ -176,7 +888,7 @@ class ProductTest extends TestCase
             'name' => 'coca',
             'description' => 'refresco',
             'stock' => 10,
-            'alert_stock' => 10,
+            'alert_stock' => 5,
             'cost' => 30.00,
             'price' => 30.00,
             'produserv_id' => 1,

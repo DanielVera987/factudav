@@ -32,7 +32,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->get();
+        $invoices = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->orderByDesc('id')->get();
         return view('invoices.index', compact('invoices'));
     }
 
@@ -77,7 +77,7 @@ class InvoiceController extends Controller
         $invoice = Invoice::create($request->all());
         Detail::createDetail($invoice->id, $request);
         
-        return redirect()->route('invoices.index')->with(['success', 'Factura Creada']);
+        return redirect(route('invoices.index'))->with('success', 'Factura Creada');
     }
 
     /**
