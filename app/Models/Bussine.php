@@ -26,6 +26,8 @@ class Bussine extends Model
         'zip',
         'no_exterior',
         'no_inside',
+        'start_serie',
+        'start_folio',
         'certificate',
         'key_private',
         'password',

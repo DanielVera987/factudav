@@ -12,6 +12,7 @@ use App\Models\Municipality;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\BussineRequest;
 
 class BussineController extends Controller
 {
@@ -56,10 +57,8 @@ class BussineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BussineRequest $request)
     {
-        $this->validator($request);
-
         if ($request->hasFile('logo')) {
             $file = $request->file('logo');
             $nameFile = time().'_'.$file->getClientOriginalName();
@@ -112,37 +111,12 @@ class BussineController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Requests\BussineRequest  $request
      * @param  \App\Models\Bussine  $bussine
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BussineRequest $request, $id)
     {
-        $request->validate([
-            'bussine_name' => 'required|string|max:255',
-            'tradename' => 'required|string|max:255',
-            'rfc' => 'required|string|max:255',
-            'email' => 'required|email',
-            'telephone' => 'required|numeric',
-            'type_person' => 'required|string',
-            'taxregimen_id' => 'required|numeric',
-            'country_id' => 'required|numeric',
-            'state_id' => 'required|numeric',
-            'municipality_id' => 'required|numeric',
-            'location' => 'required|string|max:255',
-            'street' => 'required|string|max:255',
-            'colony' => 'required|string|max:255',
-            'zip' => 'required|string|max:255',
-            'no_exterior' => 'required|string|max:255',
-            'no_inside' => 'required|string|max:255',
-            'certificate' => 'max:255', //file .cer
-            'key_private' => 'max:255', //file .key
-            'password' => 'max:255',
-            'name_pac' => 'max:255',
-            'password_pac' => 'max:255',
-            'logo' => 'image',
-        ]);
-
         $bussine = Bussine::findOrFail($id);
         $bussine->bussine_name = $request->bussine_name;
         $bussine->tradename = $request->tradename;
@@ -160,6 +134,8 @@ class BussineController extends Controller
         $bussine->zip = $request->zip;
         $bussine->no_exterior = $request->no_exterior;
         $bussine->no_inside = $request->no_inside;
+        $bussine->start_folio = $request->folio;
+        $bussine->start_serie = $request->serie;
         $bussine->certificate = $request->certificate;
         $bussine->key_private = $request->key_private;
         $bussine->password = $request->password;
@@ -214,6 +190,8 @@ class BussineController extends Controller
         $bussine->zip = $request->zip;
         $bussine->no_exterior = $request->no_exterior;
         $bussine->no_inside = $request->no_inside;
+        $bussine->start_folio = $request->folio;
+        $bussine->start_serie = $request->serie;
         $bussine->certificate = $request->certificate;
         $bussine->key_private = $request->key_private;
         $bussine->password = $request->password;
@@ -227,35 +205,6 @@ class BussineController extends Controller
 
         return ($result)
             ? $bussine->id
-            : redirect()->route('settings.create')->with('success', 'Error al guardar los datos');
-            
-    }
-
-    protected function validator(Request $data)
-    {
-        return $data->validate([
-            'bussine_name' => 'required|string|max:255',
-            'tradename' => 'required|string|max:255',
-            'rfc' => 'required|string|max:255',
-            'email' => 'required|email',
-            'telephone' => 'required|numeric',
-            'type_person' => 'required|string',
-            'taxregimen_id' => 'required|numeric',
-            'country_id' => 'required|numeric',
-            'state_id' => 'required|numeric',
-            'municipality_id' => 'required|numeric',
-            'location' => 'required|string|max:255',
-            'street' => 'required|string|max:255',
-            'colony' => 'required|string|max:255',
-            'zip' => 'required|string|max:255',
-            'no_exterior' => 'required|string|max:255',
-            'no_inside' => 'required|string|max:255',
-            'certificate' => 'max:255', //file .cer
-            'key_private' => 'max:255', //file .key
-            'password' => 'max:255',
-            'name_pac' => 'max:255',
-            'password_pac' => 'max:255',
-            'logo' => 'image',
-        ]);
-    }    
+            : redirect()->route('settings.create')->with('success', 'Error al guardar los datos');       
+    }   
 }

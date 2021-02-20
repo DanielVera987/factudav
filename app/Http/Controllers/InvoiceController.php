@@ -43,16 +43,20 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $currencies = Currency::where('bussine_id', Auth::user()->bussine_id)->get();
+        $bussine_id =  Auth::user()->bussine_id;
+        $folioAndSerie = Bussine::select('start_folio', 'start_serie')->find($bussine_id);
+        $currencies = Currency::where('bussine_id',$bussine_id)->get();
         $states = State::where('country_id', 1)->get();
-        $customers = Customer::where('bussine_id', Auth::user()->bussine_id)->get();
-        $products = Product::where('bussine_id', Auth::user()->bussine_id)->get();
-        $taxes = Tax::where('bussine_id', Auth::user()->bussine_id)->get();
+        $customers = Customer::where('bussine_id', $bussine_id)->get();
+        $products = Product::where('bussine_id', $bussine_id)->get();
+        $taxes = Tax::where('bussine_id', $bussine_id)->get();
         $usecfdi = Usecfdi::all();
         $wayToPays = WayToPay::all();
         $paymentMethods = PaymentMethod::all();
 
         return view('invoices.create', [
+            'folio' => $folioAndSerie->start_folio,
+            'serie' => $folioAndSerie->start_serie,
             'currencies' => $currencies,
             'states' => $states,
             'customers' => $customers,

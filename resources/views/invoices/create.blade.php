@@ -60,7 +60,7 @@
               <div class="row">  
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="serie">Serie *: <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="Prefijo para la factura ejemplo: Si tienes dos puntos de venta Almacen 1, Almacen 2 entonces el prefijo puede ser A1-, A2-"></i></label>
-                  <input type="text" id="serie" name="serie" class="form-control" data-parsley-trigger="change" value="{{ old('serie') }}" required />
+                  <input type="text" id="serie" name="serie" class="form-control" data-parsley-trigger="change" value="{{ old('serie') ?? $serie }}" required />
                   @error('serie')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -100,7 +100,7 @@
             <div class="row">  
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="folio">Folio * :</label>
-                  <input type="text" id="folio" class="form-control" name="folio" value="{{ old('folio') }}" data-parsley-trigger="change" required />
+                  <input type="text" id="folio" class="form-control" name="folio" value="{{ old('folio') ?? $folio }}" data-parsley-trigger="change" required />
                   @error('folio')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>

@@ -50,10 +50,10 @@
                           <div id="crop-avatar">
                             <img class="img-responsive avatar-view center-block" src="{{ asset('/images/logos/'. $bussine->logo) }}" width="200" id="previewlogo"  alt="Avatar" title="">
                             <label for="logo">Logo * :</label>
-                            <input type="file" name="logo" value="" id="logo">
+                            <input type="file" name="logo" class="@error('logo') parsley-error @enderror" value="" id="logo">
                               @error('logo')
-                                <span class="invalid-feedback" role="alert">
-                                  <strong style="color: red;">{{ $message }}</strong>
+                                <span class="invalid-feedback red" role="alert">
+                                  <strong>{{ $message }}</strong>
                                 </span>
                               @enderror
                             </br>
@@ -64,9 +64,9 @@
                     <div class="col-md-8 col-sm-8 col-xs-12">
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <label for="bussine_name">Razón Social * :</label>
-                        <input type="text" id="bussine_name" class="form-control" value="{{ $bussine->bussine_name }}" name="bussine_name" required />
+                        <input type="text" id="bussine_name" class="form-control @error('bussine_name') parsley-error @enderror" value="{{ $bussine->bussine_name }}" name="bussine_name" required />
                         @error('bussine_name')
-                          <span class="invalid-feedback" role="alert">
+                          <span class="invalid-feedback red" role="alert">
                             <strong>{{ $message }}</strong>
                           </span>
                         @enderror
@@ -74,30 +74,30 @@
                     
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <label for="tradename">Nombre Comercial * :</label>
-                        <input type="text" id="tradename" class="form-control" value="{{ $bussine->tradename }}" name="tradename" required />
+                        <input type="text" id="tradename" class="form-control @error('tradename') parsley-error @enderror" value="{{ $bussine->tradename }}" name="tradename" required />
                         @error('tradename')
-                          <span class="invalid-feedback" role="alert">
-                            <strong style="color: red;">{{ $message }}</strong>
+                          <span class="invalid-feedback red" role="alert">
+                            <strong >{{ $message }}</strong>
                           </span>
                         @enderror
                       </div>
 
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <label for="rfc">RFC * :</label>
-                        <input type="text" id="rfc" class="form-control" name="rfc" value="{{ $bussine->rfc }}" data-parsley-trigger="change" required />
+                        <input type="text" id="rfc" class="form-control @error('rfc') parsley-error @enderror" name="rfc" value="{{ $bussine->rfc }}" data-parsley-trigger="change" required />
                         @error('rfc')
-                          <span class="invalid-feedback" role="alert">
-                            <strong style="color: red;">{{ $message }}</strong>
+                          <span class="invalid-feedback red" role="alert">
+                            <strong >{{ $message }}</strong>
                           </span>
                         @enderror
                       </div>
     
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <label for="email">Correo Electrónico * :</label>
-                        <input type="email" id="email" class="form-control" name="email" value="{{ $bussine->email }}" data-parsley-trigger="change" required />
+                        <input type="email" id="email" class="form-control @error('email') parsley-error @enderror"  name="email" value="{{ $bussine->email }}" data-parsley-trigger="change" required />
                         @error('email')
-                          <span class="invalid-feedback" role="alert">
-                            <strong style="color: red;">{{ $message }}</strong>
+                          <span class="invalid-feedback red" role="alert">
+                            <strong >{{ $message }}</strong>
                           </span>
                         @enderror
                       </div>
@@ -107,37 +107,37 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="telephone">Teléfono * :</label>
-                    <input type="tel" id="telephone" class="form-control" name="telephone" value="{{ $bussine->telephone }}" data-parsley-trigger="change" required />
+                    <input type="tel" id="telephone" class="form-control @error('telephone') parsley-error @enderror" name="telephone" value="{{ $bussine->telephone }}" data-parsley-trigger="change" required />
                     @error('telephone')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
 
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="type_person">Tipo Persona *:</label>
-                    <select id="type_person" name="type_person" class="form-control" value="{{ $bussine->type_person }}" required data-parsley-trigger="change">
+                    <select id="type_person" name="type_person" class="form-control @error('type_person') parsley-error @enderror" value="{{ $bussine->type_person }}" required data-parsley-trigger="change">
                       <option value="M">Moral</option>
                       <option value="F">Fisica</option>
                     </select>
                     @error('type_person')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
 
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="taxregimen_id">Régimen Fiscal *:</label>
-                    <select id="taxregimen_id" name="taxregimen_id" class="form-control" value="{{ $bussine->taxregimen_id }}" required data-parsley-trigger="change">
+                    <select id="taxregimen_id" name="taxregimen_id" class="form-control @error('taxregimen_id') parsley-error @enderror" value="{{ $bussine->taxregimen_id }}" required data-parsley-trigger="change">
                       @foreach($tax_regimens as $value)
                         <option value="{{ $value->id }}" @if($bussine->taxregimen_id == $value->id) selected  @endif>{{ $value->code  }} | {{ $value->name  }}</option>
                       @endforeach
                     </select>
                     @error('taxregimen_id')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
@@ -145,43 +145,43 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="country_id">País * :</label>
-                    <select id="country_id" class="form-control" name="country_id" required data-parsley-trigger="change">
+                    <select id="country_id" class="form-control @error('country_id') parsley-error @enderror" name="country_id" required data-parsley-trigger="change">
                       @foreach($contries as $value)
                         <option value="{{ $value->id }}">{{ $value->name  }}</option>
                       @endforeach
                     </select>
                     @error('country_id')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
   
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="state_id">Estado *:</label>
-                    <select id="state_id" name="state_id" class="form-control" required data-parsley-trigger="change">
+                    <select id="state_id" name="state_id" class="form-control @error('state_id') parsley-error @enderror" required data-parsley-trigger="change">
                       @foreach($states as $value)
                         <option value="{{ $value->id }}" @if($bussine->state_id == $value->id) selected @endif>{{ $value->name }}</option>
                       @endforeach
                     </select>
                     @error('state_id')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
   
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="municipality_id">Municipio *:</label>
-                    <select id="municipality_id" name="municipality_id" class="form-control" value="{{ $bussine->municipality_id }}" required data-parsley-trigger="change">
+                    <select id="municipality_id" name="municipality_id" class="form-control @error('municipality_id') parsley-error @enderror" value="{{ $bussine->municipality_id }}" required data-parsley-trigger="change">
                         <option value="" disabled>Seleccionar...</option>
                         @foreach($municipalities as $value)
                         <option value="{{ $value->id }}" @if($bussine->municipality_id == $value->id) selected @endif>{{ $value->name }}</option>
                       @endforeach
                     </select>
                     @error('municipality_id')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
@@ -189,30 +189,30 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="location">Localidad * :</label>
-                    <input type="text" id="location" name="location" class="form-control" data-parsley-trigger="change" value="{{ $bussine->location }}" required />
+                    <input type="text" id="location" name="location" class="form-control @error('location') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->location }}" required />
                     @error('location')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
   
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="street">Calle * :</label>
-                    <input type="text" id="street" name="street" class="form-control" data-parsley-trigger="change" value="{{ $bussine->street }}" required />
+                    <input type="text" id="street" name="street" class="form-control @error('street') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->street }}" required />
                     @error('street')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
   
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="colony">Colonia * :</label>
-                    <input type="text" id="colony" name="colony" class="form-control" data-parsley-trigger="change" value="{{ $bussine->colony }}" required />
+                    <input type="text" id="colony" name="colony" class="form-control @error('colony') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->colony }}" required />
                     @error('colony')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
@@ -220,30 +220,30 @@
                 <div class="row">
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="zip">Código Postal * :</label>
-                    <input type="text" id="zip" name="zip" class="form-control" data-parsley-trigger="change" value="{{ $bussine->zip }}" required />
+                    <input type="text" id="zip" name="zip" class="form-control @error('zip') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->zip }}" required />
                     @error('zip')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
   
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="no_exterior">No. Exterior * :</label>
-                    <input type="text" id="no_exterior" name="no_exterior" class="form-control" data-parsley-trigger="change" value="{{ $bussine->no_exterior }}" required />
+                    <input type="text" id="no_exterior" name="no_exterior" class="form-control @error('no_exterior') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->no_exterior }}" required />
                     @error('no_exterior')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
   
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="no_inside">No. Interior * :</label>
-                    <input type="text" id="no_inside" name="no_inside" class="form-control" data-parsley-trigger="change" value="{{ $bussine->no_inside }}" required />
+                    <input type="text" id="no_inside" name="no_inside" class="form-control @error('no_inside') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->no_inside }}" required />
                     @error('no_inside')
-                      <span class="invalid-feedback" role="alert">
-                        <strong style="color: red;">{{ $message }}</strong>
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
                       </span>
                     @enderror
                   </div>
@@ -264,51 +264,73 @@
           <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">    
               <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12">
+                  <label for="serie">Serie: <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="Prefijo para la factura ejemplo: Factura-"></i></label>
+                  <input type="text" class="form-control @error('serie') parsley-error @enderror" id="serie" name="serie" data-parsley-trigger="change" value="{{ $bussine->start_serie }}"/>
+                  @error('serie')
+                    <span class="invalid-feedback red" role="alert">
+                      <strong >{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                  <label for="folio">Folio: <i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" title="ingresa el número  con el que vas a elaborar la próxima factura, Folio predeterminado: 0000000001"></i></label>
+                  <input type="text" class="form-control @error('folio') parsley-error @enderror" id="folio" name="folio" data-parsley-trigger="change" value="{{ $bussine->start_folio }}"/>
+                  @error('folio')
+                    <span class="invalid-feedback red" role="alert">
+                      <strong >{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <hr>
+                  <h4>Datos Para Timbrado</h4>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="certificate">Certificado:</label>
-                  <input type="file" class="form-control" id="certificate" name="certificate" data-parsley-trigger="change" value="{{ $bussine->centificate }}"/>
+                  <input type="file" class="form-control @error('certificate') parsley-error @enderror" id="certificate" name="certificate" data-parsley-trigger="change" value="{{ $bussine->centificate }}"/>
                   @error('certificate')
-                    <span class="invalid-feedback" role="alert">
-                      <strong style="color: red;">{{ $message }}</strong>
+                    <span class="invalid-feedback red" role="alert">
+                      <strong >{{ $message }}</strong>
                     </span>
                   @enderror
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="key_private">Llave Privada:</label>
-                  <input type="file" class="form-control" id="key_private" name="key_private" data-parsley-trigger="change" value="{{ $bussine->key_private }}"/>
+                  <input type="file" class="form-control @error('key_private') parsley-error @enderror" id="key_private" name="key_private" data-parsley-trigger="change" value="{{ $bussine->key_private }}"/>
                   @error('key_private')
-                    <span class="invalid-feedback" role="alert">
-                      <strong style="color: red;">{{ $message }}</strong>
+                    <span class="invalid-feedback red" role="alert">
+                      <strong >{{ $message }}</strong>
                     </span>
                   @enderror
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="password">Contraseña:</label>
-                  <input type="password" id="password" name="password" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+                  <input type="password" id="password" name="password" class="form-control @error('password') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
                   @error('password')
-                    <span class="invalid-feedback" role="alert">
-                      <strong style="color: red;">{{ $message }}</strong>
+                    <span class="invalid-feedback red" role="alert">
+                      <strong >{{ $message }}</strong>
                     </span>
                   @enderror
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="name_pac">PAC:</label>
-                  <input type="text" id="name_pac" name="name_pac" class="form-control" data-parsley-trigger="change" value="{{ $bussine->name_pac }}"/>
+                  <input type="text" id="name_pac" name="name_pac" class="form-control @error('name_pac') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->name_pac }}"/>
                   @error('name_pac')
-                    <span class="invalid-feedback" role="alert">
-                      <strong style="color: red;">{{ $message }}</strong>
+                    <span class="invalid-feedback red" role="alert">
+                      <strong >{{ $message }}</strong>
                     </span>
                   @enderror
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="password_pac">Contraseña PAC:</label>
-                  <input type="text" id="password_pac" name="password_pac" class="form-control" data-parsley-trigger="change" value="{{ $bussine->password_pac }}"/>
+                  <input type="text" id="password_pac" name="password_pac" class="form-control @error('password_pac') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->password_pac }}"/>
                   @error('password_pac')
-                    <span class="invalid-feedback" role="alert">
-                      <strong style="color: red;">{{ $message }}</strong>
+                    <span class="invalid-feedback red" role="alert">
+                      <strong >{{ $message }}</strong>
                     </span>
                   @enderror
                 </div>

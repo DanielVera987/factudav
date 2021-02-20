@@ -257,6 +257,23 @@
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('/js/custom.min.js') }}"></script>
     @yield('script')
+
+    <!-- Command Direct -->
+    <script>
+      $('body').on("keydown", function(e) { 
+
+        if (e.ctrlKey && e.altKey && e.which === 70) {
+            window.location.href =  "{{ route('invoices.create') }}";
+            e.preventDefault();
+        }
+
+        if (e.ctrlKey && e.altKey && e.which === 67) {
+            window.location.href =  "{{ route('customers.create') }}";
+            e.preventDefault();
+        }
+
+      });
+    </script>
 	
   </body>
 </html>
