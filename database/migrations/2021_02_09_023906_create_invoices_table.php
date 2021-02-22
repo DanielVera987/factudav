@@ -23,7 +23,7 @@ class CreateInvoicesTable extends Migration
                 ->references('id')
                 ->on('customers');
 
-            $table->string('folio')->unique();
+            $table->string('folio');
 
             $table->foreignId('way_to_pay_id')
                 ->references('id')

@@ -44,7 +44,7 @@ class InvoiceController extends Controller
     public function create()
     {
         $bussine_id =  Auth::user()->bussine_id;
-        $folioAndSerie = Bussine::select('start_folio', 'start_serie')->find($bussine_id);
+        $serie = Bussine::select('start_serie')->find($bussine_id);
         $currencies = Currency::where('bussine_id',$bussine_id)->get();
         $states = State::where('country_id', 1)->get();
         $customers = Customer::where('bussine_id', $bussine_id)->get();
@@ -55,8 +55,8 @@ class InvoiceController extends Controller
         $paymentMethods = PaymentMethod::all();
 
         return view('invoices.create', [
-            'folio' => $folioAndSerie->start_folio,
-            'serie' => $folioAndSerie->start_serie,
+            'folio' => Invoice::generateFolio(),
+            'serie' => $serie->start_serie,
             'currencies' => $currencies,
             'states' => $states,
             'customers' => $customers,
@@ -76,7 +76,14 @@ class InvoiceController extends Controller
      */
     public function store(InvoiceRequest $request)
     {   
-        $request['bussine_id'] = Auth::user()->bussine_id;
+        $bussine_id = Auth::user()->bussine_id;
+        $existFolio = Invoice::where('bussine_id', $bussine_id)
+                        ->where('folio', intval($request['folio']))
+                        ->count();
+        
+        if ($existFolio > 0) return back()->with('warning', 'El folio ya esta en uso');
+
+        $request['bussine_id'] = $bussine_id;
 
         $invoice = Invoice::create($request->all());
         Detail::createDetail($invoice->id, $request);

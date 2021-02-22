@@ -33,6 +33,11 @@
             {{ session()->get('success') }}
         </div>
       @endif
+      @if(session()->has('warning'))
+        <div class="alert alert-warning">
+            {{ session()->get('warning') }}
+        </div>
+      @endif
       @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -100,7 +105,7 @@
             <div class="row">  
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="folio">Folio * :</label>
-                  <input type="text" id="folio" class="form-control" name="folio" value="{{ old('folio') ?? $folio }}" data-parsley-trigger="change" required />
+                  <input type="text" id="folio" class="form-control" name="folio" value="{{ old('folio') ?? $folio }}" data-parsley-trigger="change" required readonly/>
                   @error('folio')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>

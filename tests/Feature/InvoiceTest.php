@@ -2,11 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Models\Detail;
-use App\Models\Invoice;
-use App\Models\Product;
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Detail;
+use App\Models\Bussine;
+use App\Models\Invoice;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -33,6 +34,93 @@ class InvoiceTest extends TestCase
         $response = $this->get('/invoices');
         $response->assertStatus(200)
             ->assertSee('Listado De Facturas');
+    }
+
+    public function test_verity_generate_folio_for_invoice_with_invoices()
+    {
+        $this->authentication();
+
+        Bussine::factory()->create();
+
+        Invoice::create([
+            'bussine_id' => 1,
+            'folio' => 10,
+            'way_to_pay_id' => 1,
+            'currency_id' => 1,
+            'payment_method_id' => 1,
+            'usecfdi_id' => 1,
+            'date' => '2020-02-21T01:18:00',
+            'customer_id' => 1,
+        ]);
+
+        $folio = Invoice::generateFolio();
+        $this->assertSame($folio, '0000000011');
+    }
+
+    public function test_verity_generate_folio_for_invoice_without_invoices()
+    {
+        $this->authentication();
+        DB::table('invoices')->truncate();
+
+        Bussine::factory()->create();
+
+        $folio = Invoice::generateFolio();
+        $this->assertSame($folio, '0000000001');
+    }
+
+    public function test_create_invoice_with_repeat_folio()
+    {
+        $this->authentication();
+        DB::table('invoices')->truncate();
+
+        Bussine::factory()->create();
+        Product::factory(10)->create();
+        Invoice::create([
+            'bussine_id' => 1,
+            'folio' => 1,
+            'way_to_pay_id' => 1,
+            'currency_id' => 1,
+            'payment_method_id' => 1,
+            'usecfdi_id' => 1,
+            'date' => '2020-02-21T01:18:00',
+            'customer_id' => 1,
+        ]);
+
+        $this->authentication();
+        
+        $response = $this->from(route('invoices.create'))
+            ->post(route('invoices.store'), [
+                'serie' => 'FAC-',
+                'folio' => '0000000001',
+                'way_to_pay_id' => 1,
+                'currency_id' => 1,
+                'payment_method_id' => 1,
+                'usecfdi_id' => 1,
+                'date' => '2021-08-13T12:00:00',
+                'customer_id' => 1,
+                'detail' => [
+                    0 => [
+                        'discount' =>  0,
+                        'amount' => 30,
+                        'product_id' => 1,
+                        'prodserv_id' => 1,
+                        'unit_id' => 2,
+                        'description' => 'cocacola bien fria',
+                        'quantity' => 1,
+                        'taxes' => [
+                            0 => [
+                                'type' => 1,
+                                'factor' => 1,
+                                'tax' => 1,
+                                'id' => 1
+                            ]
+                        ]
+                    ]
+                ]
+            ]);
+
+        $response->assertRedirect(route('invoices.create'))
+        ->assertSessionMissing(['warning' => 'El folio ya esta en uso']);
     }
     
     public function test_create_invoice()

@@ -53,6 +53,10 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        if ($this->checkRepeatingCode($request['code'])) {
+            return back()->with('warning', 'El codigo del producto ya esta en uso');
+        } 
+
         if ($request->stock <= $request->alert_stock) {
             return back()->with('warning', 'El stock debe ser mayor a la alerta de stock');
         }
@@ -125,6 +129,10 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, $id)
     {
+        if ($this->checkRepeatingCode($request['code'])) {
+            return back()->with('warning', 'El codigo del producto ya esta en uso');
+        } 
+
         if ($request->stock <= $request->alert_stock) {
             return back()->with('warning', 'El stock debe ser mayor a la alerta de stock');
         }
@@ -170,5 +178,13 @@ class ProductController extends Controller
 
             return redirect(route('products.index'))->with('success', 'Producto Eliminado'); 
         }
+    }
+
+    protected function checkRepeatingCode($code)
+    {
+        $existFolio = Product::where('bussine_id', Auth::user()->bussine_id)
+                        ->where('code', intval($code))
+                        ->count();
+        return ($existFolio > 0) ? true : false;
     }
 }

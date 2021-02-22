@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Invoice;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class InvoiceRequest extends FormRequest

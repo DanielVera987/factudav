@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
                 ->references('id')
                 ->on('bussines');
                 
-            $table->string('code')->unique();
+            $table->string('code');
             $table->string('name');   
             $table->longText('description');
             $table->string('stock');

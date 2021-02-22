@@ -104,11 +104,13 @@ function calculate_totals()
         let tax = document.getElementsByClassName('tax_name_hidden')[i].value; //isr, iva, ieps
 
         let importeImpuesto = myRound(importeConcepto * tasa, 2);
+        var bool = false;
 
         if (type[i].value == 'traslado') {
             var traslado = myRound(importeImpuesto, 2);
+            bool = true;
             totalImpuestosTrasladados += myRound(importeImpuesto, 2);
-        } else if(type[i].value == 'retenido' && tax == 'iva') {
+        } else if(type[i].value == 'retenido' && tax == 'iva' && bool) {
             totalImpuestosRetenidos += myRound(traslado * 2 / 3, 2);
         } else {
             totalImpuestosRetenidos += myRound(importeImpuesto, 2);

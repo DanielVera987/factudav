@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -63,5 +64,19 @@ class Invoice extends Model
         }
 
         return round($sumaAmount, 2);
+    }
+
+    public static function generateFolio()
+    {
+        $bussine_id = Auth::user()->bussine_id;
+        $count = Invoice::where('bussine_id', $bussine_id)->count();
+        
+        if ($count > 0) {
+            $folio = Invoice::where('bussine_id', $bussine_id)->orderBy('id', 'DESC')->take(1)->get();
+            return str_pad($folio[0]->folio + 1, 10, '0', STR_PAD_LEFT);
+        }
+
+        $confFolio = Bussine::find($bussine_id);
+        return str_pad($confFolio->start_folio, 10, '0', STR_PAD_LEFT);
     }
 }

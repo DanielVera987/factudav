@@ -44,7 +44,7 @@ class CreateBussinesTable extends Migration
             $table->string('no_exterior');
             $table->string('no_inside');
             $table->string('start_serie')->default('Factura-');
-            $table->string('start_folio')->default('0000000001');
+            $table->string('start_folio')->default('1');
             $table->string('certificate')->nullable();
             $table->string('key_private')->nullable();
             $table->string('password')->nullable();

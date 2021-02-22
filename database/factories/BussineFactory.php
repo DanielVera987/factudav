@@ -37,6 +37,8 @@ class BussineFactory extends Factory
             'street' => $this->faker->streetName(),
             'colony' => $this->faker->city(),
             'zip' => $this->faker->postcode(),
+            'start_folio' => 1,
+            'start_serie' => 'Factura-',
             'no_exterior' => $this->faker->randomNumber(3, true),
             'no_inside' => $this->faker->randomNumber(3, true),
             'certificate' => $this->faker->word(),

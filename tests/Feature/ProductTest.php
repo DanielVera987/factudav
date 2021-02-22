@@ -967,6 +967,41 @@ class ProductTest extends TestCase
         $this->assertSame($folio, '0000000006');
     }
 
+    public function test_create_product_with_repeat_code()
+    {
+        DB::table('products')->truncate();
+        DB::table('bussines')->truncate();
+
+        $this->authentication();
+
+        Bussine::factory()->create();
+        Product::factory()->create([
+            'code' => '0000000001'
+        ]);
+
+        Storage::fake('products');
+
+        $file = UploadedFile::fake()->image('avatar.jpg');
+
+        $response = $this->from(route('products.create'))
+            ->post(route('products.store'), [
+                'code' => '0000000001',
+                'name' => 'coca',
+                'description' => 'refresco',
+                'stock' => 10,
+                'alert_stock' => 2,
+                'cost' => 30.00,
+                'price' => 30.00,
+                'produserv_id' => 1,
+                'unit_id' => 1,
+                'image' => $file,
+                'is_active' => '0'
+            ]);
+            
+        $response->assertRedirect(route('products.create'))
+                ->assertSessionHas(['warning' => 'El codigo del producto ya esta en uso']);
+    }
+
     protected function authentication($bussine = 1)
     {
         DB::table('users')->truncate();

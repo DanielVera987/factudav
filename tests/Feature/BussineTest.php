@@ -116,6 +116,8 @@ class BussineTest extends TestCase
             'street' => 'Calle 41',
             'colony' => 'CTM',
             'zip' => '8888',
+            'folio' => 1,
+            'serie' => 'Factura-',
             'no_exterior' => '0',
             'no_inside' => '0',
             'certificate' => 'centificado',
@@ -157,6 +159,8 @@ class BussineTest extends TestCase
             'street' => 'Calle 41',
             'colony' => 'CTM',
             'zip' => '8888',
+            'folio' => 1,
+            'serie' => 'Factura-',
             'no_exterior' => '0',
             'no_inside' => '0',
             'certificate' => 'centificado',
@@ -750,7 +754,7 @@ class BussineTest extends TestCase
     function test_edit_company_user_relationship_with_currencies_and_taxies()
     {
         //$this->markTestIncomplete();
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
         DB::table('users')->truncate();
         DB::table('bussines')->truncate();
         
@@ -773,7 +777,7 @@ class BussineTest extends TestCase
 
         $file = UploadedFile::fake()->image('photo1.jpg');
 
-        $this->put(route('settings.update', $bussine->id), [
+        $re = $this->put(route('settings.update', $bussine->id), [
             'bussine_name' => 'danielvera',
             'tradename' => 'DavaDev',
             'rfc' => 'DAVA98762DA',
@@ -788,6 +792,8 @@ class BussineTest extends TestCase
             'street' => 'Calle 41',
             'colony' => 'CTM',
             'zip' => '8888',
+            'folio' => "1",
+            'serie' => 'Factura-',
             'no_exterior' => '0',
             'no_inside' => '0',
             'certificate' => 'centificado',
