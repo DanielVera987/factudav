@@ -24,9 +24,9 @@ class BussineRequest extends FormRequest
     public function rules()
     {
         return [
-            'bussine_name'      => 'required|string|max:255',
-            'tradename'         => 'required|string|max:255',
-            'rfc'               => 'required|string|max:255',
+            'bussine_name'      => 'required|string',
+            'tradename'         => 'required|string',
+            'rfc'               => 'required|string',
             'email'             => 'required|email',
             'telephone'         => 'required|numeric',
             'type_person'       => 'required|string',
@@ -34,12 +34,12 @@ class BussineRequest extends FormRequest
             'country_id'        => 'required|numeric',
             'state_id'          => 'required|numeric',       
             'municipality_id'   => 'required|numeric',
-            'location'          => 'required|string|max:255',
-            'street'            => 'required|string|max:255',      
-            'colony'            => 'required|string|max:255',
-            'zip'               => 'required|string|max:255',
-            'no_exterior'       => 'required|string|max:255',
-            'no_inside'         => 'required|string|max:255', 
+            'location'          => 'required|string',
+            'street'            => 'required|string',      
+            'colony'            => 'required|string',
+            'zip'               => 'required|string',
+            'no_exterior'       => 'required|string',
+            'no_inside'         => 'required|string', 
             'start_serie'       => 'string',          
             'start_folio'       => 'string',          
             'certificate'       => 'max:255', //file .cer

@@ -24,13 +24,13 @@ class ProductUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'code'          => ['required', 'string' ,'max:255'],
-            'name'          => ['required', 'string', 'max:255'], 
-            'description'   => ['required', 'string', 'max:255'],
-            'stock'         => ['required', 'numeric', 'max:255'],
-            'alert_stock'   => ['required', 'numeric', 'max:255'],
-            'cost'          => ['required', 'numeric', 'max:255'],
-            'price'         => ['required', 'numeric', 'max:255'],
+            'code'          => ['required', 'string'],
+            'name'          => ['required', 'string'], 
+            'description'   => ['required', 'string'],
+            'stock'         => ['required', 'numeric'],
+            'alert_stock'   => ['required', 'numeric'],
+            'cost'          => ['required', 'numeric'],
+            'price'         => ['required', 'numeric'],
             'produserv_id'  => ['required', 'numeric'],
             'unit_id'       => ['required', 'numeric'],
             'image'         => ['image'],

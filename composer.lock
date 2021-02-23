@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "010ab6587cb2f4a4b4d43f5b578a232b",
+    "content-hash": "d37ffdc299a1338f51c2373d1ba87586",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -390,6 +390,187 @@
                 }
             ],
             "time": "2020-11-24T19:55:57+00:00"
+        },
+        {
+            "name": "eclipxe/cfdiutils",
+            "version": "v2.14.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eclipxe13/CfdiUtils.git",
+                "reference": "64b8137bd10c64b415632d4d2bff1e1dac45f36d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eclipxe13/CfdiUtils/zipball/64b8137bd10c64b415632d4d2bff1e1dac45f36d",
+                "reference": "64b8137bd10c64b415632d4d2bff1e1dac45f36d",
+                "shasum": ""
+            },
+            "require": {
+                "eclipxe/xmlresourceretriever": "^1.3.0",
+                "eclipxe/xmlschemavalidator": "^2.0.2",
+                "ext-dom": "*",
+                "ext-iconv": "*",
+                "ext-json": "*",
+                "ext-libxml": "*",
+                "ext-mbstring": "*",
+                "ext-openssl": "*",
+                "ext-simplexml": "*",
+                "ext-soap": "*",
+                "ext-xsl": "*",
+                "php": ">=7.0",
+                "symfony/process": "^3.4|^4.2|^5.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.4",
+                "genkgo/xsl": "^0.6",
+                "phpstan/phpstan": "^0.9|^0.10|^0.11",
+                "phpunit/phpunit": "^6.2|^7.3",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "suggest": {
+                "genkgo/xsl": "Allows usage of Genkgo/Xsl transformations"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CfdiUtils\\": "src/CfdiUtils/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos C Soto",
+                    "email": "eclipxe13@gmail.com",
+                    "homepage": "http://eclipxe.com.mx/"
+                }
+            ],
+            "description": "PHP Common utilities for Mexican CFDI 3.2 & 3.3",
+            "homepage": "https://github.com/eclipxe13/CfdiUtils",
+            "keywords": [
+                "cfdi",
+                "cfdi33",
+                "electronic invoice",
+                "mexico"
+            ],
+            "support": {
+                "chat": "https://discord.gg/aFGYXvX",
+                "docs": "https://cfdiutils.readthedocs.io/",
+                "issues": "https://github.com/eclipxe13/CfdiUtils/issues",
+                "source": "https://github.com/eclipxe13/CfdiUtils"
+            },
+            "time": "2020-10-01T22:20:07+00:00"
+        },
+        {
+            "name": "eclipxe/xmlresourceretriever",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eclipxe13/XmlResourceRetriever.git",
+                "reference": "18ee1b1c755c00535075df9825a27afbf3c7ce47"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eclipxe13/XmlResourceRetriever/zipball/18ee1b1c755c00535075df9825a27afbf3c7ce47",
+                "reference": "18ee1b1c755c00535075df9825a27afbf3c7ce47",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-fileinfo": "*",
+                "ext-filter": "*",
+                "ext-xml": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.4",
+                "phpstan/phpstan": "^0.9|^0.10|^0.11|^0.12",
+                "phpunit/phpunit": "^6.2|^7.0",
+                "squizlabs/php_codesniffer": "^3.0",
+                "vimeo/psalm": "^3.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "XmlResourceRetriever\\": "src/XmlResourceRetriever/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos C Soto",
+                    "email": "eclipxe13@gmail.com",
+                    "homepage": "http://eclipxe.com.mx"
+                }
+            ],
+            "description": "XSD and XLST resource downloader for local storage",
+            "homepage": "https://github.com/eclipxe13/XmlResourceRetriever",
+            "support": {
+                "issues": "https://github.com/eclipxe13/XmlResourceRetriever/issues",
+                "source": "https://github.com/eclipxe13/XmlResourceRetriever/tree/master"
+            },
+            "time": "2020-01-09T00:47:02+00:00"
+        },
+        {
+            "name": "eclipxe/xmlschemavalidator",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eclipxe13/XmlSchemaValidator.git",
+                "reference": "add283790d140e485b5f3dc14d2ce6c7d944277d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eclipxe13/XmlSchemaValidator/zipball/add283790d140e485b5f3dc14d2ce6c7d944277d",
+                "reference": "add283790d140e485b5f3dc14d2ce6c7d944277d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.4",
+                "phpstan/phpstan": "^0.9|^0.10|^0.11",
+                "phpunit/phpunit": "^6.2|^7.3",
+                "squizlabs/php_codesniffer": "^3.0",
+                "vimeo/psalm": "^3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "XmlSchemaValidator\\": "src/XmlSchemaValidator/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Carlos C Soto",
+                    "email": "eclipxe13@gmail.com"
+                }
+            ],
+            "description": "PHP Library for XML Schema Validations",
+            "homepage": "https://github.com/eclipxe13/XmlSchemaValidator",
+            "keywords": [
+                "validation",
+                "xml",
+                "xmlschema",
+                "xsd"
+            ],
+            "support": {
+                "issues": "https://github.com/eclipxe13/XmlSchemaValidator/issues",
+                "source": "https://github.com/eclipxe13/XmlSchemaValidator/tree/master"
+            },
+            "time": "2020-04-05T18:20:44+00:00"
         },
         {
             "name": "egulias/email-validator",

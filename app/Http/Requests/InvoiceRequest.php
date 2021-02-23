@@ -27,11 +27,11 @@ class InvoiceRequest extends FormRequest
     {
         return [
             'serie'                     => ['required', 'string'],
-            'folio'                     => ['required', 'string', 'max:255', 'unique:invoices,folio'],
-            'way_to_pay_id'             => ['required', 'numeric', 'max:255'],
-            'currency_id'               => ['required', 'numeric', 'max:255'],
-            'payment_method_id'         => ['required', 'numeric', 'max:255'],
-            'usecfdi_id'                => ['required', 'numeric', 'max:255'],
+            'folio'                     => ['required', 'string', 'unique:invoices,folio'],
+            'way_to_pay_id'             => ['required', 'numeric'],
+            'currency_id'               => ['required', 'numeric'],
+            'payment_method_id'         => ['required', 'numeric'],
+            'usecfdi_id'                => ['required', 'numeric'],
             'date'                      => ['required', 'date_format:Y-m-d\TH:i:s'],
             'customer_id'               => ['required', 'numeric'],
             'detail'                    => ['required'],

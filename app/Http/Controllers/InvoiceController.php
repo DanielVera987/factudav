@@ -43,6 +43,8 @@ class InvoiceController extends Controller
      */
     public function create()
     {
+        $cfdi = new \CfdiUtils\Certificado\Certificado('');
+        dd($cfdi);
         $bussine_id =  Auth::user()->bussine_id;
         $serie = Bussine::select('start_serie')->find($bussine_id);
         $currencies = Currency::where('bussine_id',$bussine_id)->get();
