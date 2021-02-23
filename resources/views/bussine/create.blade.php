@@ -18,9 +18,14 @@
     <div class="x_title">
       <h2><i class="fa fa-institution"></i> Configuración General</h2>
       <div class="clearfix"></div>
-      @if(session()->has('message'))
+      @if(session()->has('success'))
         <div class="alert alert-success">
-            {{ session()->get('message') }}
+            {{ session()->get('success') }}
+        </div>
+      @endif
+      @if(session()->has('warning'))
+        <div class="alert alert-warning">
+            {{ session()->get('warning') }}
         </div>
       @endif
     </div>
@@ -283,7 +288,7 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="certificate">Certificado:</label>
-                  <input type="file" class="form-control @error('certificate') parsley-error @enderror" id="certificate" name="certificate" data-parsley-trigger="change" value="{{ old('centificate') }}"/>
+                  <input type="file" accept=".cer" class="form-control @error('certificate') parsley-error @enderror" id="certificate" name="certificate" data-parsley-trigger="change" value="{{ old('centificate') }}"/>
                   @error('certificate')
                     <span class="invalid-feedback red" role="alert">
                       <strong>{{ $message }}</strong>
@@ -293,7 +298,7 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="key_private">Llave Privada:</label>
-                  <input type="file" class="form-control @error('key_private') parsley-error @enderror" id="key_private" name="key_private" data-parsley-trigger="change" value="{{ old('key_private') }}"/>
+                  <input type="file" accept=".key" class="form-control @error('key_private') parsley-error @enderror" id="key_private" name="key_private" data-parsley-trigger="change" value="{{ old('key_private') }}"/>
                   @error('key_private')
                     <span class="invalid-feedback red" role="alert">
                       <strong>{{ $message }}</strong>
@@ -303,7 +308,7 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="password">Contraseña:</label>
-                  <input type="password" id="password" name="password" class="form-control @error('password') parsley-error @enderror" data-parsley-trigger="change" value="{{ old('password') }}"/>
+                  <input type="password"  id="password" name="password" class="form-control @error('password') parsley-error @enderror" data-parsley-trigger="change" value="{{ old('password') }}"/>
                   @error('password')
                     <span class="invalid-feedback red" role="alert">
                       <strong>{{ $message }}</strong>

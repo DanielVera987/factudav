@@ -42,8 +42,8 @@ class BussineRequest extends FormRequest
             'no_inside'         => 'required|string', 
             'start_serie'       => 'string',          
             'start_folio'       => 'string',          
-            'certificate'       => 'max:255', //file .cer
-            'key_private'       => 'max:255', //file .key
+            'certificate'       => 'max:2048', //file .cer
+            'key_private'       => 'max:2048', //file .key
             'password'          => 'max:255',
             'name_pac'          => 'max:255',
             'password_pac'      => 'max:255',

@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\BussineRequest;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class BussineController extends Controller
 {
@@ -136,8 +138,6 @@ class BussineController extends Controller
         $bussine->no_inside = $request->no_inside;
         $bussine->start_folio = $request->folio;
         $bussine->start_serie = $request->serie;
-        $bussine->certificate = $request->certificate;
-        $bussine->key_private = $request->key_private;
         $bussine->password = $request->password;
         $bussine->name_pac = $request->name_pac;
         $bussine->password_pac = $request->password_pac;
@@ -152,6 +152,17 @@ class BussineController extends Controller
             $bussine->logo = $nameFile;
         }
 
+        if ($request->hasFile('certificate') && $request->hasFile('key_private')) {
+            $nameFileCer = $this->uploadFileCer($request);
+            $nameFileKey = $this->uploadFileKey($request);
+
+            if(!$nameFileCer) return back()->with(['warning' => 'El campo Certificado debe ser un archivo de tipo .cer']);
+            if(!$nameFileKey) return back()->with(['warning' => 'El campo Llave Privada debe ser un archivo de tipo .key']);
+            
+            $bussine->key_private = $nameFileKey;
+            $bussine->certificate = $nameFileCer;
+        }
+
         $bussine->save();
 
         Currency::isCurrency($request, $id);
@@ -159,7 +170,6 @@ class BussineController extends Controller
 
         return redirect()->route('settings.edit', $id)->with('success', 'Datos Guardados');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -207,4 +217,28 @@ class BussineController extends Controller
             ? $bussine->id
             : redirect()->route('settings.create')->with('success', 'Error al guardar los datos');       
     }   
+
+    protected function uploadFileCer($request)
+    {
+        $ext = $request->file('certificate')->getClientOriginalExtension();
+        if ($ext != 'cer') return false;
+
+        $fileCer = $request->file('certificate');
+        $nameFileCer = time().'_'.$request->rfc;
+        Storage::disk('certificate')->put($nameFileCer, File::get($fileCer));
+
+        return $nameFileCer;
+    }
+
+    protected function uploadFileKey($request)
+    {
+        $ext = $request->file('key_private')->getClientOriginalExtension();
+        if ($ext != 'key') return false;
+
+        $fileKey = $request->file('key_private');
+        $nameFileKey = time().'_'.$request->rfc;
+        Storage::disk('key')->put($nameFileKey, File::get($fileKey));
+
+        return $nameFileKey;
+    }
 }

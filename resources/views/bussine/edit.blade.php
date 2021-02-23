@@ -24,6 +24,11 @@
             {{ session()->get('success') }}
         </div>
       @endif
+      @if(session()->has('warning'))
+        <div class="alert alert-warning">
+            {{ session()->get('warning') }}
+        </div>
+      @endif
     </div>
     <div class="x_content">
       <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -285,34 +290,47 @@
                   <hr>
                   <h4>Datos Para Timbrado</h4>
                 </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <label for="certificate">Certificado:</label>
-                  <input type="file" class="form-control @error('certificate') parsley-error @enderror" id="certificate" name="certificate" data-parsley-trigger="change" value="{{ $bussine->centificate }}"/>
-                  @error('certificate')
-                    <span class="invalid-feedback red" role="alert">
-                      <strong >{{ $message }}</strong>
-                    </span>
-                  @enderror
-                </div>
+                <div class="row">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <label for="certificate">Certificado:</label>
+                    <input type="file" accept=".cer" class="form-control @error('certificate') parsley-error @enderror" id="certificate" name="certificate" data-parsley-trigger="change" value="{{ $bussine->centificate }}"/>
+                    @if ($bussine->certificate != '' && $bussine->certificate)    
+                      <small class="text-small green">
+                        <strong>Certificado ya registrado</strong>
+                      </small>
+                    @endif
 
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <label for="key_private">Llave Privada:</label>
-                  <input type="file" class="form-control @error('key_private') parsley-error @enderror" id="key_private" name="key_private" data-parsley-trigger="change" value="{{ $bussine->key_private }}"/>
-                  @error('key_private')
-                    <span class="invalid-feedback red" role="alert">
-                      <strong >{{ $message }}</strong>
-                    </span>
-                  @enderror
-                </div>
+                    @error('certificate')
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
 
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <label for="password">Contraseña:</label>
-                  <input type="password" id="password" name="password" class="form-control @error('password') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
-                  @error('password')
-                    <span class="invalid-feedback red" role="alert">
-                      <strong >{{ $message }}</strong>
-                    </span>
-                  @enderror
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <label for="key_private">Llave Privada:</label>
+                    <input type="file" accept=".key" class="form-control @error('key_private') parsley-error @enderror" id="key_private" name="key_private" data-parsley-trigger="change" value="{{ $bussine->key_private }}"/>
+                    @if ($bussine->key_private != '' && $bussine->key_private)    
+                      <small class="text-small green">
+                        <strong>Llave privada ya registrado</strong>
+                      </small>
+                    @endif
+                    @error('key_private')
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
+
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" class="form-control @error('password') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->password }}"/>
+                    @error('password')
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
                 </div>
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
