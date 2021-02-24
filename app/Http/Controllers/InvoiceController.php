@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\InvoiceRequest;
+use Illuminate\Support\Facades\Storage;
 
 class InvoiceController extends Controller
 {
@@ -43,8 +44,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $cfdi = new \CfdiUtils\Certificado\Certificado('');
-        dd($cfdi);
+        $this->createCDFI();
         $bussine_id =  Auth::user()->bussine_id;
         $serie = Bussine::select('start_serie')->find($bussine_id);
         $currencies = Currency::where('bussine_id',$bussine_id)->get();
@@ -158,5 +158,74 @@ class InvoiceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function createCDFI()
+    {
+        $fileCer = Storage::disk('certificate')->get(Auth::user()->bussine->certificate);
+        $certificate = new \CfdiUtils\Certificado\Certificado($fileCer);
+
+        $attributesHeader = [
+            'Version' => "3.3",
+            'Serie',
+            'Folio',
+            'Fecha',
+            'FormaPago',
+            'NoCertificado',
+            'CondicionesDePago',
+            'SubTotal',
+            'Descuento',
+            'Moneda',
+            'TipoCambio',
+            'Total',
+            'TipoDeComprobante',
+            'MetodoPago',
+            'LugarExpedicion'
+        ];
+
+        $creator = new \CfdiUtils\CfdiCreator33($attributesHeader, $certificate);
+
+        $comprobante = $creator->comprobante();
+
+        $comprobante->addEmisor([
+            'Rfc',
+            'Nombre',
+            'RegimenFiscal',
+        ]);
+
+        $comprobante->addReceptor([
+            'Rfc',
+            'Nombre',
+            'UsoCFDI'
+        ]);
+
+        $comprobante->addConcepto([
+            'ClaveProdServ',
+            'Cantidad',
+            'ClaveUnidad',
+            'Unidad',
+            'Descripcion',
+            'ValorUnitario',
+            'Importe',
+            'Descuento',
+        ]);
+        
+        $comprobante->addTraslado([
+            'Base',
+            'Impuesto',
+            'TipoFactor',
+            'TasaOCuota',
+            'Importe'
+        ]);
+        
+        $comprobante->addRetencion([
+            'Base',
+            'Impuesto',
+            'TipoFactor',
+            'TasaOCuota',
+            'Importe'
+        ]);
+
+        dd($comprobante);
     }
 }

@@ -51,7 +51,9 @@ return [
 
         'certificate' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/csd_sat/cer')
+            'root' => storage_path('app/public/csd_sat/cer'),
+            'url' => env('APP_URL').'/storage/cer',
+            'visibility' => 'public',
         ],
 
         'key' => [

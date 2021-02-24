@@ -224,7 +224,7 @@ class BussineController extends Controller
         if ($ext != 'cer') return false;
 
         $fileCer = $request->file('certificate');
-        $nameFileCer = time().'_'.$request->rfc;
+        $nameFileCer = time().'_'.$request->rfc.'.cer';
         Storage::disk('certificate')->put($nameFileCer, File::get($fileCer));
 
         return $nameFileCer;
@@ -236,7 +236,7 @@ class BussineController extends Controller
         if ($ext != 'key') return false;
 
         $fileKey = $request->file('key_private');
-        $nameFileKey = time().'_'.$request->rfc;
+        $nameFileKey = time().'_'.$request->rfc.'.key';
         Storage::disk('key')->put($nameFileKey, File::get($fileKey));
 
         return $nameFileKey;
