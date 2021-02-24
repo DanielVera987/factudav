@@ -17,6 +17,9 @@ use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\InvoiceRequest;
+use App\Models\ProduServ;
+use App\Models\TaxRegimen;
+use App\Models\Unit;
 use Illuminate\Support\Facades\Storage;
 
 class InvoiceController extends Controller
@@ -44,7 +47,6 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $this->createCDFI();
         $bussine_id =  Auth::user()->bussine_id;
         $serie = Bussine::select('start_serie')->find($bussine_id);
         $currencies = Currency::where('bussine_id',$bussine_id)->get();
@@ -85,6 +87,8 @@ class InvoiceController extends Controller
         
         if ($existFolio > 0) return back()->with('warning', 'El folio ya esta en uso');
 
+        $this->createCDFI($request);
+
         $request['bussine_id'] = $bussine_id;
 
         $invoice = Invoice::create($request->all());
@@ -124,29 +128,7 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /* $request->validate([
-            'folio' => ['required', 'string', 'max:255', 'unique:invoices,folio'],
-            'way_to_pay' => ['required', 'numeric', 'max:255'],
-            'currency_id' => ['required', 'numeric', 'max:255'],
-            'payment_method_id' => ['required', 'numeric','max:255'],
-            'usecfdi_id' => ['required', 'numeric', 'max:255'],
-            'date' => ['required', 'date'],
-            'customer_id.*' => ['required', 'numeric'],
-            'product_id.*' => ['required', 'numeric'],
-            'prodserv_id.*' => ['required', 'numeric'],
-            'key_unit_id.*' => ['required', 'numeric'],
-            'description.*' => ['required', 'string', 'max:255'],
-            'quantity.*' => ['required', 'numeric'],
-            'discount.*' => ['required', 'numeric'],
-            'amount.*' => ['required', 'numeric']
-        ]);
-        $bussine_id = Auth::user()->bussine_id;
-
-        $invoices = Invoice::where('bussine_id', $bussine_id)->findOrFail($id);
-        $invoices->update($request->all());
- */
-        //programar en el modelo de detalles que actualice cada producto que se haya agregado
-        
+        //
     }
 
     /**
@@ -160,46 +142,24 @@ class InvoiceController extends Controller
         //
     }
 
-    protected function createCDFI()
+    protected function createCDFI($data)
     {
-        $fileCer = Storage::disk('certificate')->get(Auth::user()->bussine->certificate);
-        $certificate = new \CfdiUtils\Certificado\Certificado($fileCer);
+        $path = storage_path('app/public/csd_sat/cer');
+        $fileCer = Auth::user()->bussine->certificate;
+        $certificate = new \CfdiUtils\Certificado\Certificado($path.'/'.$fileCer);
 
-        $attributesHeader = [
-            'Version' => "3.3",
-            'Serie',
-            'Folio',
-            'Fecha',
-            'FormaPago',
-            'NoCertificado',
-            'CondicionesDePago',
-            'SubTotal',
-            'Descuento',
-            'Moneda',
-            'TipoCambio',
-            'Total',
-            'TipoDeComprobante',
-            'MetodoPago',
-            'LugarExpedicion'
-        ];
-
+        $attributesHeader = $this->preparedingHead($data);
         $creator = new \CfdiUtils\CfdiCreator33($attributesHeader, $certificate);
 
         $comprobante = $creator->comprobante();
 
-        $comprobante->addEmisor([
-            'Rfc',
-            'Nombre',
-            'RegimenFiscal',
-        ]);
+        $emitor = $this->preparedingEmitor();
+        $comprobante->addEmisor($emitor);
 
-        $comprobante->addReceptor([
-            'Rfc',
-            'Nombre',
-            'UsoCFDI'
-        ]);
+        $receptor = $this->preparedingReceptor($data);
+        $comprobante->addReceptor($receptor);
 
-        $comprobante->addConcepto([
+        $comprobante->multiTraslado([
             'ClaveProdServ',
             'Cantidad',
             'ClaveUnidad',
@@ -227,5 +187,77 @@ class InvoiceController extends Controller
         ]);
 
         dd($comprobante);
+    }
+
+    protected function preparedingHead($request)
+    {
+        $data = [];
+        $wayToPay = WayToPay::select('code')->find($request->way_to_pay_id);
+        $paymentMethod = PaymentMethod::select('code')->find($request->payment_method_id);
+        $zip = Auth::user()->bussine->zip;
+        $currency = Currency::select('code')->find($request->currency_id);
+
+        $data['Version'] = '3.3';
+        $data['Serie'] = $request->serie;
+        $data['Folio'] = $request->folio;
+        $data['Fecha'] = $request->date;
+        $data['FormaPago'] = $wayToPay->code;
+        $data['CondicionesDePago'] = '';
+        $data['SubTotal'] = '';
+        $data['Descuento'] = '';
+        $data['Moneda'] = $currency->code;
+        $data['TipoCambio'] = $currency->exchange_rate;
+        $data['Total'] = '';
+        $data['TipoDeComprobante'] = 'I';
+        $data['MetodoPago'] = $paymentMethod->code;
+        $data['LugarExpedicion'] = $zip;
+
+        return $data;
+    }
+
+    protected function preparedingEmitor()
+    {   
+        $data = [];
+        $regimen = TaxRegimen::select('code')->find(Auth::user()->bussine->taxregimen_id);
+        
+        $data['rfc'] = Auth::user()->bussine->rfc;
+        $data['Nombre'] = Auth::user()->bussine->bussine_name;
+        $data['RegimenFiscal'] = $regimen->code;
+        
+        return $data;
+    }
+
+    protected function preparedingReceptor($request)
+    {
+        $data = [];
+        $customerId = $request['customer_id'];
+        $customer = Customer::select('rfc', 'bussine_name', 'usecfdi_id')->find($customerId);
+        $code_usecfdi = Usecfdi::find($customer->usecfdi_id);
+
+        $data['Rfc'] = $customer->rfc;
+        $data['Nombre'] = $customer->bussine_name;
+        $data['UsoCFDI'] = $code_usecfdi->code;
+
+        return $data;
+    }
+
+    protected function preparedingConcepts($request)
+    {
+        $data = []; 
+        foreach ($request['detail'] as $key => $value) {
+            $codeProduct = ProduServ::select('code')->find($value['prodserv_id']);
+            $unidad = Unit::select('code', 'name')->find($value['unit_id']);
+
+            $data[$key] = [
+                'ClaveProdServ' => $codeProduct->code,
+                'Cantidad' => $request->quantity,
+                'ClaveUnidad' => $unidad->code,
+                'Unidad' => $unidad->name,
+                'Descripcion' => $request->description,
+                'ValorUnitario' => $request->amount,
+                'Importe' => $request->quantity * $request->amount,
+                'Descuento' => $request->discount,
+            ];
+        }
     }
 }
