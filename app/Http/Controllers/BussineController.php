@@ -170,6 +170,7 @@ class BussineController extends Controller
 
         return redirect()->route('settings.edit', $id)->with('success', 'Datos Guardados');
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -226,6 +227,7 @@ class BussineController extends Controller
         $fileCer = $request->file('certificate');
         $nameFileCer = time().'_'.$request->rfc.'.cer';
         Storage::disk('certificate')->put($nameFileCer, File::get($fileCer));
+        $this->createCertificatePem($nameFileCer);
 
         return $nameFileCer;
     }
@@ -238,7 +240,28 @@ class BussineController extends Controller
         $fileKey = $request->file('key_private');
         $nameFileKey = time().'_'.$request->rfc.'.key';
         Storage::disk('key')->put($nameFileKey, File::get($fileKey));
+        $this->createKeyPem($nameFileKey, $request->password);
 
         return $nameFileKey;
+    }
+
+    protected function createCertificatePem($nameFileCer)
+    {
+        $path = storage_path('app/public/csd_sat/cer');
+        
+        $cerFile = $path.'/'.$nameFileCer;
+        $cerFilePem = $path.'/'.$nameFileCer.'.pem';
+        
+        system('openssl x509 -inform DER -in ' . $cerFile . ' -outform PEM -pubkey -out ' . $cerFilePem);
+    }
+
+    protected function createKeyPem($nameFileKey, $password)
+    {
+        $path = storage_path('app/public/csd_sat/key');
+        
+        $KeyFile = $path.'/'.$nameFileKey;
+        $KeyFilePem = $path.'/'.$nameFileKey.'.pem';
+
+        system('openssl pkcs8 -inform DER -in ' . $KeyFile . ' -passin pass:' . $password . ' -outform PEM -out ' . $KeyFilePem);
     }
 }

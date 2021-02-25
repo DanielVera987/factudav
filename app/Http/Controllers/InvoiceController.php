@@ -24,6 +24,24 @@ use Illuminate\Support\Facades\Storage;
 
 class InvoiceController extends Controller
 {
+    /**
+     * Set total of register concept
+     * @var $TOTAL
+     */
+    private $TOTAL = 0;
+
+    /**
+     * Set subtotal of register concept
+     * @var $SUBTOTAL
+    */
+    private $SUBTOTAL = 0;
+
+    /**
+     * Set descuento of register concept
+     * @var $DESCUENTO
+     */
+    protected $DESCUENTO = 0;
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -142,6 +160,10 @@ class InvoiceController extends Controller
         //
     }
 
+    /**
+     * Create XML for CFDI33 
+     * @return \CfdiUtils\CfdiCreator33 
+     */
     protected function createCDFI($data)
     {
         $path = storage_path('app/public/csd_sat/cer');
@@ -159,36 +181,53 @@ class InvoiceController extends Controller
         $receptor = $this->preparedingReceptor($data);
         $comprobante->addReceptor($receptor);
 
-        $comprobante->multiTraslado([
-            'ClaveProdServ',
-            'Cantidad',
-            'ClaveUnidad',
-            'Unidad',
-            'Descripcion',
-            'ValorUnitario',
-            'Importe',
-            'Descuento',
-        ]);
+        $concepts = $this->preparedingConcepts($data);
+        foreach ($concepts as $concept) {
+            $comprobante->addConcepto([
+                'ClaveProdServ' => $concept['ClaveProdServ'],
+                'Cantidad'      => $concept['Cantidad'],
+                'ClaveUnidad'   => $concept['ClaveUnidad'],
+                'Unidad'        => $concept['Unidad'],
+                'Descripcion'   => $concept['Descripcion'],
+                'ValorUnitario' => $concept['ValorUnitario'],
+                'Importe'       => $concept['Importe'],
+                'Descuento'     => $concept['Descuento'],
+            ]);
         
-        $comprobante->addTraslado([
-            'Base',
-            'Impuesto',
-            'TipoFactor',
-            'TasaOCuota',
-            'Importe'
-        ]);
-        
-        $comprobante->addRetencion([
-            'Base',
-            'Impuesto',
-            'TipoFactor',
-            'TasaOCuota',
-            'Importe'
-        ]);
+            if (isset($concept['Impuestos']) && count($concept['Impuestos']) > 0) {
+                foreach($concept['Impuestos'] as $tax) {
+                    if($tax['Type'] == 'traslado') {
+                        $comprobante->addTraslado([
+                            'Base'       => $tax['Base'],
+                            'Impuesto'   => $tax['Impuesto'],
+                            'TipoFactor' => $tax['TipoFactor'],
+                            'TasaOCuota' => $tax['TasaOCuota'],
+                            'Importe'    => $tax['Importe']
+                        ]);
+                    }else{
+                        $comprobante->addRetencion([
+                            'Base'       => $tax['Base'],
+                            'Impuesto'   => $tax['Impuesto'],
+                            'TipoFactor' => $tax['TipoFactor'],
+                            'TasaOCuota' => $tax['TasaOCuota'],
+                            'Importe'    => $tax['Importe']
+                        ]);
+                    }
+                        
+                }
+            } 
+        }
 
+        $creator->addSello($path, Auth::user()->bussine->password);
+            
         dd($comprobante);
     }
 
+    /**
+     * Create Header for XML CFDI33
+     * ['Version', 'Serie', 'Folio', 'Fecha']...
+     * @return array
+     */
     protected function preparedingHead($request)
     {
         $data = [];
@@ -203,7 +242,7 @@ class InvoiceController extends Controller
         $data['Fecha'] = $request->date;
         $data['FormaPago'] = $wayToPay->code;
         $data['CondicionesDePago'] = '';
-        $data['SubTotal'] = '';
+        $data['SubTotal'] = $this->SUBTOTAL;
         $data['Descuento'] = '';
         $data['Moneda'] = $currency->code;
         $data['TipoCambio'] = $currency->exchange_rate;
@@ -215,6 +254,10 @@ class InvoiceController extends Controller
         return $data;
     }
 
+    /**
+     * Create Data of Emitor for CFDI33
+     * @return array
+     */
     protected function preparedingEmitor()
     {   
         $data = [];
@@ -227,6 +270,10 @@ class InvoiceController extends Controller
         return $data;
     }
 
+    /**
+     * Create Data of Receptor for CFDI33
+     * @return array
+     */
     protected function preparedingReceptor($request)
     {
         $data = [];
@@ -241,23 +288,51 @@ class InvoiceController extends Controller
         return $data;
     }
 
+    /**
+     * Create Data of Concepts for CFDI33
+     * @return array
+     */
     protected function preparedingConcepts($request)
     {
         $data = []; 
+        $taxes = [];
+        $subtotal = 0;
         foreach ($request['detail'] as $key => $value) {
             $codeProduct = ProduServ::select('code')->find($value['prodserv_id']);
             $unidad = Unit::select('code', 'name')->find($value['unit_id']);
 
+            $importe = $value['quantity'] * $value['amount'];
+            
+            if(isset($value['taxes'])){   
+                foreach ($value['taxes'] as $ky => $val) {
+                    $imp = $importe * $val['tasa'];
+                    $taxes[] = [
+                        'Base' => $importe,
+                        'Impuesto' => $val['code'],
+                        'TipoFactor' => $val['factor'],
+                        'TasaOCuota' => $val['tasa'],
+                        'Importe' => $imp,
+                        'Type' => $val['type']
+                    ];
+                }
+            }
+
             $data[$key] = [
                 'ClaveProdServ' => $codeProduct->code,
-                'Cantidad' => $request->quantity,
+                'Cantidad' => $value['quantity'],
                 'ClaveUnidad' => $unidad->code,
                 'Unidad' => $unidad->name,
-                'Descripcion' => $request->description,
-                'ValorUnitario' => $request->amount,
-                'Importe' => $request->quantity * $request->amount,
-                'Descuento' => $request->discount,
+                'Descripcion' => $value['description'],
+                'ValorUnitario' => $value['amount'],
+                'Importe' => $importe,
+                'Descuento' => $value['discount'],
+                'Impuestos' => $taxes
             ];
+
+            $subtotal += $importe;
         }
+        $this->SUBTOTAL = $subtotal;
+
+        return $data;
     }
 }
