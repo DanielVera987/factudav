@@ -40,7 +40,11 @@ class InvoiceController extends Controller
      * Set descuento of register concept
      * @var $DESCUENTO
      */
-    protected $DESCUENTO = 0;
+    protected $DISCOUNT = 0;
+
+    protected $SUM_TOTAL_TAXES_TRASLADADOS = 0;
+    
+    protected $SUM_TOTAL_TAXES_RETENIDOS = 0;
 
     public function __construct()
     {
@@ -174,18 +178,17 @@ class InvoiceController extends Controller
 
         $certificate = new \CfdiUtils\Certificado\Certificado($path.'/'.$fileCer);
 
+        $concepts = $this->preparedingConcepts($data);
         $attributesHeader = $this->preparedingHead($data);
-        $creator = new \CfdiUtils\CfdiCreator33($attributesHeader, $certificate);
-
-        $comprobante = $creator->comprobante();
-
         $emitor = $this->preparedingEmitor();
-        $comprobante->addEmisor($emitor);
-
         $receptor = $this->preparedingReceptor($data);
+        
+        $creator = new \CfdiUtils\CfdiCreator33($attributesHeader, $certificate);
+        
+        $comprobante = $creator->comprobante();
+        $comprobante->addEmisor($emitor);
         $comprobante->addReceptor($receptor);
 
-        $concepts = $this->preparedingConcepts($data);
         foreach ($concepts as $concept) {
             $comprobante->addConcepto([
                 'ClaveProdServ' => $concept['ClaveProdServ'],
@@ -226,15 +229,11 @@ class InvoiceController extends Controller
         $creator->addSello($filePem, Auth::user()->bussine->password);
 
         $asserts = $creator->validate();
-        $asserts->hasErrors(); // contiene si hay o no errores
-
-        // método de ayuda para generar el xml y guardar los contenidos en un archivo
+        $asserts->hasErrors();
+        
         $fileXml = $creator->saveXml(public_path('storage/invoicexml/PRUEBA.xml'));
-        dd($fileXml);
-        Storage::disk('xml')->put('prueba.xml', $fileXml);
-        //$creator->saveXml(storage_path('app/public/invoicesxml/'));
-            
         dd($asserts);
+            
     }
 
     /**
@@ -257,7 +256,7 @@ class InvoiceController extends Controller
         $data['FormaPago'] = $wayToPay->code;
         $data['CondicionesDePago'] = '';
         $data['SubTotal'] = $this->SUBTOTAL;
-        $data['Descuento'] = '';
+        $data['Descuento'] = $this->DISCOUNT;
         $data['Moneda'] = $currency->code;
         $data['TipoCambio'] = $currency->exchange_rate;
         $data['Total'] = '';
@@ -311,6 +310,8 @@ class InvoiceController extends Controller
         $data = []; 
         $taxes = [];
         $subtotal = 0;
+        $total = 0;
+        $discount = 0;
         foreach ($request['detail'] as $key => $value) {
             $codeProduct = ProduServ::select('code')->find($value['prodserv_id']);
             $unidad = Unit::select('code', 'name')->find($value['unit_id']);
@@ -318,10 +319,20 @@ class InvoiceController extends Controller
             $importe = $value['quantity'] * $value['amount'];
             
             if(isset($value['taxes'])){   
+                $trasladoPrevious = 0;
+                $bandera = false;
                 foreach ($value['taxes'] as $ky => $val) {
+                    
+                    //$imp = ($trasladoPrevious && $bandera) ?  : ;
                     $imp = $importe * $val['tasa'];
+
+                    if($value['code'] == '002' && $value['type'] == 'traslado') 
+                        $trasladoPrevious = $imp;
+                        $bandera = true;
+                    }
+
                     $taxes[] = [
-                        'Base' => $importe,
+                        'Base' => number_format($importe, 2, '.', ''),
                         'Impuesto' => $val['code'],
                         'TipoFactor' => $val['factor'],
                         'TasaOCuota' => $val['tasa'],
@@ -343,9 +354,12 @@ class InvoiceController extends Controller
                 'Impuestos' => $taxes
             ];
 
+            $discount += $value['discount'];
             $subtotal += $importe;
         }
-        $this->SUBTOTAL = $subtotal;
+
+        $this->SUBTOTAL = bcdiv($subtotal, '1', 2);
+        $this->DISCOUNT = bcdiv($discount, '1', 2);
 
         return $data;
     }

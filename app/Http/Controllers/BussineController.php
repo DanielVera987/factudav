@@ -247,6 +247,7 @@ class BussineController extends Controller
 
     protected function createCertificatePem($nameFileCer)
     {
+        return true;
         $path = storage_path('app/public/csd_sat/cer');
         
         $cerFile = $path.'/'.$nameFileCer;
@@ -257,6 +258,7 @@ class BussineController extends Controller
 
     protected function createKeyPem($nameFileKey, $password)
     {
+        return true;
         $path = storage_path('app/public/csd_sat/key');
         
         $KeyFile = $path.'/'.$nameFileKey;
