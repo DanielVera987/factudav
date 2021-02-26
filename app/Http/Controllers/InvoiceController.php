@@ -167,7 +167,11 @@ class InvoiceController extends Controller
     protected function createCDFI($data)
     {
         $path = storage_path('app/public/csd_sat/cer');
+        $pathkey = storage_path('app/public/csd_sat/key');
+
         $fileCer = Auth::user()->bussine->certificate;
+        $fileKey = Auth::user()->bussine->key_private;
+
         $certificate = new \CfdiUtils\Certificado\Certificado($path.'/'.$fileCer);
 
         $attributesHeader = $this->preparedingHead($data);
@@ -218,9 +222,19 @@ class InvoiceController extends Controller
             } 
         }
 
-        $creator->addSello($path, Auth::user()->bussine->password);
+        $filePem = Storage::disk('key')->get($fileKey.'.pem');
+        $creator->addSello($filePem, Auth::user()->bussine->password);
+
+        $asserts = $creator->validate();
+        $asserts->hasErrors(); // contiene si hay o no errores
+
+        // método de ayuda para generar el xml y guardar los contenidos en un archivo
+        $fileXml = $creator->saveXml(public_path('storage/invoicexml/PRUEBA.xml'));
+        dd($fileXml);
+        Storage::disk('xml')->put('prueba.xml', $fileXml);
+        //$creator->saveXml(storage_path('app/public/invoicesxml/'));
             
-        dd($comprobante);
+        dd($asserts);
     }
 
     /**
