@@ -231,9 +231,8 @@ class InvoiceController extends Controller
         $asserts = $creator->validate();
         $asserts->hasErrors();
         
-        $fileXml = $creator->saveXml(public_path('storage/invoicexml/PRUEBA.xml'));
-        dd($asserts);
-            
+        $creator->saveXml(public_path('storage/invoicexml/PRUEBA.xml'));
+        dd($comprobante);    
     }
 
     /**
@@ -259,7 +258,7 @@ class InvoiceController extends Controller
         $data['Descuento'] = $this->DISCOUNT;
         $data['Moneda'] = $currency->code;
         $data['TipoCambio'] = $currency->exchange_rate;
-        $data['Total'] = '';
+        $data['Total'] = $this->TOTAL;
         $data['TipoDeComprobante'] = 'I';
         $data['MetodoPago'] = $paymentMethod->code;
         $data['LugarExpedicion'] = $zip;
@@ -310,8 +309,11 @@ class InvoiceController extends Controller
         $data = []; 
         $taxes = [];
         $subtotal = 0;
+        $totalTaxTrasladado = 0;
+        $totalTaxRetenido = 0;
         $total = 0;
         $discount = 0;
+
         foreach ($request['detail'] as $key => $value) {
             $codeProduct = ProduServ::select('code')->find($value['prodserv_id']);
             $unidad = Unit::select('code', 'name')->find($value['unit_id']);
@@ -320,15 +322,17 @@ class InvoiceController extends Controller
             
             if(isset($value['taxes'])){   
                 $trasladoPrevious = 0;
-                $bandera = false;
+
                 foreach ($value['taxes'] as $ky => $val) {
                     
-                    //$imp = ($trasladoPrevious && $bandera) ?  : ;
                     $imp = $importe * $val['tasa'];
 
-                    if($value['code'] == '002' && $value['type'] == 'traslado') 
-                        $trasladoPrevious = $imp;
-                        $bandera = true;
+                    if($val['type'] == 'traslado') {
+                        if ($val['code'] == '002' ) $trasladoPrevious = $imp;
+                        $totalTaxTrasladado += $imp;
+                    } elseif($val['type'] == 'retenido') {
+                        if ($val['code'] == '003') $imp = ($trasladoPrevious * 2) / 3;
+                        $totalTaxRetenido += $imp;
                     }
 
                     $taxes[] = [
@@ -360,6 +364,9 @@ class InvoiceController extends Controller
 
         $this->SUBTOTAL = bcdiv($subtotal, '1', 2);
         $this->DISCOUNT = bcdiv($discount, '1', 2);
+        $this->SUM_TOTAL_TAXES_TRASLADADOS = bcdiv($totalTaxTrasladado, '1', 2);
+        $this->SUM_TOTAL_TAXES_RETENIDOS = bcdiv($totalTaxRetenido, '1', 2);
+        $this->TOTAL = $subtotal - $discount - $totalTaxRetenido + $totalTaxTrasladado;
 
         return $data;
     }
