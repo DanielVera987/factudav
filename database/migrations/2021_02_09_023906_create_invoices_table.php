@@ -40,6 +40,8 @@ class CreateInvoicesTable extends Migration
             $table->foreignId('usecfdi_id')
                 ->references('id')
                 ->on('usecfis');
+
+            $table->string('name_file');
                 
             $table->string('date');
             $table->timestamps();

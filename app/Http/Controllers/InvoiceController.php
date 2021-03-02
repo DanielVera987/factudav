@@ -109,9 +109,11 @@ class InvoiceController extends Controller
         
         if ($existFolio > 0) return back()->with('warning', 'El folio ya esta en uso');
 
-        $this->createCDFI($request);
+        $unsignedXml = $this->createCDFI($request);
+        if (!$unsignedXml) return back()->with('warning', 'Se genero un error al procesar el XML, Intentalo de nuevo');
 
         $request['bussine_id'] = $bussine_id;
+        $request['name_file'] = $unsignedXml;
 
         $invoice = Invoice::create($request->all());
         Detail::createDetail($invoice->id, $request);
@@ -170,38 +172,75 @@ class InvoiceController extends Controller
      */
     protected function createCDFI($data)
     {
-        $path = storage_path('app/public/csd_sat/cer');
-        $pathkey = storage_path('app/public/csd_sat/key');
+        try {
+            $path = storage_path('app/public/csd_sat/cer');
+            $pathkey = storage_path('app/public/csd_sat/key');
 
-        $fileCer = Auth::user()->bussine->certificate;
-        $fileKey = Auth::user()->bussine->key_private;
+            $fileCer = Auth::user()->bussine->certificate;
+            $fileKey = Auth::user()->bussine->key_private;
 
-        $certificate = new \CfdiUtils\Certificado\Certificado($path.'/'.$fileCer);
+            $certificate = new \CfdiUtils\Certificado\Certificado($path.'/'.$fileCer);
 
-        $concepts = $this->preparedingConcepts($data);
-        $attributesHeader = $this->preparedingHead($data);
-        $emitor = $this->preparedingEmitor();
-        $receptor = $this->preparedingReceptor($data);
-        
-        $creator = new \CfdiUtils\CfdiCreator33($attributesHeader, $certificate);
-        
-        $comprobante = $creator->comprobante();
-        $comprobante->addEmisor($emitor);
-        $comprobante->addReceptor($receptor);
+            /** Preparando los datos para la creacion del XML */
+            $concepts = $this->preparedingConcepts($data);
+            $attributesHeader = $this->preparedingHead($data);
+            $emitor = $this->preparedingEmitor();
+            $receptor = $this->preparedingReceptor($data);
 
-        foreach ($concepts as $concept) {
-            $comprobante->addConcepto([
-                'ClaveProdServ' => $concept['ClaveProdServ'],
-                'Cantidad'      => $concept['Cantidad'],
-                'ClaveUnidad'   => $concept['ClaveUnidad'],
-                'Unidad'        => $concept['Unidad'],
-                'Descripcion'   => $concept['Descripcion'],
-                'ValorUnitario' => $concept['ValorUnitario'],
-                'Importe'       => $concept['Importe'],
-                'Descuento'     => $concept['Descuento'],
-            ]);
-        
+            $creator = new \CfdiUtils\CfdiCreator33($attributesHeader, $certificate);
+            
+            $comprobante = $creator->comprobante();
+            $comprobante->addEmisor($emitor);
+            $comprobante->addReceptor($receptor);
+
+            /** Crear Conceptos con sus respectivos Impuestos */
+            foreach ($concepts as $concept) {
+                $conceptos = $comprobante->addConcepto([
+                    'ClaveProdServ' => $concept['ClaveProdServ'],
+                    'Cantidad'      => $concept['Cantidad'],
+                    'ClaveUnidad'   => $concept['ClaveUnidad'],
+                    'Unidad'        => $concept['Unidad'],
+                    'Descripcion'   => $concept['Descripcion'],
+                    'ValorUnitario' => $concept['ValorUnitario'],
+                    'Importe'       => $concept['Importe'],
+                    'Descuento'     => $concept['Descuento'],
+                ]);
+            
+                if (isset($concept['Impuestos']) && count($concept['Impuestos']) > 0) {
+                    foreach($concept['Impuestos'] as $tax) {
+                        if($tax['Type'] == 'traslado') {
+                            $conceptos->addTraslado([
+                                'Base'       => $tax['Base'],
+                                'Impuesto'   => $tax['Impuesto'],
+                                'TipoFactor' => $tax['TipoFactor'],
+                                'TasaOCuota' => $tax['TasaOCuota'],
+                                'Importe'    => $tax['Importe']
+                            ]);
+                        }else{
+                            $conceptos->addRetencion([
+                                'Base'       => $tax['Base'],
+                                'Impuesto'   => $tax['Impuesto'],
+                                'TipoFactor' => $tax['TipoFactor'],
+                                'TasaOCuota' => $tax['TasaOCuota'],
+                                'Importe'    => $tax['Importe']
+                            ]);
+                        }
+                            
+                    }
+                } 
+            }
+
+            /** Crear Impuestos en el comprobante */
             if (isset($concept['Impuestos']) && count($concept['Impuestos']) > 0) {
+                $impuestosCfdi = [];
+                if($this->SUM_TOTAL_TAXES_TRASLADADOS != 0){
+                    $impuestosCfdi['TotalImpuestosTrasladados'] = $this->SUM_TOTAL_TAXES_TRASLADADOS;
+                }
+                if($this->SUM_TOTAL_TAXES_RETENIDOS != 0){
+                    $impuestosCfdi['TotalImpuestosRetenidos'] = $this->SUM_TOTAL_TAXES_RETENIDOS;
+                }
+
+                $comprobante->addImpuestos($impuestosCfdi);
                 foreach($concept['Impuestos'] as $tax) {
                     if($tax['Type'] == 'traslado') {
                         $comprobante->addTraslado([
@@ -223,16 +262,20 @@ class InvoiceController extends Controller
                         
                 }
             } 
+
+            $filePem = Storage::disk('key')->get($fileKey.'.pem');
+            $creator->addSello($filePem, Auth::user()->bussine->password);
+
+            $asserts = $creator->validate();
+            $asserts->hasErrors();
+            
+            /** Nombre de archivo no timbrado */
+            $fileName = time() . '_' . Auth::user()->bussine->rfc . '_UNSIGNED.xml'; 
+            $creator->saveXml(public_path('storage/invoicexml/' . $fileName));
+            return $fileName; 
+        } catch (\Throwable $err) {
+            return false;
         }
-
-        $filePem = Storage::disk('key')->get($fileKey.'.pem');
-        $creator->addSello($filePem, Auth::user()->bussine->password);
-
-        $asserts = $creator->validate();
-        $asserts->hasErrors();
-        
-        $creator->saveXml(public_path('storage/invoicexml/PRUEBA.xml'));
-        dd($comprobante);    
     }
 
     /**

@@ -422,6 +422,7 @@
                       <thead>
                         <tr>
                           <th>Nombre</th>
+                          <th>Impuesto</th>
                           <th>Tasa</th>
                           <th>Tipo factor</th>
                           <th>Tipo</th>
@@ -435,6 +436,10 @@
                             IVA
                           </td>
                           <td>
+                            <input type="hidden" name="tax_tax[]" value="iva">
+                            iva
+                          </td>
+                          <td>
                             <input type="hidden" name="tasa_tax[]" value="0.16">
                             0.16
                           </td>
@@ -446,8 +451,6 @@
                             <input type="hidden" name="type_tax[]" value="traslado">
                             traslado
                           </td>
-                            <input type="hidden" name="tax_tax[]" value="iva">
-                            iva
                           <td>
                             <button type="button" class="btn btn-sm btn-danger" onclick="delete_tax(this)"><i class="fa fa-trash-o"></i></button>
                           </td>
@@ -458,6 +461,10 @@
                             IVA RETENIDO
                           </td>
                           <td>
+                            <input type="hidden" name="tax_tax[]" value="iva">
+                            iva
+                          </td>
+                          <td>
                             <input type="hidden" name="tasa_tax[]" value="0.10">
                             0.10
                           </td>
@@ -469,8 +476,6 @@
                             <input type="hidden" name="type_tax[]" value="retenido">
                             retenido
                           </td>
-                            <input type="hidden" name="tax_tax[]" value="iva">
-                            iva
                           <td>
                             <button type="button" class="btn btn-sm btn-danger" onclick="delete_tax(this)"><i class="fa fa-trash-o"></i></button>
                           </td>
@@ -481,6 +486,10 @@
                             ISR
                           </td>
                           <td>
+                            <input type="hidden" name="tax_tax[]" value="isr">
+                            isr
+                          </td>
+                          <td>
                             <input type="hidden" name="tasa_tax[]" value="0.10">
                             0.10
                           </td>
@@ -492,8 +501,6 @@
                             <input type="hidden" name="type_tax[]" value="retenido">
                             retenido
                           </td>
-                            <input type="hidden" name="tax_tax[]" value="isr">
-                            isr
                           <td>
                             <button type="button" class="btn btn-sm btn-danger" onclick="delete_tax(this)"><i class="fa fa-trash-o"></i></button>
                           </td>

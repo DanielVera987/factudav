@@ -19,6 +19,7 @@ class Invoice extends Model
         'usecfdi_id',
         'date',
         'customer_id',
+        'name_file'
     ];
 
     public function bussine() 

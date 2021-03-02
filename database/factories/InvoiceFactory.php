@@ -29,6 +29,7 @@ class InvoiceFactory extends Factory
             'currency_id' => $this->faker->randomDigit(),
             'payment_method_id' => $this->faker->randomDigit(),
             'usecfdi_id' => $this->faker->randomDigit(),
+            'name_file' => $this->faker->word().'.xml',
             'date' => $this->faker->dateTime(),
         ];
     }
