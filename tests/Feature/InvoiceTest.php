@@ -51,6 +51,7 @@ class InvoiceTest extends TestCase
             'usecfdi_id' => 1,
             'date' => '2020-02-21T01:18:00',
             'customer_id' => 1,
+            'name_file' => 'name_file.xml'
         ]);
 
         $folio = Invoice::generateFolio();
@@ -84,6 +85,7 @@ class InvoiceTest extends TestCase
             'usecfdi_id' => 1,
             'date' => '2020-02-21T01:18:00',
             'customer_id' => 1,
+            'name_file' => 'name_file.xml'
         ]);
 
         $this->authentication();
@@ -125,7 +127,7 @@ class InvoiceTest extends TestCase
     
     public function test_create_invoice()
     {
-        //$this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         DB::table('invoices')->truncate();
         Product::factory(10)->create();
 
@@ -151,10 +153,12 @@ class InvoiceTest extends TestCase
                     'quantity' => 1,
                     'taxes' => [
                         0 => [
-                            'type' => 1,
-                            'factor' => 1,
-                            'tax' => 1,
-                            'id' => 1
+                            "type" => "traslado",
+                            "factor" => "Tasa",
+                            "tasa" => "0.16",
+                            "tax" => "iva",
+                            "code" => "002",
+                            "id" => "1"
                         ]
                     ]
                 ]

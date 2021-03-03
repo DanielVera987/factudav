@@ -61,13 +61,6 @@ class BussineController extends Controller
      */
     public function store(BussineRequest $request)
     {
-        if ($request->hasFile('logo')) {
-            $file = $request->file('logo');
-            $nameFile = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path('images/logos'), $nameFile);
-            $request->logo = $nameFile;
-        }
-
         $bussineId = $this->createBussine($request);
 
         Auth::user()->bussine_id = $bussineId;
@@ -211,11 +204,12 @@ class BussineController extends Controller
         $bussine->logo = $request->logo;
 
         if ($request->hasFile('logo')) {
-            $nameImgPrevius = $bussine->logo;
-            unlink(public_path() . '/images/logos/' . $nameImgPrevius);
+            /* $nameImgPrevius = $bussine->logo;
+            unlink(public_path() . '/images/logos/' . $nameImgPrevius); */
 
             $file = $request->file('logo');
             $nameFile = time().'_'.$file->getClientOriginalName();
+            
             $file->move(public_path('images/logos'), $nameFile);
             $bussine->logo = $nameFile;
         }

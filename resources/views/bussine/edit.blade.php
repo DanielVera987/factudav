@@ -554,9 +554,9 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
               <label for="factor_tax_modal">Factor * <small>(ejemplo: traslado o retenido)</small></label>
               <select id="factor_tax_modal" class="form-control" data-parsley-trigger="change">
-                <option value="tasa">Tasa</option>
-                <option value="cuota">Cuota</option>
-                <option value="exento">Exento</option>
+                <option value="Tasa">Tasa</option>
+                <option value="Cuota">Cuota</option>
+                <option value="Exento">Exento</option>
               </select>
             </div>
 

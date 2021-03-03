@@ -112,7 +112,7 @@ class InvoiceController extends Controller
         $unsignedXml = $this->createCDFI($request);
         if (!$unsignedXml) return back()->with('warning', 'Se genero un error al procesar el XML, Intentalo de nuevo');
         
-        dd($unsignedXml);
+        //dd($unsignedXml);
         $request['bussine_id'] = $bussine_id;
         $request['name_file'] = $unsignedXml;
 
@@ -200,7 +200,7 @@ class InvoiceController extends Controller
                     'ClaveProdServ' => $concept['ClaveProdServ'],
                     'Cantidad'      => $concept['Cantidad'],
                     'ClaveUnidad'   => $concept['ClaveUnidad'],
-                    'Unidad'        => $concept['Unidad'],
+                    //'Unidad'        => $concept['Unidad'],
                     'Descripcion'   => $concept['Descripcion'],
                     'ValorUnitario' => $concept['ValorUnitario'],
                     'Importe'       => $concept['Importe'],
@@ -245,7 +245,7 @@ class InvoiceController extends Controller
                 foreach($concept['Impuestos'] as $tax) {
                     if($tax['Type'] == 'traslado') {
                         $comprobante->addTraslado([
-                            'Base'       => $tax['Base'],
+                            //'Base'       => $tax['Base'],
                             'Impuesto'   => $tax['Impuesto'],
                             'TipoFactor' => $tax['TipoFactor'],
                             'TasaOCuota' => $tax['TasaOCuota'],
@@ -253,10 +253,10 @@ class InvoiceController extends Controller
                         ]);
                     }else{
                         $comprobante->addRetencion([
-                            'Base'       => $tax['Base'],
+                            //'Base'       => $tax['Base'],
                             'Impuesto'   => $tax['Impuesto'],
-                            'TipoFactor' => $tax['TipoFactor'],
-                            'TasaOCuota' => $tax['TasaOCuota'],
+                            //'TipoFactor' => $tax['TipoFactor'],
+                            //'TasaOCuota' => $tax['TasaOCuota'],
                             'Importe'    => $tax['Importe']
                         ]);
                     }
@@ -268,12 +268,22 @@ class InvoiceController extends Controller
             $creator->addSello($filePem, Auth::user()->bussine->password);
 
             $asserts = $creator->validate();
-            $asserts->hasErrors();
+            if ($asserts->hasErrors()) {
+                $err = [];
+                foreach ($asserts->errors() as $error) {
+                    $err[] = [
+                        $error->getCode(),
+                        $error->getStatus(),
+                        $error->getTitle(),
+                        $error->getExplanation(),
+                    ];
+                } 
+            }
             
             /** Nombre de archivo no timbrado */
             $fileName = time() . '_' . Auth::user()->bussine->rfc . '_UNSIGNED.xml'; 
             $creator->saveXml(public_path('storage/invoicexml/' . $fileName));
-            dd($fileName);
+            //dd($fileName);
             return $fileName; 
         /* } catch (\Throwable $err) {
             return false;
@@ -298,7 +308,7 @@ class InvoiceController extends Controller
         $data['Folio'] = $request->folio;
         $data['Fecha'] = $request->date;
         $data['FormaPago'] = $wayToPay->code;
-        $data['CondicionesDePago'] = '';
+        $data['CondicionesDePago'] = '0';
         $data['SubTotal'] = $this->SUBTOTAL;
         $data['Descuento'] = $this->DISCOUNT;
         $data['Moneda'] = $currency->code;
@@ -320,7 +330,7 @@ class InvoiceController extends Controller
         $data = [];
         $regimen = TaxRegimen::select('code')->find(Auth::user()->bussine->taxregimen_id);
         
-        $data['rfc'] = Auth::user()->bussine->rfc;
+        $data['Rfc'] = Auth::user()->bussine->rfc;
         $data['Nombre'] = Auth::user()->bussine->bussine_name;
         $data['RegimenFiscal'] = $regimen->code;
         
@@ -384,8 +394,8 @@ class InvoiceController extends Controller
                         'Base' => number_format($importe, 2, '.', ''),
                         'Impuesto' => $val['code'],
                         'TipoFactor' => $val['factor'],
-                        'TasaOCuota' => $val['tasa'],
-                        'Importe' => $imp,
+                        'TasaOCuota' => bcdiv($val['tasa'], '1', 6),
+                        'Importe' => bcdiv($imp, '1', 2),
                         'Type' => $val['type']
                     ];
                 }
@@ -395,7 +405,7 @@ class InvoiceController extends Controller
                 'ClaveProdServ' => $codeProduct->code,
                 'Cantidad' => $value['quantity'],
                 'ClaveUnidad' => $unidad->code,
-                'Unidad' => $unidad->name,
+                //'Unidad' => $unidad->name,
                 'Descripcion' => $value['description'],
                 'ValorUnitario' => $value['amount'],
                 'Importe' => $importe,

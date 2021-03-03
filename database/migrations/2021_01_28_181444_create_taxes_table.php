@@ -22,7 +22,7 @@ class CreateTaxesTable extends Migration
             $table->set('code', ['001', '002', '003']);
             $table->set('tax', ['isr', 'iva', 'ieps']);
             $table->set('type', ['traslado', 'retenido']);
-            $table->set('factor', ['tasa', 'cuota', 'exento']);
+            $table->set('factor', ['Tasa', 'Cuota', 'Exento']);
             $table->string('tasa');
             $table->timestamps();
         });
