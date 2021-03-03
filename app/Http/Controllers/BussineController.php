@@ -209,6 +209,28 @@ class BussineController extends Controller
         $bussine->name_pac = $request->name_pac;
         $bussine->password_pac = $request->password_pac;
         $bussine->logo = $request->logo;
+
+        if ($request->hasFile('logo')) {
+            $nameImgPrevius = $bussine->logo;
+            unlink(public_path() . '/images/logos/' . $nameImgPrevius);
+
+            $file = $request->file('logo');
+            $nameFile = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('images/logos'), $nameFile);
+            $bussine->logo = $nameFile;
+        }
+
+        if ($request->hasFile('certificate') && $request->hasFile('key_private')) {
+            $nameFileCer = $this->uploadFileCer($request);
+            $nameFileKey = $this->uploadFileKey($request);
+
+            if(!$nameFileCer) return back()->with(['warning' => 'El campo Certificado debe ser un archivo de tipo .cer']);
+            if(!$nameFileKey) return back()->with(['warning' => 'El campo Llave Privada debe ser un archivo de tipo .key']);
+            
+            $bussine->key_private = $nameFileKey;
+            $bussine->certificate = $nameFileCer;
+        }
+
         $result = $bussine->save();
 
         Currency::isCurrency($request, $bussine->id);

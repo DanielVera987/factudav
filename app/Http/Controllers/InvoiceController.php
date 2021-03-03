@@ -104,14 +104,15 @@ class InvoiceController extends Controller
     {   
         $bussine_id = Auth::user()->bussine_id;
         $existFolio = Invoice::where('bussine_id', $bussine_id)
-                        ->where('folio', intval($request['folio']))
-                        ->count();
+        ->where('folio', intval($request['folio']))
+        ->count();
         
         if ($existFolio > 0) return back()->with('warning', 'El folio ya esta en uso');
-
+        
         $unsignedXml = $this->createCDFI($request);
         if (!$unsignedXml) return back()->with('warning', 'Se genero un error al procesar el XML, Intentalo de nuevo');
-
+        
+        dd($unsignedXml);
         $request['bussine_id'] = $bussine_id;
         $request['name_file'] = $unsignedXml;
 
@@ -172,7 +173,7 @@ class InvoiceController extends Controller
      */
     protected function createCDFI($data)
     {
-        try {
+        //try {
             $path = storage_path('app/public/csd_sat/cer');
             $pathkey = storage_path('app/public/csd_sat/key');
 
@@ -272,10 +273,11 @@ class InvoiceController extends Controller
             /** Nombre de archivo no timbrado */
             $fileName = time() . '_' . Auth::user()->bussine->rfc . '_UNSIGNED.xml'; 
             $creator->saveXml(public_path('storage/invoicexml/' . $fileName));
+            dd($fileName);
             return $fileName; 
-        } catch (\Throwable $err) {
+        /* } catch (\Throwable $err) {
             return false;
-        }
+        } */
     }
 
     /**
