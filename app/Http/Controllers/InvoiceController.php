@@ -51,6 +51,7 @@ class InvoiceController extends Controller
         $this->middleware('auth');
         $this->middleware('bussine.complete');
     }
+    
     /**
      * Display a listing of the resource.
      *

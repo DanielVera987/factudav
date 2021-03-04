@@ -134,6 +134,26 @@ class BussineTest extends TestCase
         ]);
     }
 
+    function test_create_company_with_certificate_and_key(){
+        $this->markTestIncomplete();
+    }
+
+    function test_uploadFileCer(){
+        $this->markTestIncomplete();
+    }
+
+    function test_uploadFileKey(){
+        $this->markTestIncomplete();
+    }
+
+    function test_createCertificatePem(){
+        $this->markTestIncomplete();
+    }
+
+    function test_createKeyPem(){
+        $this->markTestIncomplete();
+    }
+
     function test_edit_company_user_relationship()
     {
         //$this->markTestIncomplete();

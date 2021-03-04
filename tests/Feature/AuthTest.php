@@ -31,6 +31,7 @@ class AuthTest extends TestCase
 
     function test_singup_raiz_form()
     {
+        $this->withExceptionHandling();
         User::create([
             'name' => 'daniel vera',
             'email' => 'danielveraangulo703@gmail.com',

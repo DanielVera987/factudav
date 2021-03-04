@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\Unit;
 use App\Models\User;
 use App\Models\Detail;
 use App\Models\Bussine;
@@ -129,9 +130,22 @@ class InvoiceTest extends TestCase
     {
         $this->withoutExceptionHandling();
         DB::table('invoices')->truncate();
+        DB::table('bussines')->truncate();
         Product::factory(10)->create();
+        $un = Unit::create([
+            'code' => 'H48',
+            'name' => 'Unidad',
+            'simbol' => '',
+            'description' => ''
+        ]);
 
         $this->authentication();
+        Bussine::factory()->create([
+            'rfc' => 'CACX7605101P8',
+            'password' => '12345678a',
+            'certificate' => '1614819022_CACX7605101P8_test.cer',
+            'key_private' => '1614819023_CACX7605101P8_test.key'
+        ]);
         
         $response = $this->post(route('invoices.store'), [
             'serie' => 'FAC-',
@@ -148,7 +162,7 @@ class InvoiceTest extends TestCase
                     'amount' => 30,
                     'product_id' => 1,
                     'prodserv_id' => 1,
-                    'unit_id' => 2,
+                    'unit_id' => $un->id,
                     'description' => 'cocacola bien fria',
                     'quantity' => 1,
                     'taxes' => [
@@ -1122,6 +1136,31 @@ class InvoiceTest extends TestCase
         $response->assertSessionHasErrors([
             'detail.0.taxes.0.id' => 'El campo en el impuesto id es requerido'
         ]);
+    }
+
+    public function test_functio_createCFDI()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function test_functio_preparingHead()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function test_functio_preparingEmitor()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function test_functio_preparingReceptor()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function test_functio_preparingConcept()
+    {
+        $this->markTestIncomplete();
     }
 
     protected function authentication($bussine = 1)
