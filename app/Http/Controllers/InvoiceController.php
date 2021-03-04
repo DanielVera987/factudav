@@ -131,7 +131,23 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
-        //
+        $invoice = Invoice::with(
+                                'customer', 
+                                'waytopay', 
+                                'currency', 
+                                'paymentmethod', 
+                                'usecfdi',
+                                'detail'
+                            )
+                        ->where('bussine_id', Auth::user()->bussine_id)
+                        ->findOrFail($id);
+                        
+        $bussine = Bussine::select('rfc', 'email', 'telephone', 'street', 'bussine_name', 'zip')->findOrFail(Auth::user()->bussine_id);
+
+        return view('invoices.show', [
+            'invoice' => $invoice,
+            'bussine' => $bussine
+        ]);
     }
 
     /**
