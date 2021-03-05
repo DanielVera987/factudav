@@ -9,6 +9,11 @@ class Usecfdi extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'code'
+    ];
+
     public function customer()
     {
         return $this->hasMany(Customer::class);

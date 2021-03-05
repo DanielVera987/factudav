@@ -9,6 +9,11 @@ class WayToPay extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'code'
+    ];
+
     public function invoice()
     {
         return $this->hasMany(Invoice::class);

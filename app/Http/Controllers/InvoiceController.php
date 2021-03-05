@@ -144,6 +144,13 @@ class InvoiceController extends Controller
                         
         $bussine = Bussine::select('rfc', 'email', 'telephone', 'street', 'bussine_name', 'zip')->findOrFail(Auth::user()->bussine_id);
 
+        $xmlContents = file_get_contents(public_path('storage/invoicexml/' . $invoice->name_file));
+        $cfdi = \CfdiUtils\Cfdi::newFromString($xmlContents);
+        $comprobante = $cfdi->getNode();
+        $subtotal = $comprobante['SubTotal'];
+        $total = $comprobante['Total'];
+        dd($comprobante->searchNodes('cfdi:Impuestos'));
+
         return view('invoices.show', [
             'invoice' => $invoice,
             'bussine' => $bussine

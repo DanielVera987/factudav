@@ -4,9 +4,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="x_panel">
-            <div class="x_title">
-                <h2>Invoice Design <small>Sample user invoice design</small></h2>
-                
+            <div class="x_title">                
                 <div class="clearfix"></div>
             </div>
             
@@ -23,7 +21,7 @@
 
                     <div class="row invoice-info">
                         <div class="col-sm-4 invoice-col">
-                            Emisor
+                            <strong> Emisor </strong>
                             <address>
                                 Razon Social: <strong>{{ $bussine->bussine_name }}</strong>
                                 <br>RFC: {{ $bussine->rfc }}
@@ -35,7 +33,7 @@
                         </div>
 
                         <div class="col-sm-4 invoice-col">
-                            Receptor
+                            <strong> Receptor </strong>
                             <address>
                                 Razon Social: <strong>{{ $invoice->customer->bussine_name }}</strong>
                                 <br>RFC: {{ $invoice->customer->rfc }}
@@ -49,12 +47,20 @@
                         <div class="col-sm-4 invoice-col">
                             <b>{{ Auth::user()->bussine->start_serie }}{{ $invoice->folio }}</b>
                             <br>
+                            <b>Metodo de pago:</b>  {{ $invoice->paymentmethod }}
+                            @php
+                                $pm = App\Models\PaymentMethod::find($invoice->payment_method_id);
+                                echo '['.$pm->code.']'.' '.$pm->name;
+                            @endphp
                             <br>
-                            <b>Order ID:</b> 4F3S8J
+                            <b>Forma de pago:</b> 
+                            @php
+                                $wtp = App\Models\WayToPay::find($invoice->way_to_pay_id);
+                                echo '['.$wtp->code.']'.' '.$wtp->name;
+                            @endphp
                             <br>
-                            <b>Payment Due:</b> 2/22/2014
+                            <b>Uso de CFDI:</b> [{{ $invoice->usecfdi->code }}] {{ $invoice->usecfdi->name }}
                             <br>
-                            <b>Account:</b> 968-34567
                         </div>
                     </div>
 
@@ -64,22 +70,22 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Cantidad</th>
+                                        <th>ClavProdServ.</th>
+                                        <th>ClaUni.</th>
+                                        <th>Cant.</th>
                                         <th style="width: 59%">Descripción</th>
-                                        <th>Codigo #</th>
-                                        <th>Unidad</th>
-                                        <th>Producto/Servicio</th>
+                                        <th>Desc.</th>
                                         <th>Subtotal</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($invoice->detail as $item)
+                                    @foreach ($invoice->detail as $key => $item)
                                     <tr>
+                                        <td>{{ $item->produserv->code }}</td>
+                                        <td>{{ $item->unit->code }}</td>
                                         <td>{{ $item->quantity }}</td>
-                                        <td>{{ $item->description }}
-                                        <td>Call of Duty</td>
-                                        <td>455-981-221</td>
-                                        </td>
+                                        <td>{{ $item->description }}</td>
+                                        <td>$ {{ $item->discount }}</td>
                                         <td>$ {{ bcdiv($item->quantity * $item->amount, '1', 2) }}</td>
                                     </tr>
                                     @endforeach
@@ -89,19 +95,10 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <p class="lead">Metodos de Pago:</p>
-                            <img src="{{ asset('images/visa.png') }}" alt="Visa">
-                            <img src="{{ asset('images/mastercard.png') }}" alt="Mastercard">
-                            <img src="{{ asset('images/american-express.png') }}" alt="American Express">
-                            <img src="{{ asset('images/paypal.png') }}" alt="Paypal">
-                            <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                            </p>
-                        </div>
+                        <div class="col-md-6"></div>
 
                         <div class="col-md-6">
-                            <p class="lead">Amount Due 2/22/2014</p>
+                            <p class="lead"></p>
                             <div class="table-responsive">
                                 <table class="table">
                                     <tbody>
