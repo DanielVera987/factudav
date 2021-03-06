@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tax;
+use App\Models\Unit;
 use App\Models\State;
 use App\Models\Detail;
 use App\Models\Bussine;
@@ -12,14 +13,13 @@ use App\Models\Usecfdi;
 use App\Models\Currency;
 use App\Models\Customer;
 use App\Models\WayToPay;
+use App\Models\ProduServ;
+use App\Models\TaxRegimen;
 use App\Models\Municipality;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\InvoiceRequest;
-use App\Models\ProduServ;
-use App\Models\TaxRegimen;
-use App\Models\Unit;
 use Illuminate\Support\Facades\Storage;
 
 class InvoiceController extends Controller
@@ -60,6 +60,9 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->orderByDesc('id')->get();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('invoices.pdf_default');
+        return $pdf->download('invoice.pdf');
         return view('invoices.index', compact('invoices'));
     }
 
@@ -476,5 +479,42 @@ class InvoiceController extends Controller
 
         // create the invoice as output.pdf
         $pdf = $converter->createPdfAs($cfdiData, 'output.pdf'); */
+    }
+
+    /**
+     * Dowload PDF of Invoice
+     *
+     * @param Request $id
+     * @return void
+     */
+    public function downloadPDF(Request $id)
+    {
+        $dataInvoice = Invoice::where('bussine_id', Auth::user()->bussine_id)->findOrFile($id);
+        $this->printDefault($dataInvoice, true);
+    }
+
+    /**
+     * Print Default for pdf 
+     *
+     * @param [type] $customer_invoice
+     * @param boolean $download
+     * @param boolean $save
+     * @return void
+     */
+    public function printDefault($datainvoice, $download = false, $save = false)
+    {
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('invoices.pdf_default', compact('datainvoice'));
+
+        if ($save) {
+            return $pdf->output();
+        }
+
+        if($download){
+            return $pdf->download('filename' . '.pdf');
+        }
+
+        //Redirect
+        return $pdf->stream('filename' . '.pdf');
     }
 }
