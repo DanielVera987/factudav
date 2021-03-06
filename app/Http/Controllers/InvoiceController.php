@@ -113,7 +113,6 @@ class InvoiceController extends Controller
         $unsignedXml = $this->createCDFI($request);
         if (!$unsignedXml) return back()->with('warning', 'Se genero un error al procesar el XML, Intentalo de nuevo');
         
-        //dd($unsignedXml);
         $request['bussine_id'] = $bussine_id;
         $request['name_file'] = $unsignedXml;
 
@@ -144,16 +143,22 @@ class InvoiceController extends Controller
                         
         $bussine = Bussine::select('rfc', 'email', 'telephone', 'street', 'bussine_name', 'zip')->findOrFail(Auth::user()->bussine_id);
 
-        $xmlContents = file_get_contents(public_path('storage/invoicexml/' . $invoice->name_file));
-        $cfdi = \CfdiUtils\Cfdi::newFromString($xmlContents);
-        $comprobante = $cfdi->getNode();
-        $subtotal = $comprobante['SubTotal'];
-        $total = $comprobante['Total'];
-        dd($comprobante->searchNodes('cfdi:Impuestos'));
+        $totales = [];
+        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $invoice->name_file)))
+            ->getQuickReader();
+
+        $totales['subtotal']     = $comprobante['SubTotal'];
+        $totales['descuento']    = $comprobante['Descuento'];
+        $totales['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'];
+        $totales['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'];
+        $totales['total']        = $comprobante['Total'];
+
+        $this->createPDF($invoice->name_file);
 
         return view('invoices.show', [
             'invoice' => $invoice,
-            'bussine' => $bussine
+            'bussine' => $bussine,
+            'totales' => $totales
         ]);
     }
 
@@ -448,5 +453,28 @@ class InvoiceController extends Controller
         $this->TOTAL = $subtotal - $discount - $totalTaxRetenido + $totalTaxTrasladado;
 
         return $data;
+    }
+
+    protected function createPDF($fileName)
+    {
+        /* $xml = file_get_contents(public_path('storage/invoicexml/' . 'INV-000267_59.xml'));
+
+        // clean cfdi
+        $xml = \CfdiUtils\Cleaner\Cleaner::staticClean($xml);
+
+        // create the main node structure
+        $comprobante = \CfdiUtils\Nodes\XmlNodeUtils::nodeFromXmlString($xml);
+
+        // create the CfdiData object, it contains all the required information
+        $cfdiData = (new \PhpCfdi\CfdiToPdf\CfdiDataBuilder())
+            ->build($comprobante);
+
+        // create the converter
+        $converter = new \PhpCfdi\CfdiToPdf\Converter(
+            new \PhpCfdi\CfdiToPdf\Builders\Html2PdfBuilder()
+        );
+
+        // create the invoice as output.pdf
+        $pdf = $converter->createPdfAs($cfdiData, 'output.pdf'); */
     }
 }

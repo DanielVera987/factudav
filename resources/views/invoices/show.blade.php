@@ -104,23 +104,23 @@
                                     <tbody>
                                         <tr>
                                             <th style="width:50%">Subtotal:</th>
-                                            <td>$250.30</td>
+                                            <td>$ {{ $totales['subtotal'] }}</td>
                                         </tr>
                                         <tr>
                                             <th>Descuento</th>
-                                            <td>$10.34</td>
+                                            <td>$ {{ $totales['descuento'] }}</td>
                                         </tr>
                                         <tr>
                                             <th>Trasladados</th>
-                                            <td>$10.34</td>
+                                            <td>$ {{ $totales['totalImpTras'] }}</td>
                                         </tr>
                                         <tr>
                                             <th>Retenidos</th>
-                                            <td>$10.34</td>
+                                            <td>$ {{ $totales['totalImpRete'] }}</td>
                                         </tr>
                                         <tr>
                                             <th>Total:</th>
-                                            <td>$265.24</td>
+                                            <td>$ {{ $totales['total'] }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
