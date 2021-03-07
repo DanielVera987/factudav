@@ -60,9 +60,6 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->orderByDesc('id')->get();
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadView('invoices.pdf_default');
-        return $pdf->download('invoice.pdf');
         return view('invoices.index', compact('invoices'));
     }
 
@@ -132,7 +129,9 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    { 
+        return $this->downloadPDF($id);
+        
         $invoice = Invoice::with(
                                 'customer', 
                                 'waytopay', 
@@ -155,8 +154,6 @@ class InvoiceController extends Controller
         $totales['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'];
         $totales['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'];
         $totales['total']        = $comprobante['Total'];
-
-        $this->createPDF($invoice->name_file);
 
         return view('invoices.show', [
             'invoice' => $invoice,
@@ -458,39 +455,23 @@ class InvoiceController extends Controller
         return $data;
     }
 
-    protected function createPDF($fileName)
-    {
-        /* $xml = file_get_contents(public_path('storage/invoicexml/' . 'INV-000267_59.xml'));
-
-        // clean cfdi
-        $xml = \CfdiUtils\Cleaner\Cleaner::staticClean($xml);
-
-        // create the main node structure
-        $comprobante = \CfdiUtils\Nodes\XmlNodeUtils::nodeFromXmlString($xml);
-
-        // create the CfdiData object, it contains all the required information
-        $cfdiData = (new \PhpCfdi\CfdiToPdf\CfdiDataBuilder())
-            ->build($comprobante);
-
-        // create the converter
-        $converter = new \PhpCfdi\CfdiToPdf\Converter(
-            new \PhpCfdi\CfdiToPdf\Builders\Html2PdfBuilder()
-        );
-
-        // create the invoice as output.pdf
-        $pdf = $converter->createPdfAs($cfdiData, 'output.pdf'); */
-    }
-
     /**
      * Dowload PDF of Invoice
      *
      * @param Request $id
      * @return void
      */
-    public function downloadPDF(Request $id)
+    public function downloadPDF($id)
     {
-        $dataInvoice = Invoice::where('bussine_id', Auth::user()->bussine_id)->findOrFile($id);
-        $this->printDefault($dataInvoice, true);
+        $dataInvoice = Invoice::with(
+                            'customer', 
+                            'waytopay', 
+                            'currency', 
+                            'paymentmethod', 
+                            'usecfdi',
+                            'detail'
+                        )->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
+        return $this->printDefault($dataInvoice);
     }
 
     /**

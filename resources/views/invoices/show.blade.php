@@ -47,7 +47,7 @@
                         <div class="col-sm-4 invoice-col">
                             <b>{{ Auth::user()->bussine->start_serie }}{{ $invoice->folio }}</b>
                             <br>
-                            <b>Metodo de pago:</b>  {{ $invoice->paymentmethod }}
+                            <b>Metodo de pago:</b>
                             @php
                                 $pm = App\Models\PaymentMethod::find($invoice->payment_method_id);
                                 echo '['.$pm->code.']'.' '.$pm->name;
