@@ -31,3 +31,9 @@ Route::get('/searchCustomers', [SearchController::class, 'searchCustomers']);
 Route::get('/searchProduServ', [SearchController::class, 'searchProduServ']);
 Route::get('/searchProducts', [SearchController::class, 'searchProducts']);
 Route::get('/json/convertHtml', [SearchController::class, 'convertDetailHtml']);
+
+//Download
+Route::get('/invoices/pdf/{id}', [InvoiceController::class, 'downloadPDF'])
+  ->where(['id' => '[0-9]+'])->name('invoices.downloadPDF');
+Route::get('/uploads/xml/{file}', [InvoiceController::class, 'downloadXML'])
+  ->where(['file' => '(.*?)\.(xml)$'])->name('uploads.xml');

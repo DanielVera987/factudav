@@ -30,6 +30,11 @@ class Tax extends Model
         return $this->hasMany(Tax::class);
     }
 
+    public function taxdetail()
+    {
+        return $this->hasMany(TaxDetail::class);
+    }
+
     public static function isTax($request, $bussine_id) 
     {
         if (isset($request->name_tax)) {

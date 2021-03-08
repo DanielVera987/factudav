@@ -18,9 +18,10 @@ use App\Models\TaxRegimen;
 use App\Models\Municipality;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
+use NumberToWords\NumberToWords;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\InvoiceRequest;
-use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class InvoiceController extends Controller
 {
@@ -471,6 +472,33 @@ class InvoiceController extends Controller
                             'usecfdi',
                             'detail'
                         )->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
+                        //$dataInvoice->name_file
+        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . 'INV-000267_59.xml')))
+            ->getQuickReader();
+
+        $numberToWords = new NumberToWords();
+        $currencyTransformer = $numberToWords->getCurrencyTransformer('es');
+        $numberToWord = $currencyTransformer->toWords($comprobante['Total'], $comprobante['Moneda']);
+        $dataInvoice['numberToWords'] = $numberToWord;
+
+        //Genera codigo QR
+        $image = QrCode::format('png')->size(150)->margin(0)->generate('PRUEBA');
+        $dataInvoice['qr'] = 'data:image/png;base64,' . base64_encode($image);
+
+        $dataInvoice['fecha']        = $comprobante['Fecha'];
+        $dataInvoice['subtotal']     = $comprobante['SubTotal'];
+        $dataInvoice['descuento']    = $comprobante['Descuento'];
+        $dataInvoice['selloEmisor']  = $comprobante['Sello'] ?? '';
+        $dataInvoice['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'];
+        $dataInvoice['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'];
+        $dataInvoice['total']        = $comprobante['Total'];
+        $dataInvoice['folioFiscal']  = $comprobante->complemento->timbrefiscaldigital['UUID'] ?? '';
+        $dataInvoice['noCertificado']   = $comprobante->complemento->timbrefiscaldigital['NoCertificadoSAT'] ?? '';
+        $dataInvoice['FechaTimbrado']   = $comprobante->complemento->timbrefiscaldigital['FechaTimbrado'] ?? '';
+        $dataInvoice['SelloSAT']        = $comprobante->complemento->timbrefiscaldigital['SelloSAT'] ?? '';
+        $dataInvoice['SelloCFD']        = $comprobante->complemento->timbrefiscaldigital['SelloCFD'] ?? '';
+
+        
         return $this->printDefault($dataInvoice);
     }
 
@@ -486,16 +514,33 @@ class InvoiceController extends Controller
     {
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadView('invoices.pdf_default', compact('datainvoice'));
+        $fileName = Auth::user()->bussine->start_serie . $datainvoice['folio'];
 
         if ($save) {
             return $pdf->output();
         }
 
         if($download){
-            return $pdf->download('filename' . '.pdf');
+            return $pdf->download($fileName . '.pdf');
         }
 
         //Redirect
-        return $pdf->stream('filename' . '.pdf');
+        return $pdf->stream($fileName . '.pdf');
+    }
+
+    /**
+     * Download XML of Invoice Selected
+     * 
+     * @param $file File XML
+     * @return Response
+     */
+    public function downloadXML($file)
+    {
+        $path = 'storage/invoicexml/'.$file;
+
+        $headers = array(
+            'Content-Type: application/xml',
+        );
+        return \Response::download($path, $file , $headers);
     }
 }

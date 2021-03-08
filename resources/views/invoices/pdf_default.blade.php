@@ -20,7 +20,7 @@
             padding: 0;
             margin: 0;
         }
-        .logo a{ width: 60px; }
+        .logo img{ width: 120px; margin: 0px 20px; }
         .tableprodserv{ border-collapse: collapse; }
         .tableprodserv thead{ background-color: darkgray; }
         .tableprodserv tbody tr td, .tableprodserv thead tr th{ border: 1px solid black; }
@@ -28,6 +28,7 @@
         .tabletotales{ border-collapse: collapse;}
         .tabletotales tr td{ border: 1px solid black;padding: 5px;}
         .clearfix { overflow: auto; clear: both;}
+        .DataSAT tr td{  width: 50%; }
     </style>
 </head>
 <body>
@@ -40,7 +41,7 @@
             <td><h3><strong>{{ \Auth::user()->bussine->start_serie }}{{ $datainvoice->folio }}</strong></h3></td>
         </tr>
         <tr>
-            <td class="logo"><a href="https://donestandares.files.wordpress.com/2012/05/div-flotante-abajo.jpg"></a></td>
+            <td class="logo"><img src="{{ public_path('/images/logos/'. \Auth::user()->bussine->logo) }}" /></td>
             <td>
                 <strong>Receptor</strong>
                 <br>RFC: {{ $datainvoice->customer->rfc }}
@@ -63,8 +64,8 @@
         </tr>
         <tr>
             <td>
-                <br>Folio Fiscal:
-                <br>Fecha de comprobante: 
+                <br>Folio Fiscal: {{ $datainvoice->folioFiscal }}
+                <br>Fecha de comprobante: {{ $datainvoice->fecha }}
                 <br>Fecha de certificado del CFDI: 
             </td>
             <td>
@@ -103,57 +104,84 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($datainvoice->detail as $detail)
             <tr>
-                <td>1</td>
-                <td>0101010101</td>
-                <td>H48</td>
-                <td>Esta descripcion sirve unicamente para realizar mis pruebas por lo que quiero que sea algo largo</td>
-                <td>$100.00 </td>
-                <td>$0.00 </td>
-                <td>$100.00 </td>
+                <td>{{ $detail->quantity }}</td>
+                <td>{{ $detail->produserv->code }}</td>
+                <td>{{ $detail->unit->code }}</td>
+                <td>
+                    {{ $detail->description }} 
+                    <br><br>
+                    <small>Impuestos
+                    <br>
+                    @php
+                        $taxes = App\Models\TaxDetail::with('tax')->where('detail_id', $detail->id)->get();
+                        $t = '';
+                        foreach ($taxes as $tax){
+                            $t .= $tax->tax->code . ' ' . $tax->tax->tax . ' ' . $tax->tax->type . ' ' . $tax->tax->tasa . '<br>';
+                        }
+                        echo $t;
+                    @endphp
+                    </small> 
+                </td>
+                <td>$ {{ $detail->amount }} </td>
+                <td>$ {{ $detail->discount }} </td>
+                <td>$ {{ bcdiv($detail->quantity * $detail->amount, '1', 2) }} </td>
             </tr>
+            @endforeach
         </tbody>
     </table>
 
     <br>
     <div style="float: right;width: 10%; text-align: right;">
-        $100
-        <br>$0.00<hr>
-        <strong>$100.00</strong><hr>
+        $ {{ $datainvoice->subtotal }}
+        <br>$ {{ $datainvoice->descuento }}
+        <br>$ {{ $datainvoice->totalImpRete }}
+        <br>$ {{ $datainvoice->totalImpTras }}<hr>
+        <strong>$ {{ $datainvoice->total }}</strong><hr>
     </div>
     <div style="float: right;width: 10%; text-align: left;">
         SUBTOTAL:
-        <br>IVA 16%: <hr>
+        <br>DESCUENTO:
+        <br>RETENIDO:
+        <br>TRALADO: <hr>
         <strong>TOTAL:</strong><hr>
+        ({{ $datainvoice->numberToWords }} )
     </div>
     <div class="clearfix"></div>
 
     <br>
-    <table style="width: 100%">
+    <table class="DataSAT">
         <tr>
             <td>
-                QR
+                <img src="{{ $datainvoice->qr }}" alt="">
             </td>
             <td>
                 Serie del Certificado del emisor: 879878878789789789
-                <br>Folio Fiscal JHJ5644-JL46-LJ4L-LKJL4J6-4656 
-                <br>No. serie del Certificado del SAT: 9890809809890890809
-                <br>Fecha y hora de certificación: 06-04-3020 16:45:32
+                <br>Folio Fiscal: {{ $datainvoice->folioFiscal }} 
+                <br>No. serie del Certificado del SAT: {{ $datainvoice->noCertificado }}
+                <br>Fecha y hora de certificación: {{ $datainvoice->FechaTimbrado }}
                 <br><strong>Este documento es una representación impresa de un CFDI</strong>
             </td>
         </tr>
         <tr>
-            <td><strong>Sello Digital del Emisor:</strong></td>
-            <td></td>
+            <td>
+            </td>
         </tr>
         <tr>
-            <td><strong>Sello Digital del SAT:</strong></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><strong>Cadena original del complemento de certificación digital del SAT:</strong></td>
-            <td></td>
-        </tr>
-    </table>
+            <td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    <td></td>
+                </tr>
+            </table>
+        <strong>Sello Digital del Emisor:</strong></td>
+        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->selloEmisor }}</textarea>
+        <strong>Sello Digital del SAT:</strong></td>
+        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloSAT }}</textarea>
+        <strong>Cadena original del complemento de certificación digital del SAT:</strong></td>
+        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloCFD }}</textarea>
 </body>
 </html>

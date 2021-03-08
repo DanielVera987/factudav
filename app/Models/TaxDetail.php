@@ -18,4 +18,9 @@ class TaxDetail extends Model
     {
         return $this->belongsToMany(Detail::class, 'tax_details');
     }
+
+    public function tax()
+    {
+        return $this->belongsTo(Tax::class);
+    }
 }

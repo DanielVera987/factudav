@@ -51,7 +51,7 @@
                 <tbody>
                   @foreach($invoices as $invoice)
                     <tr>
-                      <td class="text-center">{{ $invoice->folio }}</td>
+                      <td class="text-center"><a href="{{ route('invoices.show', $invoice->id) }}">{{ $invoice->folio }}</a></td>
                       <td class="text-center">{{ $invoice->customer->bussine_name }}</td>
                       <td class="text-center">{{ $invoice->date ?? '' }}</td>
                       <td class="text-center">{{ $invoice->currency->code ?? '' }}</td>
@@ -64,8 +64,8 @@
                                     <span class=" fa fa-navicon"></span>
                                 </a>
                                 <ul style="width: 30px;" class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="">Ver</a></li>
-                                    <li><a href="">Descargar PDF</a></li>
+                                    <li><a href="{{ route('invoices.show', $invoice->id) }}">Ver</a></li>
+                                    <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}">Descargar PDF</a></li>
                                     <li><a href="">Enviar por correo</a></li>
                                 </ul>
                             </li>
