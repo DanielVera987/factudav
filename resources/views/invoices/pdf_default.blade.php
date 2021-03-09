@@ -153,8 +153,11 @@
     <br>
     <table class="DataSAT">
         <tr>
-            <td>
-                <img src="{{ $datainvoice->qr }}" alt="">
+            <td style="width: 40%;">
+                @php
+                    use chillerlan\QRCode\{QRCode, QROptions};
+                    echo '<img style="margin: 0px 50px;" width="180px" src="'.(new QRCode)->render('danielvera.com').'" alt="QR Code" />';
+                @endphp
             </td>
             <td>
                 Serie del Certificado del emisor: 879878878789789789
@@ -164,24 +167,12 @@
                 <br><strong>Este documento es una representación impresa de un CFDI</strong>
             </td>
         </tr>
-        <tr>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>
-                    <td></td>
-                </tr>
-            </table>
-        <strong>Sello Digital del Emisor:</strong></td>
-        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->selloEmisor }}</textarea>
-        <strong>Sello Digital del SAT:</strong></td>
-        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloSAT }}</textarea>
-        <strong>Cadena original del complemento de certificación digital del SAT:</strong></td>
-        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloCFD }}</textarea>
+    </table>
+    <strong>Sello Digital del Emisor:</strong></td>
+    <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->selloEmisor }}</textarea>
+    <strong>Sello Digital del SAT:</strong></td>
+    <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloSAT }}</textarea>
+    <strong>Cadena original del complemento de certificación digital del SAT:</strong></td>
+    <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloCFD }}</textarea>
 </body>
 </html>

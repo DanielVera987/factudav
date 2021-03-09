@@ -19,9 +19,9 @@ use App\Models\Municipality;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
 use NumberToWords\NumberToWords;
+use App\Http\Helpers\Cfdi33\Helper;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\InvoiceRequest;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class InvoiceController extends Controller
 {
@@ -475,16 +475,9 @@ class InvoiceController extends Controller
                         //$dataInvoice->name_file
         $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . 'INV-000267_59.xml')))
             ->getQuickReader();
-
-        $numberToWords = new NumberToWords();
-        $currencyTransformer = $numberToWords->getCurrencyTransformer('es');
-        $numberToWord = $currencyTransformer->toWords($comprobante['Total'], $comprobante['Moneda']);
-        $dataInvoice['numberToWords'] = $numberToWord;
-
-        //Genera codigo QR
-        $image = QrCode::format('png')->size(150)->margin(0)->generate('PRUEBA');
-        $dataInvoice['qr'] = 'data:image/png;base64,' . base64_encode($image);
-
+        
+        $dataInvoice['qr'] = Helper::generateQR('INV-000267_59.xml'); 
+        $dataInvoice['numberToWords'] = Helper::NumberToWord($comprobante['Total']);
         $dataInvoice['fecha']        = $comprobante['Fecha'];
         $dataInvoice['subtotal']     = $comprobante['SubTotal'];
         $dataInvoice['descuento']    = $comprobante['Descuento'];

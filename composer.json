@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "barryvdh/laravel-dompdf": "^0.9.0",
+        "chillerlan/php-qrcode": "^4.3",
         "eclipxe/cfdiutils": "^2.14",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -18,8 +19,7 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
-        "milon/barcode": "^8.0",
-        "simplesoftwareio/simple-qrcode": "^4.2"
+        "milon/barcode": "^8.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
