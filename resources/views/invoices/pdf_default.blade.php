@@ -144,19 +144,20 @@
         SUBTOTAL:
         <br>DESCUENTO:
         <br>RETENIDO:
-        <br>TRALADO: <hr>
+        <br>TRASLADADO: <hr>
         <strong>TOTAL:</strong><hr>
+    </div>
+    <div class="clearfix"></div>
+    <div style="float: right;width: 100%; text-align: right;">
         ({{ $datainvoice->numberToWords }} )
     </div>
     <div class="clearfix"></div>
-
-    <br>
     <table class="DataSAT">
         <tr>
             <td style="width: 40%;">
                 @php
                     use chillerlan\QRCode\{QRCode, QROptions};
-                    echo '<img style="margin: 0px 50px;" width="180px" src="'.(new QRCode)->render('danielvera.com').'" alt="QR Code" />';
+                    echo '<img style="margin: 0px 50px;" width="180px" src="'.(new QRCode)->render($datainvoice->qr).'" alt="QR Code" />';
                 @endphp
             </td>
             <td>

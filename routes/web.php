@@ -17,6 +17,7 @@ Route::resource('/settings', BussineController::class);
 Route::resource('/customers', CustomerController::class);
 Route::resource('/products', ProductController::class);
 Route::resource('/invoices', InvoiceController::class);
+Route::get('/invoices/{id}/sendinvoice', [InvoiceController::class, 'sendMail'])->name('invoices.sendEmail');
 
 
 // Route for Ajax

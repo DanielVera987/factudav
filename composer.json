@@ -15,10 +15,10 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "kwn/number-to-words": "^1.12",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.1",
+        "luecano/numero-a-letras": "^3.0",
         "milon/barcode": "^8.0"
     },
     "require-dev": {

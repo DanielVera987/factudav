@@ -18,10 +18,11 @@ use App\Models\TaxRegimen;
 use App\Models\Municipality;
 use Illuminate\Http\Request;
 use App\Models\PaymentMethod;
-use NumberToWords\NumberToWords;
-use App\Http\Helpers\Cfdi33\Helper;
+use App\Helpers\Cfdi33Helper;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\InvoiceRequest;
+use App\Mail\SendInvoiceMail;
+use Illuminate\Support\Facades\Mail;
 
 class InvoiceController extends Controller
 {
@@ -130,9 +131,7 @@ class InvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    { 
-        return $this->downloadPDF($id);
-        
+    {   
         $invoice = Invoice::with(
                                 'customer', 
                                 'waytopay', 
@@ -203,7 +202,7 @@ class InvoiceController extends Controller
      */
     protected function createCDFI($data)
     {
-        //try {
+        try {
             $path = storage_path('app/public/csd_sat/cer');
             $pathkey = storage_path('app/public/csd_sat/key');
 
@@ -315,9 +314,9 @@ class InvoiceController extends Controller
             $creator->saveXml(public_path('storage/invoicexml/' . $fileName));
             //dd($fileName);
             return $fileName; 
-        /* } catch (\Throwable $err) {
+        } catch (\Throwable $err) {
             return false;
-        } */
+        }
     }
 
     /**
@@ -475,9 +474,9 @@ class InvoiceController extends Controller
                         //$dataInvoice->name_file
         $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . 'INV-000267_59.xml')))
             ->getQuickReader();
-        
-        $dataInvoice['qr'] = Helper::generateQR('INV-000267_59.xml'); 
-        $dataInvoice['numberToWords'] = Helper::NumberToWord($comprobante['Total']);
+
+        $dataInvoice['qr'] = Cfdi33Helper::generateQR('INV-000267_59.xml'); 
+        $dataInvoice['numberToWords'] = Cfdi33Helper::NumberToWord($comprobante['Total'], 2,  $comprobante['Moneda']);
         $dataInvoice['fecha']        = $comprobante['Fecha'];
         $dataInvoice['subtotal']     = $comprobante['SubTotal'];
         $dataInvoice['descuento']    = $comprobante['Descuento'];
@@ -492,7 +491,7 @@ class InvoiceController extends Controller
         $dataInvoice['SelloCFD']        = $comprobante->complemento->timbrefiscaldigital['SelloCFD'] ?? '';
 
         
-        return $this->printDefault($dataInvoice);
+        return $this->printDefault($dataInvoice, true);
     }
 
     /**
@@ -535,5 +534,18 @@ class InvoiceController extends Controller
             'Content-Type: application/xml',
         );
         return \Response::download($path, $file , $headers);
+    }
+
+    public function sendMail($id)
+    {
+        $invoice = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
+        $serie = Auth::user()->bussine->start_serie;
+
+        $email = new SendInvoiceMail(
+                    $invoice,
+                    "Factura Realizada [{$serie}{$invoice->folio}]"
+                );
+
+        Mail::to('danielveraangulo703@gmail.com')->send($email);
     }
 }

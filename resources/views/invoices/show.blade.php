@@ -84,7 +84,20 @@
                                         <td>{{ $item->produserv->code }}</td>
                                         <td>{{ $item->unit->code }}</td>
                                         <td>{{ $item->quantity }}</td>
-                                        <td>{{ $item->description }}</td>
+                                        <td>
+                                            {{ $item->description }}
+                                            <br><br>
+                                            Impuestos
+                                            <br>
+                                            @php
+                                                $taxes = App\Models\TaxDetail::with('tax')->where('detail_id', $item->id)->get();
+                                                $t = '';
+                                                foreach ($taxes as $tax){
+                                                    $t .= $tax->tax->code . ' ' . $tax->tax->tax . ' ' . $tax->tax->type . ' ' . $tax->tax->tasa . '<br>';
+                                                }
+                                                echo $t;
+                                            @endphp
+                                        </td>
                                         <td>$ {{ $item->discount }}</td>
                                         <td>$ {{ bcdiv($item->quantity * $item->amount, '1', 2) }}</td>
                                     </tr>
@@ -111,13 +124,14 @@
                                             <td>$ {{ $totales['descuento'] }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Trasladados</th>
-                                            <td>$ {{ $totales['totalImpTras'] }}</td>
-                                        </tr>
-                                        <tr>
                                             <th>Retenidos</th>
                                             <td>$ {{ $totales['totalImpRete'] }}</td>
                                         </tr>
+                                        <tr>
+                                            <th>Trasladados</th>
+                                            <td>$ {{ $totales['totalImpTras'] }}</td>
+                                        </tr>
+                                       
                                         <tr>
                                             <th>Total:</th>
                                             <td>$ {{ $totales['total'] }}</td>
