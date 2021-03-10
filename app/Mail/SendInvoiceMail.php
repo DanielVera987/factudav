@@ -5,7 +5,9 @@ namespace App\Mail;
 use App\Models\Invoice;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendInvoiceMail extends Mailable
@@ -60,6 +62,24 @@ class SendInvoiceMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.send_customer_invoice');
+        $message = $this->markdown('emails.send_customer_invoice');
+
+        if(!empty($this->pdf)) {
+            $message->attachData($this->pdf,
+                \Auth::user()->bussine->start_serie . $this->invoice->folio . 'pdf', [
+                    'mime' => 'application/pdf',
+                ]
+            );
+        }
+
+        if(!empty($this->xml)) {
+            if(\Storage::disk('xml')->exists($this->xml)){
+                $message->attach(\Storage::disk('xml')->path($this->xml), [
+                    'as' => \Auth::user()->bussine->start_serie . $this->invoice->folio . '.xml'
+                ]);
+            }
+        }
+
+        return $message;
     }
 }

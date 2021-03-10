@@ -61,7 +61,7 @@ return [
 
         'xml' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/invoicesxml'),
+            'root' => storage_path('app/public/invoicexml'),
             'url' => env('APP_URL').'/storage/invoicexml',
             'visibility' => 'public',
         ],

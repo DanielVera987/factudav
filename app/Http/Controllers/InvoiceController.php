@@ -471,26 +471,7 @@ class InvoiceController extends Controller
                             'usecfdi',
                             'detail'
                         )->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
-                        //$dataInvoice->name_file
-        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . 'INV-000267_59.xml')))
-            ->getQuickReader();
 
-        $dataInvoice['qr'] = Cfdi33Helper::generateQR('INV-000267_59.xml'); 
-        $dataInvoice['numberToWords'] = Cfdi33Helper::NumberToWord($comprobante['Total'], 2,  $comprobante['Moneda']);
-        $dataInvoice['fecha']        = $comprobante['Fecha'];
-        $dataInvoice['subtotal']     = $comprobante['SubTotal'];
-        $dataInvoice['descuento']    = $comprobante['Descuento'];
-        $dataInvoice['selloEmisor']  = $comprobante['Sello'] ?? '';
-        $dataInvoice['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'];
-        $dataInvoice['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'];
-        $dataInvoice['total']        = $comprobante['Total'];
-        $dataInvoice['folioFiscal']  = $comprobante->complemento->timbrefiscaldigital['UUID'] ?? '';
-        $dataInvoice['noCertificado']   = $comprobante->complemento->timbrefiscaldigital['NoCertificadoSAT'] ?? '';
-        $dataInvoice['FechaTimbrado']   = $comprobante->complemento->timbrefiscaldigital['FechaTimbrado'] ?? '';
-        $dataInvoice['SelloSAT']        = $comprobante->complemento->timbrefiscaldigital['SelloSAT'] ?? '';
-        $dataInvoice['SelloCFD']        = $comprobante->complemento->timbrefiscaldigital['SelloCFD'] ?? '';
-
-        
         return $this->printDefault($dataInvoice, true);
     }
 
@@ -502,8 +483,27 @@ class InvoiceController extends Controller
      * @param boolean $save
      * @return void
      */
-    public function printDefault($datainvoice, $download = false, $save = false)
+    public function printDefault(Invoice $datainvoice, $download = false, $save = false)
     {
+        //$dataInvoice->name_file
+        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . 'INV-000267_59.xml')))
+        ->getQuickReader();
+
+        $datainvoice['qr'] = Cfdi33Helper::generateQR('INV-000267_59.xml'); 
+        $datainvoice['numberToWords'] = Cfdi33Helper::NumberToWord($comprobante['Total'], 2,  $comprobante['Moneda']);
+        $datainvoice['fecha']        = $comprobante['Fecha'];
+        $datainvoice['subtotal']     = $comprobante['SubTotal'];
+        $datainvoice['descuento']    = $comprobante['Descuento'];
+        $datainvoice['selloEmisor']  = $comprobante['Sello'] ?? '';
+        $datainvoice['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'];
+        $datainvoice['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'];
+        $datainvoice['total']        = $comprobante['Total'];
+        $datainvoice['folioFiscal']  = $comprobante->complemento->timbrefiscaldigital['UUID'] ?? '';
+        $datainvoice['noCertificado']   = $comprobante->complemento->timbrefiscaldigital['NoCertificadoSAT'] ?? '';
+        $datainvoice['FechaTimbrado']   = $comprobante->complemento->timbrefiscaldigital['FechaTimbrado'] ?? '';
+        $datainvoice['SelloSAT']        = $comprobante->complemento->timbrefiscaldigital['SelloSAT'] ?? '';
+        $datainvoice['SelloCFD']        = $comprobante->complemento->timbrefiscaldigital['SelloCFD'] ?? '';
+
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadView('invoices.pdf_default', compact('datainvoice'));
         $fileName = Auth::user()->bussine->start_serie . $datainvoice['folio'];
@@ -536,16 +536,26 @@ class InvoiceController extends Controller
         return \Response::download($path, $file , $headers);
     }
 
+    /**
+     * SendMail Invoice with PDF and XML
+     */
     public function sendMail($id)
     {
         $invoice = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
         $serie = Auth::user()->bussine->start_serie;
 
+        $fileNamePdf = $this->printDefault($invoice);
+        $fileNameXML = $invoice->name_file;
+
         $email = new SendInvoiceMail(
                     $invoice,
-                    "Factura Realizada [{$serie}{$invoice->folio}]"
+                    "Factura Realizada [{$serie}{$invoice->folio}]",
+                    $fileNamePdf,
+                    $fileNameXML,
                 );
 
         Mail::to('danielveraangulo703@gmail.com')->send($email);
+
+        dd('enviado');
     }
 }
