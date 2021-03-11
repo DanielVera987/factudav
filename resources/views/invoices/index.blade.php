@@ -66,7 +66,7 @@
                                 <ul style="width: 30px;" class="dropdown-menu dropdown-usermenu pull-right">
                                     <li><a href="{{ route('invoices.show', $invoice->id) }}">Ver</a></li>
                                     <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}">Descargar PDF</a></li>
-                                    <li><a href="{{ route('invoices.sendEmail', $invoice->id) }}">Enviar por correo</a></li>
+                                    <li><a href="{{ route('invoice.createEmail', $invoice->id) }}">Enviar por correo</a></li>
                                 </ul>
                             </li>
                         </ul>

@@ -29,6 +29,13 @@ class SendInvoiceMail extends Mailable
     public $subject = '';
 
     /**
+     * Undocumented variable
+     *
+     * @var string
+     */
+    public $message = '';
+
+    /**
      * Filename of pdf
      *
      * @var string
@@ -47,10 +54,11 @@ class SendInvoiceMail extends Mailable
      *
      * @return void
      */
-    public function __construct(Invoice $invoice, $subject = 'Factura Realizada', $pdf, $xml)
+    public function __construct(Invoice $invoice, $subject = 'Factura Realizada', $message, $pdf, $xml)
     {
         $this->invoice = $invoice;
         $this->subject = $subject;
+        $this->message = $message;
         $this->pdf = $pdf;
         $this->xml = $xml;
     }

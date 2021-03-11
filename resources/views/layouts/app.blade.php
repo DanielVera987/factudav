@@ -253,10 +253,10 @@
     <!-- Parsley -->
     <script src="{{ asset('/vendors/parsleyjs/dist/parsley.min.js') }}"></script>
 
+    @yield('script')
     
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('/js/custom.min.js') }}"></script>
-    @yield('script')
 
     <!-- Command Direct -->
     <script>

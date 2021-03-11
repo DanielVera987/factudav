@@ -6,6 +6,8 @@ Hola, <strong>{!! $invoice->customer->tradename !!}</strong>
 
 Adjuntamos la factura #{!! $invoice->folio !!} con fecha {!! $invoice->date !!}.
 
+{!! $message !!}
+
 @component('mail::subcopy')
 
 <p style="font-size: 10px; text-align: center; color: #aaaaaa; margin-top: 35px;">

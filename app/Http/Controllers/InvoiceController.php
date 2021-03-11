@@ -537,25 +537,58 @@ class InvoiceController extends Controller
     }
 
     /**
-     * SendMail Invoice with PDF and XML
+     * CreateMail Invoice with PDF and XML
      */
-    public function sendMail($id)
+    public function createEmail($id)
     {
         $invoice = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
         $serie = Auth::user()->bussine->start_serie;
 
-        $fileNamePdf = $this->printDefault($invoice);
-        $fileNameXML = $invoice->name_file;
+        $fileName = Auth::user()->bussine->start_serie . $invoice->folio;
+
+        return view('emails.create', [
+            "id" => $invoice->id,
+            "to" => $invoice->customer->email,
+            "title" => $serie . $invoice->folio,
+            "filename" => $fileName
+        ]);
+    }
+
+    /**
+     * SendMail Invoice with PDF and XML
+     */
+    public function sendMail(Request $request, $id)
+    {
+        $request->validate([
+            "to" => ['required', 'email'],
+            "subject" => ['required'],
+            "message" => ['required'],
+            "sendPDF" => [''],
+            "sendXML" => [''],
+        ]);
+     
+        $invoice = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
+
+        $fileNamePdf = false;
+        if(isset($request->sendPDF)){
+            $fileNamePdf = $this->printDefault($invoice);
+        }
+
+        $fileNameXML = false;
+        if(isset($request->sendXML)){
+            $fileNameXML = $invoice->name_file;
+        }
 
         $email = new SendInvoiceMail(
                     $invoice,
-                    "Factura Realizada [{$serie}{$invoice->folio}]",
+                    $request->subject,
+                    $request->message,
                     $fileNamePdf,
                     $fileNameXML,
                 );
 
-        Mail::to('danielveraangulo703@gmail.com')->send($email);
+        Mail::to($request->to)->send($email);
 
-        dd('enviado');
+        return redirect(route('invoice.createEmail', $invoice->id))->with('success', 'Correo Enviado');
     }
 }
