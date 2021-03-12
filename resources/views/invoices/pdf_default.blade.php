@@ -1,3 +1,6 @@
+@php
+    use chillerlan\QRCode\{QRCode, QROptions};
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +37,7 @@
 <body>
     <table>
         <tr>
-            <td class="header" colspan="3"><strong>Factura Electrónica - CFDI</strong></td>
+            <td class="header" colspan="3"><strong>Factura Electrónica - @if(!isset($datainvoice->folioFiscal)) Pre @endif CFDI</strong></td>
         </tr>
         <tr>
             <td class="nameCompany" colspan="2"><h2 class="pm0"><strong>{{ \Auth::user()->bussine->bussine_name }}</strong></h2></td>
@@ -64,9 +67,9 @@
         </tr>
         <tr>
             <td>
-                <br>Folio Fiscal: {{ $datainvoice->folioFiscal }}
+                @if(isset($datainvoice->folioFiscal))<br> Folio Fiscal: {{ $datainvoice->folioFiscal }} @endif
                 <br>Fecha de comprobante: {{ $datainvoice->fecha }}
-                <br>Fecha de certificado del CFDI: 
+                @if(isset($datainvoice->folioFiscal))<br>Fecha de certificado del CFDI: {{ $datainvoice->FechaTimbrado }} @endif
             </td>
             <td>
                 <br>Forma de pago: 
@@ -152,28 +155,29 @@
         ({{ $datainvoice->numberToWords }} )
     </div>
     <div class="clearfix"></div>
-    <table class="DataSAT">
-        <tr>
-            <td style="width: 40%;">
-                @php
-                    use chillerlan\QRCode\{QRCode, QROptions};
-                    echo '<img style="margin: 0px 50px;" width="180px" src="'.(new QRCode)->render($datainvoice->qr).'" alt="QR Code" />';
-                @endphp
-            </td>
-            <td>
-                Serie del Certificado del emisor: 879878878789789789
-                <br>Folio Fiscal: {{ $datainvoice->folioFiscal }} 
-                <br>No. serie del Certificado del SAT: {{ $datainvoice->noCertificado }}
-                <br>Fecha y hora de certificación: {{ $datainvoice->FechaTimbrado }}
-                <br><strong>Este documento es una representación impresa de un CFDI</strong>
-            </td>
-        </tr>
-    </table>
-    <strong>Sello Digital del Emisor:</strong></td>
-    <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->selloEmisor }}</textarea>
-    <strong>Sello Digital del SAT:</strong></td>
-    <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloSAT }}</textarea>
-    <strong>Cadena original del complemento de certificación digital del SAT:</strong></td>
-    <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloCFD }}</textarea>
+    @if (isset($datainvoice->folioFiscal))    
+        <table class="DataSAT">
+            <tr>
+                <td style="width: 40%;">
+                    @php
+                        echo '<img style="margin: 0px 50px;" width="180px" src="'.(new QRCode)->render($datainvoice->qr).'" alt="QR Code" />';
+                    @endphp
+                </td>
+                <td>
+                    Serie del Certificado del emisor: 879878878789789789
+                    <br>Folio Fiscal: {{ $datainvoice->folioFiscal }} 
+                    <br>No. serie del Certificado del SAT: {{ $datainvoice->noCertificado }}
+                    <br>Fecha y hora de certificación: {{ $datainvoice->FechaTimbrado }}
+                    <br><strong>Este documento es una representación impresa de un CFDI</strong>
+                </td>
+            </tr>
+        </table>
+        <strong>Sello Digital del Emisor:</strong></td>
+        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->selloEmisor }}</textarea>
+        <strong>Sello Digital del SAT:</strong></td>
+        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloSAT }}</textarea>
+        <strong>Cadena original del complemento de certificación digital del SAT:</strong></td>
+        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloCFD }}</textarea>
+    @endif
 </body>
 </html>

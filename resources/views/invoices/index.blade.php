@@ -43,7 +43,7 @@
                     <th>Fecha</th>
                     <th>Moneda</th>
                     <th>Forma de pago</th>
-                    <th>Monto</th>
+                    <th>Subtotal</th>
                     <th>Admin.</th>
                   </tr>
                 </thead>
@@ -51,7 +51,11 @@
                 <tbody>
                   @foreach($invoices as $invoice)
                     <tr>
-                      <td class="text-center"><a href="{{ route('invoices.show', $invoice->id) }}">{{ $invoice->folio }}</a></td>
+                      <td class="text-center">
+                        <a href="{{ route('invoices.show', $invoice->id) }}">
+                          {{ $invoice->folio }}
+                        </a>
+                      </td>
                       <td class="text-center">{{ $invoice->customer->bussine_name }}</td>
                       <td class="text-center">{{ $invoice->date ?? '' }}</td>
                       <td class="text-center">{{ $invoice->currency->code ?? '' }}</td>

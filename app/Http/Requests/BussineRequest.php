@@ -42,9 +42,9 @@ class BussineRequest extends FormRequest
             'no_inside'         => 'required|string', 
             'start_serie'       => 'string',          
             'start_folio'       => 'string',          
-            'certificate'       => 'max:2048', //file .cer
-            'key_private'       => 'max:2048', //file .key
-            'password'          => 'max:255',
+            'certificate'       => 'required|max:2048', //file .cer
+            'key_private'       => 'required|max:2048', //file .key
+            'password'          => 'required|max:255', //Password for encrypt .key and .cer 
             'name_pac'          => 'max:255',
             'password_pac'      => 'max:255',
             'logo'              => 'image',
@@ -70,6 +70,9 @@ class BussineRequest extends FormRequest
             'zip.required'              => 'El campo Código Postal es obligatorio.',
             'no_exterior.required'      => 'El campo No. Exterior es obligatorio.',
             'no_inside.required'        => 'El campo No. Interior es obligatorio.',  
+            'certificate.required'      => 'El campo Certificado es obligatorio',
+            'key_private.required'      => 'El campo Llave Privada es obligario',
+            'password.required'         => 'El campo Contraseña es obligario'
         ];
     }
 }

@@ -440,7 +440,7 @@
                             iva
                           </td>
                           <td>
-                            <input type="hidden" name="tasa_tax[]" value="0.16">
+                            <input type="hidden" name="tasa_tax[]" value="0.160000">
                             0.16
                           </td>
                           <td>
@@ -465,7 +465,7 @@
                             iva
                           </td>
                           <td>
-                            <input type="hidden" name="tasa_tax[]" value="0.10">
+                            <input type="hidden" name="tasa_tax[]" value="0.106667">
                             0.10
                           </td>
                           <td>
@@ -490,7 +490,7 @@
                             isr
                           </td>
                           <td>
-                            <input type="hidden" name="tasa_tax[]" value="0.10">
+                            <input type="hidden" name="tasa_tax[]" value="0.100000">
                             0.10
                           </td>
                           <td>

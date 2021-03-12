@@ -107,8 +107,8 @@ class InvoiceController extends Controller
     {   
         $bussine_id = Auth::user()->bussine_id;
         $existFolio = Invoice::where('bussine_id', $bussine_id)
-        ->where('folio', intval($request['folio']))
-        ->count();
+                                ->where('folio', intval($request['folio']))
+                                ->count();
         
         if ($existFolio > 0) return back()->with('warning', 'El folio ya esta en uso');
         
@@ -158,7 +158,8 @@ class InvoiceController extends Controller
         return view('invoices.show', [
             'invoice' => $invoice,
             'bussine' => $bussine,
-            'totales' => $totales
+            'totales' => $totales,
+            'isTimbrado' => Cfdi33Helper::isTimbrado($comprobante)
         ]);
     }
 
@@ -217,13 +218,17 @@ class InvoiceController extends Controller
             $emitor = $this->preparedingEmitor();
             $receptor = $this->preparedingReceptor($data);
 
+            
             $creator = new \CfdiUtils\CfdiCreator33($attributesHeader, $certificate);
             
             $comprobante = $creator->comprobante();
             $comprobante->addEmisor($emitor);
             $comprobante->addReceptor($receptor);
-
+            
             /** Crear Conceptos con sus respectivos Impuestos */
+            $impuestosCfdi = [];
+            $impuestosTrasladados = [];
+            $impuestosRetenidos = [];
             foreach ($concepts as $concept) {
                 $conceptos = $comprobante->addConcepto([
                     'ClaveProdServ' => $concept['ClaveProdServ'],
@@ -244,25 +249,66 @@ class InvoiceController extends Controller
                                 'Impuesto'   => $tax['Impuesto'],
                                 'TipoFactor' => $tax['TipoFactor'],
                                 'TasaOCuota' => $tax['TasaOCuota'],
-                                'Importe'    => $tax['Importe']
+                                'Importe'    => $tax['Importe'],
                             ]);
+
+                            if(count($impuestosTrasladados) <= 0){
+                                array_push($impuestosTrasladados, [
+                                    'Impuesto'   => $tax['Impuesto'],
+                                    'TipoFactor' => $tax['TipoFactor'],
+                                    'TasaOCuota' => $tax['TasaOCuota'],
+                                    'Importe'    => bcdiv($tax['Importe'], '1', 2)
+                                ]);
+                            }else{
+                                foreach($impuestosTrasladados as $key => $tras){
+                                    if($tras['Impuesto'] == $tax['Impuesto']
+                                        && $tras['TipoFactor'] == $tax['TipoFactor']
+                                        && $tras['TasaOCuota'] == $tax['TasaOCuota']
+                                    ){
+                                        $impuestosTrasladados[$key]['Importe'] =  bcdiv($tras['Importe'] + $tax['Importe'], '1', 2);
+                                    } else {
+                                        array_push($impuestosTrasladados, [
+                                            'Impuesto'   => $tax['Impuesto'],
+                                            'TipoFactor' => $tax['TipoFactor'],
+                                            'TasaOCuota' => $tax['TasaOCuota'],
+                                            'Importe'    => bcdiv($tax['Importe'], '1', 2)
+                                        ]);
+                                    }
+                                }
+                            }
                         }else{
                             $conceptos->addRetencion([
                                 'Base'       => $tax['Base'],
                                 'Impuesto'   => $tax['Impuesto'],
                                 'TipoFactor' => $tax['TipoFactor'],
                                 'TasaOCuota' => $tax['TasaOCuota'],
-                                'Importe'    => $tax['Importe']
+                                'Importe'    => $tax['Importe'],
                             ]);
+
+                            if(count($impuestosRetenidos) <= 0){
+                                array_push($impuestosRetenidos, [
+                                    'Impuesto'   => $tax['Impuesto'],
+                                    'Importe'    => bcdiv($tax['Importe'], '1', 2)
+                                ]);
+                            }else{
+                                foreach($impuestosRetenidos as $key => $tras){
+                                    if ($tras['Impuesto'] == $tax['Impuesto']) {
+                                        $impuestosRetenidos[$key]['Importe'] =  bcdiv($tras['Importe'] + $tax['Importe'], '1', 2);
+                                    } else {
+                                        array_push($impuestosRetenidos, [
+                                            'Impuesto'   => $tax['Impuesto'],
+                                            'Importe'    => bcdiv($tax['Importe'], '1', 2)
+                                        ]);
+                                    }
+                                }
+                            }
                         }
-                            
                     }
                 } 
             }
 
             /** Crear Impuestos en el comprobante */
-            if (isset($concept['Impuestos']) && count($concept['Impuestos']) > 0) {
-                $impuestosCfdi = [];
+            if (count($impuestosTrasladados) > 0 || count($impuestosRetenidos) > 0) {
                 if($this->SUM_TOTAL_TAXES_TRASLADADOS != 0){
                     $impuestosCfdi['TotalImpuestosTrasladados'] = $this->SUM_TOTAL_TAXES_TRASLADADOS;
                 }
@@ -271,29 +317,20 @@ class InvoiceController extends Controller
                 }
 
                 $comprobante->addImpuestos($impuestosCfdi);
-                foreach($concept['Impuestos'] as $tax) {
-                    if($tax['Type'] == 'traslado') {
-                        $comprobante->addTraslado([
-                            //'Base'       => $tax['Base'],
-                            'Impuesto'   => $tax['Impuesto'],
-                            'TipoFactor' => $tax['TipoFactor'],
-                            'TasaOCuota' => $tax['TasaOCuota'],
-                            'Importe'    => $tax['Importe']
-                        ]);
-                    }else{
-                        $comprobante->addRetencion([
-                            //'Base'       => $tax['Base'],
-                            'Impuesto'   => $tax['Impuesto'],
-                            //'TipoFactor' => $tax['TipoFactor'],
-                            //'TasaOCuota' => $tax['TasaOCuota'],
-                            'Importe'    => $tax['Importe']
-                        ]);
+                if (count($impuestosTrasladados) > 0) {
+                    foreach ($impuestosTrasladados as $result) {
+                        $comprobante->multiTraslado($result);
                     }
-                        
+                }
+
+                if (count($impuestosRetenidos) > 0) {
+                    foreach ($impuestosRetenidos as $result) {
+                        $comprobante->multiRetencion($result);
+                    }
                 }
             } 
 
-            $filePem = Storage::disk('key')->get($fileKey.'.pem');
+            $filePem = \Storage::disk('key')->get($fileKey.'.pem');
             $creator->addSello($filePem, Auth::user()->bussine->password);
 
             $asserts = $creator->validate();
@@ -317,6 +354,7 @@ class InvoiceController extends Controller
         } catch (\Throwable $err) {
             return false;
         }
+
     }
 
     /**
@@ -395,7 +433,6 @@ class InvoiceController extends Controller
         $subtotal = 0;
         $totalTaxTrasladado = 0;
         $totalTaxRetenido = 0;
-        $total = 0;
         $discount = 0;
 
         foreach ($request['detail'] as $key => $value) {
@@ -405,6 +442,7 @@ class InvoiceController extends Controller
             $importe = $value['quantity'] * $value['amount'];
             
             if(isset($value['taxes'])){   
+                $taxes = [];
                 $trasladoPrevious = 0;
 
                 foreach ($value['taxes'] as $ky => $val) {
@@ -413,10 +451,10 @@ class InvoiceController extends Controller
 
                     if($val['type'] == 'traslado') {
                         if ($val['code'] == '002' ) $trasladoPrevious = $imp;
-                        $totalTaxTrasladado += $imp;
+                        $totalTaxTrasladado += bcdiv($imp, '1', 2);
                     } elseif($val['type'] == 'retenido') {
-                        if ($val['code'] == '003') $imp = ($trasladoPrevious * 2) / 3;
-                        $totalTaxRetenido += $imp;
+                        if ($val['code'] == '002') $imp = ($trasladoPrevious * 2) / 3;
+                        $totalTaxRetenido += bcdiv($imp, '1', 2);
                     }
 
                     $taxes[] = [
@@ -450,7 +488,7 @@ class InvoiceController extends Controller
         $this->DISCOUNT = bcdiv($discount, '1', 2);
         $this->SUM_TOTAL_TAXES_TRASLADADOS = bcdiv($totalTaxTrasladado, '1', 2);
         $this->SUM_TOTAL_TAXES_RETENIDOS = bcdiv($totalTaxRetenido, '1', 2);
-        $this->TOTAL = $subtotal - $discount - $totalTaxRetenido + $totalTaxTrasladado;
+        $this->TOTAL = bcdiv($subtotal - $discount - $totalTaxRetenido + $totalTaxTrasladado, '1', 2);
 
         return $data;
     }
@@ -472,7 +510,7 @@ class InvoiceController extends Controller
                             'detail'
                         )->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
 
-        return $this->printDefault($dataInvoice, true);
+        return $this->print($dataInvoice, true);
     }
 
     /**
@@ -483,13 +521,31 @@ class InvoiceController extends Controller
      * @param boolean $save
      * @return void
      */
-    public function printDefault(Invoice $datainvoice, $download = false, $save = false)
+    public function print(Invoice $datainvoice, $download = false, $save = false)
     {
-        //$dataInvoice->name_file
-        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . 'INV-000267_59.xml')))
+        //'INV-000267_59.xml'
+        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $datainvoice->name_file)))
         ->getQuickReader();
 
-        $datainvoice['qr'] = Cfdi33Helper::generateQR('INV-000267_59.xml'); 
+        $tmp = 'default';
+        if (Cfdi33Helper::isTimbrado($comprobante)) {
+            $tmp = 'cfdi33';
+        }
+
+        $class_print = 'print' . ucfirst($tmp);
+        return $this->$class_print($datainvoice, $download, $save);
+    }
+
+    /**
+     * Print Cfdi33
+     *
+     * @return void
+     */
+    public function printCfdi33(Invoice $datainvoice, $download = false, $save = false){
+        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $datainvoice->name_file)))
+        ->getQuickReader();
+
+        $datainvoice['qr'] = Cfdi33Helper::generateQR($datainvoice->name_file); 
         $datainvoice['numberToWords'] = Cfdi33Helper::NumberToWord($comprobante['Total'], 2,  $comprobante['Moneda']);
         $datainvoice['fecha']        = $comprobante['Fecha'];
         $datainvoice['subtotal']     = $comprobante['SubTotal'];
@@ -498,6 +554,7 @@ class InvoiceController extends Controller
         $datainvoice['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'];
         $datainvoice['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'];
         $datainvoice['total']        = $comprobante['Total'];
+
         $datainvoice['folioFiscal']  = $comprobante->complemento->timbrefiscaldigital['UUID'] ?? '';
         $datainvoice['noCertificado']   = $comprobante->complemento->timbrefiscaldigital['NoCertificadoSAT'] ?? '';
         $datainvoice['FechaTimbrado']   = $comprobante->complemento->timbrefiscaldigital['FechaTimbrado'] ?? '';
@@ -506,7 +563,40 @@ class InvoiceController extends Controller
 
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadView('invoices.pdf_default', compact('datainvoice'));
-        $fileName = Auth::user()->bussine->start_serie . $datainvoice['folio'];
+        $fileName = Auth::user()->bussine->start_serie . $comprobante['folio'];
+
+        if ($save) {
+            return $pdf->output();
+        }
+
+        if($download){
+            return $pdf->download($fileName . '.pdf');
+        }
+
+        //Redirect
+        return $pdf->stream($fileName . '.pdf');
+    }
+
+    /**
+     * Print without Cfdi33
+     *
+     * @return void
+     */
+    public function printDefault(Invoice $datainvoice, $download = false, $save = false){
+        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $datainvoice->name_file)))
+        ->getQuickReader();
+
+        $datainvoice['numberToWords'] = Cfdi33Helper::NumberToWord($comprobante['Total'], 2,  $comprobante['Moneda']);
+        $datainvoice['fecha']        = $comprobante['Fecha'];
+        $datainvoice['subtotal']     = $comprobante['SubTotal'];
+        $datainvoice['descuento']    = $comprobante['Descuento'];
+        $datainvoice['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'];
+        $datainvoice['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'];
+        $datainvoice['total']        = $comprobante['Total'];
+
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('invoices.pdf_default', compact('datainvoice'));
+        $fileName = Auth::user()->bussine->start_serie . $comprobante['folio'];
 
         if ($save) {
             return $pdf->output();
@@ -571,7 +661,7 @@ class InvoiceController extends Controller
 
         $fileNamePdf = false;
         if(isset($request->sendPDF)){
-            $fileNamePdf = $this->printDefault($invoice);
+            $fileNamePdf = $this->print($invoice);
         }
 
         $fileNameXML = false;

@@ -11,9 +11,10 @@
             <div class="x_content">
                 <section class="content invoice">
                     <div class="row">
-                        <div class="  invoice-header">
+                        <div class="invoice-header">
                             <h1>
                                 <i class="fa fa-globe"></i> {{ Auth::user()->bussine->start_serie }}{{ $invoice->folio }}
+                                @if(!$isTimbrado) <strong style="font-size: 15px;color: #ccc">PreCfdi</strong> @endif
                                 <small class="pull-right">Fecha y Hora: {{ $invoice->date }}</small>
                             </h1>
                         </div>

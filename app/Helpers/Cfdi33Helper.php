@@ -47,4 +47,18 @@ class Cfdi33Helper{
     $formatter = new NumeroALetras();
     return $formatter->toMoney($number, $decimal = 2, $currency, $centavos);
   }
+
+  /**
+   * Check is TimbreFiscalDigital exist
+   *
+   * @return void
+   */
+  public static function isTimbrado($cfdi)
+  {
+    if (isset($cfdi->complemento->TimbreFiscalDigital)) {
+      return true;
+    }
+
+    return false;
+  }
 }
