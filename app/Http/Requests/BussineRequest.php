@@ -23,6 +23,11 @@ class BussineRequest extends FormRequest
      */
     public function rules()
     {
+        $rule = '';
+        if(request()->method != "PUT") {
+            $rule = 'required|';
+        }
+
         return [
             'bussine_name'      => 'required|string',
             'tradename'         => 'required|string',
@@ -42,9 +47,9 @@ class BussineRequest extends FormRequest
             'no_inside'         => 'required|string', 
             'start_serie'       => 'string',          
             'start_folio'       => 'string',          
-            'certificate'       => 'required|max:2048', //file .cer
-            'key_private'       => 'required|max:2048', //file .key
-            'password'          => 'required|max:255', //Password for encrypt .key and .cer 
+            'certificate'       => $rule . 'max:2048', //file .cer
+            'key_private'       => $rule . 'max:2048', //file .key
+            'password'          => $rule . 'max:255', //Password for encrypt .key and .cer 
             'name_pac'          => 'max:255',
             'password_pac'      => 'max:255',
             'logo'              => 'image',
