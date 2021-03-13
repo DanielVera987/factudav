@@ -506,61 +506,60 @@
           $('#produserv_id_search').select2({
             placeholder: 'Escribe para comenzar a buscar',
             ajax: {
-                url: '/searchProduServ',
-                dataType: 'json',
-                delay: 250,
-                processResults: function (data) {
-                    return {
-                        results: $.map(data, function (item) {
-                            return {
-                                text: `${item.code} - ${item.name}`,
-                                id: item.id
-                            }
-                        })
-                    };
-                },
-                cache: true
+              url: '/searchProduServ',
+              dataType: 'json',
+              delay: 250,
+              processResults: function (data) {
+                  return {
+                      results: $.map(data, function (item) {
+                          return {
+                              text: `${item.code} - ${item.name}`,
+                              id: item.id
+                          }
+                      })
+                  };
+              },
+              cache: true
             }
           });
 
           $('#unit_id_search').select2({
             placeholder: 'Escribe para comenzar a buscar',
             ajax: {
-                url: '/searchUnit',
-                dataType: 'json',
-                delay: 250,
-                processResults: function (data) {
-                    return {
-                        results: $.map(data, function (item) {
-                            return {
-                                text: `${item.code} - ${item.name}`,
-                                id: item.id
-                            }
-                        })
-                    };
-                },
-                cache: true
+              url: '/searchUnit',
+              dataType: 'json',
+              delay: 250,
+              processResults: function (data) {
+                  return {
+                      results: $.map(data, function (item) {
+                          return {
+                              text: `${item.code} - ${item.name}`,
+                              id: item.id
+                          }
+                      })
+                  };
+              },
+              cache: true
             }
           });
 
           $('#search_customer').select2({
             placeholder: 'Escribe para comenzar a buscar',
             ajax: {
-                url: '/searchCustomers',
-                dataType: 'json',
-                delay: 250,
-                processResults: function (data) {
-                    return {
-                        results: $.map(data, function (item) {
-                            return {
-                                text: `${item.bussine_name}`,
-                                id: item.id
-                            }
-                        })
-                    };
-
-                },
-                cache: true
+              url: '/searchCustomers',
+              dataType: 'json',
+              delay: 250,
+              processResults: function (data) {
+                  return {
+                      results: $.map(data, function (item) {
+                          return {
+                              text: `${item.bussine_name}`,
+                              id: item.id
+                          }
+                      })
+                  };
+              },
+              cache: true
             }
           });
 

@@ -119,7 +119,8 @@ class InvoiceController extends Controller
         $request['name_file'] = $unsignedXml;
 
         $invoice = Invoice::create($request->all());
-        Detail::createDetail($invoice->id, $request);
+        $details = Detail::createDetail($invoice->id, $request);
+        if(!$details) return back()->with('warning', 'Se genero un error al guardar la factura');
         
         return redirect(route('invoices.index'))->with('success', 'Factura Creada');
     }

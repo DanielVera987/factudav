@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class Detail extends Model
 {
@@ -52,8 +53,16 @@ class Detail extends Model
         return $this->belongsToMany(Tax::class, 'tax_details');
     }
 
-    public static function createDetail($invoiceId, $request)
+    /**
+     * Create relationship Detail with invoice
+     *
+     * @param [type] $invoiceId
+     * @param [type] $request
+     * @return bool
+     */
+    public static function createDetail($invoiceId, $request) : bool
     {
+        $err = [];
         foreach ($request['detail'] as $key => $value) {
             $detail = Detail::create([
                 'bussine_id' => Auth::user()->bussine_id,
@@ -67,6 +76,13 @@ class Detail extends Model
                 'quantity' => $value['quantity'],
             ]);
 
+            if($value['product_id'] != 0){
+                $check = Product::subtractStock($value['product_id'], $value['quantity']);
+                if(!$check){
+                    return false;
+                }
+            }
+
             if(isset($value['taxes'])){   
                 foreach ($value['taxes'] as $key => $value) {
                     TaxDetail::create([
@@ -76,6 +92,8 @@ class Detail extends Model
                 }
             }
         }
+
+        return true;
     }
 
     public static function updateDetail($invoiceId, $request)

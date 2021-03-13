@@ -698,3 +698,18 @@
     </div>
   </div>
 @endsection
+
+@section('script')
+    <script src="{{ asset('/vendors/pnotify/dist/pnotify.js') }}"></script>
+    <script src="{{ asset('/vendors/pnotify/dist/pnotify.buttons.js') }}"></script>
+    <script>
+      @if($alertProduct)
+         new PNotify({
+          title: 'Oh No!',
+          text: 'Hay productos con su minimo de stock!!',
+          type: 'error',
+          styling: 'bootstrap3'
+        });
+      @endif
+    </script>
+@endsection

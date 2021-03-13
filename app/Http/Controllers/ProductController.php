@@ -180,6 +180,12 @@ class ProductController extends Controller
         }
     }
 
+    /**
+     * Check if code the product repeats
+     *
+     * @param [type] $code
+     * @return void
+     */
     protected function checkRepeatingCode($code)
     {
         $existFolio = Product::where('bussine_id', Auth::user()->bussine_id)

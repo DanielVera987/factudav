@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="row invoice-info">
-                        <div class="col-sm-4 invoice-col">
+                        <div class="col-md-4 col-sm-4 invoice-col">
                             <strong> Emisor </strong>
                             <address>
                                 Razon Social: <strong>{{ $bussine->bussine_name }}</strong>
@@ -33,7 +33,7 @@
                             </address>
                         </div>
 
-                        <div class="col-sm-4 invoice-col">
+                        <div class="col-md-4 col-sm-4 invoice-col">
                             <strong> Receptor </strong>
                             <address>
                                 Razon Social: <strong>{{ $invoice->customer->bussine_name }}</strong>
@@ -45,7 +45,7 @@
                             </address>
                         </div>
 
-                        <div class="col-sm-4 invoice-col">
+                        <div class="col-md-4 col-sm-4 invoice-col">
                             <b>{{ Auth::user()->bussine->start_serie }}{{ $invoice->folio }}</b>
                             <br>
                             <b>Metodo de pago:</b>
@@ -65,9 +65,8 @@
                         </div>
                     </div>
 
-
                     <div class="row">
-                        <div class="  table">
+                        <div class="table">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>

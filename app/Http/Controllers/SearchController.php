@@ -85,6 +85,9 @@ class SearchController extends Controller
         if ( is_numeric(intval( $data['product_id'] )) && $data['product_id'] > 0) {
             $produc = Product::where('bussine_id', Auth::user()->bussine_id)->find($data['product_id']);
             if (! $produc) return abort(404);
+            if($produc->stock < $data['quantity']) {
+                return 0;
+            }
         }
         $unit = Unit::find($data['unit_id']);
         $producServ = ProduServ::find($data['produserv_id']);

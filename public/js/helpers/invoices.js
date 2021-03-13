@@ -62,9 +62,19 @@ function add_concept()
         taxes: taxes
     };
 
-    $.get(url, data, function (data) {
-        $('#divConceptos').append(data)
-        calculate_totals();
+    $.get(url, data, function (dat) {
+        if(dat == 0){
+            new PNotify({
+                title: 'Oh No!',
+                text: `No hay suficiente Stock para ${data.description}`,
+                type: 'error',
+                styling: 'bootstrap3'
+            });
+            return false; 
+        }else{
+            $('#divConceptos').append(dat)
+            calculate_totals();
+        }
     });
 }
 

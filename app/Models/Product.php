@@ -45,6 +45,11 @@ class Product extends Model
         return $this->belongsTo(ProduServ::class);
     }
 
+    /**
+     * Generate folio for product
+     *
+     * @return void
+     */
     public static function generateFolio()
     {
         $count = Product::where('bussine_id', Auth::user()->bussine_id)->count();
@@ -67,5 +72,47 @@ class Product extends Model
         $isExists = Product::where('bussine_id', Auth::user()->bussine_id)->where('code', $code)->count();
 
         return ($isExists > 0) ? true : false;
+    }
+
+    /**
+     * Decrement the stock of product
+     *
+     * @param [type] $id
+     * @param [type] $qty
+     * @return void
+     */
+    public static function subtractStock($id, $qty)
+    {
+        $product = Product::where('bussine_id', Auth::user()->bussine->id)->findOrFail($id);
+        $tmp = $product->stock - $qty;
+
+        if ($product->stock > 0 && $tmp >= 0) {
+            $product->stock = $tmp;
+            $product->save();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check which product reached its minimum stock
+     *
+     * @return bool
+     */
+    public static function checkMinStock() : bool
+    {
+        $alert = false;
+        $products = Product::where('bussine_id', Auth::user()->bussine->id)->get();
+
+        foreach($products as $product){
+            //dd($product->alert_stock, $product->stock);
+            if(15 >= $product->stock){
+                $alert = true;
+            }
+        }
+
+        return $alert;
     }
 }
