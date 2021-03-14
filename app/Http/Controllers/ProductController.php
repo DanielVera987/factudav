@@ -129,12 +129,16 @@ class ProductController extends Controller
      */
     public function update(ProductUpdateRequest $request, $id)
     {
-        if ($this->checkRepeatingCode($request['code'])) {
+        if ($this->checkRepeatingCode($request['code'], $id)) {
             return back()->with('warning', 'El codigo del producto ya esta en uso');
         } 
 
         if ($request->stock <= $request->alert_stock) {
             return back()->with('warning', 'El stock debe ser mayor a la alerta de stock');
+        }
+
+        if(!isset($request->is_active)) {
+            $request['is_active'] = null;
         }
 
         $product = Product::findOrFail($id);
@@ -186,11 +190,18 @@ class ProductController extends Controller
      * @param [type] $code
      * @return void
      */
-    protected function checkRepeatingCode($code)
+    protected function checkRepeatingCode($code, $id = '')
     {
         $existFolio = Product::where('bussine_id', Auth::user()->bussine_id)
                         ->where('code', intval($code))
                         ->count();
+        
+        if($id != '') { //If the empty id is not empty, use the update
+            $product = Product::where('bussine_id', Auth::user()->bussine_id)
+                            ->findOrFail($id);
+            $existFolio = ($product->code == $code) ? 0 : $existFolio;
+        }
+
         return ($existFolio > 0) ? true : false;
     }
 }

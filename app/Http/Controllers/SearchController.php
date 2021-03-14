@@ -52,10 +52,12 @@ class SearchController extends Controller
     {
         $products = [];
 
-        if ($request->has('q')) {
+        if ($request->has('q') && $request->q != '') {
             $search = $request->q;
             $products = Product::select('id', 'name', 'description', 'price')
                      ->where('bussine_id', Auth::user()->bussine_id)
+                     ->where('stock', '>', 0)
+                     ->where('is_active', 'on')
                      ->where('name', 'LIKE', "%$search%")
                      ->orWhere('code', 'LIKE', "%$search%")
                      ->get();

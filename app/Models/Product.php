@@ -48,7 +48,7 @@ class Product extends Model
     /**
      * Generate folio for product
      *
-     * @return void
+     * @return string $code
      */
     public static function generateFolio()
     {
@@ -67,6 +67,12 @@ class Product extends Model
         return $code;
     }
 
+    /**
+     * Verify that the code exists
+     * 
+     * @param string $code
+     * @return bool
+     */
     public static function existsCode($code) : bool
     {
         $isExists = Product::where('bussine_id', Auth::user()->bussine_id)->where('code', $code)->count();
@@ -77,13 +83,13 @@ class Product extends Model
     /**
      * Decrement the stock of product
      *
-     * @param [type] $id
-     * @param [type] $qty
+     * @param integer $id
+     * @param integer $qty
      * @return void
      */
     public static function subtractStock($id, $qty)
     {
-        $product = Product::where('bussine_id', Auth::user()->bussine->id)->findOrFail($id);
+        $product = Product::where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
         $tmp = $product->stock - $qty;
 
         if ($product->stock > 0 && $tmp >= 0) {
@@ -104,11 +110,10 @@ class Product extends Model
     public static function checkMinStock() : bool
     {
         $alert = false;
-        $products = Product::where('bussine_id', Auth::user()->bussine->id)->get();
+        $products = Product::where('bussine_id', Auth::user()->bussine_id)->get();
 
         foreach($products as $product){
-            //dd($product->alert_stock, $product->stock);
-            if(15 >= $product->stock){
+            if($product->stock <= $product->alert_stock){
                 $alert = true;
             }
         }

@@ -122,7 +122,7 @@ class InvoiceController extends Controller
         $details = Detail::createDetail($invoice->id, $request);
         if(!$details) return back()->with('warning', 'Se genero un error al guardar la factura');
         
-        return redirect(route('invoices.index'))->with('success', 'Factura Creada');
+        return redirect(route('invoices.show', $invoice->id));
     }
 
     /**

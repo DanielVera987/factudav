@@ -60,7 +60,11 @@
                       </td>
                       <td class="text-center">{{ $product->code }}</td>
                       <td class="text-center">{{ $product->name }}</td>
-                      <td class="text-center">{{ $product->stock }}</td>
+                      <td class="text-center">
+                        <span class="@if($product->stock <= $product->alert_stock) label label-warning @endif ">
+                          {{ $product->stock }}
+                        </span>
+                      </td>
                       <td class="text-center">{{ $product->price }}</td>
                       <td class="text-center">{{ $product->cost }}</td>
                       <td class="text-center"><span class="label @if($product->is_active == 'on') label-success @else label-warning @endif">{{ $product->is_active ?? 'off'}}</span></td>
