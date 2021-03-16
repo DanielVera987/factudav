@@ -441,7 +441,7 @@
                           </td>
                           <td>
                             <input type="hidden" name="tasa_tax[]" value="0.160000">
-                            0.16
+                            0.160000
                           </td>
                           <td>
                             <input type="hidden" name="factor_tax[]" value="Tasa">
@@ -466,7 +466,7 @@
                           </td>
                           <td>
                             <input type="hidden" name="tasa_tax[]" value="0.106667">
-                            0.10
+                            0.106667
                           </td>
                           <td>
                             <input type="hidden" name="factor_tax[]" value="Tasa">
@@ -491,7 +491,7 @@
                           </td>
                           <td>
                             <input type="hidden" name="tasa_tax[]" value="0.100000">
-                            0.10
+                            0.100000
                           </td>
                           <td>
                             <input type="hidden" name="factor_tax[]" value="Tasa">

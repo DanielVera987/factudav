@@ -8,15 +8,22 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () { return redirect()->route('login'); });
 
-Auth::routes();
+/**
+ * The registration url is deactivated so that only one user can access the system
+ */
+Auth::routes(['register' => false, 'reset' => false]);
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 Route::resource('/settings', BussineController::class);
 Route::resource('/customers', CustomerController::class);
 Route::resource('/products', ProductController::class);
 Route::resource('/invoices', InvoiceController::class);
+Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/user/{user}/update', [UserController::class, 'update'])->name('user.update');
 
 // Email
 Route::get('/invoices/email/{id}/create', [InvoiceController::class, 'createEmail'])->name('invoice.createEmail');
@@ -35,7 +42,7 @@ Route::get('/searchProduServ', [SearchController::class, 'searchProduServ']);
 Route::get('/searchProducts', [SearchController::class, 'searchProducts']);
 Route::get('/json/convertHtml', [SearchController::class, 'convertDetailHtml']);
 
-//Download
+//Download Files
 Route::get('/invoices/pdf/{id}', [InvoiceController::class, 'downloadPDF'])
   ->where(['id' => '[0-9]+'])->name('invoices.downloadPDF');
 Route::get('/uploads/xml/{file}', [InvoiceController::class, 'downloadXML'])

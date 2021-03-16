@@ -13,7 +13,7 @@
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
               <a href="index.html" class="site_title">
-                @if(Auth::user()->bussine->tradename != '')
+                @if(Auth::user() && Auth::user()->bussine_id && Auth::user()->bussine->tradename != '')
                   <span>{{ Auth::user()->bussine->tradename }}</span>
                 @else
                   <span>FactuDav</span>
@@ -26,7 +26,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                @if(Auth::user()->bussine->logo != '')
+                @if(Auth::user() && Auth::user()->bussine_id && Auth::user()->bussine->logo != '')
                   <img class="img-circle profile_img" src="{{ asset('/images/logos/'. Auth::user()->bussine->logo) }}" width="50">
                 @else
 
@@ -119,7 +119,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="{{ route('settings.create') }}"> Perfil</a></li>
+                    <li><a href="{{ route('user.edit', Auth::user()->id) }}"> Perfil</a></li>
                     <li>
                       <a href="{{ route('settings.create') }}">
                         <span> Configuración</span>
@@ -149,7 +149,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            @if(Auth::user()->bussine->bussine_name != '')
+            @if(Auth::user() && Auth::user()->bussine_id && Auth::user()->bussine->bussine_name != '')
               <span>{{ Auth::user()->bussine->bussine_name }}</span>
             @else
               <span>FactuDav</span>
