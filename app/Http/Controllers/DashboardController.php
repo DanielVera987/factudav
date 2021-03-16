@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tax;
+use App\Models\User;
+use App\Models\Bussine;
+use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\Currency;
+use App\Models\Customer;
 use App\Models\Municipality;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +33,15 @@ class DashboardController extends Controller
     public function index()
     {
         $alertProduct = Product::checkMinStock();
-        return view('/dashboard', compact('alertProduct'));
+        $productsMinStock = ($alertProduct) ? Product::getProductMinStock() : '';
+
+        $totalsCustomer = Customer::where('bussine_id', Auth::user()->bussine_id)->count();
+        $totalsInvoice = Invoice::where('bussine_id', Auth::user()->bussine_id)->count();
+        $totalsProduct = Product::where('bussine_id', Auth::user()->bussine_id)->count();
+
+        $completeBussine = Bussine::completeBussine();
+
+        return view('/dashboard', compact('alertProduct', 'totalsCustomer', 'totalsInvoice', 'totalsProduct', 'productsMinStock', 'completeBussine'));
     }
 
     /**

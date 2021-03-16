@@ -40,3 +40,5 @@ Route::get('/invoices/pdf/{id}', [InvoiceController::class, 'downloadPDF'])
   ->where(['id' => '[0-9]+'])->name('invoices.downloadPDF');
 Route::get('/uploads/xml/{file}', [InvoiceController::class, 'downloadXML'])
   ->where(['file' => '(.*?)\.(xml)$'])->name('uploads.xml');
+Route::get('/customer/export/cvs', [CustomerController::class, 'exportCVS']);
+Route::get('/product/export/cvs', [ProductController::class, 'exportCVS']);

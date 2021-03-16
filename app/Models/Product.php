@@ -120,4 +120,22 @@ class Product extends Model
 
         return $alert;
     }
+
+    public static function getProductMinStock()
+    {
+        $productsName = [];
+        $products = Product::where('bussine_id', Auth::user()->bussine_id)->get();
+
+        foreach($products as $product){
+            if($product->stock <= $product->alert_stock){
+                array_push($productsName, [
+                    'name' => $product->name,
+                    'code' => $product->code,
+                    'stock' => $product->stock
+                ]);
+            }
+        }
+
+        return $productsName;
+    }
 }

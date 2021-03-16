@@ -12,7 +12,13 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>FactuDav</span></a>
+              <a href="index.html" class="site_title">
+                @if(Auth::user()->bussine->tradename != '')
+                  <span>{{ Auth::user()->bussine->tradename }}</span>
+                @else
+                  <span>FactuDav</span>
+                @endif
+              </a>
             </div>
         
             <div class="clearfix"></div>
@@ -20,10 +26,14 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="{{ asset('images/img.jpg') }}" alt="..." class="img-circle profile_img">
+                @if(Auth::user()->bussine->logo != '')
+                  <img class="img-circle profile_img" src="{{ asset('/images/logos/'. Auth::user()->bussine->logo) }}" width="50">
+                @else
+
+                @endif
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Bienvenido,</span>
                 <h2>{{ Auth::user()->name }}</h2>
               </div>
             </div>
@@ -34,7 +44,6 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
                 <ul class="nav side-menu">
                   <li>
                     <a href="{{ route('home') }}">
@@ -71,14 +80,16 @@
         
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a href="{{ route('settings.create') }}" data-toggle="tooltip" data-placement="top" title="Settings">
+              <a href="{{ route('settings.create') }}" data-toggle="tooltip" data-placement="top" title="Configuración">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>
               <a data-toggle="tooltip" data-placement="top" title="">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="">
+              <a data-toggle="tooltip" data-placement="top" title="" onclick="toggleFullScreen()">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{ route('logout') }}"
+              <a data-toggle="tooltip" data-placement="top" title="Cerrar" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
@@ -104,89 +115,22 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('images/img.jpg') }}" alt="">{{ Auth::user()->name }}
+                    {{ Auth::user()->name }}
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="{{ route('settings.create') }}"> Perfil</a></li>
                     <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
+                      <a href="{{ route('settings.create') }}">
+                        <span> Configuración</span>
                       </a>
                     </li>
-                    <li><a href="javascript:;">Help</a></li>
                     <li>
                         <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-sign-out pull-right"></i> Log Out
+                                            <i class="fa fa-sign-out pull-right"></i> Cerrar
                         </a>
-                    </li>
-                  </ul>
-                </li>
-
-                <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
                     </li>
                   </ul>
                 </li>
@@ -205,7 +149,11 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            @if(Auth::user()->bussine->bussine_name != '')
+              <span>{{ Auth::user()->bussine->bussine_name }}</span>
+            @else
+              <span>FactuDav</span>
+            @endif
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -253,10 +201,10 @@
     <!-- Parsley -->
     <script src="{{ asset('/vendors/parsleyjs/dist/parsley.min.js') }}"></script>
 
-    @yield('script')
-    
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('/js/custom.min.js') }}"></script>
+    
+    @yield('script')
 
     <!-- Command Direct -->
     <script>
@@ -272,7 +220,21 @@
             e.preventDefault();
         }
 
+        if (e.ctrlKey && e.altKey && e.which === 80) {
+          window.location.href =  "{{ route('products.create') }}";
+          e.preventDefault();
+        }
       });
+
+      function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      }
     </script>
 	
   </body>

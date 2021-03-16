@@ -147,4 +147,45 @@ class CustomerController extends Controller
         $customer->delete();
         return redirect()->route('customers.index')->with('success', 'Cliente Eliminado');
     }
+
+    /**
+     * Export File CVS
+     * 
+     */
+    public function exportCVS()
+    {
+        $fileName = 'CustomerBackUp.csv';
+        $customers = Customer::with('country', 'state')->where('bussine_id', Auth::user()->bussine_id)->get();
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $columns = array('Nombre/Empresa', 'Razon Social', 'RFC', 'Email', 'Telefono', 'Pais', 'Estado');
+
+        $callback = function() use($customers, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($customers as $customer) {
+                $row['Nombre']       = $customer->bussine_name;
+                $row['Razon Social'] = $customer->tradename;
+                $row['RFC']          = $customer->rfc;
+                $row['Email']        = $customer->email;
+                $row['Telefono']     = $customer->telephone;
+                $row['Pais']         = $customer->country->abbreviation;
+                $row['Estado']       = $customer->state->abbreviation ?? '';
+
+                fputcsv($file, array($row['Nombre'], $row['Razon Social'], $row['RFC'], $row['Email'], $row['Telefono'], $row['Pais'], $row['Estado']));
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }

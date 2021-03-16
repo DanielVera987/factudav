@@ -19,6 +19,9 @@
               <h2><i class="fa fa-cubes"></i> Listado De Productos</h2>
               <div class="title_right">
                 <div style="float: right;">
+                  <button data-href="/product/export/cvs" id="exportcvs" onclick="exportProduct(event.target);" class="btn btn-secondary" type="button">
+                    Respaldar
+                  </button>
                   <a href="{{ route('products.create') }}" class="btn btn-success" type="button">
                     Crear Nuevo
                   </a>
@@ -75,7 +78,21 @@
                           <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                             @csrf 
                             @method('delete')
-                            <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
+                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target=".mod{{$product->id}}"><i class="fa fa-trash-o"></i></button>
+                            <div class="modal fade mod{{$product->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                              <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel2">¿Esta seguro?</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Borrar</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </form>
                           
                         </div>
@@ -109,4 +126,10 @@
   <script src="{{ asset('/vendors/jszip/dist/jszip.min.js') }}"></script>
   <script src="{{ asset('/vendors/pdfmake/build/pdfmake.min.js') }}"></script>
   <script src="{{ asset('/vendors/pdfmake/build/vfs_fonts.js') }}"></script>
+  <script>
+    function exportProduct(_this) {
+        let _url = $(_this).data('href');
+        window.location.href = _url;
+    }
+  </script>
 @endsection

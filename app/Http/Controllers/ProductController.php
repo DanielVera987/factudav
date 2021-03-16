@@ -204,4 +204,44 @@ class ProductController extends Controller
 
         return ($existFolio > 0) ? true : false;
     }
+
+    /**
+     * Export file CVS
+     */
+    public function exportCVS()
+    {
+        $fileName = 'ProductBackUp.csv';
+        $products = Product::with('unit', 'produserv')->where('bussine_id', Auth::user()->bussine_id)->get();
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $columns = array('Codigo', 'Nombre', 'Stock', 'Precio', 'Costo', 'Clave Sat', 'Unidad Sat');
+
+        $callback = function() use($products, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($products as $product) {
+                $row['Codigo']     = $product->code;
+                $row['Nombre']     = $product->name;
+                $row['Stock']      = $product->stock;
+                $row['Precio']     = $product->price;
+                $row['Costo']      = $product->cost;
+                $row['Clave Sat']  = '['.$product->unit->code.']'.'-'.$product->unit->name;
+                $row['Unidad Sat'] = '['.$product->produserv->code.']'.'-'.$product->produserv->name;
+
+                fputcsv($file, array($row['Codigo'], $row['Nombre'], $row['Stock'], $row['Precio'], $row['Costo'], $row['Clave Sat'], $row['Unidad Sat']));
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
 }
