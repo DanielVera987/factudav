@@ -61,4 +61,17 @@ class Cfdi33Helper{
 
     return false;
   }
+
+  /**
+  * Valida un RFC
+  *
+  * @param string $rfc a validar
+  * @return multiple int 1 si el $rfc es valido 0 si no. boolean FALSE si sucede un error.
+  * @link http://php.net/manual/en/function.preg-match.php
+  */
+  public static function validarRFC($rfc)
+  {
+    $regex = '/^[A-Z]{4}([0-9]{2})(1[0-2]|0[1-9])([0-3][0-9])([ -]?)([A-Z0-9]{4})$/';
+    return preg_match($regex, $rfc);
+  }
 }

@@ -34,6 +34,8 @@ class DashboardController extends Controller
     {
         $alertProduct = Product::checkMinStock();
         $productsMinStock = ($alertProduct) ? Product::getProductMinStock() : '';
+        $lastCustomers = Customer::where('bussine_id', Auth::user()->bussine_id)->orderByDesc('id')->take(10)->get();
+        $lastProducts = Product::where('bussine_id', Auth::user()->bussine_id)->orderByDesc('id')->take(5)->get();
 
         $totalsCustomer = Customer::where('bussine_id', Auth::user()->bussine_id)->count();
         $totalsInvoice = Invoice::where('bussine_id', Auth::user()->bussine_id)->count();
@@ -41,7 +43,16 @@ class DashboardController extends Controller
 
         $completeBussine = Bussine::completeBussine();
 
-        return view('/dashboard', compact('alertProduct', 'totalsCustomer', 'totalsInvoice', 'totalsProduct', 'productsMinStock', 'completeBussine'));
+        return view('/dashboard', 
+            compact('alertProduct', 
+                    'totalsCustomer', 
+                    'totalsInvoice', 
+                    'totalsProduct', 
+                    'productsMinStock', 
+                    'completeBussine',
+                    'lastCustomers',
+                    'lastProducts')
+        );
     }
 
     /**

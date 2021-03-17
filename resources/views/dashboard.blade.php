@@ -95,6 +95,46 @@
     <div class="col-md-4 col-sm-4 col-xs-12">
       <div class="x_panel tile fixed_height_320">
         <div class="x_title">
+          <h2>Ultimos 10 Clientes Agregados</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content"> 
+          @foreach($lastCustomers as $key => $value)
+              {{ $key + 1 }}- {{ $value->tradename }} <br />
+          @endforeach
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="x_panel tile fixed_height_320">
+        <div class="x_title">
+          <h2>Ultimos 10 Productos Agregados</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content"> 
+          @foreach($lastProducts as $key => $value)
+            {{ $key + 1 }}- {{ $value->name }} <br />
+          @endforeach
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="x_panel tile fixed_height_320">
+        <div class="x_title">
           <h2>Atajos del sistema</h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

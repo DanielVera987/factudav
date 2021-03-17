@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\RFC;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CustomerRequest extends FormRequest
@@ -26,8 +27,8 @@ class CustomerRequest extends FormRequest
         return [
             'bussine_name' => 'required|string',
             'tradename' => 'required|string',
-            'rfc' => 'required|string',
-            'email' => 'required|email|unique:customers',
+            'rfc' => ['required','string', new RFC],
+            'email' => 'required|email',
             'telephone' => 'required|string',
             'usecfdi_id' => 'required|numeric',
             'country_id' => 'required|numeric',
@@ -39,7 +40,7 @@ class CustomerRequest extends FormRequest
             'zip' => 'required|string',
             'no_exterior' => 'required|string',
             'no_inside' => 'required|string',
-            'street_reference' => 'string'
+            'street_reference' => ''
         ];
     }
 

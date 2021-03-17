@@ -110,7 +110,7 @@ class Product extends Model
     public static function checkMinStock() : bool
     {
         $alert = false;
-        $products = Product::where('bussine_id', Auth::user()->bussine_id)->get();
+        $products = Product::where('bussine_id', Auth::user()->bussine_id)->where('is_active', 'on')->get();
 
         foreach($products as $product){
             if($product->stock <= $product->alert_stock){
@@ -124,7 +124,7 @@ class Product extends Model
     public static function getProductMinStock()
     {
         $productsName = [];
-        $products = Product::where('bussine_id', Auth::user()->bussine_id)->get();
+        $products = Product::where('bussine_id', Auth::user()->bussine_id)->where('is_active', 'on')->get();
 
         foreach($products as $product){
             if($product->stock <= $product->alert_stock){

@@ -22,7 +22,7 @@ class CreateCustomersTable extends Migration
             $table->string('bussine_name');
             $table->string('tradename');
             $table->string('rfc');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('telephone');
             $table->foreignId('usecfdi_id')
                 ->reference('id')
