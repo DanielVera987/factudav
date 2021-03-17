@@ -22,6 +22,8 @@ use App\Helpers\Cfdi33Helper;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\InvoiceRequest;
 use App\Mail\SendInvoiceMail;
+use App\SuppliersPAC\Multifacturas\Config;
+use App\SuppliersPAC\Multifacturas\Timbrar;
 use Illuminate\Support\Facades\Mail;
 
 class InvoiceController extends Controller
@@ -114,9 +116,18 @@ class InvoiceController extends Controller
         
         $unsignedXml = $this->createCDFI($request);
         if (!$unsignedXml) return back()->with('warning', 'Se genero un error al procesar el XML, Intentalo de nuevo');
-        
-        $request['bussine_id'] = $bussine_id;
         $request['name_file'] = $unsignedXml;
+        
+        if($this->isTimbrar()){
+            $res = $this->timbrar($unsignedXml);
+            if($res == true){
+                $request['name_file'] = str_replace('_UNSIGNED', '', $unsignedXml);
+            }else{
+                return back()->with('warning', $res);
+            }
+        }
+
+        $request['bussine_id'] = $bussine_id;
 
         $invoice = Invoice::create($request->all());
         $details = Detail::createDetail($invoice->id, $request);
@@ -681,5 +692,26 @@ class InvoiceController extends Controller
         Mail::to($request->to)->send($email);
 
         return redirect(route('invoice.createEmail', $invoice->id))->with('success', 'Correo Enviado');
+    }
+
+    public function isTimbrar()
+    {
+        if(Auth::user()->bussine->name_pac && Auth::user()->bussine->password_pac){
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function timbrar($unsignedXml)
+    {
+        $params = new Config(
+            Auth::user()->bussine->name_pac,
+            Auth::user()->bussine->password_pac,
+            Auth::user()->bussine->production_pac,
+        );
+
+        $timbrar = new Timbrar($params, $unsignedXml);
+        return $timbrar->timbrar();
     }
 }

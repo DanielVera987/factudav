@@ -123,7 +123,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "84",
             "name" => "Kilopound-force por pulgada cuadrada",
-            "description" => "Uncodead de presión que define el número de kilopounds fuerza por pulgada cuadrada. \r\n\r\nUtilice kip por pulgada cuadrada (código común N20).",
+            "description" => "Unidad de presión que define el número de kilopounds fuerza por pulgada cuadrada. \r\n\r\nUtilice kip por pulgada cuadrada (código común N20).",
             "simbol" => "Klbf / in²",
         ]);
         Unit::create([
@@ -142,7 +142,7 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "94",
-            "name" => "Uncodead de curl",
+            "name" => "Unidad de curl",
         ]);
         Unit::create([
             "code" => "95",
@@ -180,7 +180,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "11",
             "name" => "Equipos",
-            "description" => " Uncodead de recuento que define el número de equipos (equipo: un conjunto completo de equipo / materiales / objetos utilizados para un propósito específico).",
+            "description" => " Unidad de recuento que define el número de equipos (equipo: un conjunto completo de equipo / materiales / objetos utilizados para un propósito específico).",
         ]);
         Unit::create([
             "code" => "13",
@@ -190,12 +190,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "14",
             "name" => "Shot",
-            "description" => "Uncodead de medcodea para liqucodeos.",
+            "description" => "Unidad de medcodea para liqucodeos.",
         ]);
         Unit::create([
             "code" => "15",
             "name" => "Palo, medcodea militar.",
-            "description" => "Uncodead para el momento de rotación relacionado con la longitud según el sistema de uncodeades Anglo-Americanas e Imperial.",
+            "description" => "Unidad para el momento de rotación relacionado con la longitud según el sistema de uncodeades Anglo-Americanas e Imperial.",
         ]);
         Unit::create([
             "code" => "16",
@@ -240,7 +240,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "1I",
             "name" => " Tipo de interés fijo",
-            "description" => " Uncodead de cantcodead expresada como una tasa predeterminada o conjunto para el uso de una instalación o servicio.",
+            "description" => " Unidad de cantcodead expresada como una tasa predeterminada o conjunto para el uso de una instalación o servicio.",
         ]);
         Unit::create([
             "code" => "1J",
@@ -265,12 +265,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "20",
             "name" => " Contenedores de veinte pies",
-            "description" => " Uncodead de conteo que define el número de contenedores de transporte que mcodeen 20 pies de longitud.",
+            "description" => " Unidad de conteo que define el número de contenedores de transporte que mcodeen 20 pies de longitud.",
         ]);
         Unit::create([
             "code" => "21",
             "name" => " Contenedor de cuarenta pies",
-            "description" => " Uncodead de conteo que define el número de contenedores de transporte que mcodeen 40 pies de longitud.",
+            "description" => " Unidad de conteo que define el número de contenedores de transporte que mcodeen 40 pies de longitud.",
         ]);
         Unit::create([
             "code" => "22",
@@ -285,7 +285,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "24",
             "name" => "Libra teórica",
-            "description" => " Uncodead de masa que define la masa esperada de material expresado como el número de libras.",
+            "description" => " Unidad de masa que define la masa esperada de material expresado como el número de libras.",
         ]);
         Unit::create([
             "code" => "25",
@@ -295,7 +295,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "27",
             "name" => "Tonelada teórica",
-            "description" => "Uncodead de masa que define la masa esperada de material, expresada como el número de toneladas.",
+            "description" => "Unidad de masa que define la masa esperada de material, expresada como el número de toneladas.",
         ]);
         Unit::create([
             "code" => "28",
@@ -328,12 +328,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "2H",
             "name" => "Voltios CD",
-            "description" => "Uncodead de potencial eléctrico en relación con corriente directa (CD).",
+            "description" => "Unidad de potencial eléctrico en relación con corriente directa (CD).",
             "simbol" => "V",
         ]);
         Unit::create([
             "code" => "2I",
-            "name" => "Uncodead térmica británica (tabla internacional) por hora",
+            "name" => "Unidad térmica británica (tabla internacional) por hora",
             "simbol" => "BtuIT/h",
         ]);
         Unit::create([
@@ -365,7 +365,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "2P",
             "name" => "Kilobyte",
-            "description" => " Uncodead de información igual a 10 ³  (1000) bytes.",
+            "description" => " Unidad de información igual a 10 ³  (1000) bytes.",
             "simbol" => "kbyte",
         ]);
         Unit::create([
@@ -436,7 +436,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "3C",
             "name" => "Manmonth",
-            "description" => "Uncodead de cuenta que define el número de meses que una persona o personas pueden desempeñar alguna activcodead.",
+            "description" => "Unidad de cuenta que define el número de meses que una persona o personas pueden desempeñar alguna activcodead.",
         ]);
         Unit::create([
             "code" => "3E",
@@ -496,7 +496,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "4L",
             "name" => "Megabyte",
-            "description" => "Uncodead que se usa para cuantificar un caudal de datos equivalente a 1000 kb/s.",
+            "description" => "Unidad que se usa para cuantificar un caudal de datos equivalente a 1000 kb/s.",
             "simbol" => "Mbyte",
         ]);
         Unit::create([
@@ -552,7 +552,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "56",
             "name" => "Sitas",
-            "description" => " Uncodead de área de placa de estaño igual a un área de superficie de 100 metros cuadrados.",
+            "description" => " Unidad de área de placa de estaño igual a un área de superficie de 100 metros cuadrados.",
         ]);
         Unit::create([
             "code" => "57",
@@ -562,7 +562,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "58",
             "name" => " kilogramo neto",
-            "description" => "Uncodead de masa que define el número total de kilogramos después de las deducciones.",
+            "description" => "Unidad de masa que define el número total de kilogramos después de las deducciones.",
         ]);
         Unit::create([
             "code" => "59",
@@ -578,7 +578,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "5B",
             "name" => "Batch",
-            "description" => "Uncodead de conteo que define el número de lotes (lote: cantcodead de material produccodeo en una operación o número de animales o personas que vienen a la vez).",
+            "description" => "Unidad de conteo que define el número de lotes (lote: cantcodead de material produccodeo en una operación o número de animales o personas que vienen a la vez).",
         ]);
         Unit::create([
             "code" => "5C",
@@ -587,7 +587,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "5E",
             "name" => "Mmscf/day",
-            "description" => "Uncodead de volumen equivalente a un millón (1,000,000) pies cúbicos de gas por día.",
+            "description" => "Unidad de volumen equivalente a un millón (1,000,000) pies cúbicos de gas por día.",
         ]);
         Unit::create([
             "code" => "5F",
@@ -610,7 +610,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "5J",
             "name" => "Caballos de potencia hcoderáulica",
-            "description" => "Uncodead de potencia de la definición de los caballos de potencia hcoderáulica suministrada por una bomba de flucodeo dependiendo de la viscoscodead del flucodeo.",
+            "description" => "Unidad de potencia de la definición de los caballos de potencia hcoderáulica suministrada por una bomba de flucodeo dependiendo de la viscoscodead del flucodeo.",
         ]);
         Unit::create([
             "code" => "5K",
@@ -653,7 +653,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "81",
             "name" => "Henry",
-            "description" => "Un henry es la uncodead para la inductancia eléctrica en el Sistema Internacional de Uncodeades. Es la inductancia eléctrica de un circuito cerrado en el que se produce una fuerza electromotriz de 1 voltio, cuando la corriente eléctrica que recorre el circuito varía uniformemente a razón de un amperio por segundo.",
+            "description" => "Un henry es la uncodead para la inductancia eléctrica en el Sistema Internacional de Unidades. Es la inductancia eléctrica de un circuito cerrado en el que se produce una fuerza electromotriz de 1 voltio, cuando la corriente eléctrica que recorre el circuito varía uniformemente a razón de un amperio por segundo.",
             "simbol" => "H",
         ]);
         Unit::create([
@@ -675,7 +675,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "91",
             "name" => "Stokes",
-            "description" => "El Stokes es la uncodead de viscoscodead cinemática en el Sistema Cegesimal de Uncodeades",
+            "description" => "El Stokes es la uncodead de viscoscodead cinemática en el Sistema Cegesimal de Unidades",
             "simbol" => "St",
         ]);
         Unit::create([
@@ -696,7 +696,7 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "A12",
-            "name" => "Uncodead astronómica",
+            "name" => "Unidad astronómica",
             "description" => "Es una uncodead de longitud igual por definición a 149 597 870 700 metros, y que equivale aproximadamente a la distancia media entre el planeta Tierra y el Sol.",
             "simbol" => "ua",
         ]);
@@ -744,22 +744,22 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "A20",
-            "name" => "Uncodead térmica británica (tabla internacional) por segundo pie cuadrado grado rankine.",
+            "name" => "Unidad térmica británica (tabla internacional) por segundo pie cuadrado grado rankine.",
             "simbol" => "BtuIT/(s·ft²·°R)",
         ]);
         Unit::create([
             "code" => "A21",
-            "name" => "Uncodead térmica británica (tabla internacional) por libra grado rankine",
+            "name" => "Unidad térmica británica (tabla internacional) por libra grado rankine",
             "simbol" => "Btu/IT(lb·°R)",
         ]);
         Unit::create([
             "code" => "A22",
-            "name" => "Uncodead térmica británica (tabla internacional) por segundo pie grado rankine",
+            "name" => "Unidad térmica británica (tabla internacional) por segundo pie grado rankine",
             "simbol" => "BtuIT/(s·ft·°R)",
         ]);
         Unit::create([
             "code" => "A23",
-            "name" => "Uncodead térmica británica (tabla internacional) por hora pie cuadrado grado rankine.",
+            "name" => "Unidad térmica británica (tabla internacional) por hora pie cuadrado grado rankine.",
             "simbol" => "BtuIT/(h·ft²·°R)",
         ]);
         Unit::create([
@@ -871,7 +871,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "A43",
             "name" => "Tonelaje de peso muerto",
-            "description" => "Uncodead de masa que define la diferencia entre el peso de un barco cuando está completamente vacío y su peso cuando está completamente cargado, expresado como el número de toneladas.",
+            "description" => "Unidad de masa que define la diferencia entre el peso de un barco cuando está completamente vacío y su peso cuando está completamente cargado, expresado como el número de toneladas.",
             "simbol" => "dwt",
         ]);
         Unit::create([
@@ -888,7 +888,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "A47",
             "name" => "Decitex",
-            "description" => "Uncodead de denscodead de hilo. Un decitex es igual a una masa de 1 gramo por 10 kilómetros de longitud.",
+            "description" => "Unidad de denscodead de hilo. Un decitex es igual a una masa de 1 gramo por 10 kilómetros de longitud.",
             "simbol" => "dtex (g/10km)",
         ]);
         Unit::create([
@@ -900,7 +900,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "A49",
             "name" => "Negador",
-            "description" => "Uncodead de denscodead de hilo. Una denier es igual a una masa de 1 gramo por 9 kilómetros de longitud.",
+            "description" => "Unidad de denscodead de hilo. Una denier es igual a una masa de 1 gramo por 9 kilómetros de longitud.",
             "simbol" => "den (g/9 km)",
         ]);
         Unit::create([
@@ -956,7 +956,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "A59",
             "name" => "La cobertura de nubes 8-parte",
-            "description" => "Uncodead de recuento para definir el número de octavos de partes como una medcodea de la cobertura de nubes de la ccúpula celeste. \r\n\r\n'Sinónimo: OKTA, OCTA",
+            "description" => "Unidad de recuento para definir el número de octavos de partes como una medcodea de la cobertura de nubes de la ccúpula celeste. \r\n\r\n'Sinónimo: OKTA, OCTA",
         ]);
         Unit::create([
             "code" => "A6",
@@ -1042,7 +1042,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "A75",
             "name" => "Tonelada de carga",
-            "description" => "Uncodead de información que normalmente se utiliza para la facturación, que se define como sea el número de toneladas métricas o el número de metros cúbicos, lo que sea mayor.",
+            "description" => "Unidad de información que normalmente se utiliza para la facturación, que se define como sea el número de toneladas métricas o el número de metros cúbicos, lo que sea mayor.",
         ]);
         Unit::create([
             "code" => "A76",
@@ -1117,7 +1117,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "A9",
             "name" => "Tarífa",
-            "description" => "Uncodead de cantcodead expresada como una tasa para el uso de una instalación o servicio.",
+            "description" => "Unidad de cantcodead expresada como una tasa para el uso de una instalación o servicio.",
         ]);
         Unit::create([
             "code" => "A90",
@@ -1143,7 +1143,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "A95",
             "name" => "Gray",
-            "description" => "Es una uncodead derivada del Sistema Internacional de Uncodeades que mcodee la dosis absorbcodea de radiaciones ionizantes por un determinado material. Un Gray es equivalente a la absorción de un julio de energía ionizante por un kilogramo de material irradiado.",
+            "description" => "Es una uncodead derivada del Sistema Internacional de Unidades que mcodee la dosis absorbcodea de radiaciones ionizantes por un determinado material. Un Gray es equivalente a la absorción de un julio de energía ionizante por un kilogramo de material irradiado.",
             "simbol" => "Gy",
         ]);
         Unit::create([
@@ -1164,18 +1164,18 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "A99",
             "name" => "Bit",
-            "description" => "Uncodead de información igual a un dígito binario.",
+            "description" => "Unidad de información igual a un dígito binario.",
             "simbol" => "bit",
         ]);
         Unit::create([
             "code" => "AA",
             "name" => "Balón",
-            "description" => "Uncodead de recuento para definir el número de bolas (Balón: objeto formado en la forma de esfera).",
+            "description" => "Unidad de recuento para definir el número de bolas (Balón: objeto formado en la forma de esfera).",
         ]);
         Unit::create([
             "code" => "AB",
             "name" => "Paquete a granel",
-            "description" => "Uncodead de recuento para definir el número de artículos por paquete a granel.",
+            "description" => "Unidad de recuento para definir el número de artículos por paquete a granel.",
             "simbol" => "pk",
         ]);
         Unit::create([
@@ -1187,12 +1187,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "ACT",
             "name" => "Activcodead",
-            "description" => "Uncodead de recuento para definir el número de activcodeades (activcodead: una uncodead de trabajo o acción).",
+            "description" => "Unidad de recuento para definir el número de activcodeades (activcodead: una uncodead de trabajo o acción).",
         ]);
         Unit::create([
             "code" => "AD",
             "name" => "Byte",
-            "description" => "Uncodead de información igual a 8 bits.",
+            "description" => "Unidad de información igual a 8 bits.",
             "simbol" => "byte",
         ]);
         Unit::create([
@@ -1204,12 +1204,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "AH",
             "name" => "Minuto adicional",
-            "description" => "Uncodead de tiempo que define el número de minutos, además de los minutos referenciados.",
+            "description" => "Unidad de tiempo que define el número de minutos, además de los minutos referenciados.",
         ]);
         Unit::create([
             "code" => "AI",
             "name" => "Minuto y medio por llamada",
-            "description" => "Uncodead de recuento para definir el número de minutos para el intervalo medio de una llamada.",
+            "description" => "Unidad de recuento para definir el número de minutos para el intervalo medio de una llamada.",
         ]);
         Unit::create([
             "code" => "AJ",
@@ -1224,12 +1224,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "AL",
             "name" => "Línea de acceso",
-            "description" => "Uncodead de recuento para definir el número de líneas de acceso telefónico.",
+            "description" => "Unidad de recuento para definir el número de líneas de acceso telefónico.",
         ]);
         Unit::create([
             "code" => "AMH",
             "name" => "Amperio hora",
-            "description" => "Uncodead de carga electrica defincodea por la cantcodead de carga acumulada por un flujo constante de un amperio por 1 hora. ",
+            "description" => "Unidad de carga electrica defincodea por la cantcodead de carga acumulada por un flujo constante de un amperio por 1 hora. ",
             "simbol" => "A·h",
         ]);
         Unit::create([
@@ -1241,7 +1241,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "ANN",
             "name" => "Año",
-            "description" => "Uncodead de tiempo equivalente a 365.25 días. ",
+            "description" => "Unidad de tiempo equivalente a 365.25 días. ",
             "simbol" => "y",
         ]);
         Unit::create([
@@ -1255,8 +1255,8 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "AQ",
-            "name" => "Uncodead del factir anti-hemofilico.",
-            "description" => "Uncodead de medcodea para la potencia de la sangre (US).",
+            "name" => "Unidad del factir anti-hemofilico.",
+            "description" => "Unidad de medcodea para la potencia de la sangre (US).",
         ]);
         Unit::create([
             "code" => "AR",
@@ -1271,17 +1271,17 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "AS",
             "name" => "Variedad",
-            "description" => "Uncodead de recuento para definir el número de surtcodeos (variedad: conjunto de elementos agrupados en una colección mixta).",
+            "description" => "Unidad de recuento para definir el número de surtcodeos (variedad: conjunto de elementos agrupados en una colección mixta).",
         ]);
         Unit::create([
             "code" => "ASM",
             "name" => "Grado alcohólico en masa",
-            "description" => "Uncodead de masa que define el grado alcohólico de un líqucodeo.",
+            "description" => "Unidad de masa que define el grado alcohólico de un líqucodeo.",
         ]);
         Unit::create([
             "code" => "ASU",
             "name" => "Grado alcohólico volumétrico",
-            "description" => "Uncodead de volumen que define el grado alcohólico de un líqucodeo (por ejemplo, alcohol, vino, cerveza, etc.), a menudo a una temperatura específica.",
+            "description" => "Unidad de volumen que define el grado alcohólico de un líqucodeo (por ejemplo, alcohol, vino, cerveza, etc.), a menudo a una temperatura específica.",
         ]);
         Unit::create([
             "code" => "ATM",
@@ -1311,7 +1311,7 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "AZ",
-            "name" => "Uncodead térmica británica (tabla internacional) por libra",
+            "name" => "Unidad térmica británica (tabla internacional) por libra",
             "simbol" => "BtuIT/lb",
         ]);
         Unit::create([
@@ -1327,7 +1327,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "B10",
             "name" => "Bits por segundo",
-            "description" => "Uncodead de información igual a un dígito binario por segundo.",
+            "description" => "Unidad de información igual a un dígito binario por segundo.",
             "simbol" => "bit/s",
         ]);
         Unit::create([
@@ -1365,7 +1365,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "B17",
             "name" => "Crédito",
-            "description" => "Uncodead de recuento de definir el número de entradas realizadas en el haber de una cuenta.",
+            "description" => "Unidad de recuento de definir el número de entradas realizadas en el haber de una cuenta.",
         ]);
         Unit::create([
             "code" => "B18",
@@ -1375,7 +1375,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "B19",
             "name" => "Dígito",
-            "description" => "Uncodead de información que define la cantcodead de números utiliza para formar un número.",
+            "description" => "Unidad de información que define la cantcodead de números utiliza para formar un número.",
         ]);
         Unit::create([
             "code" => "B2",
@@ -1434,12 +1434,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "B3",
             "name" => "Libra de bateo",
-            "description" => "Uncodead de masa que define el número de libras de fibra acolchada.",
+            "description" => "Unidad de masa que define el número de libras de fibra acolchada.",
         ]);
         Unit::create([
             "code" => "B30",
             "name" => "Gibibit",
-            "description" => "Uncodead de información igual a 2³⁰ los bits (dígitos binarios).",
+            "description" => "Unidad de información igual a 2³⁰ los bits (dígitos binarios).",
             "simbol" => "Gibit",
         ]);
         Unit::create([
@@ -1490,7 +1490,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "B4",
             "name" => "Barril, uncodead imperial",
-            "description" => "Uncodead de volumen utilizado para medir cerveza. Un barril de cerveza es igual a 36 galones imperiales.",
+            "description" => "Unidad de volumen utilizado para medir cerveza. Un barril de cerveza es igual a 36 galones imperiales.",
         ]);
         Unit::create([
             "code" => "B40",
@@ -1585,7 +1585,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "B57",
             "name" => "Año luz",
-            "description" => "Uncodead de longitud que conscodeera la distancia a la que viaja la luz en el vacío en un año.",
+            "description" => "Unidad de longitud que conscodeera la distancia a la que viaja la luz en el vacío en un año.",
             "simbol" => "ly",
         ]);
         Unit::create([
@@ -1645,7 +1645,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "B68",
             "name" => "Gigabit",
-            "description" => "Uncodead de información igual a 10⁹ los bits (dígitos binarios).",
+            "description" => "Unidad de información igual a 10⁹ los bits (dígitos binarios).",
             "simbol" => "Gbit",
         ]);
         Unit::create([
@@ -1656,7 +1656,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "B7",
             "name" => "Ciclo",
-            "description" => "Uncodead de recuento de definir el número de ciclos (ciclo: un período recurrente de duración defincodea).",
+            "description" => "Unidad de recuento de definir el número de ciclos (ciclo: un período recurrente de duración defincodea).",
         ]);
         Unit::create([
             "code" => "B70",
@@ -1716,7 +1716,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "B80",
             "name" => "Gigabit por segundo",
-            "description" => "Uncodead de información igual a 10⁹ bits (dígitos binarios) por segundo.",
+            "description" => "Unidad de información igual a 10⁹ bits (dígitos binarios) por segundo.",
             "simbol" => "Gbit/s",
         ]);
         Unit::create([
@@ -1727,7 +1727,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "B82",
             "name" => "Pulgadas por pie lineal",
-            "description" => "Uncodead de longitud que define el número de pulgadas por pie lineal.",
+            "description" => "Unidad de longitud que define el número de pulgadas por pie lineal.",
         ]);
         Unit::create([
             "code" => "B83",
@@ -1806,7 +1806,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "B97",
             "name" => "Microrradián",
-            "description" => "Uncodead de distancia angular igual a una milésima de milliradian. Uncodead angular - una uncodead de medcodea para ángulos.",
+            "description" => "Unidad de distancia angular igual a una milésima de milliradian. Unidad angular - una uncodead de medcodea para ángulos.",
             "simbol" => "µrad",
         ]);
         Unit::create([
@@ -1833,7 +1833,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "BFT",
             "name" => "Tablero de pies",
-            "description" => "Uncodead de medcodea para el volumen de la madera en el Estados Uncodeos y Canadá . Es el volumen de una longitud de un pie de una placa de un pie de ancho y una pulgada de grosor.",
+            "description" => "Unidad de medcodea para el volumen de la madera en el Estados Uncodeos y Canadá . Es el volumen de una longitud de un pie de una placa de un pie de ancho y una pulgada de grosor.",
             "simbol" => "fbm",
         ]);
         Unit::create([
@@ -1879,7 +1879,7 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "BTU",
-            "name" => "Uncodead térmica británica (tabla internacional)",
+            "name" => "Unidad térmica británica (tabla internacional)",
             "simbol" => "BtuIT",
         ]);
         Unit::create([
@@ -1973,7 +1973,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "C21",
             "name" => "Kibibit",
-            "description" => "Uncodead de información igual a 2¹⁰ (1024) bits (dígitos binarios).",
+            "description" => "Unidad de información igual a 2¹⁰ (1024) bits (dígitos binarios).",
             "simbol" => "Kibit",
         ]);
         Unit::create([
@@ -2062,7 +2062,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "C37",
             "name" => "Kilobits",
-            "description" => "Uncodead de información igual a 10³(1000) bits (dígitos binarios).",
+            "description" => "Unidad de información igual a 10³(1000) bits (dígitos binarios).",
             "simbol" => "kbit",
         ]);
         Unit::create([
@@ -2241,7 +2241,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "C69",
             "name" => "Phon",
-            "description" => "Uncodead de volumen del soncodeo subjetivo. Un soncodeo tiene p phons de sonorcodead si se parece al oyente a ser iguales en intenscodead, con el soncodeo de un tono puro de frecuencia 1 kilohertz y de la fuerza p decibelios.",
+            "description" => "Unidad de volumen del soncodeo subjetivo. Un soncodeo tiene p phons de sonorcodead si se parece al oyente a ser iguales en intenscodead, con el soncodeo de un tono puro de frecuencia 1 kilohertz y de la fuerza p decibelios.",
         ]);
         Unit::create([
             "code" => "C7",
@@ -2271,7 +2271,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "C74",
             "name" => "Kilobits por segundo",
-            "description" => "Uncodead de información igual a 10 ³  (1000) bits (dígitos binarios) por segundo.",
+            "description" => "Unidad de información igual a 10 ³  (1000) bits (dígitos binarios) por segundo.",
             "simbol" => "kbit/s",
         ]);
         Unit::create([
@@ -2297,7 +2297,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "C79",
             "name" => "Kilovoltios horas amperios",
-            "description" => "Uncodead de energía acumulada de 1000 amperios voltioios durante un período de una hora.",
+            "description" => "Unidad de energía acumulada de 1000 amperios voltioios durante un período de una hora.",
             "simbol" => "kVAh",
         ]);
         Unit::create([
@@ -2360,7 +2360,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "C9",
             "name" => "Grupo bobinas",
-            "description" => "Uncodead de conteo que define el número de grupos de bobinas (grupo bobina: grupos de elementos dispuestos por longitudes de los objetos colocados en una secuencia de círculos concéntricos uncodeo).",
+            "description" => "Unidad de conteo que define el número de grupos de bobinas (grupo bobina: grupos de elementos dispuestos por longitudes de los objetos colocados en una secuencia de círculos concéntricos uncodeo).",
         ]);
         Unit::create([
             "code" => "C90",
@@ -2417,7 +2417,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "CCT",
             "name" => "Capaccodead de carga en toneladas métricas",
-            "description" => "Uncodead de masa que define la capaccodead de carga, expresada como el número de toneladas métricas.",
+            "description" => "Unidad de masa que define la capaccodead de carga, expresada como el número de toneladas métricas.",
         ]);
         Unit::create([
             "code" => "CDL",
@@ -2443,7 +2443,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "CG",
             "name" => "Tarjeta",
-            "description" => "Uncodead de conteo que define el número de uncodeades de la tarjeta (tarjeta: papel rígcodeo grueso o cartón).",
+            "description" => "Unidad de conteo que define el número de uncodeades de la tarjeta (tarjeta: papel rígcodeo grueso o cartón).",
         ]);
         Unit::create([
             "code" => "CGM",
@@ -2491,7 +2491,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "CNP",
             "name" => "Cientos de paquetes",
-            "description" => "Uncodead de recuento para definir el número de cientos de paquetes (cien paquete: conjunto de un centenar de artículos empaquetados juntos).",
+            "description" => "Unidad de recuento para definir el número de cientos de paquetes (cien paquete: conjunto de un centenar de artículos empaquetados juntos).",
         ]);
         Unit::create([
             "code" => "CNT",
@@ -2507,7 +2507,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "CTG",
             "name" => "Contencodeo en gramos",
-            "description" => "Uncodead de masa que define el número de gramos de un elemento con nombre en un producto.",
+            "description" => "Unidad de masa que define el número de gramos de un elemento con nombre en un producto.",
         ]);
         Unit::create([
             "code" => "CTM",
@@ -2517,7 +2517,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "CTN",
             "name" => "Tonelada de contencodeo (métrica)",
-            "description" => "Uncodead de masa que define el número de toneladas métricas de un elemento con nombre en un producto.",
+            "description" => "Unidad de masa que define el número de toneladas métricas de un elemento con nombre en un producto.",
         ]);
         Unit::create([
             "code" => "CUR",
@@ -2542,13 +2542,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "D03",
             "name" => "Kilovatio hora por hora",
-            "description" => "Uncodead de energía acumulada en mil vatios durante un período de una hora.",
+            "description" => "Unidad de energía acumulada en mil vatios durante un período de una hora.",
             "simbol" => "kW·h/h",
         ]);
         Unit::create([
             "code" => "D04",
             "name" => "Lot Unit::create([uncodead de peso]",
-            "description" => "Uncodead de peso igual a aproximadamente media onza o 15 gramos.",
+            "description" => "Unidad de peso igual a aproximadamente media onza o 15 gramos.",
         ]);
         Unit::create([
             "code" => "D1",
@@ -2628,7 +2628,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "D23",
             "name" => "Gramo pluma (proteína)",
-            "description" => "Uncodead de recuento pata definir el número de gramos de aminoáccodeos  prescritos para la terapia parenteral y terapia enteral.",
+            "description" => "Unidad de recuento pata definir el número de gramos de aminoáccodeos  prescritos para la terapia parenteral y terapia enteral.",
         ]);
         Unit::create([
             "code" => "D24",
@@ -2726,12 +2726,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "D42",
             "name" => "Año tropical",
-            "description" => "Uncodead de tiempo equivalente a 365.242 19 días. Sinónimo: año solar.",
+            "description" => "Unidad de tiempo equivalente a 365.242 19 días. Sinónimo: año solar.",
             "simbol" => "y (tropical)",
         ]);
         Unit::create([
             "code" => "D43",
-            "name" => "Uncodead de masa atómica unificada",
+            "name" => "Unidad de masa atómica unificada",
             "simbol" => "u",
         ]);
         Unit::create([
@@ -2847,7 +2847,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "D63",
             "name" => "Libro",
-            "description" => "Uncodead de recuento para definir el número de libros (libro: conjunto de elementos uncodeos entre sí o documento de un material escrito).",
+            "description" => "Unidad de recuento para definir el número de libros (libro: conjunto de elementos uncodeos entre sí o documento de un material escrito).",
         ]);
         Unit::create([
             "code" => "D64",
@@ -2856,7 +2856,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "D65",
             "name" => "Redondo",
-            "description" => "Uncodead de recuento para definir el número de rondas (redondos: un objeto circular o cilíndrico).",
+            "description" => "Unidad de recuento para definir el número de rondas (redondos: un objeto circular o cilíndrico).",
         ]);
         Unit::create([
             "code" => "D66",
@@ -2869,7 +2869,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "D68",
             "name" => "Número de palabras",
-            "description" => "Uncodead de recuento para definir el número de palabras.",
+            "description" => "Unidad de recuento para definir el número de palabras.",
         ]);
         Unit::create([
             "code" => "D69",
@@ -2923,7 +2923,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "D78",
             "name" => "Megajoule por segundo",
-            "description" => "Uncodead de energía acumulada igual a un millón de julios por segundo.",
+            "description" => "Unidad de energía acumulada igual a un millón de julios por segundo.",
             "simbol" => "MJ/s",
         ]);
         Unit::create([
@@ -3033,7 +3033,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "DAD",
             "name" => "Decena de días",
-            "description" => "Uncodead de tiempo que define el número de días en múltiplos de 10.",
+            "description" => "Unidad de tiempo que define el número de días en múltiplos de 10.",
         ]);
         Unit::create([
             "code" => "DAY",
@@ -3044,7 +3044,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "DB",
             "name" => "Libra seca",
-            "description" => "Uncodead de masa que define el número de libras de un producto, sin tener en cuenta el contencodeo de agua del producto.",
+            "description" => "Unidad de masa que define el número de libras de un producto, sin tener en cuenta el contencodeo de agua del producto.",
         ]);
         Unit::create([
             "code" => "DC",
@@ -3063,7 +3063,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "DEC",
             "name" => "Década",
-            "description" => "Uncodead de recuento de definir el número de décadas (década: cantcodead igual a 10 o tiempo igual a 10 años).",
+            "description" => "Unidad de recuento de definir el número de décadas (década: cantcodead igual a 10 o tiempo igual a 10 años).",
         ]);
         Unit::create([
             "code" => "DG",
@@ -3098,7 +3098,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "DMO",
             "name" => "Kiloliter norma",
-            "description" => "Uncodead de volumen que define el número de kilolitros de un producto a una temperatura de 15 grados centígrados, sobre todo en relación con los aceites de hcoderocarburos.",
+            "description" => "Unidad de volumen que define el número de kilolitros de un producto a una temperatura de 15 grados centígrados, sobre todo en relación con los aceites de hcoderocarburos.",
         ]);
         Unit::create([
             "code" => "DMQ",
@@ -3120,17 +3120,17 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "DPC",
             "name" => "Docenas de piezas",
-            "description" => "Uncodead de recuento para definir el número de piezas en múltiplos de 12 (pieza: un solo artículo, el artículo o ejemplar).",
+            "description" => "Unidad de recuento para definir el número de piezas en múltiplos de 12 (pieza: un solo artículo, el artículo o ejemplar).",
         ]);
         Unit::create([
             "code" => "DPR",
             "name" => "Docenas de pares",
-            "description" => "Uncodead de recuento de definir el número de pares en múltiplos de 12 (par: ítem descrito por dos de).",
+            "description" => "Unidad de recuento de definir el número de pares en múltiplos de 12 (par: ítem descrito por dos de).",
         ]);
         Unit::create([
             "code" => "DPT",
             "name" => "Peso de desplazamiento",
-            "description" => "Uncodead de masa que define el volumen de agua de mar de un barco desplaza, expresada como el número de toneladas.",
+            "description" => "Unidad de masa que define el volumen de agua de mar de un barco desplaza, expresada como el número de toneladas.",
         ]);
         Unit::create([
             "code" => "DQ",
@@ -3149,7 +3149,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "DRL",
             "name" => "Docena de rodillos",
-            "description" => "Uncodead de recuento de definir el número de rollos, expresado en doce uncodeades de rodillos.",
+            "description" => "Unidad de recuento de definir el número de rollos, expresado en doce uncodeades de rodillos.",
         ]);
         Unit::create([
             "code" => "DRM",
@@ -3162,7 +3162,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "DT",
             "name" => "Tonelada seca",
-            "description" => "Uncodead de masa que define el número de toneladas de un producto, sin tener en cuenta el contencodeo de agua del producto.",
+            "description" => "Unidad de masa que define el número de toneladas de un producto, sin tener en cuenta el contencodeo de agua del producto.",
         ]);
         Unit::create([
             "code" => "DTN",
@@ -3178,7 +3178,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "DWT",
             "name" => "Pennyweight",
-            "description" => "La uncodead obsoleta pennyweight era Uncodead de masa utilizada en el Reino Uncodeo antes de 1971. Se conscodeeraba equivalente a la masa de un penique, y equivale a la 1/240 parte de una libra troy. Se abrevia pwt.",
+            "description" => "La uncodead obsoleta pennyweight era Unidad de masa utilizada en el Reino Uncodeo antes de 1971. Se conscodeeraba equivalente a la masa de un penique, y equivale a la 1/240 parte de una libra troy. Se abrevia pwt.",
         ]);
         Unit::create([
             "code" => "Dx",
@@ -3192,13 +3192,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "DZN",
             "name" => "Docena",
-            "description" => "Uncodead de recuento de definir el número de uncodeades en múltiplos de 12.",
+            "description" => "Unidad de recuento de definir el número de uncodeades en múltiplos de 12.",
             "simbol" => "DOZ",
         ]);
         Unit::create([
             "code" => "DZP",
             "name" => "Docena de paquete",
-            "description" => "Uncodead de conteo que define el número de paquetes en múltiplos de 12 (paquete: uncodead de embalaje estándar).",
+            "description" => "Unidad de conteo que define el número de paquetes en múltiplos de 12 (paquete: uncodead de embalaje estándar).",
         ]);
         Unit::create([
             "code" => "E01",
@@ -3209,25 +3209,25 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "E07",
             "name" => "Megawatt hora por hora",
-            "description" => "Uncodead de energía acumulado de un millón de vatios durante un período de una hora.",
+            "description" => "Unidad de energía acumulado de un millón de vatios durante un período de una hora.",
             "simbol" => "MW·h/h",
         ]);
         Unit::create([
             "code" => "E08",
             "name" => "Megavatios por hertz",
-            "description" => "Uncodead de energía expresada como el cambio de carga en millones de watts que provocará un desplazamiento de frecuencia de un hertz.",
+            "description" => "Unidad de energía expresada como el cambio de carga en millones de watts que provocará un desplazamiento de frecuencia de un hertz.",
             "simbol" => "MW/Hz",
         ]);
         Unit::create([
             "code" => "E09",
             "name" => "Miliamperio hora",
-            "description" => "Uncodead de carga de potencia entregada a razón de una milésima parte de un amperio durante un período de una hora.",
+            "description" => "Unidad de carga de potencia entregada a razón de una milésima parte de un amperio durante un período de una hora.",
             "simbol" => "mA·h",
         ]);
         Unit::create([
             "code" => "E10",
             "name" => "Día de grado",
-            "description" => "Uncodead de medcodea utilizada en la meteorología y la ingeniería para medir la demanda de calentamiento o enfriamiento durante un período determinado de días.",
+            "description" => "Unidad de medcodea utilizada en la meteorología y la ingeniería para medir la demanda de calentamiento o enfriamiento durante un período determinado de días.",
             "simbol" => "deg da",
         ]);
         Unit::create([
@@ -3238,7 +3238,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "E12",
             "name" => "Mille",
-            "description" => "Uncodead de recuento de definir el número de cigarrillos en uncodeades de 1.000.",
+            "description" => "Unidad de recuento de definir el número de cigarrillos en uncodeades de 1.000.",
         ]);
         Unit::create([
             "code" => "E14",
@@ -3253,13 +3253,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "E16",
             "name" => "Millón de btu (ti) por hora",
-            "description" => "Uncodead de potencia igual a un millón de uncodeades térmicas británicas por hora.",
+            "description" => "Unidad de potencia igual a un millón de uncodeades térmicas británicas por hora.",
             "simbol" => "BtuIT/h",
         ]);
         Unit::create([
             "code" => "E17",
             "name" => "Pie cúbico por segundo",
-            "description" => "Uncodead de volumen igual a un pie cúbico pasa por un punto dado en un periodo de un segundo.",
+            "description" => "Unidad de volumen igual a un pie cúbico pasa por un punto dado en un periodo de un segundo.",
             "simbol" => "ft³/s",
         ]);
         Unit::create([
@@ -3271,43 +3271,43 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "E19",
             "name" => "Ping",
-            "description" => "Uncodead de área equivalente a 3,3 metros cuadrados.",
+            "description" => "Unidad de área equivalente a 3,3 metros cuadrados.",
         ]);
         Unit::create([
             "code" => "E20",
             "name" => "Megabit por segundo",
-            "description" => "Uncodead de información igual a 10 ⁶  (1000000) bits (dígitos binarios) por segundo.",
+            "description" => "Unidad de información igual a 10 ⁶  (1000000) bits (dígitos binarios) por segundo.",
             "simbol" => "Mbit/s",
         ]);
         Unit::create([
             "code" => "E21",
             "name" => "Shares",
-            "description" => "Uncodead de recuento para definir el número de acciones (proporción: un total o una parte de las partes en que se divcodee el capital de una entcodead comercial).",
+            "description" => "Unidad de recuento para definir el número de acciones (proporción: un total o una parte de las partes en que se divcodee el capital de una entcodead comercial).",
         ]);
         Unit::create([
             "code" => "E22",
             "name" => "Tue",
-            "description" => "Uncodead de recuento para definir el número de uncodeades equivalentes a veinte pies (TEU) como una medcodea de la capaccodead de carga en contenedores.",
+            "description" => "Unidad de recuento para definir el número de uncodeades equivalentes a veinte pies (TEU) como una medcodea de la capaccodead de carga en contenedores.",
         ]);
         Unit::create([
             "code" => "E23",
             "name" => "Neumático",
-            "description" => "Uncodead de recuento de definir el número de neumáticos (una cubierta sólcodea o llena de aire colocado alrededor de una llanta de rueda para formar un contacto suave con la carretera, absorber los golpes y proporcionar tracción).",
+            "description" => "Unidad de recuento de definir el número de neumáticos (una cubierta sólcodea o llena de aire colocado alrededor de una llanta de rueda para formar un contacto suave con la carretera, absorber los golpes y proporcionar tracción).",
         ]);
         Unit::create([
             "code" => "E25",
-            "name" => "Uncodead activa",
-            "description" => "Uncodead de conteo que define el número de uncodeades activas dentro de una sustancia.",
+            "name" => "Unidad activa",
+            "description" => "Unidad de conteo que define el número de uncodeades activas dentro de una sustancia.",
         ]);
         Unit::create([
             "code" => "E27",
             "name" => "Dosis",
-            "description" => "Uncodead de recuento de definir el número de dosis (dosis: una cantcodead defincodea de un medicamento o fármaco).",
+            "description" => "Unidad de recuento de definir el número de dosis (dosis: una cantcodead defincodea de un medicamento o fármaco).",
         ]);
         Unit::create([
             "code" => "E28",
             "name" => "Tonelada seca de aire",
-            "description" => "Uncodead de masa que define el número de toneladas de un producto, sin tener en cuenta el contencodeo de agua del producto.",
+            "description" => "Unidad de masa que define el número de toneladas de un producto, sin tener en cuenta el contencodeo de agua del producto.",
         ]);
         Unit::create([
             "code" => "E3",
@@ -3316,68 +3316,68 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "E30",
             "name" => "Hebra",
-            "description" => "Uncodead de recuento de definir el número de hebras (hebra: de largo,, flexible, solo hilo delgado, tiras de fibra, filamento constituyente o múltiplos de la misma, trenzados entre sí).",
+            "description" => "Unidad de recuento de definir el número de hebras (hebra: de largo,, flexible, solo hilo delgado, tiras de fibra, filamento constituyente o múltiplos de la misma, trenzados entre sí).",
         ]);
         Unit::create([
             "code" => "E31",
             "name" => "Metro cuadrado por litro",
-            "description" => "Uncodead de recuento de definir el número de metros cuadrados por litro.",
+            "description" => "Unidad de recuento de definir el número de metros cuadrados por litro.",
             "simbol" => "m²/l",
         ]);
         Unit::create([
             "code" => "E32",
             "name" => "Litros por hora",
-            "description" => "Uncodead de recuento de definir el número de litros por hora.",
+            "description" => "Unidad de recuento de definir el número de litros por hora.",
             "simbol" => "l/h",
         ]);
         Unit::create([
             "code" => "E33",
             "name" => "Por mil pies",
-            "description" => "Uncodead de recuento de definir el número de pies por mil uncodeades.",
+            "description" => "Unidad de recuento de definir el número de pies por mil uncodeades.",
         ]);
         Unit::create([
             "code" => "E34",
             "name" => "Gigabyte",
-            "description" => "Uncodead de información igual a 10⁹ bytes.",
+            "description" => "Unidad de información igual a 10⁹ bytes.",
             "simbol" => "Gbyte",
         ]);
         Unit::create([
             "code" => "E35",
             "name" => "Terabyte",
-            "description" => "Uncodead de información igual a 10¹² bytes.",
+            "description" => "Unidad de información igual a 10¹² bytes.",
             "simbol" => "Tbyte",
         ]);
         Unit::create([
             "code" => "E36",
             "name" => "Petabyte",
-            "description" => "Uncodead de información igual a 10¹⁵ bytes.",
+            "description" => "Unidad de información igual a 10¹⁵ bytes.",
             "simbol" => "Pbyte",
         ]);
         Unit::create([
             "code" => "E37",
             "name" => "Pixel",
-            "description" => "Uncodead de recuento de definir el número de píxeles (píxel: elemento de imagen).",
+            "description" => "Unidad de recuento de definir el número de píxeles (píxel: elemento de imagen).",
         ]);
         Unit::create([
             "code" => "E38",
             "name" => "Megapíxeles",
-            "description" => "Uncodead de recuento igual a 10 $ ⁶ $ (1000000) píxeles (elementos de imagen).",
+            "description" => "Unidad de recuento igual a 10 $ ⁶ $ (1000000) píxeles (elementos de imagen).",
         ]);
         Unit::create([
             "code" => "E39",
             "name" => "Puntos por pulgada",
-            "description" => "Uncodead de información que define el número de puntos por pulgada lineal como una medcodea de la resolución o nitcodeez de una imagen gráfica.",
+            "description" => "Unidad de información que define el número de puntos por pulgada lineal como una medcodea de la resolución o nitcodeez de una imagen gráfica.",
             "simbol" => "dpi",
         ]);
         Unit::create([
             "code" => "E4",
             "name" => "Kilo bruto",
-            "description" => "Uncodead de masa que define el número total de kilogramos antes de las deducciones.",
+            "description" => "Unidad de masa que define el número total de kilogramos antes de las deducciones.",
         ]);
         Unit::create([
             "code" => "E40",
             "name" => "Parte por cien mil",
-            "description" => "Uncodead de proporción igual a 10⁻⁵.",
+            "description" => "Unidad de proporción igual a 10⁻⁵.",
             "simbol" => "ppht",
         ]);
         Unit::create([
@@ -3399,7 +3399,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "E44",
             "name" => "Metros kilogramo-fuerza por centímetro cuadrado",
-            "description" => "Uncodead de torsión que define el medcodeor de par kilogramo-fuerza por centímetro cuadrado.",
+            "description" => "Unidad de torsión que define el medcodeor de par kilogramo-fuerza por centímetro cuadrado.",
             "simbol" => "kgf·m/cm²",
         ]);
         Unit::create([
@@ -3410,24 +3410,24 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "E46",
             "name" => "Kilovatio hora por metro cúbico",
-            "description" => "Uncodead de consumo de energía expresada como kilovatio hora por metro cúbico.",
+            "description" => "Unidad de consumo de energía expresada como kilovatio hora por metro cúbico.",
             "simbol" => "kW·h/m³",
         ]);
         Unit::create([
             "code" => "E47",
             "name" => "Kilovatio hora por kelvin",
-            "description" => "Uncodead de consumo de energía expresada como kilovatio hora por kelvin.",
+            "description" => "Unidad de consumo de energía expresada como kilovatio hora por kelvin.",
             "simbol" => "kW·h/K",
         ]);
         Unit::create([
             "code" => "E48",
-            "name" => "Uncodead de servicio",
-            "description" => "Uncodead de conteo que define el número de uncodeades de servicio (uncodead de servicio: defincodeo período / propiedad / centro / utilcodead de alimentación).",
+            "name" => "Unidad de servicio",
+            "description" => "Unidad de conteo que define el número de uncodeades de servicio (uncodead de servicio: defincodeo período / propiedad / centro / utilcodead de alimentación).",
         ]);
         Unit::create([
             "code" => "E49",
             "name" => "Día de trabajo",
-            "description" => "Uncodead de recuento de definir el número de días de trabajo (jornada de trabajo: un día en el que se lleva a cabo normalmente un trabajo).",
+            "description" => "Unidad de recuento de definir el número de días de trabajo (jornada de trabajo: un día en el que se lleva a cabo normalmente un trabajo).",
         ]);
         Unit::create([
             "code" => "E5",
@@ -3436,234 +3436,234 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "E50",
-            "name" => "Uncodead de cuenta",
-            "description" => "Uncodead de recuento de definir el número de uncodeades de contabilcodead.",
+            "name" => "Unidad de cuenta",
+            "description" => "Unidad de recuento de definir el número de uncodeades de contabilcodead.",
         ]);
         Unit::create([
             "code" => "E51",
             "name" => "Trabajo",
-            "description" => "Uncodead de recuento de definir el número de puestos de trabajo.",
+            "description" => "Unidad de recuento de definir el número de puestos de trabajo.",
         ]);
         Unit::create([
             "code" => "E52",
             "name" => "Run foot",
-            "description" => "Uncodead de conteo para definir la distancia (en la uncodead Pie) que se dan en una carrera).",
+            "description" => "Unidad de conteo para definir la distancia (en la uncodead Pie) que se dan en una carrera).",
         ]);
         Unit::create([
             "code" => "E53",
             "name" => "Prueba",
-            "description" => "Uncodead de recuento de definir el número de pruebas.",
+            "description" => "Unidad de recuento de definir el número de pruebas.",
         ]);
         Unit::create([
             "code" => "E54",
             "name" => "Viaje",
-            "description" => "Uncodead de recuento de definir el número de viajes.",
+            "description" => "Unidad de recuento de definir el número de viajes.",
         ]);
         Unit::create([
             "code" => "E55",
             "name" => "Utilizar",
-            "description" => "Uncodead de recuento de definir el número de veces que se utiliza un objeto.",
+            "description" => "Unidad de recuento de definir el número de veces que se utiliza un objeto.",
         ]);
         Unit::create([
             "code" => "E56",
             "name" => "Bien",
-            "description" => "Uncodead de recuento para definir el número de pozos.",
+            "description" => "Unidad de recuento para definir el número de pozos.",
         ]);
         Unit::create([
             "code" => "E57",
             "name" => "Zona",
-            "description" => "Uncodead de conteo que define el número de zonas.",
+            "description" => "Unidad de conteo que define el número de zonas.",
         ]);
         Unit::create([
             "code" => "E58",
             "name" => "Exabit por segundo",
-            "description" => "Uncodead de información igual a 10¹⁸ bits (dígitos binarios) por segundo.",
+            "description" => "Unidad de información igual a 10¹⁸ bits (dígitos binarios) por segundo.",
             "simbol" => "Ebit/s",
         ]);
         Unit::create([
             "code" => "E59",
             "name" => "Exbibyte",
-            "description" => "Uncodead de información igual a 2⁶⁰ bytes.",
+            "description" => "Unidad de información igual a 2⁶⁰ bytes.",
             "simbol" => "Eibyte",
         ]);
         Unit::create([
             "code" => "E60",
             "name" => "Pebibyte",
-            "description" => "Uncodead de información igual a 2⁵⁰ bytes.",
+            "description" => "Unidad de información igual a 2⁵⁰ bytes.",
             "simbol" => "Pibyte",
         ]);
         Unit::create([
             "code" => "E61",
             "name" => "Tebibyte",
-            "description" => "Uncodead de información igual a 2⁴⁰ bytes.",
+            "description" => "Unidad de información igual a 2⁴⁰ bytes.",
             "simbol" => "Tibyte",
         ]);
         Unit::create([
             "code" => "E62",
             "name" => "Gibibyte",
-            "description" => "Uncodead de información igual a 2³⁰ bytes.",
+            "description" => "Unidad de información igual a 2³⁰ bytes.",
             "simbol" => "Gibyte",
         ]);
         Unit::create([
             "code" => "E63",
             "name" => "Mebibyte",
-            "description" => "Uncodead de información igual a 2²⁰ bytes.",
+            "description" => "Unidad de información igual a 2²⁰ bytes.",
             "simbol" => "Mibyte",
         ]);
         Unit::create([
             "code" => "E64",
             "name" => "Kibibyte",
-            "description" => "Uncodead de información igual a 2¹⁰ bytes.",
+            "description" => "Unidad de información igual a 2¹⁰ bytes.",
             "simbol" => "Kibyte",
         ]);
         Unit::create([
             "code" => "E65",
             "name" => "Exbibit por metro",
-            "description" => "Uncodead de información igual a 2⁶⁰ bits (dígitos binarios) por metro.",
+            "description" => "Unidad de información igual a 2⁶⁰ bits (dígitos binarios) por metro.",
             "simbol" => "Eibit/m",
         ]);
         Unit::create([
             "code" => "E66",
             "name" => "Exbibit por metro cuadrado",
-            "description" => "Uncodead de información igual a 2⁶⁰ bits (dígitos binarios) por metro cuadrado.",
+            "description" => "Unidad de información igual a 2⁶⁰ bits (dígitos binarios) por metro cuadrado.",
             "simbol" => "Eibit/m²",
         ]);
         Unit::create([
             "code" => "E67",
             "name" => "Exbibit por metro cúbico",
-            "description" => "Uncodead de información igual a 2⁶⁰ bits (dígitos binarios) por metro cúbico.",
+            "description" => "Unidad de información igual a 2⁶⁰ bits (dígitos binarios) por metro cúbico.",
             "simbol" => "Eibit/m³",
         ]);
         Unit::create([
             "code" => "E68",
             "name" => "Gigabyte por segundo",
-            "description" => "Uncodead de información igual a 10⁹ bytes por segundo.",
+            "description" => "Unidad de información igual a 10⁹ bytes por segundo.",
             "simbol" => "Gbyte/s",
         ]);
         Unit::create([
             "code" => "E69",
             "name" => "Gibibit por metro",
-            "description" => "Uncodead de información igual a 2³⁰ bits (dígitos binarios) por metro.",
+            "description" => "Unidad de información igual a 2³⁰ bits (dígitos binarios) por metro.",
             "simbol" => "Gibit/m",
         ]);
         Unit::create([
             "code" => "E70",
             "name" => "Gibibit por metro cuadrado",
-            "description" => "Uncodead de información igual a 2³⁰ bits (dígitos binarios) por metro cuadrado.",
+            "description" => "Unidad de información igual a 2³⁰ bits (dígitos binarios) por metro cuadrado.",
             "simbol" => "Gibit/m²",
         ]);
         Unit::create([
             "code" => "E71",
             "name" => "Gibibit por metro cúbico",
-            "description" => "Uncodead de información igual a 2³⁰ bits (dígitos binarios) por metro cúbico.",
+            "description" => "Unidad de información igual a 2³⁰ bits (dígitos binarios) por metro cúbico.",
             "simbol" => "Gibit/m³",
         ]);
         Unit::create([
             "code" => "E72",
             "name" => "Kibibit por metro",
-            "description" => "Uncodead de información igual a 2¹⁰ bits (dígitos binarios) por metro.",
+            "description" => "Unidad de información igual a 2¹⁰ bits (dígitos binarios) por metro.",
             "simbol" => "Kibit/m",
         ]);
         Unit::create([
             "code" => "E73",
             "name" => "Kibibit por metro cuadrado",
-            "description" => "Uncodead de información igual a 2¹⁰ bits (dígitos binarios) por metro cuadrado.",
+            "description" => "Unidad de información igual a 2¹⁰ bits (dígitos binarios) por metro cuadrado.",
             "simbol" => "Kibit/m²",
         ]);
         Unit::create([
             "code" => "E74",
             "name" => "Kikibit por metro cúbico.",
-            "description" => " Uncodead de información igual a 2¹⁰ bits (dígitos binarios) por metro cúbico.",
+            "description" => " Unidad de información igual a 2¹⁰ bits (dígitos binarios) por metro cúbico.",
             "simbol" => "Kibit/m³",
         ]);
         Unit::create([
             "code" => "E75",
             "name" => "Mebbit por metro.",
-            "description" => " Uncodead de información igual a 2²⁰ bits (dígitos binarios) por metro.",
+            "description" => " Unidad de información igual a 2²⁰ bits (dígitos binarios) por metro.",
             "simbol" => "Mibit/m",
         ]);
         Unit::create([
             "code" => "E76",
             "name" => "Mebbitt por metro cuadrado.",
-            "description" => " Uncodead de información igual a 2²⁰ bits (dígitos binarios) por metro cuadrado.",
+            "description" => " Unidad de información igual a 2²⁰ bits (dígitos binarios) por metro cuadrado.",
             "simbol" => "Mibit/m²",
         ]);
         Unit::create([
             "code" => "E77",
             "name" => "Mebbit por metro cúbico. ",
-            "description" => " Uncodead de información igual a 2²⁰ bits (dígitos binarios) por metro cúbico.",
+            "description" => " Unidad de información igual a 2²⁰ bits (dígitos binarios) por metro cúbico.",
             "simbol" => "Mibit/m³",
         ]);
         Unit::create([
             "code" => "E78",
             "name" => "Petabit",
-            "description" => " Uncodead de información igual a 10¹⁵ los bits (dígitos binarios).",
+            "description" => " Unidad de información igual a 10¹⁵ los bits (dígitos binarios).",
             "simbol" => "Pbit",
         ]);
         Unit::create([
             "code" => "E79",
             "name" => "Pebibit por segundo.",
-            "description" => " Uncodead de información igual a 10¹⁵ bits (dígitos binarios) por segundo.",
+            "description" => " Unidad de información igual a 10¹⁵ bits (dígitos binarios) por segundo.",
             "simbol" => "Pbit/s",
         ]);
         Unit::create([
             "code" => "E80",
             "name" => "Pebibit por metro.",
-            "description" => "Uncodead de información igual a 2⁵⁰ bits (dígitos binarios) por metro.",
+            "description" => "Unidad de información igual a 2⁵⁰ bits (dígitos binarios) por metro.",
             "simbol" => "Pibit/m",
         ]);
         Unit::create([
             "code" => "E81",
             "name" => "Pebibit por metro cuadrado.",
-            "description" => " Uncodead de información igual a 2⁵⁰ bits (dígitos binarios) por metro cuadrado.",
+            "description" => " Unidad de información igual a 2⁵⁰ bits (dígitos binarios) por metro cuadrado.",
             "simbol" => "Pibit/m²",
         ]);
         Unit::create([
             "code" => "E82",
             "name" => "Pebibit por metro cúbico.",
-            "description" => " Uncodead de información igual a 2⁵⁰ bits (dígitos binarios) por metro cúbico.",
+            "description" => " Unidad de información igual a 2⁵⁰ bits (dígitos binarios) por metro cúbico.",
             "simbol" => "Pibit/m³",
         ]);
         Unit::create([
             "code" => "E83",
             "name" => "Tebibit.",
-            "description" => " Uncodead de información igual a 10¹² los bits (dígitos binarios).",
+            "description" => " Unidad de información igual a 10¹² los bits (dígitos binarios).",
             "simbol" => "Tbit",
         ]);
         Unit::create([
             "code" => "E84",
             "name" => "Tebibit por segundo",
-            "description" => " Uncodead de información igual a 10¹² bits (dígitos binarios) por segundo.",
+            "description" => " Unidad de información igual a 10¹² bits (dígitos binarios) por segundo.",
             "simbol" => "Tbit/s",
         ]);
         Unit::create([
             "code" => "E85",
             "name" => "Tebibit por metro.",
-            "description" => " Uncodead de información igual a 2⁴⁰ bits (dígitos binarios) por metro.",
+            "description" => " Unidad de información igual a 2⁴⁰ bits (dígitos binarios) por metro.",
             "simbol" => "Tibit/m",
         ]);
         Unit::create([
             "code" => "E86",
             "name" => "Tebibit por metro cúbico.",
-            "description" => " Uncodead de información igual a 2⁴⁰ bits (dígitos binarios) por metro cúbico.",
+            "description" => " Unidad de información igual a 2⁴⁰ bits (dígitos binarios) por metro cúbico.",
             "simbol" => "Tibit/m³",
         ]);
         Unit::create([
             "code" => "E87",
             "name" => "Tebibit por metro cuadrado",
-            "description" => " Uncodead de información igual a 2⁴⁰ bits (dígitos binarios) por metro cuadrado.",
+            "description" => " Unidad de información igual a 2⁴⁰ bits (dígitos binarios) por metro cuadrado.",
             "simbol" => "Tibit/m²",
         ]);
         Unit::create([
             "code" => "E88",
             "name" => "Bit por metro",
-            "description" => "Uncodead de información igual a 1 bit (dígito binario) por metro.",
+            "description" => "Unidad de información igual a 1 bit (dígito binario) por metro.",
             "simbol" => "bit/m",
         ]);
         Unit::create([
             "code" => "E89",
             "name" => "Bit por metro cuadrado",
-            "description" => " Uncodead de información igual a 1 bit (dígito binario) por metro cuadrado.",
+            "description" => " Unidad de información igual a 1 bit (dígito binario) por metro cuadrado.",
             "simbol" => "bit/m²",
         ]);
         Unit::create([
@@ -3719,7 +3719,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "EA",
             "name" => "Elemento",
-            "description" => "Uncodead de conteo que define el número de elementos conscodeerados como uncodeades separadas.",
+            "description" => "Unidad de conteo que define el número de elementos conscodeerados como uncodeades separadas.",
         ]);
         Unit::create([
             "code" => "EB",
@@ -3733,12 +3733,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "EQ",
             "name" => "Galón equivalente",
-            "description" => "Uncodead de volumen que define el número de galones de producto produccodeo a partir de concentrado.",
+            "description" => "Unidad de volumen que define el número de galones de producto produccodeo a partir de concentrado.",
         ]);
         Unit::create([
             "code" => "F01",
             "name" => "Bit por metro cúbico",
-            "description" => "Uncodead de información igual a 1 bit (dígito binario) por metro cúbico.",
+            "description" => "Unidad de información igual a 1 bit (dígito binario) por metro cúbico.",
             "simbol" => "bit/m³",
         ]);
         Unit::create([
@@ -3978,8 +3978,8 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "F49",
-            "name" => "Rod (Uncodead de distancia)",
-            "description" => "Uncodead de distancia equivalente a 5.5 yardas (16 pies 6 pulgadas)",
+            "name" => "Rod (Unidad de distancia)",
+            "description" => "Unidad de distancia equivalente a 5.5 yardas (16 pies 6 pulgadas)",
             "simbol" => "rd (US)",
         ]);
         Unit::create([
@@ -4255,12 +4255,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "FBM",
             "name" => "Medcodeor de fibra",
-            "description" => "Uncodead de longitud que define el número de metros de fibra indivcodeual.",
+            "description" => "Unidad de longitud que define el número de metros de fibra indivcodeual.",
         ]);
         Unit::create([
             "code" => "FC",
             "name" => "Mil pies cúbicos",
-            "description" => "Uncodead de volumen igual a mil pies cúbicos.",
+            "description" => "Unidad de volumen igual a mil pies cúbicos.",
             "simbol" => "kft³",
         ]);
         Unit::create([
@@ -4274,7 +4274,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "FF",
             "name" => "Cien metros cúbicos",
-            "description" => "Uncodead de volumen igual a cien metros cúbicos.",
+            "description" => "Unidad de volumen igual a cien metros cúbicos.",
         ]);
         Unit::create([
             "code" => "FG",
@@ -4288,13 +4288,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "FIT",
             "name" => "Fallas en el tiempo",
-            "description" => "Uncodead de conteo que define el número de fallos que se pueden esperar en un intervalo de tiempo especificado. Las tasas de fallo de los componentes semiconductores se especifican a menudo como FIT (fallas en la uncodead de tiempo) donde 1 FIT = 10?? / h.",
+            "description" => "Unidad de conteo que define el número de fallos que se pueden esperar en un intervalo de tiempo especificado. Las tasas de fallo de los componentes semiconductores se especifican a menudo como FIT (fallas en la uncodead de tiempo) donde 1 FIT = 10?? / h.",
             "simbol" => "FIT",
         ]);
         Unit::create([
             "code" => "FL",
             "name" => "Flake ton",
-            "description" => "Uncodead de masa que define el número de toneladas de una sustancia en copos (escamas: un pequeño fragmento plano).",
+            "description" => "Unidad de masa que define el número de toneladas de una sustancia en copos (escamas: un pequeño fragmento plano).",
         ]);
         Unit::create([
             "code" => "FM",
@@ -4304,7 +4304,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "FOT",
             "name" => "Pie",
-            "description" => "Uncodead de medcodea empleada por aeronautas, equivale a 30.48 cm",
+            "description" => "Unidad de medcodea empleada por aeronautas, equivale a 30.48 cm",
             "simbol" => "ft",
         ]);
         Unit::create([
@@ -4846,7 +4846,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "GDW",
             "name" => "Gramo, peso seco",
-            "description" => "Uncodead de masa que define el número de gramos de un producto, sin tener en cuenta el contencodeo de agua del producto.",
+            "description" => "Unidad de masa que define el número de gramos de un producto, sin tener en cuenta el contencodeo de agua del producto.",
         ]);
         Unit::create([
             "code" => "GE",
@@ -4861,13 +4861,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "GFI",
             "name" => "Gramo de isótopo fisible",
-            "description" => "Uncodead de masa que define el número de gramos de un isótopo fisible (isótopo fisible: un isótopo cuyo núcleo es capaz de ser divcodecodeo cuando se irradia con neutrones de baja energía).",
+            "description" => "Unidad de masa que define el número de gramos de un isótopo fisible (isótopo fisible: un isótopo cuyo núcleo es capaz de ser divcodecodeo cuando se irradia con neutrones de baja energía).",
             "simbol" => "gi F/S",
         ]);
         Unit::create([
             "code" => "GGR",
             "name" => "Grandioso",
-            "description" => "Uncodead de cuenta que define el número de uncodeades en múltiplos de 1728 (12 x 12 x 12).",
+            "description" => "Unidad de cuenta que define el número de uncodeades en múltiplos de 1728 (12 x 12 x 12).",
         ]);
         Unit::create([
             "code" => "GH",
@@ -4876,24 +4876,24 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "GIA",
             "name" => "Gill (us)",
-            "description" => "Es Uncodead de volumen inglesa en el sistema imperial y en los Estados Uncodeos. La versión imperial usada en el UK es de 5 onzas líqucodeas, y es equivalente a 142,0653125 ml; mientras que en los EUA es de 4 onzas líqucodeas, y es equivalente a 118,29411825 ml.",
+            "description" => "Es Unidad de volumen inglesa en el sistema imperial y en los Estados Uncodeos. La versión imperial usada en el UK es de 5 onzas líqucodeas, y es equivalente a 142,0653125 ml; mientras que en los EUA es de 4 onzas líqucodeas, y es equivalente a 118,29411825 ml.",
             "simbol" => "gi (US)",
         ]);
         Unit::create([
             "code" => "GIC",
             "name" => "Gramo, inclucodeo el contenedor",
-            "description" => "Uncodead de masa que define el número de gramos de un producto, incluyendo su recipiente.",
+            "description" => "Unidad de masa que define el número de gramos de un producto, incluyendo su recipiente.",
         ]);
         Unit::create([
             "code" => "GII",
             "name" => "Gill (uk)",
-            "description" => "Es Uncodead de volumen inglesa en el sistema imperial y en los Estados Uncodeos. La versión imperial usada en el UK es de 5 onzas líqucodeas, y es equivalente a 142.0653125 ml; mientras que en los EUA es de 4 onzas líqucodeas, y es equivalente a 118.29411825 ml.",
+            "description" => "Es Unidad de volumen inglesa en el sistema imperial y en los Estados Uncodeos. La versión imperial usada en el UK es de 5 onzas líqucodeas, y es equivalente a 142.0653125 ml; mientras que en los EUA es de 4 onzas líqucodeas, y es equivalente a 118.29411825 ml.",
             "simbol" => "gi (UK)",
         ]);
         Unit::create([
             "code" => "GIP",
             "name" => "Grama, inclucodeo el embalaje interior",
-            "description" => "Uncodead de masa que define el número de gramos de un producto, incluyendo sus materiales de envasado interior.",
+            "description" => "Unidad de masa que define el número de gramos de un producto, incluyendo sus materiales de envasado interior.",
         ]);
         Unit::create([
             "code" => "GJ",
@@ -4965,7 +4965,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "GRO",
             "name" => "Gross",
-            "description" => "Uncodead de conteo que define el número de uncodeades en múltiplos de 144 (12 x 12).",
+            "description" => "Unidad de conteo que define el número de uncodeades en múltiplos de 144 (12 x 12).",
             "simbol" => "gr",
         ]);
         Unit::create([
@@ -5092,7 +5092,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "H21",
             "name" => "Blanco",
-            "description" => "Uncodead de conteo que define el número de blancos",
+            "description" => "Unidad de conteo que define el número de blancos",
         ]);
         Unit::create([
             "code" => "H22",
@@ -5112,7 +5112,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "H25",
             "name" => "Por ciento por kelvin",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación con la uncodead de base SI Kelvin.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación con la uncodead de base SI Kelvin.",
             "simbol" => "%/K",
         ]);
         Unit::create([
@@ -5344,19 +5344,19 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "H71",
             "name" => "Por ciento al mes",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación a un mes.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación a un mes.",
             "simbol" => "%/mo",
         ]);
         Unit::create([
             "code" => "H72",
             "name" => "Por ciento por hectobar",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación con 100 veces la barra unitaria",
+            "description" => "Unidad de proporción, igual a 0,01, en relación con 100 veces la barra unitaria",
             "simbol" => "%/hbar",
         ]);
         Unit::create([
             "code" => "H73",
             "name" => "Por ciento por decakelvin",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación con 10 veces la uncodead de base SI Kelvin",
+            "description" => "Unidad de proporción, igual a 0,01, en relación con 10 veces la uncodead de base SI Kelvin",
             "simbol" => "%/daK",
         ]);
         Unit::create([
@@ -5377,7 +5377,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "H77",
             "name" => "Anchura del módulo",
-            "description" => "Uncodead de medcodea utilizada para describir la anchura de los conjuntos electrónicos como una norma de instalación o una dimensión de montaje.",
+            "description" => "Unidad de medcodea utilizada para describir la anchura de los conjuntos electrónicos como una norma de instalación o una dimensión de montaje.",
             "simbol" => "MW",
         ]);
         Unit::create([
@@ -5388,13 +5388,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "H79",
             "name" => "Escala francesa ",
-            "description" => "Uncodead de longitud usada para la medición de los diámetros de pequeños tubos como instrumentos urológicos y catéteres.                                                       \r\nSinónimos: Francés, Charrière, Charrière gauge.",
+            "description" => "Unidad de longitud usada para la medición de los diámetros de pequeños tubos como instrumentos urológicos y catéteres.                                                       \r\nSinónimos: Francés, Charrière, Charrière gauge.",
             "simbol" => "Fg",
         ]);
         Unit::create([
             "code" => "H80",
-            "name" => "Uncodead de bastcodeor",
-            "description" => "Uncodead de medcodea utilizada para describir la altura en uncodeades de bastcodeor del equipo destinado a ser montado en un bastcodeor de 19 pulgadas o un bastcodeor de 23 pulgadas. Uncodead de bastcodeor tiene 1,45 pulgadas (44,45 mm) de alto.",
+            "name" => "Unidad de bastcodeor",
+            "description" => "Unidad de medcodea utilizada para describir la altura en uncodeades de bastcodeor del equipo destinado a ser montado en un bastcodeor de 19 pulgadas o un bastcodeor de 23 pulgadas. Unidad de bastcodeor tiene 1,45 pulgadas (44,45 mm) de alto.",
             "simbol" => "U or RU",
         ]);
         Unit::create([
@@ -5405,7 +5405,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "H82",
             "name" => "Punto grande",
-            "description" => "Uncodead de longitud que define el número de puntos grandes (punto grande: el software de Adobe (EUA) define el punto grande a ser exactamente 1/72 de pulgada (0,013 888 9 pulgadas o 0,352 777 8 milímetros)",
+            "description" => "Unidad de longitud que define el número de puntos grandes (punto grande: el software de Adobe (EUA) define el punto grande a ser exactamente 1/72 de pulgada (0,013 888 9 pulgadas o 0,352 777 8 milímetros)",
             "simbol" => "bp",
         ]);
         Unit::create([
@@ -5426,7 +5426,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "H87",
             "name" => "Pieza",
-            "description" => "Uncodead de conteo que define el número de piezas (pieza: un solo artículo, artículo o ejemplar).",
+            "description" => "Unidad de conteo que define el número de piezas (pieza: un solo artículo, artículo o ejemplar).",
         ]);
         Unit::create([
             "code" => "H88",
@@ -5436,67 +5436,67 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "H89",
             "name" => "Por ciento por Ohmio",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación con un ángulo de un grado.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación con un ángulo de un grado.",
             "simbol" => "%/Ω",
         ]);
         Unit::create([
             "code" => "H90",
             "name" => "Porcentaje por grado",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación a múltiplos de diez mil.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación a múltiplos de diez mil.",
             "simbol" => "%/°",
         ]);
         Unit::create([
             "code" => "H91",
             "name" => "Por ciento por cada diez mil",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación a múltiplos de cien mil.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación a múltiplos de cien mil.",
             "simbol" => "%/10000",
         ]);
         Unit::create([
             "code" => "H92",
             "name" => "Ciento por cien mil",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación a múltiplos de cien.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación a múltiplos de cien.",
             "simbol" => "%/100000",
         ]);
         Unit::create([
             "code" => "H93",
             "name" => "Porcentaje por cien",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación a múltiplos de mil.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación a múltiplos de mil.",
             "simbol" => "%/100",
         ]);
         Unit::create([
             "code" => "H94",
             "name" => "Por ciento por mil",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación con la uncodead derivada de SI volt.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación con la uncodead derivada de SI volt.",
             "simbol" => "%/1000",
         ]);
         Unit::create([
             "code" => "H95",
             "name" => "Por ciento por voltio",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación con una presión atmosférica de una barra.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación con una presión atmosférica de una barra.",
             "simbol" => "%/V",
         ]);
         Unit::create([
             "code" => "H96",
             "name" => "Tanto por ciento por bar",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación con una presión atmosférica de una barra.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación con una presión atmosférica de una barra.",
             "simbol" => "%/bar",
         ]);
         Unit::create([
             "code" => "H98",
             "name" => "Por ciento por pulgada",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación a una pulgada.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación a una pulgada.",
             "simbol" => "%/in",
         ]);
         Unit::create([
             "code" => "H99",
             "name" => "Por ciento por metro",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación con un metro.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación con un metro.",
             "simbol" => "%/m",
         ]);
         Unit::create([
             "code" => "HA",
             "name" => "Madeja",
-            "description" => "Uncodead de longitud, típicamente para el hilado.",
+            "description" => "Unidad de longitud, típicamente para el hilado.",
         ]);
         Unit::create([
             "code" => "HAR",
@@ -5512,12 +5512,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "HBX",
             "name" => "Ciento de cajas",
-            "description" => "Uncodead de conteo que define el número de cajas en múltiplos de cien uncodeades de caja.",
+            "description" => "Unidad de conteo que define el número de cajas en múltiplos de cien uncodeades de caja.",
         ]);
         Unit::create([
             "code" => "HC",
             "name" => "Conteo en cientos",
-            "description" => "Uncodead de cuenta que define el número de uncodeades contadas en múltiplos de 100.",
+            "description" => "Unidad de cuenta que define el número de uncodeades contadas en múltiplos de 100.",
         ]);
         Unit::create([
             "code" => "HD",
@@ -5526,7 +5526,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "HDW",
             "name" => "Cien kilogramos, peso seco",
-            "description" => "Uncodead de masa que define el número de cien kilogramos de un producto, sin tener en cuenta el contencodeo de agua del producto.",
+            "description" => "Unidad de masa que define el número de cien kilogramos de un producto, sin tener en cuenta el contencodeo de agua del producto.",
         ]);
         Unit::create([
             "code" => "HE",
@@ -5535,7 +5535,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "HEA",
             "name" => "Cabeza",
-            "description" => "Uncodead de conteo que define el número de cabezas (cabeza: persona o animal conscodeerada como un número.",
+            "description" => "Unidad de conteo que define el número de cabezas (cabeza: persona o animal conscodeerada como un número.",
         ]);
         Unit::create([
             "code" => "HF",
@@ -5549,7 +5549,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "HH",
             "name" => "Cien pies cúbicos",
-            "description" => "Uncodead de volumen igual a cien pies cúbicos.",
+            "description" => "Unidad de volumen igual a cien pies cúbicos.",
         ]);
         Unit::create([
             "code" => "HI",
@@ -5557,8 +5557,8 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "HIU",
-            "name" => "Uncodead internacional de cien",
-            "description" => "Uncodead de cuenta que define el número de uncodeades internacionales en múltiplos de 100.",
+            "name" => "Unidad internacional de cien",
+            "description" => "Unidad de cuenta que define el número de uncodeades internacionales en múltiplos de 100.",
         ]);
         Unit::create([
             "code" => "HJ",
@@ -5572,7 +5572,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "HKM",
             "name" => "Cien kilogramos, masa neta",
-            "description" => "Uncodead de masa que define el número de cientos de kilogramos de un producto, después de las deducciones.",
+            "description" => "Unidad de masa que define el número de cientos de kilogramos de un producto, después de las deducciones.",
         ]);
         Unit::create([
             "code" => "HL",
@@ -5592,13 +5592,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "HMQ",
             "name" => "Millones de metros cúbicos",
-            "description" => "Uncodead de volumen igual a un millón de metros cúbicos.",
+            "description" => "Unidad de volumen igual a un millón de metros cúbicos.",
             "simbol" => "Mm³",
         ]);
         Unit::create([
             "code" => "HMT",
             "name" => "Hectómetro",
-            "description" => "Es una uncodead de longitud. Equivale a 100 metros. Hecto es el prefijo para 100 en el Sistema Internacional de Uncodeades.",
+            "description" => "Es una uncodead de longitud. Equivale a 100 metros. Hecto es el prefijo para 100 en el Sistema Internacional de Unidades.",
             "simbol" => "hm",
         ]);
         Unit::create([
@@ -5618,7 +5618,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "HPA",
             "name" => "Hectolitro de alcohol puro",
-            "description" => "Uncodead de volumen igual a cien litros de alcohol puro.",
+            "description" => "Unidad de volumen igual a cien litros de alcohol puro.",
         ]);
         Unit::create([
             "code" => "HS",
@@ -5631,7 +5631,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "HTZ",
             "name" => "Hertz",
-            "description" => "Uncodead de frecuencia del Sistema Internacional, de símbolo Hz, que equivale a la frecuencia de un fenómeno periódico cuyo período es 1 segundo.",
+            "description" => "Unidad de frecuencia del Sistema Internacional, de símbolo Hz, que equivale a la frecuencia de un fenómeno periódico cuyo período es 1 segundo.",
             "simbol" => "Hz",
         ]);
         Unit::create([
@@ -5656,7 +5656,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "IE",
             "name" => "Personas",
-            "description" => "Uncodead de conteo que define el número de personas.",
+            "description" => "Unidad de conteo que define el número de personas.",
         ]);
         Unit::create([
             "code" => "IF",
@@ -5696,7 +5696,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "ISD",
             "name" => "Grado internacional de azúcar",
-            "description" => "Uncodead de medcodea que define el contencodeo de azúcar de una solución, expresada en grados.",
+            "description" => "Unidad de medcodea que define el contencodeo de azúcar de una solución, expresada en grados.",
         ]);
         Unit::create([
             "code" => "IT",
@@ -5715,49 +5715,49 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "J10",
             "name" => "Por ciento por milímetro",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación a un milímetro.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación a un milímetro.",
             "simbol" => "%/mm",
         ]);
         Unit::create([
             "code" => "J12",
             "name" => "Por mille por psi",
-            "description" => "Uncodead de presión igual a una milésima de psi (libra-fuerza por pulgada cuadrada).",
+            "description" => "Unidad de presión igual a una milésima de psi (libra-fuerza por pulgada cuadrada).",
             "simbol" => "‰/psi",
         ]);
         Unit::create([
             "code" => "J13",
             "name" => "Grado api",
-            "description" => "Uncodead de denscodead relativa como una medcodea de cuán pesado o ligero es un líqucodeo de petróleo comparado con agua (API: American Petroleum Institute).",
+            "description" => "Unidad de denscodead relativa como una medcodea de cuán pesado o ligero es un líqucodeo de petróleo comparado con agua (API: American Petroleum Institute).",
             "simbol" => "°API",
         ]);
         Unit::create([
             "code" => "J14",
             "name" => "Grado baume (escala de origen)",
-            "description" => "Uncodead tradicional de denscodead relativa para líqucodeos. Nombrado en honor de Antoine Baumé.",
+            "description" => "Unidad tradicional de denscodead relativa para líqucodeos. Nombrado en honor de Antoine Baumé.",
             "simbol" => "°Bé",
         ]);
         Unit::create([
             "code" => "J15",
             "name" => "Grado baume (us pesado)",
-            "description" => "Uncodead de denscodead relativa para líqucodeos más pesados que el agua.",
+            "description" => "Unidad de denscodead relativa para líqucodeos más pesados que el agua.",
             "simbol" => "°Bé (US heavy)",
         ]);
         Unit::create([
             "code" => "J16",
             "name" => "Grado baume (luz de los EUA)",
-            "description" => "Uncodead de denscodead relativa para líqucodeos más ligeros que el agua.",
+            "description" => "Unidad de denscodead relativa para líqucodeos más ligeros que el agua.",
             "simbol" => "°Bé (US light)",
         ]);
         Unit::create([
             "code" => "J17",
             "name" => "Grado balling",
-            "description" => "Uncodead de denscodead como medcodea del contencodeo de azúcar, especialmente de mosto de cerveza. Nombrado en honor de Karl Balling.",
+            "description" => "Unidad de denscodead como medcodea del contencodeo de azúcar, especialmente de mosto de cerveza. Nombrado en honor de Karl Balling.",
             "simbol" => "°Balling",
         ]);
         Unit::create([
             "code" => "J18",
             "name" => "Grado brix",
-            "description" => "Uncodead de proporcion utilizada para medir la proporcion de masa de azúcar disuelta a agua de un líqucodeo. Nombrado en honor de Adolf Brix",
+            "description" => "Unidad de proporcion utilizada para medir la proporcion de masa de azúcar disuelta a agua de un líqucodeo. Nombrado en honor de Adolf Brix",
             "simbol" => "°Bx",
         ]);
         Unit::create([
@@ -5808,7 +5808,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "J27",
             "name" => "Grado oechsle",
-            "description" => "Uncodead de denscodead como medcodea del contencodeo de azúcar de mosto, el licor no fermentado del que se elabora el vino. Nombrado en honor de Ferdinand Oechsle.",
+            "description" => "Unidad de denscodead como medcodea del contencodeo de azúcar de mosto, el licor no fermentado del que se elabora el vino. Nombrado en honor de Ferdinand Oechsle.",
             "simbol" => "°Oechsle",
         ]);
         Unit::create([
@@ -5829,7 +5829,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "J31",
             "name" => "Grado twaddel.",
-            "description" => "Uncodead de denscodead para líqucodeos que son más pesados que el agua. 1 grado Twaddle representa una diferencia en gravedad específica de 0,005.",
+            "description" => "Unidad de denscodead para líqucodeos que son más pesados que el agua. 1 grado Twaddle representa una diferencia en gravedad específica de 0,005.",
             "simbol" => "°Tw",
         ]);
         Unit::create([
@@ -5860,77 +5860,77 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "J38",
             "name" => "Baud",
-            "description" => "Es Uncodead de medcodea utilizada en telecomunicaciones, que representa el número de símbolos por segundo en un medio de transmisión digital.1 Cada símbolo puede comprender 1 o más bits, dependiendo del esquema de modulación.",
+            "description" => "Es Unidad de medcodea utilizada en telecomunicaciones, que representa el número de símbolos por segundo en un medio de transmisión digital.1 Cada símbolo puede comprender 1 o más bits, dependiendo del esquema de modulación.",
             "simbol" => "Bd",
         ]);
         Unit::create([
             "code" => "J39",
-            "name" => "Uncodead térmica británica (significado)",
+            "name" => "Unidad térmica británica (significado)",
             "simbol" => "Btu",
         ]);
         Unit::create([
             "code" => "J40",
-            "name" => "Uncodead térmica británica (tabla internacional) pie por hora pie cuadrado grado fahrenheit.",
+            "name" => "Unidad térmica británica (tabla internacional) pie por hora pie cuadrado grado fahrenheit.",
             "simbol" => "BtuIT·ft/(h·ft²·°F)",
         ]);
         Unit::create([
             "code" => "J41",
-            "name" => "Uncodead térmica británica (tabla internacional) pulgada por hora pie cuadrado grado fahrenheit.",
+            "name" => "Unidad térmica británica (tabla internacional) pulgada por hora pie cuadrado grado fahrenheit.",
             "simbol" => "BtuIT·in/(h·ft²·°F)",
         ]);
         Unit::create([
             "code" => "J42",
-            "name" => "Uncodead térmica británica (tabla internacional) pulgada por segundo pie cuadrado grado fahrenheit.",
+            "name" => "Unidad térmica británica (tabla internacional) pulgada por segundo pie cuadrado grado fahrenheit.",
             "simbol" => "BtuIT·in/(s·ft²·°F)",
         ]);
         Unit::create([
             "code" => "J43",
-            "name" => "Uncodead térmica británica (tabla internacional) por libra grado fahrenheit",
+            "name" => "Unidad térmica británica (tabla internacional) por libra grado fahrenheit",
             "simbol" => "BtuIT/(lb·°F)",
         ]);
         Unit::create([
             "code" => "J44",
-            "name" => "Uncodead térmica británica (tabla internacional) por minuto",
+            "name" => "Unidad térmica británica (tabla internacional) por minuto",
             "simbol" => "BtuIT/min",
         ]);
         Unit::create([
             "code" => "J45",
-            "name" => "Uncodead térmica británica (tabla internacional) por segundo",
+            "name" => "Unidad térmica británica (tabla internacional) por segundo",
             "simbol" => "BtuIT/s",
         ]);
         Unit::create([
             "code" => "J46",
-            "name" => "Uncodead térmica británica (termoquímico) pie por hora pie cuadrado grado fahrenheit.",
+            "name" => "Unidad térmica británica (termoquímico) pie por hora pie cuadrado grado fahrenheit.",
             "simbol" => "Btuth·ft/(h·ft²·°F)",
         ]);
         Unit::create([
             "code" => "J47",
-            "name" => "Uncodead térmica británica (termoquímica) por hora",
+            "name" => "Unidad térmica británica (termoquímica) por hora",
             "simbol" => "Btuth/h",
         ]);
         Unit::create([
             "code" => "J48",
-            "name" => "Uncodead térmica británica (termoquímico) pulgada por hora pie cuadrado grado fahrenheit.",
+            "name" => "Unidad térmica británica (termoquímico) pulgada por hora pie cuadrado grado fahrenheit.",
             "simbol" => "Btuth·in/(h·ft²·°F)",
         ]);
         Unit::create([
             "code" => "J49",
-            "name" => "Uncodead térmica británica (termoquímico) pulgada por segundo pie cuadrado grado fahrenheit.",
+            "name" => "Unidad térmica británica (termoquímico) pulgada por segundo pie cuadrado grado fahrenheit.",
             "simbol" => "Btuth·in/(s·ft²·°F)",
         ]);
         Unit::create([
             "code" => "J50",
-            "name" => "Uncodead térmica británica (termoquímico) por libra grado fahrenheit",
+            "name" => "Unidad térmica británica (termoquímico) por libra grado fahrenheit",
             "simbol" => "Btuth/(lb·°F)",
         ]);
         Unit::create([
             "code" => "J51",
-            "name" => "Uncodead térmica británica (termoquímica) por minuto",
+            "name" => "Unidad térmica británica (termoquímica) por minuto",
             "simbol" => "Btuth/min",
         ]);
         Unit::create([
             "code" => "J52",
-            "name" => "Uncodead térmica británica (termoquímica) por segundo",
+            "name" => "Unidad térmica británica (termoquímica) por segundo",
             "simbol" => "Btuth/s",
         ]);
         Unit::create([
@@ -5941,7 +5941,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "J54",
             "name" => "Megabaud",
-            "description" => "Uncodead de veloccodead de transmisión de señal igual a 106 (1000000) eventos de señalización por segundo.",
+            "description" => "Unidad de veloccodead de transmisión de señal igual a 106 (1000000) eventos de señalización por segundo.",
             "simbol" => "MBd",
         ]);
         Unit::create([
@@ -6048,7 +6048,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "J75",
             "name" => "Caloría",
-            "description" => "Uncodead de energía térmica, de símbolo cal, que equivale a la cantcodead de calor necesaria para elevar 1 grado centígrado la temperatura de 1 gramo de agua.",
+            "description" => "Unidad de energía térmica, de símbolo cal, que equivale a la cantcodead de calor necesaria para elevar 1 grado centígrado la temperatura de 1 gramo de agua.",
             "simbol" => "cal",
         ]);
         Unit::create([
@@ -6190,17 +6190,17 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "JPS",
             "name" => "Cien metros",
-            "description" => "Uncodead de conteo que define el número de longitudes de 100 metros.",
+            "description" => "Unidad de conteo que define el número de longitudes de 100 metros.",
         ]);
         Unit::create([
             "code" => "JWL",
             "name" => "Número de joyas",
-            "description" => "Uncodead de cuenta que define el número de joyas (joya: piedra preciosa).",
+            "description" => "Unidad de cuenta que define el número de joyas (joya: piedra preciosa).",
         ]);
         Unit::create([
             "code" => "K1",
             "name" => "Demanda de kilowatt",
-            "description" => "Uncodead de medcodea que define la carga de potencia medcodea a intervalos predeterminados.",
+            "description" => "Unidad de medcodea que define la carga de potencia medcodea a intervalos predeterminados.",
         ]);
         Unit::create([
             "code" => "K10",
@@ -6255,7 +6255,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "K2",
             "name" => "Kilovoltios amperios demanda reactiva",
-            "description" => "Uncodead de medcodea que define la demanda de potencia reactiva igual a un kilovoltioio de potencia reactiva.",
+            "description" => "Unidad de medcodea que define la demanda de potencia reactiva igual a un kilovoltioio de potencia reactiva.",
         ]);
         Unit::create([
             "code" => "K20",
@@ -6305,7 +6305,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "K3",
             "name" => "Kilovoltio amperio hora reactivo",
-            "description" => "Uncodead de medcodea que define la energía reactiva acumulada igual a un kilovoltioio de potencia reactiva por hora.",
+            "description" => "Unidad de medcodea que define la energía reactiva acumulada igual a un kilovoltioio de potencia reactiva por hora.",
             "simbol" => "kvar·h",
         ]);
         Unit::create([
@@ -6416,7 +6416,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "K50",
             "name" => "Kilobaud",
-            "description" => "Uncodead de veloccodead de transmisión de señal igual a 10³ (1000) eventos de señalización por segundo.",
+            "description" => "Unidad de veloccodead de transmisión de señal igual a 10³ (1000) eventos de señalización por segundo.",
             "simbol" => "kBd",
         ]);
         Unit::create([
@@ -6657,7 +6657,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KA",
             "name" => "Pastel",
-            "description" => "Uncodead de conteo que define el número de pasteles (torta: objeto en forma de una masa plana y compacta).",
+            "description" => "Unidad de conteo que define el número de pasteles (torta: objeto en forma de una masa plana y compacta).",
         ]);
         Unit::create([
             "code" => "KAT",
@@ -6668,7 +6668,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KB",
             "name" => "Kilocaracter",
-            "description" => "Uncodead de información igual a 10³ (1000) caracteres.",
+            "description" => "Unidad de información igual a 10³ (1000) caracteres.",
         ]);
         Unit::create([
             "code" => "KBA",
@@ -6678,7 +6678,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KCC",
             "name" => "Kilogramo de cloruro de colina",
-            "description" => "Uncodead de masa igual a mil gramos de cloruro de colina.",
+            "description" => "Unidad de masa igual a mil gramos de cloruro de colina.",
             "simbol" => "kg C₅ H₁₄ClNO",
         ]);
         Unit::create([
@@ -6688,13 +6688,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KDW",
             "name" => "Kilogramo de peso neto drenado",
-            "description" => "Uncodead de masa que define el número neto de kilogramos de un producto, sin tener en cuenta el contencodeo líqucodeo del producto.",
+            "description" => "Unidad de masa que define el número neto de kilogramos de un producto, sin tener en cuenta el contencodeo líqucodeo del producto.",
             "simbol" => "kg/net eda",
         ]);
         Unit::create([
             "code" => "KEL",
             "name" => "Kelvin",
-            "description" => "Uncodead de temperatura termodinámica, es la fracción 1/273,16 de la temperatura termodinámica del punto triple del agua. ",
+            "description" => "Unidad de temperatura termodinámica, es la fracción 1/273,16 de la temperatura termodinámica del punto triple del agua. ",
             "simbol" => "K",
         ]);
         Unit::create([
@@ -6715,7 +6715,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KHY",
             "name" => "Kilogramo de peróxcodeo de hcoderógeno",
-            "description" => "Uncodead de masa igual a mil gramos de peróxcodeo de hcoderógeno.",
+            "description" => "Unidad de masa igual a mil gramos de peróxcodeo de hcoderógeno.",
             "simbol" => "kg H₂O₂",
         ]);
         Unit::create([
@@ -6731,17 +6731,17 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KIC",
             "name" => "Kilogramo, incluyendo el contenedor",
-            "description" => "Uncodead de masa que define el número de kilogramos de un producto, inclucodeo su contenedor.",
+            "description" => "Unidad de masa que define el número de kilogramos de un producto, inclucodeo su contenedor.",
         ]);
         Unit::create([
             "code" => "KIP",
             "name" => "Kilogramo, incluyendo el empaquetado interno",
-            "description" => "Uncodead de masa que define el número de kilogramos de un producto, incluyendo sus materiales de embalaje internos.",
+            "description" => "Unidad de masa que define el número de kilogramos de un producto, incluyendo sus materiales de embalaje internos.",
         ]);
         Unit::create([
             "code" => "KJ",
             "name" => "Kilosegmento",
-            "description" => "Uncodead de información igual a 10³ (1000) segmentos.",
+            "description" => "Unidad de información igual a 10³ (1000) segmentos.",
         ]);
         Unit::create([
             "code" => "KJO",
@@ -6756,7 +6756,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KLK",
             "name" => "Porcentaje de material seco láctico",
-            "description" => "Uncodead de proporción que define el porcentaje de material láctico seco en un producto.",
+            "description" => "Unidad de proporción que define el porcentaje de material láctico seco en un producto.",
         ]);
         Unit::create([
             "code" => "KLX",
@@ -6767,7 +6767,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KMA",
             "name" => "Kilogramo de metilamina",
-            "description" => "Uncodead de masa igual a mil gramos de metilamina.",
+            "description" => "Unidad de masa igual a mil gramos de metilamina.",
             "simbol" => "kg met.am.",
         ]);
         Unit::create([
@@ -6784,7 +6784,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KMQ",
             "name" => "Kilogramo por metro cúbico",
-            "description" => "Uncodead de peso expresada en kilogramos de una sustancia que llena un volumen de un metro cúbico.",
+            "description" => "Unidad de peso expresada en kilogramos de una sustancia que llena un volumen de un metro cúbico.",
             "simbol" => "kg/m³",
         ]);
         Unit::create([
@@ -6796,7 +6796,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KNI",
             "name" => "Kilogramo de nitrógeno",
-            "description" => "Uncodead de masa igual a mil gramos de nitrógeno.",
+            "description" => "Unidad de masa igual a mil gramos de nitrógeno.",
             "simbol" => "kg N",
         ]);
         Unit::create([
@@ -6807,7 +6807,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KNS",
             "name" => "Kilogram sustancia nombrada",
-            "description" => "Uncodead de masa igual a un kilogramo de una sustancia llamada.",
+            "description" => "Unidad de masa igual a un kilogramo de una sustancia llamada.",
         ]);
         Unit::create([
             "code" => "KNT",
@@ -6818,7 +6818,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KO",
             "name" => "Miliequivalentes de potasa cáustica por gramo de producto",
-            "description" => "Uncodead de conteo que define el número de miligramos de hcoderóxcodeo de potasio por gramo de producto como una medcodea de la concentración de hcoderóxcodeo de potasio en el producto.",
+            "description" => "Unidad de conteo que define el número de miligramos de hcoderóxcodeo de potasio por gramo de producto como una medcodea de la concentración de hcoderóxcodeo de potasio en el producto.",
         ]);
         Unit::create([
             "code" => "KPA",
@@ -6828,19 +6828,19 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KPH",
             "name" => "Kilogramo de hcoderóxcodeo de potasio (potasa cáustica)",
-            "description" => "Uncodead de masa igual a mil gramos de hcoderóxcodeo de potasio (potasa cáustica).",
+            "description" => "Unidad de masa igual a mil gramos de hcoderóxcodeo de potasio (potasa cáustica).",
             "simbol" => "kg KOH",
         ]);
         Unit::create([
             "code" => "KPO",
             "name" => "Kilogramo de óxcodeo de potasio",
-            "description" => "Uncodead de masa igual a mil gramos de óxcodeo de potasio.",
+            "description" => "Unidad de masa igual a mil gramos de óxcodeo de potasio.",
             "simbol" => "kg K₂O",
         ]);
         Unit::create([
             "code" => "KPP",
             "name" => "Kilogramo de pentóxcodeo de fósforo (anhídrcodeo fosfórico)",
-            "description" => "Uncodead de masa igual a mil gramos de anhídrcodeo fosfórico de pentóxcodeo de fósforo.",
+            "description" => "Unidad de masa igual a mil gramos de anhídrcodeo fosfórico de pentóxcodeo de fósforo.",
         ]);
         Unit::create([
             "code" => "KR",
@@ -6854,19 +6854,19 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KSD",
             "name" => "Kilogramo de sustancia 90% seco",
-            "description" => "Uncodead de masa igual a mil gramos de una sustancia llamada 90% seca.",
+            "description" => "Unidad de masa igual a mil gramos de una sustancia llamada 90% seca.",
             "simbol" => "kg 90 % sdt",
         ]);
         Unit::create([
             "code" => "KSH",
             "name" => "Kilogramo de hcoderóxcodeo de sodio (sodio cáustica)",
-            "description" => "Uncodead de masa igual a mil gramos de hcoderóxcodeo sódico (sosa cáustica).",
+            "description" => "Unidad de masa igual a mil gramos de hcoderóxcodeo sódico (sosa cáustica).",
             "simbol" => "kg NaOH",
         ]);
         Unit::create([
             "code" => "KT",
             "name" => "Kit",
-            "description" => "Uncodead de conteo que define el número de kits (kit: bañera, barril o cubo).",
+            "description" => "Unidad de conteo que define el número de kits (kit: bañera, barril o cubo).",
         ]);
         Unit::create([
             "code" => "KTN",
@@ -6876,7 +6876,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "KUR",
             "name" => "Kilogramo de uranio",
-            "description" => "Uncodead de masa igual a mil gramos de uranio.",
+            "description" => "Unidad de masa igual a mil gramos de uranio.",
             "simbol" => "kg U",
         ]);
         Unit::create([
@@ -7388,12 +7388,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "LAC",
             "name" => "Porcentaje de exceso de lactosa",
-            "description" => "Uncodead de proporción que define el porcentaje de lactosa en un producto que excede un nivel de porcentaje defincodeo.",
+            "description" => "Unidad de proporción que define el porcentaje de lactosa en un producto que excede un nivel de porcentaje defincodeo.",
         ]);
         Unit::create([
             "code" => "LBR",
             "name" => "Libra",
-            "description" => "Uncodead monetaria de Irlanda (hasta su sustitución por el euro), Reino Uncodeo, Chipre, Egipto, Líbano, Malta, Siria y otros países.",
+            "description" => "Unidad monetaria de Irlanda (hasta su sustitución por el euro), Reino Uncodeo, Chipre, Egipto, Líbano, Malta, Siria y otros países.",
             "simbol" => "lb",
         ]);
         Unit::create([
@@ -7416,17 +7416,17 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "LEF",
             "name" => "Hoja",
-            "description" => "Uncodead de conteo que define el número de hojas.",
+            "description" => "Unidad de conteo que define el número de hojas.",
         ]);
         Unit::create([
             "code" => "LF",
             "name" => "Pie lineal",
-            "description" => "Uncodead de conteo que define el número de pies (12 pulgadas) de longitud de un objeto de ancho uniforme.",
+            "description" => "Unidad de conteo que define el número de pies (12 pulgadas) de longitud de un objeto de ancho uniforme.",
         ]);
         Unit::create([
             "code" => "LH",
             "name" => "Hora de trabajo",
-            "description" => "Uncodead de tiempo que define el número de horas de trabajo.",
+            "description" => "Unidad de tiempo que define el número de horas de trabajo.",
         ]);
         Unit::create([
             "code" => "LI",
@@ -7439,42 +7439,42 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "LK",
             "name" => "Enlazar",
-            "description" => "Uncodead de distancia igual a 0.01 cadena.",
+            "description" => "Unidad de distancia igual a 0.01 cadena.",
         ]);
         Unit::create([
             "code" => "LM",
             "name" => "Metro lineal",
-            "description" => "Uncodead de conteo que define el número de metros de longitud de un objeto de ancho uniforme.",
+            "description" => "Unidad de conteo que define el número de metros de longitud de un objeto de ancho uniforme.",
         ]);
         Unit::create([
             "code" => "LN",
             "name" => "Longitud",
-            "description" => "Uncodead de distancia que define la extensión lineal de un elemento medcodeo de extremo a extremo.",
+            "description" => "Unidad de distancia que define la extensión lineal de un elemento medcodeo de extremo a extremo.",
         ]);
         Unit::create([
             "code" => "LO",
             "name" => "Lote Unit::create([uncodead de adquisición]",
-            "description" => "Uncodead de conteo que define el número de lotes (lote: una colección de artículos asociados).",
+            "description" => "Unidad de conteo que define el número de lotes (lote: una colección de artículos asociados).",
         ]);
         Unit::create([
             "code" => "LP",
             "name" => "Libra líqucodea",
-            "description" => "Uncodead de masa que define el número de libras de una sustancia líqucodea.",
+            "description" => "Unidad de masa que define el número de libras de una sustancia líqucodea.",
         ]);
         Unit::create([
             "code" => "LPA",
             "name" => "Litro de alcohol puro",
-            "description" => "Uncodead de volumen igual a un litro de alcohol puro.",
+            "description" => "Unidad de volumen igual a un litro de alcohol puro.",
         ]);
         Unit::create([
             "code" => "LR",
             "name" => "Capa ",
-            "description" => "Uncodead de conteo que define el número de capas.",
+            "description" => "Unidad de conteo que define el número de capas.",
         ]);
         Unit::create([
             "code" => "LS",
             "name" => "Suma global",
-            "description" => "Uncodead de conteo que define el número de cantcodeades monetarias completas o completas.",
+            "description" => "Unidad de conteo que define el número de cantcodeades monetarias completas o completas.",
         ]);
         Unit::create([
             "code" => "LTN",
@@ -7485,13 +7485,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "LTR",
             "name" => "Litro",
-            "description" => "Es una uncodead de volumen equivalente a un decímetro cúbico (1 dm³). Su uso es aceptado en el Sistema Internacional de Uncodeades (SI), aunque ya no pertenece estrictamente a él.",
+            "description" => "Es una uncodead de volumen equivalente a un decímetro cúbico (1 dm³). Su uso es aceptado en el Sistema Internacional de Unidades (SI), aunque ya no pertenece estrictamente a él.",
             "simbol" => "l",
         ]);
         Unit::create([
             "code" => "LUB",
             "name" => "Tonelada métrica, aceite lubricante",
-            "description" => "Uncodead de masa que define el número de toneladas métricas de aceite lubricante.",
+            "description" => "Unidad de masa que define el número de toneladas métricas de aceite lubricante.",
         ]);
         Unit::create([
             "code" => "LUM",
@@ -7512,7 +7512,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "LY",
             "name" => "Yarda lineal",
-            "description" => "Uncodead de conteo que define el número de uncodeades de 36 pulgadas en longitud de un objeto de ancho uniforme.",
+            "description" => "Unidad de conteo que define el número de uncodeades de 36 pulgadas en longitud de un objeto de ancho uniforme.",
         ]);
         Unit::create([
             "code" => "M0",
@@ -7602,7 +7602,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M25",
             "name" => "Porcentaje por grado celsius",
-            "description" => "Uncodead de proporción, igual a 0,01, en relación a una temperatura de un grado.",
+            "description" => "Unidad de proporción, igual a 0,01, en relación a una temperatura de un grado.",
             "simbol" => "%/°C",
         ]);
         Unit::create([
@@ -7653,13 +7653,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M36",
             "name" => "Mes de 30 días",
-            "description" => "Uncodead de cuenta que define el número de meses expresado en múltiplos de 30 días, un día es igual a 24 horas.",
+            "description" => "Unidad de cuenta que define el número de meses expresado en múltiplos de 30 días, un día es igual a 24 horas.",
             "simbol" => "mo (30 days)",
         ]);
         Unit::create([
             "code" => "M37",
             "name" => "Actual 360",
-            "description" => "Uncodead de cuenta que define el número de años expresado en múltiplos de 360 días, un día es igual a 24 horas.",
+            "description" => "Unidad de cuenta que define el número de años expresado en múltiplos de 360 días, un día es igual a 24 horas.",
             "simbol" => "y (360 days)",
         ]);
         Unit::create([
@@ -7677,12 +7677,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M4",
             "name" => "Valor monetario",
-            "description" => "Uncodead de medcodea expresada como un monto monetario.",
+            "description" => "Unidad de medcodea expresada como un monto monetario.",
         ]);
         Unit::create([
             "code" => "M40",
             "name" => "Yarda por segundo cuadrado",
-            "description" => "Uncodead de longitud de acuerdo con el sistema Anglo-Americano y el sistema imperial de uncodeades, divcodecodeo por la potencia de la uncodead del sistema internacional, segundo elevado al exponente 2.",
+            "description" => "Unidad de longitud de acuerdo con el sistema Anglo-Americano y el sistema imperial de uncodeades, divcodecodeo por la potencia de la uncodead del sistema internacional, segundo elevado al exponente 2.",
             "simbol" => "yd/s²",
         ]);
         Unit::create([
@@ -7694,19 +7694,19 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M42",
             "name" => "Milla (milla estatal)  por segundo cuadrado",
-            "description" => "Uncodead de la longitud según el sistema Imperial de uncodeades divcodecodeo por la potencia de la uncodead base del sistema internacional por segundo por el exponente 2.",
+            "description" => "Unidad de la longitud según el sistema Imperial de uncodeades divcodecodeo por la potencia de la uncodead base del sistema internacional por segundo por el exponente 2.",
             "simbol" => "mi/s²",
         ]);
         Unit::create([
             "code" => "M43",
             "name" => "Mil (uncodead de Medcodea Militar)",
-            "description" => "Uncodead para indicar un ángulo en la zona militar, igual a la 6400ª parte del círculo completo del 360° ó 2  pi radian.",
+            "description" => "Unidad para indicar un ángulo en la zona militar, igual a la 6400ª parte del círculo completo del 360° ó 2  pi radian.",
             "simbol" => "mil",
         ]);
         Unit::create([
             "code" => "M44",
             "name" => "Revolución",
-            "description" => "Uncodead para codeentificar un ángulo de un círculo de 360 grados ó 2*pi*radio (Referencia ISO/TC12 SI Guía).",
+            "description" => "Unidad para codeentificar un ángulo de un círculo de 360 grados ó 2*pi*radio (Referencia ISO/TC12 SI Guía).",
             "simbol" => "rev",
         ]);
         Unit::create([
@@ -7723,13 +7723,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M47",
             "name" => "Circular Mil",
-            "description" => "Uncodead que representa el área del círculo de un mil de diámetro.",
+            "description" => "Unidad que representa el área del círculo de un mil de diámetro.",
             "simbol" => "cmil",
         ]);
         Unit::create([
             "code" => "M48",
             "name" => "Milla cuadrada (basado en u.s survey foot)",
-            "description" => "Uncodead de área que es principalmente usada en la agricultura y en la forestación.",
+            "description" => "Unidad de área que es principalmente usada en la agricultura y en la forestación.",
             "simbol" => "mi² (US survey)",
         ]);
         Unit::create([
@@ -7746,49 +7746,49 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M50",
             "name" => "Estadio",
-            "description" => "Uncodead comunmente usada en Gran Bretaña en distancias rurales: 1 furlong = 40 rods = 10 cadenas (UK) =1/8 de milla = 1/10 furlong = 220 yardas =660 pies.",
+            "description" => "Unidad comunmente usada en Gran Bretaña en distancias rurales: 1 furlong = 40 rods = 10 cadenas (UK) =1/8 de milla = 1/10 furlong = 220 yardas =660 pies.",
             "simbol" => "fur",
         ]);
         Unit::create([
             "code" => "M51",
             "name" => "Pie (Topografía UEA)",
-            "description" => "Uncodead comunmente usada en los estados uncodeos para la inspección de artillería.",
+            "description" => "Unidad comunmente usada en los estados uncodeos para la inspección de artillería.",
             "simbol" => "ft (US survey) ",
         ]);
         Unit::create([
             "code" => "M52",
             "name" => "Milla",
-            "description" => "Uncodead comunmente usada en los Estados Uncodeos para la inspección de artillería.",
+            "description" => "Unidad comunmente usada en los Estados Uncodeos para la inspección de artillería.",
             "simbol" => "mi (US survey) ",
         ]);
         Unit::create([
             "code" => "M53",
             "name" => "Metro por pascal",
-            "description" => "Metro, uncodead del Sistema Internacional divcodecodeo por Pascal, Uncodead del Sistema Internacional",
+            "description" => "Metro, uncodead del Sistema Internacional divcodecodeo por Pascal, Unidad del Sistema Internacional",
             "simbol" => "m/Pa",
         ]);
         Unit::create([
             "code" => "M55",
             "name" => "Metro por radián",
-            "description" => "Uncodead del factor de conversión para la implementación de rotación a movimiento lineal.",
+            "description" => "Unidad del factor de conversión para la implementación de rotación a movimiento lineal.",
             "simbol" => "m/rad",
         ]);
         Unit::create([
             "code" => "M56",
             "name" => "Shake ",
-            "description" => "Uncodead para un periódo muy corto.",
+            "description" => "Unidad para un periódo muy corto.",
             "simbol" => "shake",
         ]);
         Unit::create([
             "code" => "M57",
             "name" => "Milla por minuto",
-            "description" => "Uncodead de veloccodead del sistema inglés de uncodeades.",
+            "description" => "Unidad de veloccodead del sistema inglés de uncodeades.",
             "simbol" => "mi/min",
         ]);
         Unit::create([
             "code" => "M58",
             "name" => "Milla por segundo",
-            "description" => "Uncodead de veloccodead del sistema inglés de uncodeades.",
+            "description" => "Unidad de veloccodead del sistema inglés de uncodeades.",
             "simbol" => "mi/s",
         ]);
         Unit::create([
@@ -7806,7 +7806,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M61",
             "name" => "Pulgada por año",
-            "description" => "Uncodead de longitud según el sistema de uncodeades Anglo-Americano y el sistema Imperial de uncodeades divcodecodeo por la uncodead común año de 365 días.",
+            "description" => "Unidad de longitud según el sistema de uncodeades Anglo-Americano y el sistema Imperial de uncodeades divcodecodeo por la uncodead común año de 365 días.",
             "simbol" => "in/y",
         ]);
         Unit::create([
@@ -7818,37 +7818,37 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M63",
             "name" => "Pulgada por minuto",
-            "description" => "Uncodead de pulgada de acuerdo con el sistema de uncodeades Anglo-Americanas e Imperial divcodecodeo por el minuto de uncodead.",
+            "description" => "Unidad de pulgada de acuerdo con el sistema de uncodeades Anglo-Americanas e Imperial divcodecodeo por el minuto de uncodead.",
             "simbol" => "in/min",
         ]);
         Unit::create([
             "code" => "M64",
             "name" => "Yarda por segundo",
-            "description" => "Uncodead de yarda de acuerdo con el sistema de uncodeades Anglo-Americanas e Imperial divcodecodeo por la uncodead de base segundo.",
+            "description" => "Unidad de yarda de acuerdo con el sistema de uncodeades Anglo-Americanas e Imperial divcodecodeo por la uncodead de base segundo.",
             "simbol" => "yd/s",
         ]);
         Unit::create([
             "code" => "M65",
             "name" => "Yarda por minuto",
-            "description" => "Uncodead de yarda de acuerdo con el sistema de uncodeades Anglo-Americanas e Imperial divcodecodeo por el minuto de uncodead.",
+            "description" => "Unidad de yarda de acuerdo con el sistema de uncodeades Anglo-Americanas e Imperial divcodecodeo por el minuto de uncodead.",
             "simbol" => "yd/min",
         ]);
         Unit::create([
             "code" => "M66",
             "name" => "Yarda por hora",
-            "description" => "Uncodead de yarda de acuerdo con el sistema Anglo-Americano y el sistema Imperial de uncodeades, divcodecodeo por la uncodead de minuto.",
+            "description" => "Unidad de yarda de acuerdo con el sistema Anglo-Americano y el sistema Imperial de uncodeades, divcodecodeo por la uncodead de minuto.",
             "simbol" => "yd/h",
         ]);
         Unit::create([
             "code" => "M67",
             "name" => "Acre-pie",
-            "description" => "Uncodead de volúmen, la cúal es usada en los Estados Uncodeos para medir la capaccodead de las presas.",
+            "description" => "Unidad de volúmen, la cúal es usada en los Estados Uncodeos para medir la capaccodead de las presas.",
             "simbol" => "acre-ft (US survey)",
         ]);
         Unit::create([
             "code" => "M68",
             "name" => "Cordón",
-            "description" => "Uncodead tradicional del volumen de leña apilada que se ha medcodeo con un cordón.",
+            "description" => "Unidad tradicional del volumen de leña apilada que se ha medcodeo con un cordón.",
             "simbol" => "cord",
         ]);
         Unit::create([
@@ -7863,13 +7863,13 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "M70",
-            "name" => "Uncodead tradicional de capaccodead de carga",
+            "name" => "Unidad tradicional de capaccodead de carga",
             "simbol" => "RT",
         ]);
         Unit::create([
             "code" => "M71",
             "name" => "Metro cúbico por pascal (joules)",
-            "description" => "Uncodead de Energía del sistema internacional, metro elevado al exponente 3 y divcodecodeo por la uncodead pascal.",
+            "description" => "Unidad de Energía del sistema internacional, metro elevado al exponente 3 y divcodecodeo por la uncodead pascal.",
             "simbol" => "m³/Pa",
         ]);
         Unit::create([
@@ -7881,7 +7881,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M73",
             "name" => "Kilogramo por metro cúbico pascal",
-            "description" => "Uncodead base del sistema internacional kilogramo, divcodecodeo por el producto de metro elevado al exponente 3 por pascal.",
+            "description" => "Unidad base del sistema internacional kilogramo, divcodecodeo por el producto de metro elevado al exponente 3 por pascal.",
             "simbol" => "(kg/m³)/Pa",
         ]);
         Unit::create([
@@ -7898,7 +7898,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M76",
             "name" => "Poundal",
-            "description" => "Uncodead no conforme al sistema internacional de la potencia, que corresponde a una masa de una libra multiplicada con la aceleración de un pie por segundo cuadrado.",
+            "description" => "Unidad no conforme al sistema internacional de la potencia, que corresponde a una masa de una libra multiplicada con la aceleración de un pie por segundo cuadrado.",
             "simbol" => "pdl",
         ]);
         Unit::create([
@@ -7939,19 +7939,19 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M83",
             "name" => "Denier",
-            "description" => "Uncodead tradicional para la indicación de la masa lineal de fibras e hilados nameiles.",
+            "description" => "Unidad tradicional para la indicación de la masa lineal de fibras e hilados nameiles.",
             "simbol" => "den",
         ]);
         Unit::create([
             "code" => "M84",
             "name" => "Libra por yarda ",
-            "description" => "Uncodead de masa lineal según el sistema de uncodeades avoirdupois.",
+            "description" => "Unidad de masa lineal según el sistema de uncodeades avoirdupois.",
             "simbol" => "lb/yd",
         ]);
         Unit::create([
             "code" => "M85",
             "name" => "Tonelada, ensayo",
-            "description" => "Uncodead de masa no conforme al sistema internacional, utilizada en la mineralogía para determinar la concentración de metales preciosos en el mineral de acuerdo con la masa del metal precioso en miligramos en una muestra de la masa de un soncodeo de ensayo (número de onzas troy en una tonelada corta (1 000 lb)).",
+            "description" => "Unidad de masa no conforme al sistema internacional, utilizada en la mineralogía para determinar la concentración de metales preciosos en el mineral de acuerdo con la masa del metal precioso en miligramos en una muestra de la masa de un soncodeo de ensayo (número de onzas troy en una tonelada corta (1 000 lb)).",
         ]);
         Unit::create([
             "code" => "M86",
@@ -7968,13 +7968,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M88",
             "name" => "Tonelada por mes",
-            "description" => "Uncodead tonelada métrica divcodecodea por la uncodead mes",
+            "description" => "Unidad tonelada métrica divcodecodea por la uncodead mes",
             "simbol" => "t/mo",
         ]);
         Unit::create([
             "code" => "M89",
             "name" => "Tonelada por año",
-            "description" => "Uncodead tonelada métrica divcodecodea por la uncodead año con 365 días",
+            "description" => "Unidad tonelada métrica divcodecodea por la uncodead año con 365 días",
             "simbol" => "t/y",
         ]);
         Unit::create([
@@ -8009,7 +8009,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "M94",
             "name" => "Kilogramo metro",
-            "description" => "Uncodead de desequilibrio como producto del kilogramo  y el metro.",
+            "description" => "Unidad de desequilibrio como producto del kilogramo  y el metro.",
             "simbol" => "kg·m",
         ]);
         Unit::create([
@@ -8072,13 +8072,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "MAW",
             "name" => "Megawatt",
-            "description" => "Uncodead de potencia que define la tasa de energía transfercodea o consumcodea cuando una corriente de 1000 amperios fluye debcodeo a un potencial de 1000 volts al factor de potencia unitario.",
+            "description" => "Unidad de potencia que define la tasa de energía transfercodea o consumcodea cuando una corriente de 1000 amperios fluye debcodeo a un potencial de 1000 volts al factor de potencia unitario.",
             "simbol" => "MW",
         ]);
         Unit::create([
             "code" => "MBE",
             "name" => "Mil equivalente de ladrillo estándar",
-            "description" => "Uncodead de cuenta que define el número de mil uncodeades equivalentes de ladrillo.",
+            "description" => "Unidad de cuenta que define el número de mil uncodeades equivalentes de ladrillo.",
         ]);
         Unit::create([
             "code" => "MBF",
@@ -8102,7 +8102,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "MD",
             "name" => "Tonelada métrica seca al aire",
-            "description" => "Uncodead de conteo que define el número de toneladas métricas de un producto, sin tener en cuenta el contencodeo de agua del producto.",
+            "description" => "Unidad de conteo que define el número de toneladas métricas de un producto, sin tener en cuenta el contencodeo de agua del producto.",
         ]);
         Unit::create([
             "code" => "MF",
@@ -8144,8 +8144,8 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "MIU",
-            "name" => "Uncodead internacional de millon",
-            "description" => "Uncodead de cuenta que define el número de uncodeades internacionales en múltiplos de 106.",
+            "name" => "Unidad internacional de millon",
+            "description" => "Unidad de cuenta que define el número de uncodeades internacionales en múltiplos de 106.",
         ]);
         Unit::create([
             "code" => "MK",
@@ -8184,12 +8184,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "MND",
             "name" => "Kilogramo, peso seco",
-            "description" => "Uncodead de masa que define el número de kilogramos de un producto, sin tener en cuenta el contencodeo de agua del producto.",
+            "description" => "Unidad de masa que define el número de kilogramos de un producto, sin tener en cuenta el contencodeo de agua del producto.",
         ]);
         Unit::create([
             "code" => "MON",
             "name" => "Mes ",
-            "description" => "Uncodead de tiempo equivalente a 1/12 de año de 365.25 días.",
+            "description" => "Unidad de tiempo equivalente a 1/12 de año de 365.25 días.",
             "simbol" => "mo",
         ]);
         Unit::create([
@@ -8220,7 +8220,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "MTK",
             "name" => "Metro cuadrado",
-            "description" => "Es la uncodead básica de superficie en el Sistema Internacional de Uncodeades. Si a esta uncodead se antepone un prefijo del Sistema Internacional se crea un múltiplo o submúltiplo de esta.",
+            "description" => "Es la uncodead básica de superficie en el Sistema Internacional de Unidades. Si a esta uncodead se antepone un prefijo del Sistema Internacional se crea un múltiplo o submúltiplo de esta.",
             "simbol" => "m²",
         ]);
         Unit::create([
@@ -8232,7 +8232,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "MTR",
             "name" => "Metro",
-            "description" => "El metro (símbolo m) es la principal uncodead de longitud del Sistema Internacional de Uncodeades. Un metro es la distancia que recorre la luz en el vacío en un intervalo de 1/299 792 458 de segundo.",
+            "description" => "El metro (símbolo m) es la principal uncodead de longitud del Sistema Internacional de Unidades. Un metro es la distancia que recorre la luz en el vacío en un intervalo de 1/299 792 458 de segundo.",
             "simbol" => "m",
         ]);
         Unit::create([
@@ -8253,13 +8253,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "MWH",
             "name" => "Megawatt hora",
-            "description" => "Uncodead de potencia que define la cantcodead total de energía a granel transfercodea o consumcodea.",
+            "description" => "Unidad de potencia que define la cantcodead total de energía a granel transfercodea o consumcodea.",
             "simbol" => "MW·h",
         ]);
         Unit::create([
             "code" => "N1",
             "name" => "Pluma calórica",
-            "description" => "Uncodead de conteo que define el número de calorías que se recetan diariamente para la terapia parenteral / enteral.",
+            "description" => "Unidad de conteo que define el número de calorías que se recetan diariamente para la terapia parenteral / enteral.",
         ]);
         Unit::create([
             "code" => "N10",
@@ -8276,49 +8276,49 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "N12",
             "name" => "Pferdestaerke",
-            "description" => "Uncodead obsoleta de la potencia relativa a DIN 1301-3: 1979: 1 PS = 735.498 75 W.",
+            "description" => "Unidad obsoleta de la potencia relativa a DIN 1301-3: 1979: 1 PS = 735.498 75 W.",
             "simbol" => "PS",
         ]);
         Unit::create([
             "code" => "N13",
             "name" => "Centímetro de mercurio (0°)",
-            "description" => "Uncodead de presión no conforme al sistema internacional, en la cuál el valor de 1 cmHg cumple con la presión estática, que es generada por un mercurio a una temperatura de 0 ° C con una altura de 1 centímetro.",
+            "description" => "Unidad de presión no conforme al sistema internacional, en la cuál el valor de 1 cmHg cumple con la presión estática, que es generada por un mercurio a una temperatura de 0 ° C con una altura de 1 centímetro.",
             "simbol" => "cmHg (0 ºC)",
         ]);
         Unit::create([
             "code" => "N14",
             "name" => "Centímetro de agua (4°)",
-            "description" => "Uncodead de presión no conforme al sistema internacional, en la cuál el valor de 1 cmH2O cumple con la presión estática, que es generada por una cabeza de agua a una temperatura de 4 ° C con una altura de 1 centímetro.",
+            "description" => "Unidad de presión no conforme al sistema internacional, en la cuál el valor de 1 cmH2O cumple con la presión estática, que es generada por una cabeza de agua a una temperatura de 4 ° C con una altura de 1 centímetro.",
             "simbol" => "cmH₂O (4 °C)",
         ]);
         Unit::create([
             "code" => "N15",
             "name" => "Pie de agua (39.2 °f)",
-            "description" => "Uncodead de presión no conforme al sistema internacional, de acuerdo con el sistema Anglo-Americano e Imperial para uncodeades, mientras que el valor de 1 ft H2O es equivalente a la presión estática, que es generada por una cabeza de agua a una temperatura de 39,2 ° F con una Altura de 1 pie.",
+            "description" => "Unidad de presión no conforme al sistema internacional, de acuerdo con el sistema Anglo-Americano e Imperial para uncodeades, mientras que el valor de 1 ft H2O es equivalente a la presión estática, que es generada por una cabeza de agua a una temperatura de 39,2 ° F con una Altura de 1 pie.",
             "simbol" => "ftH₂O (39,2 ºF)",
         ]);
         Unit::create([
             "code" => "N16",
             "name" => "Pulgada de mercurio (32 °f)",
-            "description" => "Uncodead de presión no conforme al sistema internacional, de acuerdo con el sistema Anglo-American e Imperial para uncodeades, mientras que el valor de 1 inHg cumple con la presión estática, que es generada por un mercurio a una temperatura de 32 ° F con una altura de 1 pulgada.",
+            "description" => "Unidad de presión no conforme al sistema internacional, de acuerdo con el sistema Anglo-American e Imperial para uncodeades, mientras que el valor de 1 inHg cumple con la presión estática, que es generada por un mercurio a una temperatura de 32 ° F con una altura de 1 pulgada.",
             "simbol" => "inHG (32 ºF)",
         ]);
         Unit::create([
             "code" => "N17",
             "name" => "Pulgada de mercurio (60 °f)",
-            "description" => "Uncodead de presión no conforme al sistema internacional sino según al sistema Anglo-Americano e Imperial para uncodeades, mientras que el valor de 1 in Hg satisface la presión estática, que es generada por un mercurio a una temperatura de 60 ° F con una altura de 1 pulgada.",
+            "description" => "Unidad de presión no conforme al sistema internacional sino según al sistema Anglo-Americano e Imperial para uncodeades, mientras que el valor de 1 in Hg satisface la presión estática, que es generada por un mercurio a una temperatura de 60 ° F con una altura de 1 pulgada.",
             "simbol" => "inHg (60 ºF)",
         ]);
         Unit::create([
             "code" => "N18",
             "name" => "Pulgada de agua (39.2 °f)",
-            "description" => "Uncodead de presión no conforme al sistema internacional sino de acuerdo con el sistema Anglo-Americano e Imperial para uncodeades, mientras que el valor de 1 inH2O satisface la presión estática, que es generada por una cabeza de agua a una temperatura de 39,2 ° F con una altura De 1 pulgada.",
+            "description" => "Unidad de presión no conforme al sistema internacional sino de acuerdo con el sistema Anglo-Americano e Imperial para uncodeades, mientras que el valor de 1 inH2O satisface la presión estática, que es generada por una cabeza de agua a una temperatura de 39,2 ° F con una altura De 1 pulgada.",
             "simbol" => "inH₂O (39,2 ºF)",
         ]);
         Unit::create([
             "code" => "N19",
             "name" => "Pulgada de agua (60 °f)",
-            "description" => "Uncodead de presión no conforme al sistema internacional sino según al sistema Anglo-Americano e Imperial para uncodeades, mientras que el valor de 1 inH2O satisface la presión estática, que es generada por una cabeza de agua a una temperatura de 60 ° F con una altura de 1 pulgada.",
+            "description" => "Unidad de presión no conforme al sistema internacional sino según al sistema Anglo-Americano e Imperial para uncodeades, mientras que el valor de 1 inH2O satisface la presión estática, que es generada por una cabeza de agua a una temperatura de 60 ° F con una altura de 1 pulgada.",
             "simbol" => "inH₂O (60 ºF)",
         ]);
         Unit::create([
@@ -8328,19 +8328,19 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "N20",
             "name" => "Kip por pulgada cuadrada",
-            "description" => "Uncodead de presión no conforme al sistema internacional de uncodeades sino de acuerdo con el sistema Anglo-Americano de uncodeades como el 1000 veces de la uncodead de fuerza de libra fuerza divcodecodea por la potencia de la uncodead de pulgada por el exponente 2.",
+            "description" => "Unidad de presión no conforme al sistema internacional de uncodeades sino de acuerdo con el sistema Anglo-Americano de uncodeades como el 1000 veces de la uncodead de fuerza de libra fuerza divcodecodea por la potencia de la uncodead de pulgada por el exponente 2.",
             "simbol" => "ksi",
         ]);
         Unit::create([
             "code" => "N21",
             "name" => "Poundal por pie cuadrado",
-            "description" => "Uncodead de presión no conforme al sistema internacional según el sistema Imperial de uncodeades según NIST: 1 pdl / ft² = 1,488 164 Pa.",
+            "description" => "Unidad de presión no conforme al sistema internacional según el sistema Imperial de uncodeades según NIST: 1 pdl / ft² = 1,488 164 Pa.",
             "simbol" => "pdl/ft²",
         ]);
         Unit::create([
             "code" => "N22",
             "name" => "Onza (avoirdupois) por pulgada cuadrada",
-            "description" => "Uncodead de la masa específica de la superficie (onza de avoirdupois según el sistema del avoirdupois de uncodeades según la superficie pulgada cuadrada según el sistema Anglo-Americano e imperial de uncodeades).",
+            "description" => "Unidad de la masa específica de la superficie (onza de avoirdupois según el sistema del avoirdupois de uncodeades según la superficie pulgada cuadrada según el sistema Anglo-Americano e imperial de uncodeades).",
             "simbol" => "oz/in²",
         ]);
         Unit::create([
@@ -8358,13 +8358,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "N25",
             "name" => "Libra por yarda cuadrada",
-            "description" => "Uncodead para la masa relacionada con el área como una uncodead de la libra según el sistema de la uncodead del avoirdupois divcodecodeo por la potencia del patio de la uncodead según el sistema Anglo-Americano e imperial de uncodeades con el exponente 2.",
+            "description" => "Unidad para la masa relacionada con el área como una uncodead de la libra según el sistema de la uncodead del avoirdupois divcodecodeo por la potencia del patio de la uncodead según el sistema Anglo-Americano e imperial de uncodeades con el exponente 2.",
             "simbol" => "lb/yd²",
         ]);
         Unit::create([
             "code" => "N26",
             "name" => "Poundal por pulgada cuadrada",
-            "description" => "Uncodead de presión no conforme al sistema internacional sino según el sistema Imperial de uncodeades (poundal por pulgada cuadrada).",
+            "description" => "Unidad de presión no conforme al sistema internacional sino según el sistema Imperial de uncodeades (poundal por pulgada cuadrada).",
             "simbol" => "pdl/in²",
         ]);
         Unit::create([
@@ -8404,19 +8404,19 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "N32",
             "name" => "Poundal por pulgada",
-            "description" => "Uncodead de tensión superficial de acuerdo con el sistema de uncodead Imperial como cociente de poundal por pulgada.",
+            "description" => "Unidad de tensión superficial de acuerdo con el sistema de uncodead Imperial como cociente de poundal por pulgada.",
             "simbol" => "pdl/in",
         ]);
         Unit::create([
             "code" => "N33",
             "name" => "Libra-fuerza por yarda",
-            "description" => "Uncodead de fuerza por uncodead de longitud basado en el sistema Anglo-Americano de uncodeades.",
+            "description" => "Unidad de fuerza por uncodead de longitud basado en el sistema Anglo-Americano de uncodeades.",
             "simbol" => "lbf/yd",
         ]);
         Unit::create([
             "code" => "N34",
             "name" => "Poundal segundo por pie cuadrado",
-            "description" => "Uncodead de viscoscodead no conforme al sistema internacional.",
+            "description" => "Unidad de viscoscodead no conforme al sistema internacional.",
             "simbol" => "(pdl/ft²)·s",
         ]);
         Unit::create([
@@ -8428,55 +8428,55 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "N36",
             "name" => "Newton segundo por metro cuadrado",
-            "description" => "Uncodead de la viscoscodead dinámica como un producto de la uncodead de la presión (newton por metro cuadrado) multiplicado con la uncodead de base SI segundo.",
+            "description" => "Unidad de la viscoscodead dinámica como un producto de la uncodead de la presión (newton por metro cuadrado) multiplicado con la uncodead de base SI segundo.",
             "simbol" => "(N/m²)·s",
         ]);
         Unit::create([
             "code" => "N37",
             "name" => "Kilogramo por metro segundo",
-            "description" => "Uncodead de la viscoscodead dinámica como un cociente de la uncodead kilogramo del sistema internacional entre la uncodead metro y por segundo del sistema internacional de uncodeades.",
+            "description" => "Unidad de la viscoscodead dinámica como un cociente de la uncodead kilogramo del sistema internacional entre la uncodead metro y por segundo del sistema internacional de uncodeades.",
             "simbol" => "kg/(m·s)",
         ]);
         Unit::create([
             "code" => "N38",
             "name" => "Kilogramo por metro minuto",
-            "description" => "Uncodead de la viscoscodead dinámica como un cociente de la uncodead kilogramo del sistema internacional entre la uncodead metro y por minuto del sistema internacional de uncodeades.",
+            "description" => "Unidad de la viscoscodead dinámica como un cociente de la uncodead kilogramo del sistema internacional entre la uncodead metro y por minuto del sistema internacional de uncodeades.",
             "simbol" => "kg/(m·min)",
         ]);
         Unit::create([
             "code" => "N39",
             "name" => "Kilogramo por metro día",
-            "description" => "Uncodead de la viscoscodead dinámica como un cociente de uncodead base kilogramo divcodecodeo por la uncodead base metro y por la uncodead de día, ambas del sistema internacional. ",
+            "description" => "Unidad de la viscoscodead dinámica como un cociente de uncodead base kilogramo divcodecodeo por la uncodead base metro y por la uncodead de día, ambas del sistema internacional. ",
             "simbol" => "kg/(m·d)",
         ]);
         Unit::create([
             "code" => "N40",
             "name" => "Kilogramo por metro hora",
-            "description" => "Uncodead de la viscoscodead dinámica como cociente de la uncodead base kilogramo divcodecodeo por la uncodead base metro y por uncodead de hora, ambas del sistema internacional.",
+            "description" => "Unidad de la viscoscodead dinámica como cociente de la uncodead base kilogramo divcodecodeo por la uncodead base metro y por uncodead de hora, ambas del sistema internacional.",
             "simbol" => "kg/(m·h)",
         ]);
         Unit::create([
             "code" => "N41",
             "name" => "Gramo por centímetro segundo",
-            "description" => "Uncodead de la viscoscodead dinámica como un cociente del 0,001 veces de la uncodead base kilogramo divcodecodeo por el 0,01 veces de la uncodead base metro y la uncodead base segundo, del sistema internacional de uncodeades.",
+            "description" => "Unidad de la viscoscodead dinámica como un cociente del 0,001 veces de la uncodead base kilogramo divcodecodeo por el 0,01 veces de la uncodead base metro y la uncodead base segundo, del sistema internacional de uncodeades.",
             "simbol" => "g/(cm·s)",
         ]);
         Unit::create([
             "code" => "N42",
             "name" => "Poundal segundo por pulgada cuadrada",
-            "description" => "Uncodead de viscoscodead dinámica no conforme al sistema internacional sino según el sistema Imperial de uncodeades, como producto de la  uncodead de presión (poundal por pulgada cuadrada) multiplicada por la uncodead base segundo, del sistema internacional de uncodeades.",
+            "description" => "Unidad de viscoscodead dinámica no conforme al sistema internacional sino según el sistema Imperial de uncodeades, como producto de la  uncodead de presión (poundal por pulgada cuadrada) multiplicada por la uncodead base segundo, del sistema internacional de uncodeades.",
             "simbol" => "(pdl/in²)·s",
         ]);
         Unit::create([
             "code" => "N43",
             "name" => "Libra por pie minuto",
-            "description" => "Uncodead de la viscoscodead dinámica según el sistema Anglo-Americano de uncodeades.",
+            "description" => "Unidad de la viscoscodead dinámica según el sistema Anglo-Americano de uncodeades.",
             "simbol" => "lb/(ft·min)",
         ]);
         Unit::create([
             "code" => "N44",
             "name" => "Libra por pie día",
-            "description" => "Uncodead de la viscoscodead dinámica según el sistema Anglo-Americano de uncodeades.",
+            "description" => "Unidad de la viscoscodead dinámica según el sistema Anglo-Americano de uncodeades.",
             "simbol" => "lb/(ft·d)",
         ]);
         Unit::create([
@@ -8488,193 +8488,193 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "N46",
             "name" => "Pie poundal",
-            "description" => "Uncodead de trabajo (trayectoria de fuerza)",
+            "description" => "Unidad de trabajo (trayectoria de fuerza)",
             "simbol" => "ft·pdl",
         ]);
         Unit::create([
             "code" => "N47",
             "name" => "Pulgada poundal",
-            "description" => "Uncodead de trabajo (fuerza multiplicado por trayectoria) de acuerdo con el sistema imperial de uncodeades como el producto de la uncodead pulgada multiplicada por el poundal.",
+            "description" => "Unidad de trabajo (fuerza multiplicado por trayectoria) de acuerdo con el sistema imperial de uncodeades como el producto de la uncodead pulgada multiplicada por el poundal.",
             "simbol" => "in·pdl",
         ]);
         Unit::create([
             "code" => "N48",
             "name" => "Watt por centímetro cuadrado",
-            "description" => "Uncodead derivada del sistema internacional, watt, divcodecodeo por la potencia de la 0.01 parte de la uncodead base del sistema internacional, metro al exponente 2.",
+            "description" => "Unidad derivada del sistema internacional, watt, divcodecodeo por la potencia de la 0.01 parte de la uncodead base del sistema internacional, metro al exponente 2.",
             "simbol" => "W/cm²",
         ]);
         Unit::create([
             "code" => "N49",
             "name" => "Watt por pulgada cuadrada",
-            "description" => "Uncodead derivada del sistema internacional, watt, divcodecodeo por la potencia de la uncodead pulgada al exponente 2, de acuerdo al sistema de uncodeades Anglo-Americano y el sistema imperial de uncodeades.",
+            "description" => "Unidad derivada del sistema internacional, watt, divcodecodeo por la potencia de la uncodead pulgada al exponente 2, de acuerdo al sistema de uncodeades Anglo-Americano y el sistema imperial de uncodeades.",
             "simbol" => "W/in²",
         ]);
         Unit::create([
             "code" => "N50",
-            "name" => "Uncodead térmica británica (tabla internacional) por pie cuadrado hora.",
-            "description" => "Uncodead del flujo superficial de calor según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (tabla internacional) por pie cuadrado hora.",
+            "description" => "Unidad del flujo superficial de calor según el sistema Imperial de uncodeades.",
             "simbol" => "BtuIT/(ft²·h)",
         ]);
         Unit::create([
             "code" => "N51",
-            "name" => "Uncodead térmica británica (termoquímica) por pie cuadrado hora.",
-            "description" => "Uncodead del flujo superficial de calor según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (termoquímica) por pie cuadrado hora.",
+            "description" => "Unidad del flujo superficial de calor según el sistema Imperial de uncodeades.",
             "simbol" => "Btuth/(ft²·h)",
         ]);
         Unit::create([
             "code" => "N52",
-            "name" => "Uncodead térmica británica (termoquímico) por pie cuadrado minuto.",
-            "description" => "Uncodead del flujo superficial de calor según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (termoquímico) por pie cuadrado minuto.",
+            "description" => "Unidad del flujo superficial de calor según el sistema Imperial de uncodeades.",
             "simbol" => "Btuth/(ft²·min) ",
         ]);
         Unit::create([
             "code" => "N53",
-            "name" => "Uncodead térmica británica (tabla internacional) por pie cuadrado segundo.",
-            "description" => "Uncodead del flujo superficial de calor según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (tabla internacional) por pie cuadrado segundo.",
+            "description" => "Unidad del flujo superficial de calor según el sistema Imperial de uncodeades.",
             "simbol" => "BtuIT/(ft²·s)",
         ]);
         Unit::create([
             "code" => "N54",
-            "name" => "Uncodead térmica británica (termoquímica) por pie cuadrado segundo.",
-            "description" => "Uncodead del flujo superficial de calor según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (termoquímica) por pie cuadrado segundo.",
+            "description" => "Unidad del flujo superficial de calor según el sistema Imperial de uncodeades.",
             "simbol" => "Btuth/(ft²·s)",
         ]);
         Unit::create([
             "code" => "N55",
-            "name" => "Uncodead térmica británica (tabla internacional) por pulgada cuadrada segundo.",
-            "description" => "Uncodead del flujo superficial de calor según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (tabla internacional) por pulgada cuadrada segundo.",
+            "description" => "Unidad del flujo superficial de calor según el sistema Imperial de uncodeades.",
             "simbol" => "BtuIT/(in²·s)",
         ]);
         Unit::create([
             "code" => "N56",
             "name" => "Caloría (termoquímica) por centímetro cuadrado minuto",
-            "description" => "Uncodead del flujo superficial de calor según el sistema Imperial de uncodeades.",
+            "description" => "Unidad del flujo superficial de calor según el sistema Imperial de uncodeades.",
             "simbol" => "calth/(cm²·min)",
         ]);
         Unit::create([
             "code" => "N57",
             "name" => "Caloría (termoquímica) por centímetro cuadrado segundo",
-            "description" => "Uncodead del flujo superficial de calor según el sistema Imperial de uncodeades.",
+            "description" => "Unidad del flujo superficial de calor según el sistema Imperial de uncodeades.",
             "simbol" => "calth/(cm²·s)",
         ]);
         Unit::create([
             "code" => "N58",
-            "name" => "Uncodead térmica británica (tabla internacional) por pie cúbico",
-            "description" => "Uncodead de la denscodead de energía según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (tabla internacional) por pie cúbico",
+            "description" => "Unidad de la denscodead de energía según el sistema Imperial de uncodeades.",
             "simbol" => "BtuIT/ft³",
         ]);
         Unit::create([
             "code" => "N59",
-            "name" => "Uncodead térmica británica (termoquímica) por pie cúbico",
-            "description" => "Uncodead de la denscodead de energía según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (termoquímica) por pie cúbico",
+            "description" => "Unidad de la denscodead de energía según el sistema Imperial de uncodeades.",
             "simbol" => "Btuth/ft³",
         ]);
         Unit::create([
             "code" => "N60",
-            "name" => "Uncodead térmica británica (tabla internacional) por grado fahrenheit",
-            "description" => "Uncodead de la capaccodead calorífica según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (tabla internacional) por grado fahrenheit",
+            "description" => "Unidad de la capaccodead calorífica según el sistema Imperial de uncodeades.",
             "simbol" => "BtuIT/ºF",
         ]);
         Unit::create([
             "code" => "N61",
-            "name" => "Uncodead térmica británica (termoquímico) por grado fahrenheit",
-            "description" => "Uncodead de la capaccodead calorífica según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (termoquímico) por grado fahrenheit",
+            "description" => "Unidad de la capaccodead calorífica según el sistema Imperial de uncodeades.",
             "simbol" => "Btuth/ºF",
         ]);
         Unit::create([
             "code" => "N62",
-            "name" => "Uncodead térmica británica (tabla internacional) por grado rankine",
-            "description" => "Uncodead de la capaccodead calorífica según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (tabla internacional) por grado rankine",
+            "description" => "Unidad de la capaccodead calorífica según el sistema Imperial de uncodeades.",
             "simbol" => "BtuIT/ºR",
         ]);
         Unit::create([
             "code" => "N63",
-            "name" => "Uncodead térmica británica (termoquímico) por grado rankine",
-            "description" => "Uncodead de la capaccodead calorífica según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (termoquímico) por grado rankine",
+            "description" => "Unidad de la capaccodead calorífica según el sistema Imperial de uncodeades.",
             "simbol" => "Btuth/ºR",
         ]);
         Unit::create([
             "code" => "N64",
-            "name" => "Uncodead térmica británica (termoquímico) por libra grado rankine",
-            "description" => "Uncodead de la capaccodead calorífica (uncodead térmica británica según la tabla internacional según el grado de Rankine) de acuerdo con el sistema Imperial de uncodeades divcodecodeo por la uncodead avoirdupois libra según el sistema de avoirdupois de uncodeades.",
+            "name" => "Unidad térmica británica (termoquímico) por libra grado rankine",
+            "description" => "Unidad de la capaccodead calorífica (uncodead térmica británica según la tabla internacional según el grado de Rankine) de acuerdo con el sistema Imperial de uncodeades divcodecodeo por la uncodead avoirdupois libra según el sistema de avoirdupois de uncodeades.",
             "simbol" => "(Btuth/°R)/lb",
         ]);
         Unit::create([
             "code" => "N65",
             "name" => "Kilocaloría (tabla internacional) por gramo kelvin",
-            "description" => "Uncodead de la capaccodead calorífica relacionada con la masa como cociente 1000 veces de la caloría (tabla internacional) divcodecodeo por el producto de 0,001 veces de las uncodeades de base kilogramo y kelvin.",
+            "description" => "Unidad de la capaccodead calorífica relacionada con la masa como cociente 1000 veces de la caloría (tabla internacional) divcodecodeo por el producto de 0,001 veces de las uncodeades de base kilogramo y kelvin.",
             "simbol" => "(kcalIT/K)/g",
         ]);
         Unit::create([
             "code" => "N66",
-            "name" => "Uncodead térmica británica (39 °f)",
-            "description" => "Uncodead de energía térmica según el sistema Imperial de uncodeades en una temperatura de referencia de 39 ° F.",
+            "name" => "Unidad térmica británica (39 °f)",
+            "description" => "Unidad de energía térmica según el sistema Imperial de uncodeades en una temperatura de referencia de 39 ° F.",
             "simbol" => "Btu (39 ºF) ",
         ]);
         Unit::create([
             "code" => "N67",
-            "name" => "Uncodead térmica británica (59 °f)",
-            "description" => "Uncodead de energía térmica según el sistema Imperial de uncodeades en una temperatura de referencia de 59 ° F.",
+            "name" => "Unidad térmica británica (59 °f)",
+            "description" => "Unidad de energía térmica según el sistema Imperial de uncodeades en una temperatura de referencia de 59 ° F.",
             "simbol" => "Btu (59 ºF)",
         ]);
         Unit::create([
             "code" => "N68",
-            "name" => "Uncodead térmica británica (60 °f)",
-            "description" => "Uncodead de energía térmica según el sistema Imperial de uncodeades en una temperatura de referencia de 60 ° F.",
+            "name" => "Unidad térmica británica (60 °f)",
+            "description" => "Unidad de energía térmica según el sistema Imperial de uncodeades en una temperatura de referencia de 60 ° F.",
             "simbol" => "Btu (60 ºF) ",
         ]);
         Unit::create([
             "code" => "N69",
             "name" => "Caloría (20 °c)",
-            "description" => "Uncodead para la cantcodead de calor, que se requiere para que 1g de agua libre de aire a una presión constante de 101.325 kPa, se caliente a la presión de la atmósfera estándar a nivel del mar, de 19,5 ° C a 20,5 ° C.",
+            "description" => "Unidad para la cantcodead de calor, que se requiere para que 1g de agua libre de aire a una presión constante de 101.325 kPa, se caliente a la presión de la atmósfera estándar a nivel del mar, de 19,5 ° C a 20,5 ° C.",
             "simbol" => "cal₂₀",
         ]);
         Unit::create([
             "code" => "N70",
             "name" => "Quad",
-            "description" => "Uncodead de energía de acuerdo al sistema imperial de uncodeades",
+            "description" => "Unidad de energía de acuerdo al sistema imperial de uncodeades",
             "simbol" => "quad",
         ]);
         Unit::create([
             "code" => "N71",
             "name" => "Termia (energía comercial)",
-            "description" => "Uncodead de energía calorífica en uso comercial, dentro de Estados Uncodeos defincodea como: 1 thm (EC) = 100 000 BtuIT.",
+            "description" => "Unidad de energía calorífica en uso comercial, dentro de Estados Uncodeos defincodea como: 1 thm (EC) = 100 000 BtuIT.",
             "simbol" => "thm (EC)",
         ]);
         Unit::create([
             "code" => "N72",
             "name" => "Termia (UEA)",
-            "description" => "Uncodead de energía térmica en uso comercial.",
+            "description" => "Unidad de energía térmica en uso comercial.",
             "simbol" => "thm (US)",
         ]);
         Unit::create([
             "code" => "N73",
-            "name" => "Uncodead térmica británica (termoquímica) por libra",
-            "description" => "Uncodead de la energía calorífica según el sistema imperial de uncodeades divcodeió por la uncodead de la libra de avoirdupois según el sistema de avoirdupois de uncodeades.",
+            "name" => "Unidad térmica británica (termoquímica) por libra",
+            "description" => "Unidad de la energía calorífica según el sistema imperial de uncodeades divcodeió por la uncodead de la libra de avoirdupois según el sistema de avoirdupois de uncodeades.",
             "simbol" => "Btuth/lb",
         ]);
         Unit::create([
             "code" => "N74",
-            "name" => "Uncodead térmica británica (tabla internacional) por hora pie cuadrado grado fahrenheit.",
-            "description" => "Uncodead del coeficiente de transición térmica según el sistema Imperial de uncodeades.",
+            "name" => "Unidad térmica británica (tabla internacional) por hora pie cuadrado grado fahrenheit.",
+            "description" => "Unidad del coeficiente de transición térmica según el sistema Imperial de uncodeades.",
             "simbol" => "BtuIT/(h·ft²·ºF)",
         ]);
         Unit::create([
             "code" => "N75",
-            "name" => "Uncodead térmica británica (termoquímico) por hora pie cuadrado grado farenheit.",
-            "description" => "Uncodead del coeficiente de transición térmica según el sistema imperial de uncodeades.",
+            "name" => "Unidad térmica británica (termoquímico) por hora pie cuadrado grado farenheit.",
+            "description" => "Unidad del coeficiente de transición térmica según el sistema imperial de uncodeades.",
             "simbol" => "Btuth/(h·ft²·ºF)",
         ]);
         Unit::create([
             "code" => "N76",
-            "name" => "Uncodead térmica británica (tabla internacional) por segundo pie cuadrado grado fahrenheit.",
-            "description" => "Uncodead del coeficiente de transición térmica según el sistema imperial de uncodeades.",
+            "name" => "Unidad térmica británica (tabla internacional) por segundo pie cuadrado grado fahrenheit.",
+            "description" => "Unidad del coeficiente de transición térmica según el sistema imperial de uncodeades.",
             "simbol" => "BtuIT/(s·ft²·ºF)",
         ]);
         Unit::create([
             "code" => "N77",
-            "name" => "Uncodead térmica británica (termoquímico) por segundo pie cuadrado grado fahrenheit.",
-            "description" => "Uncodead del coeficiente de transición térmica según el sistema imperial de uncodeades.",
+            "name" => "Unidad térmica británica (termoquímico) por segundo pie cuadrado grado fahrenheit.",
+            "description" => "Unidad del coeficiente de transición térmica según el sistema imperial de uncodeades.",
             "simbol" => "Btuth/(s·ft²·ºF) ",
         ]);
         Unit::create([
@@ -8686,13 +8686,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "N79",
             "name" => "Kelvin por pascal",
-            "description" => "Uncodead base del sistema internacional kelvin, divcodecodeo entre pascal, uncodead base del sistema internacional",
+            "description" => "Unidad base del sistema internacional kelvin, divcodecodeo entre pascal, uncodead base del sistema internacional",
             "simbol" => "K/Pa",
         ]);
         Unit::create([
             "code" => "N80",
             "name" => "Watt por metro grado celsius",
-            "description" => "Uncodead derivada del sistema internacional, watt, divcodecodeo por el producto de la uncodead base, metro, y la uncodead de temperatura grados Celsius.",
+            "description" => "Unidad derivada del sistema internacional, watt, divcodecodeo por el producto de la uncodead base, metro, y la uncodead de temperatura grados Celsius.",
             "simbol" => "W/(m·°C)",
         ]);
         Unit::create([
@@ -8715,37 +8715,37 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "N84",
             "name" => "Grado fahrenheit hora por uncodead térmica británica (tabla internacional)",
-            "description" => "Uncodead no conforme al sistema internacional de uncodeades,de la resistencia térmica según el sistema Imperial de uncodeades.",
+            "description" => "Unidad no conforme al sistema internacional de uncodeades,de la resistencia térmica según el sistema Imperial de uncodeades.",
             "simbol" => "ºF/(BtuIT/h)",
         ]);
         Unit::create([
             "code" => "N85",
             "name" => "Grado fahrenheit hora por uncodead térmica británica (termoquímico)",
-            "description" => "Uncodead no conforme al sistema internacional de uncodeades,de la resistencia térmica según el sistema Imperial de uncodeades.",
+            "description" => "Unidad no conforme al sistema internacional de uncodeades,de la resistencia térmica según el sistema Imperial de uncodeades.",
             "simbol" => "ºF/(Btuth/h)",
         ]);
         Unit::create([
             "code" => "N86",
             "name" => "Grado fahrenheit segundo por uncodead térmica británica (tabla internacional)",
-            "description" => "Uncodead no conforme al sistema internacional de uncodeades,de la resistencia térmica según el sistema Imperial de uncodeades.",
+            "description" => "Unidad no conforme al sistema internacional de uncodeades,de la resistencia térmica según el sistema Imperial de uncodeades.",
             "simbol" => "ºF/(BtuIT/s)",
         ]);
         Unit::create([
             "code" => "N87",
             "name" => "Grago fahrenheit segundo por uncodead térmica británica (termoquímico)",
-            "description" => "Uncodead no conforme al sistema internacional de uncodeades,de la resistencia térmica según el sistema Imperial de uncodeades.",
+            "description" => "Unidad no conforme al sistema internacional de uncodeades,de la resistencia térmica según el sistema Imperial de uncodeades.",
             "simbol" => "ºF/(Btuth/s)",
         ]);
         Unit::create([
             "code" => "N88",
             "name" => "Grado fahrenheit hora pie cuadrado por uncodead térmica británica (tabla internacional) pulgada",
-            "description" => "Uncodead de resistencia térmica específica según el sistema Imperial de uncodeades",
+            "description" => "Unidad de resistencia térmica específica según el sistema Imperial de uncodeades",
             "simbol" => "ºF·h·ft²/(BtuIT·in)",
         ]);
         Unit::create([
             "code" => "N89",
             "name" => "Grado fahrenheit hora pie cuadrado por uncodead térmica británica (termoquímico) pulgada.",
-            "description" => "Uncodead de resistencia térmica específica según el sistema Imperial de uncodeades",
+            "description" => "Unidad de resistencia térmica específica según el sistema Imperial de uncodeades",
             "simbol" => "ºF·h·ft²/(Btuth·in)",
         ]);
         Unit::create([
@@ -8768,7 +8768,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "N93",
             "name" => "Amperio por pascal",
-            "description" => "Uncodead base amperio divcodecodeo por la uncodead derivada pascal.",
+            "description" => "Unidad base amperio divcodecodeo por la uncodead derivada pascal.",
             "simbol" => "A/Pa",
         ]);
         Unit::create([
@@ -8780,7 +8780,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "N95",
             "name" => "Amperio minuto",
-            "description" => "Uncodead de carga eléctrica que define la cantcodead de carga acumulada por un flujo constante de un amperio por un minuto.",
+            "description" => "Unidad de carga eléctrica que define la cantcodead de carga acumulada por un flujo constante de un amperio por un minuto.",
             "simbol" => "A·min",
         ]);
         Unit::create([
@@ -8798,7 +8798,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "N98",
             "name" => "Voltio por pascal",
-            "description" => "Uncodead derivada del sistema internacional, voltio, divcodecodeo entre la uncodead derivada del sistema internacional, pascal.",
+            "description" => "Unidad derivada del sistema internacional, voltio, divcodecodeo entre la uncodead derivada del sistema internacional, pascal.",
             "simbol" => "V/Pa",
         ]);
         Unit::create([
@@ -8815,7 +8815,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "NAR",
             "name" => "Número de artículos",
-            "description" => "Uncodead de conteo que define el número de artículos ",
+            "description" => "Unidad de conteo que define el número de artículos ",
         ]);
         Unit::create([
             "code" => "NB",
@@ -8832,7 +8832,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "NCL",
             "name" => "Número de celulas",
-            "description" => "Uncodead de conteo que define el número de células (célula: un espacio cerrado o circunscrito, cavcodead o volumen)",
+            "description" => "Unidad de conteo que define el número de células (célula: un espacio cerrado o circunscrito, cavcodead o volumen)",
         ]);
         Unit::create([
             "code" => "ND",
@@ -8850,7 +8850,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "NF",
             "name" => "Mensaje",
-            "description" => "Uncodead de conteo que define el número de mensajes",
+            "description" => "Unidad de conteo que define el número de mensajes",
         ]);
         Unit::create([
             "code" => "NG",
@@ -8867,13 +8867,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "NIL",
             "name" => "Nil",
-            "description" => "Uncodead de conteo que define el número de instancias de nada",
+            "description" => "Unidad de conteo que define el número de instancias de nada",
             "simbol" => "()",
         ]);
         Unit::create([
             "code" => "NIU",
             "name" => "Número de uncodeades internacionales",
-            "description" => "Uncodead de conteo que define el número de uncodeades internacionales",
+            "description" => "Unidad de conteo que define el número de uncodeades internacionales",
         ]);
         Unit::create([
             "code" => "NJ",
@@ -8882,7 +8882,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "NL",
             "name" => "Carga",
-            "description" => "Uncodead de volumen que define el número de cargas(carga: cantcodead de artículos transportados o procesados al mismo tiempo)",
+            "description" => "Unidad de volumen que define el número de cargas(carga: cantcodead de artículos transportados o procesados al mismo tiempo)",
         ]);
         Unit::create([
             "code" => "NM3",
@@ -8898,7 +8898,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "NMP",
             "name" => "Número de paquetes",
-            "description" => "Uncodead que define el número de paquetes (paquetes: colección de objetos empaquetados)",
+            "description" => "Unidad que define el número de paquetes (paquetes: colección de objetos empaquetados)",
         ]);
         Unit::create([
             "code" => "NN",
@@ -8912,7 +8912,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "NPT",
             "name" => "Número de partes",
-            "description" => "Uncodead de conteo que define el número de partes (partes: componente de larga entcodead)",
+            "description" => "Unidad de conteo que define el número de partes (partes: componente de larga entcodead)",
         ]);
         Unit::create([
             "code" => "NQ",
@@ -8925,7 +8925,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "NT",
             "name" => "Tonelada neta",
-            "description" => "Uncodead de masa equivalente a 2000 libras, ver (US). Convencion Internacional referencia sobre el arqueo de los busques",
+            "description" => "Unidad de masa equivalente a 2000 libras, ver (US). Convencion Internacional referencia sobre el arqueo de los busques",
         ]);
         Unit::create([
             "code" => "NTT",
@@ -8943,18 +8943,18 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "NX",
             "name" => "Parte por mil",
-            "description" => "Uncodead de proporcion igual a 10 Sínonimo: por milla",
+            "description" => "Unidad de proporcion igual a 10 Sínonimo: por milla",
             "simbol" => "‰",
         ]);
         Unit::create([
             "code" => "OA",
             "name" => "Panel",
-            "description" => "Uncodeade de conteo que define el nUnit::create([umero de paneles ",
+            "description" => "Unidade de conteo que define el nUnit::create([umero de paneles ",
         ]);
         Unit::create([
             "code" => "ODE",
             "name" => "Equvalente de agotamiento del ozona",
-            "description" => "Uncodead de masa que define el potencial de agotamiento del ozono en kilogramos de un producto en relación con el agotamiento calculado para la sustancia de referencia Triclorofluorometano (CFC-11).",
+            "description" => "Unidad de masa que define el potencial de agotamiento del ozono en kilogramos de un producto en relación con el agotamiento calculado para la sustancia de referencia Triclorofluorometano (CFC-11).",
         ]);
         Unit::create([
             "code" => "Ohm",
@@ -8986,7 +8986,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "OT",
             "name" => "Hora extra",
-            "description" => "Uncodead de tiempo que define el nUnit::create([umero de horas extras",
+            "description" => "Unidad de tiempo que define el nUnit::create([umero de horas extras",
         ]);
         Unit::create([
             "code" => "OZ",
@@ -9010,13 +9010,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P1",
             "name" => "Tanto por ciento",
-            "description" => "Uncodead de proporcion equivalente a 0.01",
+            "description" => "Unidad de proporcion equivalente a 0.01",
             "simbol" => "% or pct",
         ]);
         Unit::create([
             "code" => "P10",
             "name" => "Culombio por metro",
-            "description" => "Uncodead derivada, coulomb divcodecodea por la uncodead base, metro.",
+            "description" => "Unidad derivada, coulomb divcodecodea por la uncodead base, metro.",
             "simbol" => "C/m",
         ]);
         Unit::create([
@@ -9028,7 +9028,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P12",
             "name" => "Gamma",
-            "description" => "Uncodead de denscodead de flujo magnético.",
+            "description" => "Unidad de denscodead de flujo magnético.",
             "simbol" => "γ",
         ]);
         Unit::create([
@@ -9099,7 +9099,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P23",
             "name" => "Ohm circular-mil por pie",
-            "description" => "Uncodead de resistivcodead.",
+            "description" => "Unidad de resistivcodead.",
             "simbol" => "Ω·cmil/ft ",
         ]);
         Unit::create([
@@ -9111,7 +9111,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P25",
             "name" => "Lumen por pie cuadrado",
-            "description" => "Uncodead derivada, lumen divcodecodeo por la potencia de la uncodead pie, al exponente 2, de acuerdo con el sistema anglo-americano y el sistema imperial.",
+            "description" => "Unidad derivada, lumen divcodecodeo por la potencia de la uncodead pie, al exponente 2, de acuerdo con el sistema anglo-americano y el sistema imperial.",
             "simbol" => "lm/ft²",
         ]);
         Unit::create([
@@ -9123,19 +9123,19 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P27",
             "name" => "Vela (medcodea)",
-            "description" => "Es una uncodead de medcodea de iluminancia que no pertenece al Sistema Internacional de Uncodeades, pero es ampliamente usada en Estados Uncodeos para fotografía, cine, televisión, conservación luminosa, ingeniería de la construcción, etc. Una vela significa \"el reparto de iluminación sobre una superficie equivalente a una candela, y a un pie de distancia\".",
+            "description" => "Es una uncodead de medcodea de iluminancia que no pertenece al Sistema Internacional de Unidades, pero es ampliamente usada en Estados Uncodeos para fotografía, cine, televisión, conservación luminosa, ingeniería de la construcción, etc. Una vela significa \"el reparto de iluminación sobre una superficie equivalente a una candela, y a un pie de distancia\".",
             "simbol" => "ftc",
         ]);
         Unit::create([
             "code" => "P28",
             "name" => "Candela por pulgada cuadrada",
-            "description" => "Uncodead base, candela divcodecodeo por la potencia de la uncodead de pulgada al exponente 2 de acuerdo con el sistema de uncodeades Anglo-Americanas e Imperial.",
+            "description" => "Unidad base, candela divcodecodeo por la potencia de la uncodead de pulgada al exponente 2 de acuerdo con el sistema de uncodeades Anglo-Americanas e Imperial.",
             "simbol" => "cd/in²",
         ]);
         Unit::create([
             "code" => "P29",
             "name" => "Footlambert",
-            "description" => "Uncodead de luminancia de acuerdo con el sistema Anglo-Americano de uncodeades, y se define como la luminancia emitcodea o reflejada de un lumen por pie cuadrado.",
+            "description" => "Unidad de luminancia de acuerdo con el sistema Anglo-Americano de uncodeades, y se define como la luminancia emitcodea o reflejada de un lumen por pie cuadrado.",
             "simbol" => "ftL",
         ]);
         Unit::create([
@@ -9145,19 +9145,19 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P30",
             "name" => "Lambert",
-            "description" => "Uncodead de luminancia CGS (Centímetro-Gram-Segundo sistema), defincodea como la luminancia emitcodea o reflejada de un lumen por centímetro cuadrado.",
+            "description" => "Unidad de luminancia CGS (Centímetro-Gram-Segundo sistema), defincodea como la luminancia emitcodea o reflejada de un lumen por centímetro cuadrado.",
             "simbol" => "Lb",
         ]);
         Unit::create([
             "code" => "P31",
             "name" => "Stilb ",
-            "description" => "Uncodead de luminancia CGS (Centímetro-Gram-Segundo sistema), defincodea como la luminancia emitcodea o reflejada de un lumen por centímetro cuadrado.",
+            "description" => "Unidad de luminancia CGS (Centímetro-Gram-Segundo sistema), defincodea como la luminancia emitcodea o reflejada de un lumen por centímetro cuadrado.",
             "simbol" => "sb",
         ]);
         Unit::create([
             "code" => "P32",
             "name" => "Candela por pie cuadrado",
-            "description" => "Uncodead base, candela divcodecodeo por la potencia de la uncodead pie al exponente 2 , de acuerdo con el sistema anglo-americano y el sistema imperial de uncodeades ",
+            "description" => "Unidad base, candela divcodecodeo por la potencia de la uncodead pie al exponente 2 , de acuerdo con el sistema anglo-americano y el sistema imperial de uncodeades ",
             "simbol" => "cd/ft²",
         ]);
         Unit::create([
@@ -9181,25 +9181,25 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P36",
             "name" => "Candela internacional",
-            "description" => "Uncodead obsoleta de la potencia en Alemania relativa a DIN 1301-3: 1979: 1 HK = 1.019 candela.",
+            "description" => "Unidad obsoleta de la potencia en Alemania relativa a DIN 1301-3: 1979: 1 HK = 1.019 candela.",
             "simbol" => "IK",
         ]);
         Unit::create([
             "code" => "P37",
-            "name" => "Uncodead térmica británica (tabla internacional) por pie cuadrado",
-            "description" => "Uncodead de la transmisión de energía relacionado de muestreo de áreas de acuerdo con el sistema imperial de uncodeades.",
+            "name" => "Unidad térmica británica (tabla internacional) por pie cuadrado",
+            "description" => "Unidad de la transmisión de energía relacionado de muestreo de áreas de acuerdo con el sistema imperial de uncodeades.",
             "simbol" => "BtuIT/ft²",
         ]);
         Unit::create([
             "code" => "P38",
-            "name" => "Uncodead térmica británica (termoquímica) por pie cuadrado",
-            "description" => "Uncodead de la transmisión de energía relacionado de muestreo de áreas de acuerdo con el sistema imperial de uncodeades.",
+            "name" => "Unidad térmica británica (termoquímica) por pie cuadrado",
+            "description" => "Unidad de la transmisión de energía relacionado de muestreo de áreas de acuerdo con el sistema imperial de uncodeades.",
             "simbol" => "Btuth/ft²",
         ]);
         Unit::create([
             "code" => "P39",
             "name" => "Caloría (termoquímica) por centímetro cuadrado",
-            "description" => "Uncodead de la transmisión de energía relacionado de muestreo de áreas de acuerdo con el sistema imperial de uncodeades.",
+            "description" => "Unidad de la transmisión de energía relacionado de muestreo de áreas de acuerdo con el sistema imperial de uncodeades.",
             "simbol" => "calth/cm²",
         ]);
         Unit::create([
@@ -9221,7 +9221,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P42",
             "name" => "Pascal por segundo cuadrado",
-            "description" => "Uncodead del conjunto como un producto de la potencia de derivado uncodead pascal SI con exponente 2 y la uncodead base segunda SI.",
+            "description" => "Unidad del conjunto como un producto de la potencia de derivado uncodead pascal SI con exponente 2 y la uncodead base segunda SI.",
             "simbol" => "Pa²·s",
         ]);
         Unit::create([
@@ -9233,19 +9233,19 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P44",
             "name" => "Libra Mol",
-            "description" => "Uncodead que no forma parte del sistema internacional, cantcodead de una sustancia relacionada que un mol libra de una composición química corresponde a la misma cantcodead de libras como el peso molcular de una molécula de esta composición en uncodeades de masa atómica.",
+            "description" => "Unidad que no forma parte del sistema internacional, cantcodead de una sustancia relacionada que un mol libra de una composición química corresponde a la misma cantcodead de libras como el peso molcular de una molécula de esta composición en uncodeades de masa atómica.",
             "simbol" => "lbmol",
         ]);
         Unit::create([
             "code" => "P45",
             "name" => "Libra de Mol por segundo",
-            "description" => "No forma parte del sistema internacional de uncodeades.\r\nUncodead de flujo del flujo molar que se refiere a que una libra mol de una composición química el mismo número de libras corresponde con el peso molcular de una molécula de esta composición en la masa atómica de uncodeades.",
+            "description" => "No forma parte del sistema internacional de uncodeades.\r\nUnidad de flujo del flujo molar que se refiere a que una libra mol de una composición química el mismo número de libras corresponde con el peso molcular de una molécula de esta composición en la masa atómica de uncodeades.",
             "simbol" => "lbmol/s",
         ]);
         Unit::create([
             "code" => "P46",
             "name" => "Libra Mol por minuto",
-            "description" => "No forma parte del sistema internacional de uncodeades.\r\nUncodead de flujo del flujo molar que se refiere a que una libra mol de una composición química el mismo número de libras corresponde como el peso molcular de una molécula de esta composición en la masa atómica de uncodeades.",
+            "description" => "No forma parte del sistema internacional de uncodeades.\r\nUnidad de flujo del flujo molar que se refiere a que una libra mol de una composición química el mismo número de libras corresponde como el peso molcular de una molécula de esta composición en la masa atómica de uncodeades.",
             "simbol" => "lbmol/h",
         ]);
         Unit::create([
@@ -9257,7 +9257,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P48",
             "name" => "Libra de Mol por libra",
-            "description" => "Uncodead del flujo molar material divcodecodeo por la libra avoirdupois para la masa de acuerdo con el sistema de uncodeades avoirdupois no SI-conforme.",
+            "description" => "Unidad del flujo molar material divcodecodeo por la libra avoirdupois para la masa de acuerdo con el sistema de uncodeades avoirdupois no SI-conforme.",
             "simbol" => "lbmol/lb",
         ]);
         Unit::create([
@@ -9269,7 +9269,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P5",
             "name" => "Paquete de cinco",
-            "description" => "Uncodead de conteo que define el número de paquetes-cinco (paquete-cinco: set de cinco artículos empaquetados siempre)",
+            "description" => "Unidad de conteo que define el número de paquetes-cinco (paquete-cinco: set de cinco artículos empaquetados siempre)",
         ]);
         Unit::create([
             "code" => "P50",
@@ -9280,7 +9280,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P51",
             "name" => "Mol por kilogramo pascal ",
-            "description" => "Uncodead base mol divcodecodeo por el producto de la uncodead base SI kilogramo y la uncodead derivada pascal SI. ",
+            "description" => "Unidad base mol divcodecodeo por el producto de la uncodead base SI kilogramo y la uncodead derivada pascal SI. ",
             "simbol" => "(mol/kg)/Pa",
         ]);
         Unit::create([
@@ -9392,7 +9392,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P69",
             "name" => "Rem por segundo",
-            "description" => "Uncodead para la tasa de estaño equivalente y relativa a DIN 1301-3: 1979: 1 rem / s = 0,01 J / (kg · s) = 1 Sv / s.",
+            "description" => "Unidad para la tasa de estaño equivalente y relativa a DIN 1301-3: 1979: 1 rem / s = 0,01 J / (kg · s) = 1 Sv / s.",
             "simbol" => "rem/s",
         ]);
         Unit::create([
@@ -9456,7 +9456,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P79",
             "name" => "Pascal metro cuadrado por kilogramo",
-            "description" => " Uncodead del índice de estallcodeo como uncodead derivada para pascal presión relacionada con la sustancia, representado como cociente de la uncodead base SI kilogramo divcodecodea por la potencia de la uncodead base SI metros por exponente 2.",
+            "description" => " Unidad del índice de estallcodeo como uncodead derivada para pascal presión relacionada con la sustancia, representado como cociente de la uncodead base SI kilogramo divcodecodea por la potencia de la uncodead base SI metros por exponente 2.",
             "simbol" => "Pa/(kg/m²)",
         ]);
         Unit::create([
@@ -9484,7 +9484,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P83",
             "name" => "Admosfera estandar por metro.",
-            "description" => "Uncodead anticuadas de la presión divcodecodea por la uncodead de base metros.",
+            "description" => "Unidad anticuadas de la presión divcodecodea por la uncodead de base metros.",
             "simbol" => "Atm/m",
         ]);
         Unit::create([
@@ -9496,31 +9496,31 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P85",
             "name" => "Torr por metro.",
-            "description" => "Uncodead de la presión divcodecodea por la uncodead de base metros.",
+            "description" => "Unidad de la presión divcodecodea por la uncodead de base metros.",
             "simbol" => "Torr/m",
         ]);
         Unit::create([
             "code" => "P86",
             "name" => "Psi por pulgada",
-            "description" => "Uncodead de compuesto para la presión (libra de fuerza de acuerdo con el sistema de la uncodead angloamericana divcodecodea por la potencia de la uncodead de pulgada de acuerdo con el sistema angloamericano e Imperial de uncodeades con el exponente 2) divcodecodeo por la uncodead de pulgada de acuerdo con la sistema angloamericano e Imperial de uncodeades.",
+            "description" => "Unidad de compuesto para la presión (libra de fuerza de acuerdo con el sistema de la uncodead angloamericana divcodecodea por la potencia de la uncodead de pulgada de acuerdo con el sistema angloamericano e Imperial de uncodeades con el exponente 2) divcodecodeo por la uncodead de pulgada de acuerdo con la sistema angloamericano e Imperial de uncodeades.",
             "simbol" => "psi/in",
         ]);
         Unit::create([
             "code" => "P87",
             "name" => "Metro cúbico por segundo de metro cuadrado",
-            "description" => "Uncodead de volumen de flujo metros cúbicos por segundo relacionado con la superficie de transmisión en metros cuadrados.",
+            "description" => "Unidad de volumen de flujo metros cúbicos por segundo relacionado con la superficie de transmisión en metros cuadrados.",
             "simbol" => "(m³/s)/m²",
         ]);
         Unit::create([
             "code" => "P88",
             "name" => "Rhe",
-            "description" => "Uncodead no conforme a SI de flucodeez de viscoscodead dinámica",
+            "description" => "Unidad no conforme a SI de flucodeez de viscoscodead dinámica",
             "simbol" => "rhe",
         ]);
         Unit::create([
             "code" => "P89",
             "name" => "Libra por metro cúbico de pulgada",
-            "description" => "Uncodead para el momento de rotación relacionado con la longitud según el sistema de uncodeades Anglo-Americanas e Imperial.",
+            "description" => "Unidad para el momento de rotación relacionado con la longitud según el sistema de uncodeades Anglo-Americanas e Imperial.",
             "simbol" => "lbf·ft/in",
         ]);
         Unit::create([
@@ -9530,19 +9530,19 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P90",
             "name" => "Libra-fuerza por pulgada cuadrada",
-            "description" => "Uncodead para el momento de rotación relacionado con la longitud según el sistema de uncodeades Anglo-Americanas e Imperial.",
+            "description" => "Unidad para el momento de rotación relacionado con la longitud según el sistema de uncodeades Anglo-Americanas e Imperial.",
             "simbol" => "lbf·in/in",
         ]);
         Unit::create([
             "code" => "P91",
             "name" => "Permanente (0°c)",
-            "description" => "Uncodead tradicional para la capaccodead de un material para permitir la transición del vapor, defincodea a una temperatura de 0°C como transmitancia del vapor en la cual la masa de un grano de vapor penetra en un área de un pie cuadrado a una presión de mercurio de una pulgada por hora.",
+            "description" => "Unidad tradicional para la capaccodead de un material para permitir la transición del vapor, defincodea a una temperatura de 0°C como transmitancia del vapor en la cual la masa de un grano de vapor penetra en un área de un pie cuadrado a una presión de mercurio de una pulgada por hora.",
             "simbol" => "perm (0 ºC) ",
         ]);
         Unit::create([
             "code" => "P92",
             "name" => "Permanente (23°c)",
-            "description" => "Uncodead tradicional para la capaccodead de un material para permitir la transición del vapor, defincodea a una temperatura de 23°C como transmitancia del vapor en la cual la masa de un grano de vapor penetra en un área de un pie cuadrado a una presión de mercurio de una pulgada por hora.",
+            "description" => "Unidad tradicional para la capaccodead de un material para permitir la transición del vapor, defincodea a una temperatura de 23°C como transmitancia del vapor en la cual la masa de un grano de vapor penetra en un área de un pie cuadrado a una presión de mercurio de una pulgada por hora.",
             "simbol" => "perm (23 ºC) ",
         ]);
         Unit::create([
@@ -9578,13 +9578,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "P98",
             "name" => "Pascal a la suma de potencia de los números estequimetricos",
-            "description" => "Uncodead de la constante de equilibrio sobre la base de la presión (ISO 80000-9: 2009, 9-35.a).",
+            "description" => "Unidad de la constante de equilibrio sobre la base de la presión (ISO 80000-9: 2009, 9-35.a).",
             "simbol" => "PaΣνB",
         ]);
         Unit::create([
             "code" => "P99",
             "name" => "Mols por metro cúbico a la suma de potencia de los números estequimetricos",
-            "description" => "Uncodead de la constante de equilibrio sobre la base de la concentración (ISO 80000-9: 2009, 9-36.a).",
+            "description" => "Unidad de la constante de equilibrio sobre la base de la concentración (ISO 80000-9: 2009, 9-36.a).",
             "simbol" => "(mol/m³)∑νB",
         ]);
         Unit::create([
@@ -9600,7 +9600,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "PD",
             "name" => "Almohadilla",
-            "description" => "Uncodead de conteo que define el número de almohadillas (almohadilla: bloquea de hojas de papel sujetas juntas en un extremo).",
+            "description" => "Unidad de conteo que define el número de almohadillas (almohadilla: bloquea de hojas de papel sujetas juntas en un extremo).",
         ]);
         Unit::create([
             "code" => "PE",
@@ -9609,22 +9609,22 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "PFL",
             "name" => "Litro de prueba ",
-            "description" => "Uncodead de volumen igual a un litro de alcoholes de prueba, o su equivalente alcohólico. Se utiliza para medir la concentración de licores alcohólicos destilados, expresada como porcentaje del contencodeo en alcohol de una mezcla patrón a una tempreatura específica.",
+            "description" => "Unidad de volumen igual a un litro de alcoholes de prueba, o su equivalente alcohólico. Se utiliza para medir la concentración de licores alcohólicos destilados, expresada como porcentaje del contencodeo en alcohol de una mezcla patrón a una tempreatura específica.",
         ]);
         Unit::create([
             "code" => "PGL",
             "name" => "Galón de prueba",
-            "description" => "Uncodead de volumen igual a un galón de alcoholes de prueba, o su equivalente alcohólico. Se utiliza para medir la concentración de licores alcohólicos destilados, expresada como porcentaje del contencodeo en alcohol de una mezcla patrón a una temperatura específica.",
+            "description" => "Unidad de volumen igual a un galón de alcoholes de prueba, o su equivalente alcohólico. Se utiliza para medir la concentración de licores alcohólicos destilados, expresada como porcentaje del contencodeo en alcohol de una mezcla patrón a una temperatura específica.",
         ]);
         Unit::create([
             "code" => "PI",
             "name" => "Tono",
-            "description" => "Uncodeade de conteo que define el número de caracteres que se ajustan en una pulgada horizontal",
+            "description" => "Unidade de conteo que define el número de caracteres que se ajustan en una pulgada horizontal",
         ]);
         Unit::create([
             "code" => "PLA",
             "name" => "Grado de platón ",
-            "description" => "Uncodead de proporción que define el contencodeo de azúcar de un producto, especialmente en relación con la cerveza",
+            "description" => "Unidad de proporción que define el contencodeo de azúcar de un producto, especialmente en relación con la cerveza",
             "simbol" => "°P",
         ]);
         Unit::create([
@@ -9639,13 +9639,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "PQ",
             "name" => "Página por pulgada",
-            "description" => "Uncodead de cantcodead que define el grado de espesor de una publicación enlazada, expresada como el número de de páginas por pulgada de espesor.",
+            "description" => "Unidad de cantcodead que define el grado de espesor de una publicación enlazada, expresada como el número de de páginas por pulgada de espesor.",
             "simbol" => "ppi",
         ]);
         Unit::create([
             "code" => "PR",
             "name" => "Par",
-            "description" => "Uncodead de conteo que define el número de pares (par: descripción por 2)",
+            "description" => "Unidad de conteo que define el número de pares (par: descripción por 2)",
         ]);
         Unit::create([
             "code" => "PS",
@@ -9699,13 +9699,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "Q10",
             "name" => "Joule por tesla",
-            "description" => "Uncodead del momento dipolar magnético de la molécula como derivado de la uncodead SI joule divcodecodeo por la uncodead SI derivada Tesla",
+            "description" => "Unidad del momento dipolar magnético de la molécula como derivado de la uncodead SI joule divcodecodeo por la uncodead SI derivada Tesla",
             "simbol" => "J/T",
         ]);
         Unit::create([
             "code" => "Q11",
             "name" => "Erlang",
-            "description" => "Uncodead del valor del mercado de acuerdo con la caracteristica de una sola característica como una medición estadística de la utilización existente ",
+            "description" => "Unidad del valor del mercado de acuerdo con la caracteristica de una sola característica como una medición estadística de la utilización existente ",
             "simbol" => "E",
         ]);
         Unit::create([
@@ -9717,61 +9717,61 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "Q13",
             "name" => "Octeto por segundo",
-            "description" => "Uncodead octeto divcodecodeo por la uncodead base SI segundo",
+            "description" => "Unidad octeto divcodecodeo por la uncodead base SI segundo",
             "simbol" => "o/s",
         ]);
         Unit::create([
             "code" => "Q14",
             "name" => "Shannon",
-            "description" => "Uncodead logarítmica para la información igual al contencodeo de la decisión de una oración de dos sucesos mutuamente excluyentes, expresada como un logaritmo a la base 2.",
+            "description" => "Unidad logarítmica para la información igual al contencodeo de la decisión de una oración de dos sucesos mutuamente excluyentes, expresada como un logaritmo a la base 2.",
             "simbol" => "Sh",
         ]);
         Unit::create([
             "code" => "Q15",
             "name" => "Hartley",
-            "description" => "Uncodead logarítmica para la información igual al contencodeo de la decisión de una oración de diez sucesos mutuamente excluyentes, expresada como un logaritmo base 10.",
+            "description" => "Unidad logarítmica para la información igual al contencodeo de la decisión de una oración de diez sucesos mutuamente excluyentes, expresada como un logaritmo base 10.",
             "simbol" => "Hart",
         ]);
         Unit::create([
             "code" => "Q16",
-            "name" => "Uncodead natural de información ",
-            "description" => "Uncodead logarítmica para información igual al contencodeo de la decisión de una oración de 718 281 828 459 sucesos mutuamente excluyentes, expresada como un logaritmo para basar el valor de Euler e.",
+            "name" => "Unidad natural de información ",
+            "description" => "Unidad logarítmica para información igual al contencodeo de la decisión de una oración de 718 281 828 459 sucesos mutuamente excluyentes, expresada como un logaritmo para basar el valor de Euler e.",
             "simbol" => "nat",
         ]);
         Unit::create([
             "code" => "Q17",
             "name" => "Shannon por segundo",
-            "description" => "Uncodead logarítmica relacionada con el tiempo para información igual al contencodeo de la decisión de una oración de dos sucesos mutuamente excluyentes, expresada como logarítmo base 2.",
+            "description" => "Unidad logarítmica relacionada con el tiempo para información igual al contencodeo de la decisión de una oración de dos sucesos mutuamente excluyentes, expresada como logarítmo base 2.",
             "simbol" => "Sh/s",
         ]);
         Unit::create([
             "code" => "Q18",
             "name" => "Hartley por segundo ",
-            "description" => "Uncodead logaritmica relacionada con el tiempo para información igual al contencodeo de la decisión de una oración de diez sucesos mutuamente excluyentes, expresada como un logartimo a la base 10. ",
+            "description" => "Unidad logaritmica relacionada con el tiempo para información igual al contencodeo de la decisión de una oración de diez sucesos mutuamente excluyentes, expresada como un logartimo a la base 10. ",
             "simbol" => "Hart/s",
         ]);
         Unit::create([
             "code" => "Q19",
-            "name" => "Uncodead natural de información por segundo ",
-            "description" => "Uncodead logarítmica relacionada con el tiempo para información igual al contencodeo de la decisión de una oración 2.718281828459 mutuamente excluyentes, expresado como un logarítmo a la base del valor de Euler",
+            "name" => "Unidad natural de información por segundo ",
+            "description" => "Unidad logarítmica relacionada con el tiempo para información igual al contencodeo de la decisión de una oración 2.718281828459 mutuamente excluyentes, expresado como un logarítmo a la base del valor de Euler",
             "simbol" => "nat/s",
         ]);
         Unit::create([
             "code" => "Q20",
             "name" => "Segundo por kilogramo",
-            "description" => "Uncodead de la probabilcodead de transición de Einsten para emisiones espontáneas o inductoras y absorción según ISO 80000-7, expresada como uncodead base SI segundo divcodecodea por la uncodead base kilogramo.",
+            "description" => "Unidad de la probabilcodead de transición de Einsten para emisiones espontáneas o inductoras y absorción según ISO 80000-7, expresada como uncodead base SI segundo divcodecodea por la uncodead base kilogramo.",
             "simbol" => "s/kg",
         ]);
         Unit::create([
             "code" => "Q21",
             "name" => "Watt metro cuadrado",
-            "description" => "Uncodead de las primeras constantes de radiación c1=2.p.c0, cuyo valor es 3.74177118.10 6 veces la del valor comparativo del producto de la uncodead SI deriva watts multiplicada con la potencia de la SI medcodeor de la uncodead base con el exponente 2.",
+            "description" => "Unidad de las primeras constantes de radiación c1=2.p.c0, cuyo valor es 3.74177118.10 6 veces la del valor comparativo del producto de la uncodead SI deriva watts multiplicada con la potencia de la SI medcodeor de la uncodead base con el exponente 2.",
             "simbol" => "W·m²",
         ]);
         Unit::create([
             "code" => "Q22",
             "name" => "Segundo por metro cúbicos de radianes ",
-            "description" => "Uncodead de la denscodead de estados como una expresión de la frecuencia angular como complemento del producto de hertzio y radiante y la potencia del medcodeor de la uncodead base SI por exponente 3.",
+            "description" => "Unidad de la denscodead de estados como una expresión de la frecuencia angular como complemento del producto de hertzio y radiante y la potencia del medcodeor de la uncodead base SI por exponente 3.",
             "simbol" => "1/(Hz·rad·m³)",
         ]);
         Unit::create([
@@ -9789,7 +9789,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "Q25",
             "name" => "Dioptría",
-            "description" => "Uncodead utilizada en la declaración de índices de refracción relativos de sistemas ópticos como complemento de la longitud focal con correspondencia con: 1dpt=1/m.",
+            "description" => "Unidad utilizada en la declaración de índices de refracción relativos de sistemas ópticos como complemento de la longitud focal con correspondencia con: 1dpt=1/m.",
             "simbol" => "dpt",
         ]);
         Unit::create([
@@ -9801,13 +9801,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "Q27",
             "name" => "Newtons metros por metro",
-            "description" => "Uncodead para el momento de rotación relacionado con la longitud como producto de la uncodead SI derivada por el medcodeor de la uncodead SI",
+            "description" => "Unidad para el momento de rotación relacionado con la longitud como producto de la uncodead SI derivada por el medcodeor de la uncodead SI",
             "simbol" => "N·m/m²",
         ]);
         Unit::create([
             "code" => "Q28",
             "name" => "Kilograma por metro cuadrado pascal segundo",
-            "description" => "Uncodead para la capaccodead de un material para permitir la transición del vapor",
+            "description" => "Unidad para la capaccodead de un material para permitir la transición del vapor",
             "simbol" => "kg/(m²·Pa·s)",
         ]);
         Unit::create([
@@ -9819,7 +9819,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "Q3",
             "name" => "Comcodea",
-            "description" => "Uncodead de conteo que define el número de comcodea",
+            "description" => "Unidad de conteo que define el número de comcodea",
         ]);
         Unit::create([
             "code" => "Q30",
@@ -9850,13 +9850,13 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "Q35",
             "name" => "Megawatts por minuto",
-            "description" => "Uncodead de potencia que define la cantcodead total de energía mayor transfercodea o consumcodea en un minuto.",
+            "description" => "Unidad de potencia que define la cantcodead total de energía mayor transfercodea o consumcodea en un minuto.",
             "simbol" => "MW/min",
         ]);
         Unit::create([
             "code" => "Q36",
             "name" => "Metro cuadrado por metro cúbico",
-            "description" => "Uncodead de la cantcodead de superficie por uncodead de volumen de un objeto o colección de objetos",
+            "description" => "Unidad de la cantcodead de superficie por uncodead de volumen de un objeto o colección de objetos",
             "simbol" => "m2/m3",
         ]);
         Unit::create([
@@ -9892,17 +9892,17 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "QA",
             "name" => "Página-fascimil",
-            "description" => "Uncodead de conteo que define el número de páginas fascimil",
+            "description" => "Unidad de conteo que define el número de páginas fascimil",
         ]);
         Unit::create([
             "code" => "QAN",
             "name" => "Cuarto (de un año)",
-            "description" => "Uncodead de tiempo que define el número de años (3 meses)",
+            "description" => "Unidad de tiempo que define el número de años (3 meses)",
         ]);
         Unit::create([
             "code" => "QB",
             "name" => "Página, copia impresa",
-            "description" => "Uncodead de conteo que define el número de copias impresas",
+            "description" => "Unidad de conteo que define el número de copias impresas",
         ]);
         Unit::create([
             "code" => "QD",
@@ -9919,7 +9919,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "QR",
             "name" => "Mano de papel",
-            "description" => "Uncodead de conteo para papel, expresada como el número de manos de papel (mano de papel: numero de papel en hojas, típicamente 25)",
+            "description" => "Unidad de conteo para papel, expresada como el número de manos de papel (mano de papel: numero de papel en hojas, típicamente 25)",
             "simbol" => "qr",
         ]);
         Unit::create([
@@ -9947,23 +9947,23 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "QTR",
             "name" => "Cuarto",
-            "description" => "Uncodead tradicional de peso igual a 1/4 de peso. En el Reino Uncodeo 1/4 equivale a 28 libras.",
+            "description" => "Unidad tradicional de peso igual a 1/4 de peso. En el Reino Uncodeo 1/4 equivale a 28 libras.",
             "simbol" => "Qr (UK)",
         ]);
         Unit::create([
             "code" => "R1",
             "name" => "Pica",
-            "description" => "Uncodead de conteo que define el número de picas (pica: longitud tipografia igual a 12 puntos o 4,22 mm aprox)",
+            "description" => "Unidad de conteo que define el número de picas (pica: longitud tipografia igual a 12 puntos o 4,22 mm aprox)",
         ]);
         Unit::create([
             "code" => "R9",
             "name" => "Mil metros cúbicos ",
-            "description" => "Uncodead de volumen que equivale a mil metro cúbicos",
+            "description" => "Unidad de volumen que equivale a mil metro cúbicos",
         ]);
         Unit::create([
             "code" => "RH",
             "name" => "Hora de funcionamiento",
-            "description" => "Uncodead de tiempo que define el número de horas de operación",
+            "description" => "Unidad de tiempo que define el número de horas de operación",
         ]);
         Unit::create([
             "code" => "RK",
@@ -9972,7 +9972,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "RM",
             "name" => "Resma",
-            "description" => "Uncodead de conteo para papel, espresada como el número de resmas (resma: una gran cantcodead de hojas de papel, tipicamente 500)",
+            "description" => "Unidad de conteo para papel, espresada como el número de resmas (resma: una gran cantcodead de hojas de papel, tipicamente 500)",
         ]);
         Unit::create([
             "code" => "RN",
@@ -9981,12 +9981,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "ROM",
             "name" => "Habitación",
-            "description" => "Uncodead de conteo que define el número de habitaciones",
+            "description" => "Unidad de conteo que define el número de habitaciones",
         ]);
         Unit::create([
             "code" => "RP",
             "name" => "Libra por resma",
-            "description" => "Uncodead de masa para papel, expresada en libras por resma. (Resma: una gran cantcodead de papel, tipicamente 500 hojas)",
+            "description" => "Unidad de masa para papel, expresada en libras por resma. (Resma: una gran cantcodead de papel, tipicamente 500 hojas)",
         ]);
         Unit::create([
             "code" => "RPM",
@@ -10007,7 +10007,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "RT",
             "name" => "Milla de toneladas de ingresos",
-            "description" => "Uncodead de información tipicamente utilizada para propósitos de facturación, expresada como el número de toneladas en ingresos: una tonelada métrica o un metro cúbico, la que sea mayor) se movio  a una distancia de una milla",
+            "description" => "Unidad de información tipicamente utilizada para propósitos de facturación, expresada como el número de toneladas en ingresos: una tonelada métrica o un metro cúbico, la que sea mayor) se movio  a una distancia de una milla",
         ]);
         Unit::create([
             "code" => "RU",
@@ -10039,22 +10039,22 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "S8",
-            "name" => "Uncodead de publiccodead estándar",
+            "name" => "Unidad de publiccodead estándar",
         ]);
         Unit::create([
             "code" => "SAN",
             "name" => "Medio año",
-            "description" => "Uncodead de tiempo que define el número de años ",
+            "description" => "Unidad de tiempo que define el número de años ",
         ]);
         Unit::create([
             "code" => "SCO",
             "name" => "Puntuación",
-            "description" => "Uncodead de conteo que define el número de uncodeades en multiplos de 20",
+            "description" => "Unidad de conteo que define el número de uncodeades en multiplos de 20",
         ]);
         Unit::create([
             "code" => "SCR",
             "name" => "Escrúpulo",
-            "description" => "El escrúpulo (en inglés apothecary scruple) era Uncodead de medcodea utilizada en farmacia para pesar ingredientes de los medicamentos.\r\n\r\nEl escrúpulo podía tener diferentes valores en cada país: en España y Portugal, un escrúpulo equivalía a 24 granos (pesando 1,55517384 gramos), mientras que en el sistema imperial inglés correspondía a 20 granos (1,2959782 gramos).\r\n\r\nEn astronomía, un escrúpulo es el resultado de divcodeir en sesenta partes un grado de círculo.",
+            "description" => "El escrúpulo (en inglés apothecary scruple) era Unidad de medcodea utilizada en farmacia para pesar ingredientes de los medicamentos.\r\n\r\nEl escrúpulo podía tener diferentes valores en cada país: en España y Portugal, un escrúpulo equivalía a 24 granos (pesando 1,55517384 gramos), mientras que en el sistema imperial inglés correspondía a 20 granos (1,2959782 gramos).\r\n\r\nEn astronomía, un escrúpulo es el resultado de divcodeir en sesenta partes un grado de círculo.",
         ]);
         Unit::create([
             "code" => "SD",
@@ -10073,17 +10073,17 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "SET",
             "name" => "Conjunto",
-            "description" => "Uncodead de conteo que define el número de conjuntos (Conjunto: un número de objetos agrupados)",
+            "description" => "Unidad de conteo que define el número de conjuntos (Conjunto: un número de objetos agrupados)",
         ]);
         Unit::create([
             "code" => "SG",
             "name" => "Segmento ",
-            "description" => "Uncodead de información equivalente a 64000bytes",
+            "description" => "Unidad de información equivalente a 64000bytes",
         ]);
         Unit::create([
             "code" => "SHT",
             "name" => "Tonelada de envíos",
-            "description" => "Uncodead de masa que define el número de toneladas para el envío.",
+            "description" => "Unidad de masa que define el número de toneladas para el envío.",
         ]);
         Unit::create([
             "code" => "SIE",
@@ -10114,17 +10114,17 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "SQ",
             "name" => "Cuadrado",
-            "description" => "Uncodead de conteo que define el número de cuadrados (cuadrado: forma rectangular)",
+            "description" => "Unidad de conteo que define el número de cuadrados (cuadrado: forma rectangular)",
         ]);
         Unit::create([
             "code" => "SQR",
             "name" => "Cuadrado y techado",
-            "description" => "Uncodead de conteo que conteo que define el número de plazas de materiales para techos, medcodea en múltiplos de 100 pies cuadrados",
+            "description" => "Unidad de conteo que conteo que define el número de plazas de materiales para techos, medcodea en múltiplos de 100 pies cuadrados",
         ]);
         Unit::create([
             "code" => "SR",
             "name" => "Tira",
-            "description" => "Uncodead de conteo que define el número de tiras (pieza larga y estrecha de un objeto)",
+            "description" => "Unidad de conteo que define el número de tiras (pieza larga y estrecha de un objeto)",
         ]);
         Unit::create([
             "code" => "SS",
@@ -10137,7 +10137,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "STC",
             "name" => "Palo",
-            "description" => "Uncodead de conteo que define el número de palos (palo: pieza delgada y a menudo cilíndirca de una sustancia)",
+            "description" => "Unidad de conteo que define el número de palos (palo: pieza delgada y a menudo cilíndirca de una sustancia)",
         ]);
         Unit::create([
             "code" => "STI",
@@ -10147,12 +10147,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "STK",
             "name" => "Palo, cigarrillo",
-            "description" => "Uncodead de conteo que define el número de cigarrillos en la uncodead más pequeña para el cálculo de la población y/o del trabajo",
+            "description" => "Unidad de conteo que define el número de cigarrillos en la uncodead más pequeña para el cálculo de la población y/o del trabajo",
         ]);
         Unit::create([
             "code" => "STL",
             "name" => "Litro estándar",
-            "description" => "Uncodead de volumen que define el número de litros de un producto a una temperatura de 15 grados celsius, especialmente en relación con los aceites de hcoderocarburos",
+            "description" => "Unidad de volumen que define el número de litros de un producto a una temperatura de 15 grados celsius, especialmente en relación con los aceites de hcoderocarburos",
         ]);
         Unit::create([
             "code" => "STN",
@@ -10163,27 +10163,27 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "STW",
             "name" => "Paja",
-            "description" => "Uncodead de conteo que define el número de pajitas (paja:un tubo delgado utilizado para succionar liqucodeos)",
+            "description" => "Unidad de conteo que define el número de pajitas (paja:un tubo delgado utilizado para succionar liqucodeos)",
         ]);
         Unit::create([
             "code" => "SW",
             "name" => "Número de madejas",
-            "description" => "Uncodead de conteo que define el número de madejas (skein:un paquete de hilo o hilo suelto)",
+            "description" => "Unidad de conteo que define el número de madejas (skein:un paquete de hilo o hilo suelto)",
         ]);
         Unit::create([
             "code" => "SX",
             "name" => "Envío",
-            "description" => "Uncodead de conteo que define el número de envíos (embarque: una cantcodead de mercancias embarcadas o transportadas)",
+            "description" => "Unidad de conteo que define el número de envíos (embarque: una cantcodead de mercancias embarcadas o transportadas)",
         ]);
         Unit::create([
             "code" => "SYR",
             "name" => "Jeringuilla",
-            "description" => "Uncodead de conteo que define el número de jeringuillas (jeringa: un pequeño dispositivo para bombear, pulverizar y/o inyectar liqucodeos a través de una pequeña abertura)",
+            "description" => "Unidad de conteo que define el número de jeringuillas (jeringa: un pequeño dispositivo para bombear, pulverizar y/o inyectar liqucodeos a través de una pequeña abertura)",
         ]);
         Unit::create([
             "code" => "T0",
             "name" => "Linea de telecomunicaciones en servicio",
-            "description" => "Uncodead de conteo que define el número de líneas de servicio",
+            "description" => "Unidad de conteo que define el número de líneas de servicio",
         ]);
         Unit::create([
             "code" => "T1",
@@ -10192,7 +10192,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "T3",
             "name" => "Mil pedazos",
-            "description" => "Uncodead de conteo que define el número de piezas en múltiplos de 1000 (pieza: un solo artículo, artículo o ejemplar)",
+            "description" => "Unidad de conteo que define el número de piezas en múltiplos de 1000 (pieza: un solo artículo, artículo o ejemplar)",
         ]);
         Unit::create([
             "code" => "T4",
@@ -10231,7 +10231,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "TAN",
             "name" => "Número de accodeo total",
-            "description" => "Uncodead de química que define la cantcodead de hcoderóxcodeo de potasio (KOH) en miligramos que se necesita para neutralizar los áccodeos en un gramo de aceite. Es una medcodea importante de la calcodead del petróleo crudo",
+            "description" => "Unidad de química que define la cantcodead de hcoderóxcodeo de potasio (KOH) en miligramos que se necesita para neutralizar los áccodeos en un gramo de aceite. Es una medcodea importante de la calcodead del petróleo crudo",
             "simbol" => "TAN",
         ]);
         Unit::create([
@@ -10253,17 +10253,17 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "TI",
             "name" => "Mil pulgadas cuadradas",
-            "description" => "Uncodead de medcodea imperial",
+            "description" => "Unidad de medcodea imperial",
         ]);
         Unit::create([
             "code" => "TIC",
             "name" => "Tonelada métrica, inclucodeo el contenedor",
-            "description" => "Uncodead de masa que define el número de toneladas métricas de un producto, incluyendo su contenedor",
+            "description" => "Unidad de masa que define el número de toneladas métricas de un producto, incluyendo su contenedor",
         ]);
         Unit::create([
             "code" => "TIP",
             "name" => "Tonelada métrica, inclucodeo el embalaje interior",
-            "description" => "Uncodead de masa que define el número de toneladas metricas de un producto, incluyendo sus materiales de embalaje interior",
+            "description" => "Unidad de masa que define el número de toneladas metricas de un producto, incluyendo sus materiales de embalaje interior",
         ]);
         Unit::create([
             "code" => "TJ",
@@ -10272,7 +10272,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "TKM",
             "name" => "Tonelada kilometro",
-            "description" => "Uncodead de información típicamente usada para propósitos de facturación, expresada como el número de toneladas (toneladas métricas) movcodeas sobre una distancia de un kilómetro",
+            "description" => "Unidad de información típicamente usada para propósitos de facturación, expresada como el número de toneladas (toneladas métricas) movcodeas sobre una distancia de un kilómetro",
             "simbol" => "t·km",
         ]);
         Unit::create([
@@ -10282,7 +10282,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "TMS",
             "name" => "Kilogramo de carne importada, menos despojos",
-            "description" => "Uncodead de masa equivalente a mil gramos de carne importada, sin tener en cuenta los subproductos menos valiosos como las montañas",
+            "description" => "Unidad de masa equivalente a mil gramos de carne importada, sin tener en cuenta los subproductos menos valiosos como las montañas",
         ]);
         Unit::create([
             "code" => "TNE",
@@ -10293,7 +10293,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "TP",
             "name" => "Paquete de diez",
-            "description" => "Uncodead de conteo que define el número de elementos en múltiplos de 10",
+            "description" => "Unidad de conteo que define el número de elementos en múltiplos de 10",
         ]);
         Unit::create([
             "code" => "TPI",
@@ -10304,7 +10304,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "TPR",
             "name" => "Decenas de pares",
-            "description" => "Uncodead de conteo que define el número de pares en multiplos de 10 (par:elemento descrito por dos)",
+            "description" => "Unidad de conteo que define el número de pares en multiplos de 10 (par:elemento descrito por dos)",
         ]);
         Unit::create([
             "code" => "TQ",
@@ -10313,7 +10313,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "TQD",
             "name" => "Mil metros cúbicos por día ",
-            "description" => "Uncodead de volumen igual a mil metros cúbicos por día",
+            "description" => "Unidad de volumen igual a mil metros cúbicos por día",
             "simbol" => "km³/d",
         ]);
         Unit::create([
@@ -10323,7 +10323,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "TRL",
             "name" => "Trillones (eur)",
-            "description" => "Uncodead de escala númerica",
+            "description" => "Unidad de escala númerica",
         ]);
         Unit::create([
             "code" => "Ts",
@@ -10340,7 +10340,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "TST",
             "name" => "Decena de conjuntos",
-            "description" => "Uncodead de conteo que define el número de conjuntos en múltiplos de 10 (conjunto: un número de objetos agrupados)",
+            "description" => "Unidad de conteo que define el número de conjuntos en múltiplos de 10 (conjunto: un número de objetos agrupados)",
         ]);
         Unit::create([
             "code" => "TT",
@@ -10349,7 +10349,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "TTS",
             "name" => "Decenas de millar de pegatinas",
-            "description" => "Uncodead de conteo que define el número de palos multiples de 10000 (Pegatina: pieza delgada y a menudo cilíndrica de una sustancia)",
+            "description" => "Unidad de conteo que define el número de palos multiples de 10000 (Pegatina: pieza delgada y a menudo cilíndrica de una sustancia)",
         ]);
         Unit::create([
             "code" => "Tu",
@@ -10367,12 +10367,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "U1",
             "name" => "Tratamiento ",
-            "description" => "Uncodead de conteo que define el número de tratamientos (tratamiento: sujección a la acción de un agente químico, físico o biológico)",
+            "description" => "Unidad de conteo que define el número de tratamientos (tratamiento: sujección a la acción de un agente químico, físico o biológico)",
         ]);
         Unit::create([
             "code" => "U2",
             "name" => "Número de tabletas",
-            "description" => "Uncodead de conteo que define el número de tabletas",
+            "description" => "Unidad de conteo que define el número de tabletas",
         ]);
         Unit::create([
             "code" => "UA",
@@ -10428,7 +10428,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "VP",
             "name" => "Volumen porcentual ",
-            "description" => "Uncodead de medcodea de concentración, expresada tipícamente como el porcentaje de volumen de un soluto en una solución ",
+            "description" => "Unidad de medcodea de concentración, expresada tipícamente como el porcentaje de volumen de un soluto en una solución ",
         ]);
         Unit::create([
             "code" => "VS",
@@ -10437,7 +10437,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "W2",
             "name" => "Kilo húmedo ",
-            "description" => "Uncodead de masa que define el número de kilogramos de un producto, inclucodeo el contencodeo de agua del producto.",
+            "description" => "Unidad de masa que define el número de kilogramos de un producto, inclucodeo el contencodeo de agua del producto.",
         ]);
         Unit::create([
             "code" => "W4",
@@ -10446,23 +10446,23 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "WA",
             "name" => "Watt por kilogramo ",
-            "description" => "Uncodead de potencia",
+            "description" => "Unidad de potencia",
             "simbol" => "W/kg",
         ]);
         Unit::create([
             "code" => "WB",
             "name" => "Libra húmeda",
-            "description" => "Uncodead de masa que define el número de libras de un material, incluyendo el contencodeo de agua del material ",
+            "description" => "Unidad de masa que define el número de libras de un material, incluyendo el contencodeo de agua del material ",
         ]);
         Unit::create([
             "code" => "WCD",
             "name" => "Cable",
-            "description" => "Uncodead de volumen utilizada para medir la madera. Un pie de tabla equivale a 1/2 de un pie cúbico.",
+            "description" => "Unidad de volumen utilizada para medir la madera. Un pie de tabla equivale a 1/2 de un pie cúbico.",
         ]);
         Unit::create([
             "code" => "WE",
             "name" => "Tonelada húmeda ",
-            "description" => "Uncodead de masa que define el número de toneladas de un material, incluyendo el contencodeo de agua del material.",
+            "description" => "Unidad de masa que define el número de toneladas de un material, incluyendo el contencodeo de agua del material.",
         ]);
         Unit::create([
             "code" => "WEB",
@@ -10479,7 +10479,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "WG",
             "name" => "Galón de vino",
-            "description" => "Uncodead de volumen igual a 231 pulgadas cúbicas",
+            "description" => "Unidad de volumen igual a 231 pulgadas cúbicas",
         ]);
         Unit::create([
             "code" => "WH",
@@ -10497,7 +10497,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "WM",
             "name" => "Mes de trabajo ",
-            "description" => "Uncodead de tiempo que define el número de meses de trabajo.",
+            "description" => "Unidad de tiempo que define el número de meses de trabajo.",
         ]);
         Unit::create([
             "code" => "WR",
@@ -10506,7 +10506,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "WSD",
             "name" => "Estándar",
-            "description" => "Uncodead de volumen de madera acabada igual a 165 pies cúbicos.",
+            "description" => "Unidad de volumen de madera acabada igual a 165 pies cúbicos.",
             "simbol" => "std",
         ]);
         Unit::create([
@@ -10518,7 +10518,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "WW",
             "name" => "Mililitro de agua",
-            "description" => "Uncodead de volumen igual al número de mililitros de agua.",
+            "description" => "Unidad de volumen igual al número de mililitros de agua.",
         ]);
         Unit::create([
             "code" => "X1",
@@ -11436,7 +11436,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "XPK",
             "name" => "Paquete",
-            "description" => "Uncodead de empaque estándar.",
+            "description" => "Unidad de empaque estándar.",
         ]);
         Unit::create([
             "code" => "XPL",
@@ -11739,7 +11739,7 @@ class UnitSeeder extends Seeder
         ]);
         Unit::create([
             "code" => "XUN",
-            "name" => "Uncodead",
+            "name" => "Unidad",
             "description" => "Tipo de paquete compuesto de un solo artículo u objeto, no especificado de otro modo como una uncodead de equipo de transporte.",
         ]);
         Unit::create([
@@ -12130,7 +12130,7 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "Z11",
             "name" => "Contenedor colgante ",
-            "description" => "Uncodead de conteo que define el número de contenedores colgantes.",
+            "description" => "Unidad de conteo que define el número de contenedores colgantes.",
         ]);
         Unit::create([
             "code" => "Z5",
@@ -12147,12 +12147,12 @@ class UnitSeeder extends Seeder
         Unit::create([
             "code" => "ZP",
             "name" => "Páginas",
-            "description" => "Uncodead de conteo que define el número de páginas",
+            "description" => "Unidad de conteo que define el número de páginas",
         ]);
         Unit::create([
             "code" => "ZZ",
             "name" => "Mutuamente defincodeo",
-            "description" => "Uncodead de medcodea acordada en común entre dos o más partes",
+            "description" => "Unidad de medcodea acordada en común entre dos o más partes",
         ]);
     }
 }

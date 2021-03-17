@@ -46,6 +46,7 @@ class BussineFactory extends Factory
             'password' => $this->faker->word(),
             'name_pac' => $this->faker->word(),
             'password_pac' => $this->faker->word(),
+            'production_pac' => 'NO',
             'logo' => ''
         ];
     }

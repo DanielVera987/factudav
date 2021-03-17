@@ -56,9 +56,9 @@
                     <tr>
                       <td>
                         @if(\Storage::disk('products')->exists("$product->image"))                        
-                          <img class="center-block" src="{{ asset('storage/products/'.$product->image) }}" width="60" height="80"/>
+                          <img class="center-block" src="{{ asset('storage/products/'.$product->image) }}" width="60" height="60"/>
                         @else
-                          <img class="center-block" src="{{ asset('storage/products/default.png') }}" width="60" height="80"/>
+                          <img class="center-block" src="{{ asset('storage/products/default.png') }}" width="60" height="60"/>
                         @endif
                       </td>
                       <td class="text-center">{{ $product->code }}</td>

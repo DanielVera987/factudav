@@ -328,10 +328,23 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                   <label for="password_pac">Contraseña PAC:</label>
-                  <input type="text" id="password_pac" name="password_pac" class="form-control @error('password_pac') parsley-error @enderror" data-parsley-trigger="change" value="{{ old('password_pac') }}"/>
+                  <input type="password" id="password_pac" name="password_pac" class="form-control @error('password_pac') parsley-error @enderror" data-parsley-trigger="change" value="{{ old('password_pac') }}"/>
                   @error('password_pac')
                     <span class="invalid-feedback red" role="alert">
                       <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                  <label for="production_pac">Producción PAC *:</label>
+                  <select id="production_pac" name="production_pac" class="form-control @error('production_pac') parsley-error @enderror" required data-parsley-trigger="change">
+                    <option value="SI">Producción</option>
+                    <option value="NO" selected>Pruebas</option>
+                  </select>
+                  @error('production_pac')
+                    <span class="invalid-feedback red" role="alert">
+                      <strong >{{ $message }}</strong>
                     </span>
                   @enderror
                 </div>

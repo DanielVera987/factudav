@@ -134,6 +134,7 @@ class BussineController extends Controller
         $bussine->password = $request->password;
         $bussine->name_pac = $request->name_pac;
         $bussine->password_pac = $request->password_pac;
+        $bussine->production_pac = $request->production_pac;
 
         if ($request->hasFile('logo')) {
             $nameImgPrevius = $bussine->logo;
@@ -201,6 +202,7 @@ class BussineController extends Controller
         $bussine->password = $request->password;
         $bussine->name_pac = $request->name_pac;
         $bussine->password_pac = $request->password_pac;
+        $bussine->production_pac = $request->production_pac;
         $bussine->logo = $request->logo;
 
         if ($request->hasFile('logo')) {

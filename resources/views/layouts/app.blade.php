@@ -27,7 +27,7 @@
             <div class="profile clearfix">
               <div class="profile_pic">
                 @if(Auth::user() && Auth::user()->bussine_id && Auth::user()->bussine->logo != '')
-                  <img class="img-circle profile_img" src="{{ asset('/images/logos/'. Auth::user()->bussine->logo) }}" width="50">
+                  <img class="img-circle profile_img" src="{{ asset('/images/logos/'. Auth::user()->bussine->logo) }}" width="50" height="52">
                 @else
 
                 @endif

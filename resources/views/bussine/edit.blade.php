@@ -333,24 +333,43 @@
                   </div>
                 </div>
 
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <label for="name_pac">PAC:</label>
-                  <input type="text" id="name_pac" name="name_pac" class="form-control @error('name_pac') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->name_pac }}"/>
-                  @error('name_pac')
-                    <span class="invalid-feedback red" role="alert">
-                      <strong >{{ $message }}</strong>
-                    </span>
-                  @enderror
-                </div>
+                <div class="row">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <label for="name_pac">PAC:</label>
+                    <input type="text" id="name_pac" name="name_pac" class="form-control @error('name_pac') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->name_pac }}"/>
+                    @error('name_pac')
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
 
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                  <label for="password_pac">Contraseña PAC:</label>
-                  <input type="text" id="password_pac" name="password_pac" class="form-control @error('password_pac') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->password_pac }}"/>
-                  @error('password_pac')
-                    <span class="invalid-feedback red" role="alert">
-                      <strong >{{ $message }}</strong>
-                    </span>
-                  @enderror
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <label for="password_pac">Contraseña PAC:</label>
+                    <input type="password" id="password_pac" name="password_pac" class="form-control @error('password_pac') parsley-error @enderror" data-parsley-trigger="change" value="{{ $bussine->password_pac }}"/>
+                    @error('password_pac')
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
+
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <label for="production_pac">Producción PAC *:</label>
+                    <select id="production_pac" name="production_pac" class="form-control @error('production_pac') parsley-error @enderror" required data-parsley-trigger="change">
+                      <option value="SI" @if($bussine->production_pac == 'SI') selected @endif>Producción</option>
+                      <option value="NO" @if($bussine->production_pac == 'NO') selected @endif>Pruebas</option>
+                    </select>
+                    @error('production_pac')
+                      <span class="invalid-feedback red" role="alert">
+                        <strong >{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
+
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <small><strong>NOTA:</strong> Al dejar vacio los campos PAC y Contraseña PAC, el sistema realizara Pre-facturas. Que son facturas sin Timbre Fiscal Digital.</small>
+                  </div>
                 </div>
 
                 <br/>

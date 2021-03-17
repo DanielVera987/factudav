@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\RFC;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BussineRequest extends FormRequest
@@ -31,7 +32,7 @@ class BussineRequest extends FormRequest
         return [
             'bussine_name'      => 'required|string',
             'tradename'         => 'required|string',
-            'rfc'               => 'required|string',
+            'rfc'               => ['required', 'string', new RFC],
             'email'             => 'required|email',
             'telephone'         => 'required|numeric',
             'type_person'       => 'required|string',
@@ -52,6 +53,7 @@ class BussineRequest extends FormRequest
             'password'          => $rule . 'max:255', //Password for encrypt .key and .cer 
             'name_pac'          => 'max:255',
             'password_pac'      => 'max:255',
+            'production_pac'    => '',
             'logo'              => 'image',
         ];
     }

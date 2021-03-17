@@ -33,6 +33,7 @@ class Bussine extends Model
         'password',
         'name_pac',
         'password_pac',
+        'production_pac',
         'logo'
     ];
 
@@ -124,6 +125,10 @@ class Bussine extends Model
         if($product > 0){
             $porcentage += 17;
             $step6 = true;
+        }
+
+        if($porcentage > 100){
+            $porcentage = 100;
         }
 
         $data = [
