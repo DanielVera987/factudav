@@ -34,61 +34,62 @@
             </div>
             <div class="x_content">
               <p class="text-muted font-13 m-b-30"></p>
-    
-              <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                <thead>
-                  <tr>
-                    <th>Nombre/Empresa</th>
-                    <th>Razón Social</th>
-                    <th>RFC</th>
-                    <th>Email</th>
-                    <th>Telefono</th>
-                    <th>Pais</th>
-                    <th>Estado</th>
-                    <th>Admin.</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  @foreach($customers as $customer)
+              <div class="card-box table-responsive">
+                <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                  <thead>
                     <tr>
-                      <td>{{ $customer->bussine_name}}</td>
-                      <td>{{ $customer->tradename}}</td>
-                      <td>{{ $customer->rfc}}</td>
-                      <td>{{ $customer->email}}</td>
-                      <td>{{ $customer->telephone}}</td>
-                      <td>{{ $customer->country->abbreviation}}</td>
-                      <td>{{ $customer->state->abbreviation ?? 'NaN'}}</td>
-                      <td>
-                        <div class="btn-group btn-group-sm">
-                          <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
+                      <th>Nombre/Empresa</th>
+                      <th>Razón Social</th>
+                      <th>RFC</th>
+                      <th>Email</th>
+                      <th>Telefono</th>
+                      <th>Pais</th>
+                      <th>Estado</th>
+                      <th>Admin.</th>
+                    </tr>
+                  </thead>
 
-                          <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
-                            @csrf 
-                            @method('delete')
-                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target=".mod{{$customer->id}}"><i class="fa fa-trash-o"></i></button>
-                            <div class="modal fade mod{{$customer->id}}" tabindex="-1" role="dialog" aria-hidden="true">
-                              <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel2">¿Esta seguro?</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Borrar</button>
+                  <tbody>
+                    @foreach($customers as $customer)
+                      <tr>
+                        <td>{{ $customer->bussine_name}}</td>
+                        <td>{{ $customer->tradename}}</td>
+                        <td>{{ $customer->rfc}}</td>
+                        <td>{{ $customer->email}}</td>
+                        <td>{{ $customer->telephone}}</td>
+                        <td>{{ $customer->country->abbreviation}}</td>
+                        <td>{{ $customer->state->abbreviation ?? 'NaN'}}</td>
+                        <td>
+                          <div class="btn-group btn-group-sm">
+                            <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></a>
+
+                            <form action="{{ route('customers.destroy', $customer->id) }}" method="POST">
+                              @csrf 
+                              @method('delete')
+                              <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target=".mod{{$customer->id}}"><i class="fa fa-trash-o"></i></button>
+                              <div class="modal fade mod{{$customer->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-sm">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title" id="myModalLabel2">¿Esta seguro?</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                      <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> Borrar</button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
-                          </form>
-                          
-                        </div>
-                      </td>
-                    </tr>
-                  @endforeach
-                </tbody>
-              </table>
+                            </form>
+                            
+                          </div>
+                        </td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

@@ -2,7 +2,10 @@
 
 namespace App\Helpers;
 
+use Illuminate\Support\Facades\Storage;
 use Luecano\NumeroALetras\NumeroALetras;
+use \CfdiUtils\XmlResolver\XmlResolver;
+use \CfdiUtils\CadenaOrigen\DOMBuilder;
 
 class Cfdi33Helper{
 
@@ -73,5 +76,72 @@ class Cfdi33Helper{
   {
     $regex = '/^[A-Z]{4}([0-9]{2})(1[0-2]|0[1-9])([0-3][0-9])([ -]?)([A-Z0-9]{4})$/';
     return preg_match($regex, $rfc);
+  }
+
+  /**
+   * Get Timbre Fiscal of FileXML
+   * 
+   * @var string File Name of XML
+   */
+  public static function getTimbreFiscal($nameFileXml)
+  {
+    $comprobante = self::getXML($nameFileXml);
+    return $comprobante->complemento->TimbreFiscalDigital['UUID'];
+  }
+
+  /**
+   * Get No Certificado SAT of FileXML
+   * 
+   * @var string File Name of XML
+   */
+  public static function getNoCertificadoSAT($nameFileXml)
+  {
+    $comprobante = self::getXML($nameFileXml);
+    return $comprobante->complemento->TimbreFiscalDigital['NoCertificadoSAT'];
+  }
+
+  /**
+   * Get SelloSAT of FileXML
+   * 
+   * @var string File Name of XML
+   */
+  public static function getSelloSAT($nameFileXml)
+  {
+    $comprobante = self::getXML($nameFileXml);
+    return $comprobante->complemento->TimbreFiscalDigital['SelloSAT'];
+  }
+
+  /**
+   * Get FechaTimbrado of FileXML
+   * 
+   * @var string File Name of XML
+   */
+  public static function getFechaTimbrado($nameFileXml)
+  {
+    $comprobante = self::getXML($nameFileXml);
+    return $comprobante->complemento->TimbreFiscalDigital['FechaTimbrado'];
+  }
+
+  public static function getXML($nameFileXml)
+  {
+    return \CfdiUtils\Cfdi::newFromString(Storage::disk('xml')->get($nameFileXml))
+    ->getQuickReader();
+  }
+
+  /**
+   * Get CadenaOrigin of FileXML
+   * 
+   * @var string File Name of XML
+   */
+  public static function getCadenaOrigen($nameFileXml)
+  {
+    $xmlContent = Storage::disk('xml')->get($nameFileXml);
+
+    $resolver = new XmlResolver();
+
+    $location = $resolver->resolveCadenaOrigenLocation('3.3');
+
+    $builder = new DOMBuilder();
+    return $builder->build($xmlContent, $location);
   }
 }

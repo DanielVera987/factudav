@@ -17,14 +17,15 @@ use App\Models\ProduServ;
 use App\Models\TaxRegimen;
 use App\Models\Municipality;
 use Illuminate\Http\Request;
-use App\Models\PaymentMethod;
 use App\Helpers\Cfdi33Helper;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\InvoiceRequest;
 use App\Mail\SendInvoiceMail;
+use App\Models\PaymentMethod;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\InvoiceRequest;
+use Illuminate\Support\Facades\Storage;
 use App\SuppliersPAC\Multifacturas\Config;
 use App\SuppliersPAC\Multifacturas\Timbrar;
-use Illuminate\Support\Facades\Mail;
 
 class InvoiceController extends Controller
 {
@@ -120,7 +121,7 @@ class InvoiceController extends Controller
         
         if($this->isTimbrar()){
             $res = $this->timbrar($unsignedXml);
-            if($res == true){
+            if(!$res){
                 $request['name_file'] = str_replace('_UNSIGNED', '', $unsignedXml);
             }else{
                 return back()->with('warning', $res);
@@ -162,9 +163,9 @@ class InvoiceController extends Controller
             ->getQuickReader();
 
         $totales['subtotal']     = $comprobante['SubTotal'];
-        $totales['descuento']    = $comprobante['Descuento'];
-        $totales['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'];
-        $totales['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'];
+        $totales['descuento']    = $comprobante['Descuento'] ?? '0.00';
+        $totales['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'] ?? '0.00';
+        $totales['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'] ?? '0.00';
         $totales['total']        = $comprobante['Total'];
 
         return view('invoices.show', [
@@ -303,21 +304,35 @@ class InvoiceController extends Controller
                                     'Importe'    => bcdiv($tax['Importe'], '1', 2)
                                 ]);
                             }else{
-                                foreach($impuestosRetenidos as $key => $tras){
-                                    if ($tras['Impuesto'] == $tax['Impuesto']) {
-                                        $impuestosRetenidos[$key]['Importe'] =  bcdiv($tras['Importe'] + $tax['Importe'], '1', 2);
+                                
+                                $search = array_search($tax['Impuesto'], array_column($impuestosRetenidos, 'Impuesto'));
+                                if($search){
+                                    $index = $search;
+                                    $impuestosRetenidos[$index]['Importe'] =  bcdiv($impuestosRetenidos[$index]['Importe'] + $tax['Importe'], '1', 2);
+                                }else{
+                                    array_push($impuestosRetenidos, [
+                                        'Impuesto'   => $tax['Impuesto'],
+                                        'Importe'    => bcdiv($tax['Importe'], '1', 2)
+                                    ]);
+                                }
+
+                                /* foreach($impuestosRetenidos as $key => $ret){
+                                    if ($ret['Impuesto'] == $tax['Impuesto']) {
+                                        $impuestosRetenidos[$key]['Importe'] =  bcdiv($ret['Importe'] + $tax['Importe'], '1', 2);
                                     } else {
                                         array_push($impuestosRetenidos, [
                                             'Impuesto'   => $tax['Impuesto'],
                                             'Importe'    => bcdiv($tax['Importe'], '1', 2)
                                         ]);
                                     }
-                                }
+                                } */
                             }
                         }
                     }
                 } 
             }
+
+            dd($impuestosRetenidos);
 
             /** Crear Impuestos en el comprobante */
             if (count($impuestosTrasladados) > 0 || count($impuestosRetenidos) > 0) {
@@ -522,7 +537,7 @@ class InvoiceController extends Controller
                             'detail'
                         )->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
 
-        return $this->print($dataInvoice, true);
+        return $this->print($dataInvoice, false);
     }
 
     /**
@@ -554,24 +569,23 @@ class InvoiceController extends Controller
      * @return void
      */
     public function printCfdi33(Invoice $datainvoice, $download = false, $save = false){
-        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $datainvoice->name_file)))
+        $comprobante = \CfdiUtils\Cfdi::newFromString(Storage::disk('xml')->get($datainvoice->name_file))
         ->getQuickReader();
 
         $datainvoice['qr'] = Cfdi33Helper::generateQR($datainvoice->name_file); 
         $datainvoice['numberToWords'] = Cfdi33Helper::NumberToWord($comprobante['Total'], 2,  $comprobante['Moneda']);
-        $datainvoice['fecha']        = $comprobante['Fecha'];
         $datainvoice['subtotal']     = $comprobante['SubTotal'];
         $datainvoice['descuento']    = $comprobante['Descuento'];
         $datainvoice['selloEmisor']  = $comprobante['Sello'] ?? '';
-        $datainvoice['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'];
-        $datainvoice['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'];
+        $datainvoice['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'] ?? '0.00';
+        $datainvoice['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'] ?? '0.00  ';
         $datainvoice['total']        = $comprobante['Total'];
 
         $datainvoice['folioFiscal']  = $comprobante->complemento->timbrefiscaldigital['UUID'] ?? '';
         $datainvoice['noCertificado']   = $comprobante->complemento->timbrefiscaldigital['NoCertificadoSAT'] ?? '';
         $datainvoice['FechaTimbrado']   = $comprobante->complemento->timbrefiscaldigital['FechaTimbrado'] ?? '';
         $datainvoice['SelloSAT']        = $comprobante->complemento->timbrefiscaldigital['SelloSAT'] ?? '';
-        $datainvoice['SelloCFD']        = $comprobante->complemento->timbrefiscaldigital['SelloCFD'] ?? '';
+        $datainvoice['SelloCFDI']        = $comprobante['Sello'] ?? '';
 
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadView('invoices.pdf_default', compact('datainvoice'));
@@ -602,8 +616,8 @@ class InvoiceController extends Controller
         $datainvoice['fecha']        = $comprobante['Fecha'];
         $datainvoice['subtotal']     = $comprobante['SubTotal'];
         $datainvoice['descuento']    = $comprobante['Descuento'];
-        $datainvoice['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'];
-        $datainvoice['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'];
+        $datainvoice['totalImpTras'] = $comprobante->impuestos['totalImpuestosTrasladados'] ?? '0.00';
+        $datainvoice['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'] ?? '0.00';
         $datainvoice['total']        = $comprobante['Total'];
 
         $pdf = \App::make('dompdf.wrapper');

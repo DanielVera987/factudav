@@ -49,46 +49,12 @@
                 <strong>Receptor</strong>
                 <br>RFC: {{ $datainvoice->customer->rfc }}
                 <br>Nombre: {{ $datainvoice->customer->bussine_name }}
-                <br> {{ $datainvoice->customer->street }}
-                <br>
-                <br>Quintana Roo. Cozumel, CP {{ $datainvoice->customer->zip }}
-                <br>Tel. {{ $datainvoice->customer->telephone }}
-                <br>E-mail: danielveraangulo703@gmail.com
+                <br>Uso de CFDI: {{ $datainvoice->usecfdi->name }}
             </td>
             <td>
                 <strong>Emisor</strong>
                 <br>RFC: {{ \Auth::user()->bussine->rfc }}
-                <br>{{ \Auth::user()->bussine->street }}
-                <br>
-                <br>Quintana Roo. Cozumel, CP {{ \Auth::user()->bussine->zip }}
-                <br>Tel. {{ \Auth::user()->bussine->telephone }}
-                <br>E-mail: {{ \Auth::user()->bussine->email }}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @if(isset($datainvoice->folioFiscal))<br> Folio Fiscal: {{ $datainvoice->folioFiscal }} @endif
-                <br>Fecha de comprobante: {{ $datainvoice->fecha }}
-                @if(isset($datainvoice->folioFiscal))<br>Fecha de certificado del CFDI: {{ $datainvoice->FechaTimbrado }} @endif
-            </td>
-            <td>
-                <br>Forma de pago: 
-                @php
-                    $wtp = App\Models\WayToPay::find($datainvoice->way_to_pay_id);
-                    echo '['.$wtp->code.']'.' '.$wtp->name;
-                @endphp
-                <br>Metodo de pago: 
-                @php
-                    $pm = App\Models\PaymentMethod::find($datainvoice->payment_method_id);
-                    echo '['.$pm->code.']'.' '.$pm->name;
-                @endphp
-                <br>Regimen fiscal: 
-                <br>Uso de CFDI: [{{ $datainvoice->usecfdi->code }}] {{ $datainvoice->usecfdi->name }}
-            </td>
-            <td>
-                <br>Moneda: {{ $datainvoice->currency->code }}
-                <br>Tipo de cambio: {{ $datainvoice->currency->exchange_rate }}
-                <br>Tipo de comprobante: I
+                <br>Regimen fiscal: {{ \Auth::user()->bussine->taxregimen->name }}
             </td>
         </tr>
     </table>
@@ -136,6 +102,29 @@
     </table>
 
     <br>
+    <div style="float: left;width: 50%; text-align: right;">
+        <table>
+            <tr>
+        <td>
+            <br>Forma de pago: 
+            @php
+                $wtp = App\Models\WayToPay::find($datainvoice->way_to_pay_id);
+                echo '['.$wtp->code.']'.' '.$wtp->name;
+            @endphp
+            <br>Metodo de pago: 
+            @php
+                $pm = App\Models\PaymentMethod::find($datainvoice->payment_method_id);
+                echo '['.$pm->code.']'.' '.$pm->name;
+            @endphp
+        </td>
+        <td>
+            <br>Moneda: {{ $datainvoice->currency->code }}
+            <br>Tipo de cambio: {{ $datainvoice->currency->exchange_rate }}
+            <br>Tipo de comprobante: I
+        </td>
+            </tr>
+        </table>
+    </div>
     <div style="float: right;width: 10%; text-align: right;">
         $ {{ $datainvoice->subtotal }}
         <br>$ {{ $datainvoice->descuento }}
@@ -158,13 +147,12 @@
     @if (isset($datainvoice->folioFiscal))    
         <table class="DataSAT">
             <tr>
-                <td style="width: 40%;">
+                <td style="width: 8%;">
                     @php
-                        echo '<img style="margin: 0px 50px;" width="180px" src="'.(new QRCode)->render($datainvoice->qr).'" alt="QR Code" />';
+                        echo '<img width="75px" src="'.(new QRCode)->render($datainvoice->qr).'" alt="QR Code" />';
                     @endphp
                 </td>
                 <td>
-                    Serie del Certificado del emisor: 879878878789789789
                     <br>Folio Fiscal: {{ $datainvoice->folioFiscal }} 
                     <br>No. serie del Certificado del SAT: {{ $datainvoice->noCertificado }}
                     <br>Fecha y hora de certificación: {{ $datainvoice->FechaTimbrado }}
@@ -172,12 +160,12 @@
                 </td>
             </tr>
         </table>
-        <strong>Sello Digital del Emisor:</strong></td>
-        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->selloEmisor }}</textarea>
-        <strong>Sello Digital del SAT:</strong></td>
-        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloSAT }}</textarea>
-        <strong>Cadena original del complemento de certificación digital del SAT:</strong></td>
-        <textarea style="border: none" cols="30" rows="20">{{ $datainvoice->SelloCFD }}</textarea>
+        <strong style="font-size: 8px;">Sello Digital del CDFI:</strong></td>
+        <textarea style="border: none;font-size: 8px;" >{{ $datainvoice->SelloCFDI }}</textarea>
+        <strong style="font-size: 8px;">Sello Digital del SAT:</strong></td>
+        <textarea style="border: none;font-size: 8px;" >{{ $datainvoice->SelloSAT }}</textarea>
+        <strong style="font-size: 8px;">Cadena original del complemento de certificación digital del SAT:</strong></td>
+        <textarea style="border: none;font-size: 8px;" >{{App\Helpers\Cfdi33Helper::getCadenaOrigen($datainvoice->name_file)}}</textarea>
     @endif
 </body>
 </html>

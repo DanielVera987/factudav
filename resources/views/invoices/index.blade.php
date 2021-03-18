@@ -33,58 +33,67 @@
               @endif
             </div>
             <div class="x_content">
-              <p class="text-muted font-13 m-b-30"></p>
-    
-              <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                <thead>
-                  <tr>
-                    <th>N°</th>
-                    <th>Cliente</th>
-                    <th>Fecha</th>
-                    <th>Moneda</th>
-                    <th>Forma de pago</th>
-                    <th>Subtotal</th>
-                    <th>Admin.</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  @foreach($invoices as $invoice)
+              <div class="card-box table-responsive">
+                <table id="datatable-buttons" class="table table-striped table-bordered" width="100%">
+                  <thead>
                     <tr>
-                      <td class="text-center">
-                        <a href="{{ route('invoices.show', $invoice->id) }}">
-                          {{ $invoice->folio }}
-                        </a>
-                      </td>
-                      <td class="text-center">{{ $invoice->customer->bussine_name }}</td>
-                      <td class="text-center">{{ $invoice->date ?? '' }}</td>
-                      <td class="text-center">{{ $invoice->currency->code ?? '' }}</td>
-                      <td class="text-center">
-                        @php
-                            $wtp = App\Models\WayToPay::find($invoice->way_to_pay_id);
-                            $name = $wtp->name ?? '';
-                            echo $name;
-                        @endphp
-                      </td>
-                      <td class="text-center">$ {{ App\Models\Invoice::getAmountInvoice($invoice->id) }}</td>
-                      <td class="text-center" width="5%">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="">
-                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <span class=" fa fa-navicon"></span>
-                                </a>
-                                <ul style="width: 30px;" class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="{{ route('invoices.show', $invoice->id) }}">Ver</a></li>
-                                    <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}">Descargar PDF</a></li>
-                                    <li><a href="{{ route('invoice.createEmail', $invoice->id) }}">Enviar por correo</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                      </td>
+                      <th>N°</th>
+                      <th>Cliente</th>
+                      <th>Fecha</th>
+                      <th>Moneda</th>
+                      <th>Forma de pago</th>
+                      <th>Subtotal</th>
+                      <th>UUID</th>
+                      <th>Admin.</th>
                     </tr>
-                  @endforeach
-                </tbody>
-              </table>
+                  </thead>
+
+                  <tbody>
+                    @foreach($invoices as $invoice)
+                      <tr>
+                        <td class="text-center">
+                          <a href="{{ route('invoices.show', $invoice->id) }}">
+                            {{ $invoice->folio }}
+                            @if (!App\Helpers\Cfdi33Helper::getTimbreFiscal($invoice->name_file))
+                                <br><strong>Pre-CFDI</strong>
+                            @endif
+                          </a>
+                        </td>
+                        <td class="text-center">{{ $invoice->customer->bussine_name }}</td>
+                        <td class="text-center">{{ $invoice->date ?? '' }}</td>
+                        <td class="text-center">{{ $invoice->currency->code ?? '' }}</td>
+                        <td class="text-center">
+                          @php
+                              $wtp = App\Models\WayToPay::find($invoice->way_to_pay_id);
+                              $name = $wtp->name ?? '';
+                              echo $name;
+                          @endphp
+                        </td>
+                        <td class="text-center">$ {{ App\Models\Invoice::getAmountInvoice($invoice->id) }}</td>
+                        <td class="text-center">
+                          @if(App\Helpers\Cfdi33Helper::getTimbreFiscal($invoice->name_file))
+                            {{ App\Helpers\Cfdi33Helper::getTimbreFiscal($invoice->name_file) }}
+                          @endif
+                        </td>
+                        <td class="text-center" width="5%">
+                          <ul class="nav navbar-nav navbar-right">
+                              <li class="">
+                                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                      <span class=" fa fa-navicon"></span>
+                                  </a>
+                                  <ul style="width: 30px;" class="dropdown-menu dropdown-usermenu pull-right">
+                                      <li><a href="{{ route('invoices.show', $invoice->id) }}">Ver</a></li>
+                                      <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}">Descargar PDF</a></li>
+                                      <li><a href="{{ route('invoice.createEmail', $invoice->id) }}">Enviar por correo</a></li>
+                                  </ul>
+                              </li>
+                          </ul>
+                        </td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

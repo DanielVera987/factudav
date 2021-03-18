@@ -62,14 +62,14 @@ Class Timbrar
             $response = $client->__soapCall('timbrar33b64', $params);
             $codigo_int = (int)$response->codigo_mf_numero;
             if ($codigo_int != 0) {
-                return ($response->mensaje_original_pac_json);
+                return ($response->codigo_mf_texto);
             }
 
             $fileName = str_replace('_UNSIGNED', '', $this->XML);
             $xml_timbrado = base64_decode($response->cfdi);
             file_put_contents($this->PATH_SAVE_CFDI . $fileName, $xml_timbrado);
 
-            return true;
+            return false;
         } catch (\SoapFault $e) {
             return ($e->getMessage());
         }
