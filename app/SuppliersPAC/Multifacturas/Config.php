@@ -62,12 +62,18 @@ Class Config
     public function __construct(
         string $user_pac,
         string $pass_pac,
-        string $production_pac
+        string $production_pac,
+        string $file_cer = '',
+        string $file_key = '',
+        string $pass = ''
     )
     {
         $this->USER_PAC = $user_pac;
         $this->PASS_PAC = $pass_pac;
         $this->PRODUCTION_PAC = $production_pac;
+        $this->FILE_CER = $file_cer;
+        $this->FILE_KEY = $file_key;
+        $this->PASS = $pass;
     }
 
     /**

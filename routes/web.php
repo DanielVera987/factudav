@@ -26,7 +26,7 @@ Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edi
 Route::put('/user/{user}/update', [UserController::class, 'update'])->name('user.update');
 
 // Email
-Route::get('/invoices/email/{id}/create', [InvoiceController::class, 'createEmail'])->name('invoice.createEmail');
+Route::get('/invoices/email/{id}/create', [InvoiceController::class, 'createEmail'])->name('invoices.createEmail');
 Route::post('/invoices/{id}/sendinvoice', [InvoiceController::class, 'sendMail'])->name('invoices.sendEmail');
 
 // Route for Ajax
@@ -45,6 +45,11 @@ Route::get('/json/convertHtml', [SearchController::class, 'convertDetailHtml']);
 //Download Files
 Route::get('/invoices/pdf/{id}', [InvoiceController::class, 'downloadPDF'])
   ->where(['id' => '[0-9]+'])->name('invoices.downloadPDF');
+
+//Cancel Invoice
+Route::get('/invoices/{id}/{action}', [InvoiceController::class, 'cancel'])
+  ->where(['id' => '[0-9]+'])->name('invoices.cancel');
+
 Route::get('/uploads/xml/{file}', [InvoiceController::class, 'downloadXML'])
   ->where(['file' => '(.*?)\.(xml)$'])->name('uploads.xml');
 Route::get('/customer/export/cvs', [CustomerController::class, 'exportCVS']);

@@ -31,6 +31,11 @@
                   <strong>{{ session()->get('success') }}</strong>
                 </div>
               @endif
+              @if(session()->has('warning'))
+                <div class="alert alert-success">
+                  <strong>{{ session()->get('warning') }}</strong>
+                </div>
+              @endif
             </div>
             <div class="x_content">
               <div class="card-box table-responsive">
@@ -57,6 +62,10 @@
                             @if (!App\Helpers\Cfdi33Helper::getTimbreFiscal($invoice->name_file))
                                 <br><strong>Pre-CFDI</strong>
                             @endif
+                            @if ($invoice->cancel_status == 'success')
+                                <br><p style="color: red;">Cancelado ante el SAT</p>
+                                {{ $invoice->cancel_date }}
+                            @endif 
                           </a>
                         </td>
                         <td class="text-center">{{ $invoice->customer->bussine_name }}</td>
@@ -84,7 +93,8 @@
                                   <ul style="width: 30px;" class="dropdown-menu dropdown-usermenu pull-right">
                                       <li><a href="{{ route('invoices.show', $invoice->id) }}">Ver</a></li>
                                       <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}">Descargar PDF</a></li>
-                                      <li><a href="{{ route('invoice.createEmail', $invoice->id) }}">Enviar por correo</a></li>
+                                      <li><a href="{{ route('invoices.createEmail', $invoice->id) }}">Enviar por correo</a></li>
+                                      <li><a href="{{ route('invoices.cancel', [$invoice->id, 'consultar']) }}">Cancelar</a></li>
                                   </ul>
                               </li>
                           </ul>

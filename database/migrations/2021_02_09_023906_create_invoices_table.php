@@ -44,6 +44,10 @@ class CreateInvoicesTable extends Migration
             $table->string('name_file');
                 
             $table->string('date');
+            $table->string('cancel_date')->nullable();
+            $table->longText('cancel_acuse')->nullable();
+            $table->string('cancel_status')->nullable();
+
             $table->timestamps();
         });
     }

@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         Tax::factory()->create();
         Product::factory()->create();
         Customer::factory(10)->create();
-        Invoice::factory(10)->create();
+        //Invoice::factory(10)->create();
         Detail::factory(10)->create();
         TaxDetail::factory(5)->create();
     }

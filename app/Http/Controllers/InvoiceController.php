@@ -23,6 +23,7 @@ use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\InvoiceRequest;
+use App\SuppliersPAC\Multifacturas\Cancelar;
 use Illuminate\Support\Facades\Storage;
 use App\SuppliersPAC\Multifacturas\Config;
 use App\SuppliersPAC\Multifacturas\Timbrar;
@@ -119,7 +120,7 @@ class InvoiceController extends Controller
         if (!$unsignedXml) return back()->with('warning', 'Se genero un error al procesar el XML, Intentalo de nuevo');
         $request['name_file'] = $unsignedXml;
         
-        if($this->isTimbrar()){
+        if($this->CheckRegisterPac()){
             $res = $this->timbrar($unsignedXml);
             if(!$res){
                 $request['name_file'] = str_replace('_UNSIGNED', '', $unsignedXml);
@@ -527,7 +528,7 @@ class InvoiceController extends Controller
                             'detail'
                         )->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
 
-        return $this->print($dataInvoice, false);
+        return $this->print($dataInvoice, true);
     }
 
     /**
@@ -540,7 +541,6 @@ class InvoiceController extends Controller
      */
     public function print(Invoice $datainvoice, $download = false, $save = false)
     {
-        //'INV-000267_59.xml'
         $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $datainvoice->name_file)))
         ->getQuickReader();
 
@@ -698,7 +698,12 @@ class InvoiceController extends Controller
         return redirect(route('invoice.createEmail', $invoice->id))->with('success', 'Correo Enviado');
     }
 
-    public function isTimbrar()
+    /**
+     * Check Register Pac for Invoices
+     * 
+     * @var bool
+     */
+    public function CheckRegisterPac()
     {
         if(Auth::user()->bussine->name_pac && Auth::user()->bussine->password_pac){
             return true;
@@ -717,5 +722,44 @@ class InvoiceController extends Controller
 
         $timbrar = new Timbrar($params, $unsignedXml);
         return $timbrar->timbrar();
+    }
+
+    /**
+     * Cancel of Invoice in SAT
+     *
+     * @param [type] $id
+     * @param [type] $action
+     * @return void
+     */
+    public function cancel($id, $action)
+    {
+        $invoice = Invoice::where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
+
+        if ($this->CheckRegisterPac() && Cfdi33Helper::getTimbreFiscal($invoice->name_file)) {
+            $uuid = Cfdi33Helper::getTimbreFiscal($invoice->name_file);
+
+            $params = new Config(
+                Auth::user()->bussine->name_pac,
+                Auth::user()->bussine->password_pac,
+                Auth::user()->bussine->production_pac,
+                base64_encode(Storage::disk('certificate')->get(Auth::user()->bussine->certificate)),
+                base64_encode(Storage::disk('key')->get(Auth::user()->bussine->key_private)),
+                Auth::user()->bussine->password
+            );
+
+            $res = new Cancelar($params, $uuid, $action);
+
+            dd($res);
+            if($res->STATUS == "success") {
+                $invoice->cancel_date = date('Y-m-d H:i:s');
+                $invoice->cancel_acuse = $res->ACUSE;
+                $invoice->cancel_status = $res->STATUS;
+                $invoice->save();
+
+                return back()->with('success', $res->CODIGO_RES_SAT);
+            }
+             
+            return back()->with('warning', $res->CODIGO_RES_SAT);
+        }
     }
 }
