@@ -62,6 +62,7 @@ Class Timbrar
             $response = $client->__soapCall('timbrar33b64', $params);
             $codigo_int = (int)$response->codigo_mf_numero;
             if ($codigo_int != 0) {
+                dd($response);
                 return ($response->codigo_mf_texto);
             }
 

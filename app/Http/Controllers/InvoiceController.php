@@ -253,42 +253,52 @@ class InvoiceController extends Controller
                     'Importe'       => $concept['Importe'],
                     'Descuento'     => $concept['Descuento'],
                 ]);
-            
+
                 if (isset($concept['Impuestos']) && count($concept['Impuestos']) > 0) {
                     foreach($concept['Impuestos'] as $tax) {
                         if($tax['Type'] == 'traslado') {
-                            $conceptos->addTraslado([
+
+                            $addTraslado = [
                                 'Base'       => $tax['Base'],
                                 'Impuesto'   => $tax['Impuesto'],
-                                'TipoFactor' => $tax['TipoFactor'],
-                                'TasaOCuota' => $tax['TasaOCuota'],
-                                'Importe'    => $tax['Importe'],
-                            ]);
+                                'TipoFactor' => $tax['TipoFactor']
+                            ];
+                            if($tax['TipoFactor'] != 'Exento'){
+                                $addTraslado['TasaOCuota'] = $tax['TasaOCuota'];
+                                $addTraslado['Importe'] = $tax['Importe'];
+                            }
 
-                            if(count($impuestosTrasladados) <= 0){
-                                array_push($impuestosTrasladados, [
-                                    'Impuesto'   => $tax['Impuesto'],
-                                    'TipoFactor' => $tax['TipoFactor'],
-                                    'TasaOCuota' => $tax['TasaOCuota'],
-                                    'Importe'    => bcdiv($tax['Importe'], '1', 2)
-                                ]);
+                            $conceptos->addTraslado($addTraslado);
+
+                            $searchTax = array_search($tax['Impuesto'], array_column($impuestosTrasladados, 'Impuesto'));
+                            $searchTypeOFactor = array_search($tax['TipoFactor'], array_column($impuestosTrasladados, 'TipoFactor'));
+                            $searchTasaOCuota = array_search($tax['TasaOCuota'], array_column($impuestosTrasladados, 'TasaOCuota'));
+
+                            if($searchTax !== false 
+                                && $searchTypeOFactor !== false 
+                                && $searchTasaOCuota !== false
+                                && $searchTax == $searchTypeOFactor
+                                && $searchTax == $searchTasaOCuota
+                                && $searchTypeOFactor == $searchTasaOCuota
+                            ){
+                                $index = $searchTax;
+                                $impuestosTrasladados[$index]['Importe'] =  bcdiv($impuestosTrasladados[$index]['Importe'] + $tax['Importe'], '1', 2);
                             }else{
-                                foreach($impuestosTrasladados as $key => $tras){
-                                    if($tras['Impuesto'] == $tax['Impuesto']
-                                        && $tras['TipoFactor'] == $tax['TipoFactor']
-                                        && $tras['TasaOCuota'] == $tax['TasaOCuota']
-                                    ){
-                                        $impuestosTrasladados[$key]['Importe'] =  bcdiv($tras['Importe'] + $tax['Importe'], '1', 2);
-                                    } else {
-                                        array_push($impuestosTrasladados, [
-                                            'Impuesto'   => $tax['Impuesto'],
-                                            'TipoFactor' => $tax['TipoFactor'],
-                                            'TasaOCuota' => $tax['TasaOCuota'],
-                                            'Importe'    => bcdiv($tax['Importe'], '1', 2)
-                                        ]);
-                                    }
+                                if($tax['TipoFactor'] != 'Exento'){
+                                    $addTraslado = [
+                                        //'Base'       => $tax['Base'],
+                                        'Impuesto'   => $tax['Impuesto'],
+                                        'TipoFactor' => $tax['TipoFactor']
+                                    ];
+                                
+                                    $addTraslado['TasaOCuota'] = $tax['TasaOCuota'];
+                                    $addTraslado['Importe'] = bcdiv($tax['Importe'], '1', 2);
+                                    
+                                    array_push($impuestosTrasladados, $addTraslado);
                                 }
                             }
+
+                            unset($addTraslado);
                         }else{
                             $conceptos->addRetencion([
                                 'Base'       => $tax['Base'],
@@ -298,41 +308,21 @@ class InvoiceController extends Controller
                                 'Importe'    => $tax['Importe'],
                             ]);
 
-                            if(count($impuestosRetenidos) <= 0){
+                            $searchTax = array_search($tax['Impuesto'], array_column($impuestosRetenidos, 'Impuesto'));
+
+                            if($searchTax !== false){
+                                $index = $searchTax;
+                                $impuestosRetenidos[$index]['Importe'] =  bcdiv($impuestosRetenidos[$index]['Importe'] + $tax['Importe'], '1', 2);
+                            }else{
                                 array_push($impuestosRetenidos, [
                                     'Impuesto'   => $tax['Impuesto'],
                                     'Importe'    => bcdiv($tax['Importe'], '1', 2)
                                 ]);
-                            }else{
-                                
-                                $search = array_search($tax['Impuesto'], array_column($impuestosRetenidos, 'Impuesto'));
-                                if($search){
-                                    $index = $search;
-                                    $impuestosRetenidos[$index]['Importe'] =  bcdiv($impuestosRetenidos[$index]['Importe'] + $tax['Importe'], '1', 2);
-                                }else{
-                                    array_push($impuestosRetenidos, [
-                                        'Impuesto'   => $tax['Impuesto'],
-                                        'Importe'    => bcdiv($tax['Importe'], '1', 2)
-                                    ]);
-                                }
-
-                                /* foreach($impuestosRetenidos as $key => $ret){
-                                    if ($ret['Impuesto'] == $tax['Impuesto']) {
-                                        $impuestosRetenidos[$key]['Importe'] =  bcdiv($ret['Importe'] + $tax['Importe'], '1', 2);
-                                    } else {
-                                        array_push($impuestosRetenidos, [
-                                            'Impuesto'   => $tax['Impuesto'],
-                                            'Importe'    => bcdiv($tax['Importe'], '1', 2)
-                                        ]);
-                                    }
-                                } */
                             }
                         }
                     }
                 } 
             }
-
-            dd($impuestosRetenidos);
 
             /** Crear Impuestos en el comprobante */
             if (count($impuestosTrasladados) > 0 || count($impuestosRetenidos) > 0) {
