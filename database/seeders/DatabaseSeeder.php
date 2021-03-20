@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Tax;
-use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\Currency;
 use App\Models\Customer;
@@ -31,17 +30,15 @@ class DatabaseSeeder extends Seeder
             WayToPaySeeder::class,
             UnitSeeder::class,
             ProduServSeeder::class,
-            UserSeeder::class
+            UserSeeder::class,
+            TypeRelationSeeder::class
         ]);
         
         /* Call Factories */
-        //User::factory(10)->create();  
-        //Bussine::factory(1)->create();
         Currency::factory()->create();
         Tax::factory()->create();
         Product::factory()->create();
         Customer::factory(10)->create();
-        //Invoice::factory(10)->create();
         Detail::factory(10)->create();
         TaxDetail::factory(5)->create();
     }

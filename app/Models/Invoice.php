@@ -57,6 +57,11 @@ class Invoice extends Model
         return $this->belongsTo(WayToPay::class);
     }
 
+    public function relationdocs()
+    {
+        return $this->hasMany(RelationDocs::class);
+    }
+
     public static function getAmountInvoice($invoice_id) {
         $details = Detail::select('quantity', 'amount')->where('invoice_id', $invoice_id)->get();
         $sumaAmount = 0;

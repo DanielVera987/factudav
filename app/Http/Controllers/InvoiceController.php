@@ -734,6 +734,7 @@ class InvoiceController extends Controller
     {
         $invoice = Invoice::where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
 
+        //Cancel in SAT
         if ($this->CheckRegisterPac() && Cfdi33Helper::getTimbreFiscal($invoice->name_file)) {
             $uuid = Cfdi33Helper::getTimbreFiscal($invoice->name_file);
 
@@ -759,5 +760,9 @@ class InvoiceController extends Controller
              
             return back()->with('warning', $res->CODIGO_RES_SAT);
         }
+
+        //Cancel in plataform
+        $invoice->cancel_date = date('Y-m-d H:i:s');
+        $invoice->save();
     }
 }

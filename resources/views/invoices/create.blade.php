@@ -55,6 +55,8 @@
           </li>
           <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Conceptos</a>
           </li>
+          <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Documentos Relacionados</a>
+          </li>
         </ul>
         <div id="myTabContent" class="tab-content">
 
@@ -151,6 +153,19 @@
                             <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                    </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                      <label for="payment_method_id">Tipo de Comprobante * :</label>
+                      <select id="payment_method_id" name="payment_method_id" class="form-control select2" value="{{ old('payment_method_id') }}" required data-parsley-trigger="change">
+                        <option value="I">I - Ingreso</option>
+                        <option value="E">E - Nota de Crédito</option>
+                      </select>
+                      @error('payment_method_id')
+                        <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                      @enderror
                     </div>
                 </div>
               
@@ -426,7 +441,50 @@
                 </br>
                 <div class="actionBar">
                   <button class="btn btn-primary float-rigth" role="tab" onclick="document.getElementById('home-tab').click();" data-toggle="tab" aria-expanded="false">Anterior</button>
+                  <button class="btn btn-primary float-rigth" role="tab" onclick="document.getElementById('profile-tab3').click();" data-toggle="tab" aria-expanded="false">Agregar Doc. Relacionado</button>
                   <input type="submit" class="btn btn-success float-rigth" value="Timbrar Factura">
+                </div>
+              </div>
+            </div>   
+            <!-- /BOTONES -->
+
+          </div>
+
+          <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">    
+            <div class="row">  
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <label for="type_relation">Tipo de Relación *: </label>
+                <select id="type_relation" name="type_relation" class="form-control select2"></select>
+                @error('type_relation')
+                    <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+              </div>
+
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <label for="uuid-rel">UUID *: </label>
+                <input type="text"class="form-control" id="uuid-rel" name="uuid-rel" value="sdfsadf-sadfsadfasdf-sadfdsfs-asf">
+                @error('uuid-rel')
+                    <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+              </div>
+
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <br />
+                <button class="btn btn-primary">Agregar</button>
+              </div>
+            </div>
+
+
+            <!-- BOTONES -->
+            <div class="row">
+              <div class="col-md-12">
+                </br>
+                <div class="actionBar">
+                  <button class="btn btn-primary float-rigth" role="tab" onclick="document.getElementById('profile-tab2').click();" data-toggle="tab" aria-expanded="false">Anterior</button>
                 </div>
               </div>
             </div>   

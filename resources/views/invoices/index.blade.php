@@ -60,11 +60,13 @@
                           <a href="{{ route('invoices.show', $invoice->id) }}">
                             {{ $invoice->folio }}
                             @if (!App\Helpers\Cfdi33Helper::getTimbreFiscal($invoice->name_file))
-                                <br><strong>Pre-CFDI</strong>
+                              <br><strong>Pre-CFDI</strong>
                             @endif
                             @if ($invoice->cancel_status == 'success')
-                                <br><p style="color: red;">Cancelado ante el SAT</p>
-                                {{ $invoice->cancel_date }}
+                              <br><p style="color: red;">Cancelado ante el SAT</p>
+                              {{ $invoice->cancel_date }}
+                            @elseif($invoice->cancel_status == 'cancel')
+                              <br><p style="color: red;">Cancelado</p>
                             @endif 
                           </a>
                         </td>
@@ -73,9 +75,9 @@
                         <td class="text-center">{{ $invoice->currency->code ?? '' }}</td>
                         <td class="text-center">
                           @php
-                              $wtp = App\Models\WayToPay::find($invoice->way_to_pay_id);
-                              $name = $wtp->name ?? '';
-                              echo $name;
+                            $wtp = App\Models\WayToPay::find($invoice->way_to_pay_id);
+                            $name = $wtp->name ?? '';
+                            echo $name;
                           @endphp
                         </td>
                         <td class="text-center">$ {{ App\Models\Invoice::getAmountInvoice($invoice->id) }}</td>
@@ -88,17 +90,32 @@
                           <ul class="nav navbar-nav navbar-right">
                               <li class="">
                                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                      <span class=" fa fa-navicon"></span>
+                                    <span class=" fa fa-navicon"></span>
                                   </a>
                                   <ul style="width: 30px;" class="dropdown-menu dropdown-usermenu pull-right">
-                                      <li><a href="{{ route('invoices.show', $invoice->id) }}">Ver</a></li>
-                                      <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}">Descargar PDF</a></li>
-                                      <li><a href="{{ route('invoices.createEmail', $invoice->id) }}">Enviar por correo</a></li>
-                                      <li><a href="{{ route('invoices.cancel', [$invoice->id, 'cancelar']) }}">Cancelar</a></li>
+                                    <li><a href="{{ route('invoices.show', $invoice->id) }}">Ver</a></li>
+                                    <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}">Descargar PDF</a></li>
+                                    <li><a href="{{ route('invoices.createEmail', $invoice->id) }}">Enviar por correo</a></li>
+
+                                    <li><a data-toggle="modal" data-target=".mod{{$invoice->id}}">Cancelar</a></li>
                                   </ul>
                               </li>
                           </ul>
                         </td>
+                        <div class="modal fade mod{{$invoice->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                          <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel2">¿Esta seguro?</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <a href="{{ route('invoices.cancel', [$invoice->id, 'cancelar']) }}" class="btn btn-sm btn-danger"> Cancelar</a>
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
                       </tr>
                     @endforeach
                   </tbody>
