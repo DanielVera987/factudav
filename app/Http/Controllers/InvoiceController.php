@@ -287,7 +287,6 @@ class InvoiceController extends Controller
                             }else{
                                 if($tax['TipoFactor'] != 'Exento'){
                                     $addTraslado = [
-                                        //'Base'       => $tax['Base'],
                                         'Impuesto'   => $tax['Impuesto'],
                                         'TipoFactor' => $tax['TipoFactor']
                                     ];
@@ -749,7 +748,6 @@ class InvoiceController extends Controller
 
             $res = new Cancelar($params, $uuid, $action);
 
-            dd($res);
             if($res->STATUS == "success") {
                 $invoice->cancel_date = date('Y-m-d H:i:s');
                 $invoice->cancel_acuse = $res->ACUSE;

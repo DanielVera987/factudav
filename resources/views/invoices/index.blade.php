@@ -94,7 +94,7 @@
                                       <li><a href="{{ route('invoices.show', $invoice->id) }}">Ver</a></li>
                                       <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}">Descargar PDF</a></li>
                                       <li><a href="{{ route('invoices.createEmail', $invoice->id) }}">Enviar por correo</a></li>
-                                      <li><a href="{{ route('invoices.cancel', [$invoice->id, 'consultar']) }}">Cancelar</a></li>
+                                      <li><a href="{{ route('invoices.cancel', [$invoice->id, 'cancelar']) }}">Cancelar</a></li>
                                   </ul>
                               </li>
                           </ul>

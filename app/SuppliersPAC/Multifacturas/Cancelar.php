@@ -131,7 +131,6 @@ Class Cancelar
     protected function consultar($data)
     {
         $res = $this->CLIENT->__soapCall('consultarCancelarCfdi', $data);
-        dd($res);
         return $res;
     }
 }
