@@ -12,14 +12,18 @@ class Invoice extends Model
 
     protected $fillable = [
         'bussine_id',
+        'customer_id',
         'folio',
         'way_to_pay_id',
         'currency_id',
         'payment_method_id',
         'usecfdi_id',
+        'type_voucher',
+        'name_file',
         'date',
-        'customer_id',
-        'name_file'
+        'cancel_date',
+        'cancel_acuse',
+        'cancel_status'
     ];
 
     public function bussine() 

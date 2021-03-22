@@ -41,6 +41,8 @@ class CreateInvoicesTable extends Migration
                 ->references('id')
                 ->on('usecfis');
 
+            $table->string('type_voucher')->set(['I', 'E']);
+
             $table->string('name_file');
             $table->string('date');
 

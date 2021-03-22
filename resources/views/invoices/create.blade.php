@@ -156,12 +156,12 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                      <label for="payment_method_id">Tipo de Comprobante * :</label>
-                      <select id="payment_method_id" name="payment_method_id" class="form-control select2" value="{{ old('payment_method_id') }}" required data-parsley-trigger="change">
+                      <label for="type_voucher">Tipo de Comprobante * :</label>
+                      <select id="type_voucher" name="type_voucher" class="form-control select2" value="{{ old('type_voucher') }}" required data-parsley-trigger="change">
                         <option value="I">I - Ingreso</option>
-                        <option value="E">E - Nota de Crédito</option>
+                        <option value="E">E - Egreso (Nota de Crédito)</option>
                       </select>
-                      @error('payment_method_id')
+                      @error('type_voucher')
                         <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                         </span>
@@ -454,7 +454,11 @@
             <div class="row">  
               <div class="col-md-4 col-sm-4 col-xs-12">
                 <label for="type_relation">Tipo de Relación *: </label>
-                <select id="type_relation" name="type_relation" class="form-control select2"></select>
+                <select id="type_relation" class="form-control select2">
+                  @foreach ($typeRelation as $item)
+                    <option value="{{ $item->code }}">{{ $item->code }} - {{ $item->name }}</option>
+                  @endforeach
+                </select>
                 @error('type_relation')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -464,7 +468,7 @@
 
               <div class="col-md-4 col-sm-4 col-xs-12">
                 <label for="uuid-rel">UUID *: </label>
-                <input type="text"class="form-control" id="uuid-rel" name="uuid-rel" value="sdfsadf-sadfsadfasdf-sadfdsfs-asf">
+                <input type="text"class="form-control" id="uuid_rel">
                 @error('uuid-rel')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -474,10 +478,26 @@
 
               <div class="col-md-4 col-sm-4 col-xs-12">
                 <br />
-                <button class="btn btn-primary">Agregar</button>
+                <button type="button" id="btDocRelation" onclick="init_add_docRelation()" class="btn btn-primary">Agregar</button>
               </div>
             </div>
+            
+            <br/>
+            <br/>
+            <br/>
+            
+            <div class="row">
+              <div class="col-md-12">
+                <div id="div_doc_relation">
+                  <div class="row">
+                    <div class="col-md-6">Tipo de Relación</div>
+                    <div class="col-md-6">UUID</div>
 
+
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <!-- BOTONES -->
             <div class="row">

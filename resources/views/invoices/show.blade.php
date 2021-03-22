@@ -73,8 +73,8 @@
                     <tbody>
                         @foreach ($invoice->detail as $key => $item)
                         <tr>
-                            <td>{{ $item->produserv->code }}</td>
-                            <td>{{ $item->unit->code }}</td>
+                            <td>{{ $item->produserv->code ?? '' }}</td>
+                            <td>{{ $item->unit->code ?? ''}}</td>
                             <td>{{ $item->quantity }}</td>
                             <td>
                                 {{ $item->description }}

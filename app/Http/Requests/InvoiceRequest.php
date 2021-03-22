@@ -32,6 +32,7 @@ class InvoiceRequest extends FormRequest
             'currency_id'               => ['required', 'numeric'],
             'payment_method_id'         => ['required', 'numeric'],
             'usecfdi_id'                => ['required', 'numeric'],
+            'type_voucher'              => ['required', 'string'],
             'date'                      => ['required', 'date_format:Y-m-d\TH:i:s'],
             'customer_id'               => ['required', 'numeric'],
             'detail'                    => ['required'],
@@ -47,6 +48,8 @@ class InvoiceRequest extends FormRequest
             'detail.*.taxes.*.factor'   => ['required'],
             'detail.*.taxes.*.tax'      => ['required'],
             'detail.*.taxes.*.id'       => ['required', 'numeric'],
+            'type_relation.*'           => [''],
+            'uuid_rel.*'                => ['']
         ];
     }
 
@@ -58,6 +61,7 @@ class InvoiceRequest extends FormRequest
     public function messages()
     {
         return [
+            'type_voucher.required'             => 'El campo Tipo de Comprante es requerido',
             'way_to_pay_id.required'            => 'La forma de pago es requerido',
             'currency_id.required'              => 'El campo moneda es requerido',
             'payment_method_id.required'        => 'El campo metodo de pago es requerido',

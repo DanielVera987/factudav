@@ -23,6 +23,7 @@ use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\InvoiceRequest;
+use App\Models\TypeRelation;
 use App\SuppliersPAC\Multifacturas\Cancelar;
 use Illuminate\Support\Facades\Storage;
 use App\SuppliersPAC\Multifacturas\Config;
@@ -86,6 +87,7 @@ class InvoiceController extends Controller
         $usecfdi = Usecfdi::all();
         $wayToPays = WayToPay::all();
         $paymentMethods = PaymentMethod::all();
+        $typeRelation = TypeRelation::all();
 
         return view('invoices.create', [
             'folio' => Invoice::generateFolio(),
@@ -97,7 +99,8 @@ class InvoiceController extends Controller
             'taxes' => $taxes,
             'usecfdi' => $usecfdi,
             'waytopays' => $wayToPays,
-            'paymentmethods' => $paymentMethods
+            'paymentmethods' => $paymentMethods,
+            'typeRelation' => $typeRelation
         ]);
     }
 
@@ -227,15 +230,28 @@ class InvoiceController extends Controller
             $certificate = new \CfdiUtils\Certificado\Certificado($path.'/'.$fileCer);
 
             /** Preparando los datos para la creacion del XML */
+            $cfdiRelations = $this->preparedCfdiRelation($data);
             $concepts = $this->preparedingConcepts($data);
             $attributesHeader = $this->preparedingHead($data);
             $emitor = $this->preparedingEmitor();
             $receptor = $this->preparedingReceptor($data);
-
             
             $creator = new \CfdiUtils\CfdiCreator33($attributesHeader, $certificate);
             
             $comprobante = $creator->comprobante();
+
+            if(!empty($cfdiRelations)){
+                $comprobante->addCfdiRelacionados([
+                    'TipoRelacion' => $item['TipoRelacion']
+                ]);
+
+                foreach($cfdiRelations as $item){    
+                    $comprobante->addCfdiRelacionado([
+                        'UUID' => $item['UUID']
+                    ]);
+                }
+            }
+
             $comprobante->addEmisor($emitor);
             $comprobante->addReceptor($receptor);
             
@@ -374,6 +390,19 @@ class InvoiceController extends Controller
 
     }
 
+    protected function preparedCfdiRelation($data)
+    {
+        $cfdiRelation = [];
+        if(isset($data->type_relation) && isset($data->uuid_rel)) {
+            foreach($data->type_relation as $key => $item) {
+                $cfdiRelation[$key]['TipoRelacion'] = $item;
+                $cfdiRelation[$key]['UUID'] = $data->uuid_rel[$key];
+            }
+        }
+
+        return $cfdiRelation;
+    }
+
     /**
      * Create Header for XML CFDI33
      * ['Version', 'Serie', 'Folio', 'Fecha']...
@@ -398,7 +427,7 @@ class InvoiceController extends Controller
         $data['Moneda'] = $currency->code;
         $data['TipoCambio'] = $currency->exchange_rate;
         $data['Total'] = $this->TOTAL;
-        $data['TipoDeComprobante'] = 'I';
+        $data['TipoDeComprobante'] = $request->type_voucher;
         $data['MetodoPago'] = $paymentMethod->code;
         $data['LugarExpedicion'] = $zip;
 

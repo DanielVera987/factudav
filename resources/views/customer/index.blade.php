@@ -38,6 +38,7 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
+                      <th>#</th>
                       <th>Nombre/Empresa</th>
                       <th>Razón Social</th>
                       <th>RFC</th>
@@ -50,8 +51,9 @@
                   </thead>
 
                   <tbody>
-                    @foreach($customers as $customer)
+                    @foreach($customers as $key => $customer)
                       <tr>
+                        <td>{{ $key + 1 }}</td>
                         <td>{{ $customer->bussine_name}}</td>
                         <td>{{ $customer->tradename}}</td>
                         <td>{{ $customer->rfc}}</td>

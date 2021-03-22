@@ -204,6 +204,28 @@ function clear_txts()
     document.getElementById('txt_total').innerHTML = '';
 }
 
+function init_add_docRelation()
+{
+    var input_type_relation = document.getElementById('type_relation');
+    var uuid_relation = document.getElementById('uuid_rel');
+
+    if(uuid_relation.value == '' && input_type_relation.value == '') return false;
+
+    add_doc_realtion(uuid_relation, input_type_relation);
+}
+
+function add_doc_realtion(uuid, relation)
+{
+    data = `
+        <div class="col-md-6">${relation.options[relation.selectedIndex].text}</div>
+        <div class="col-md-6">${uuid.value}</div>
+        <input type="hidden" name="type_relation[]" value="${relation.value}">
+        <input type="hidden" name="uuid_rel[]" value="${uuid.value}">
+    `;
+    
+    $('#div_doc_relation').append(data);
+}
+
 function myRound(number, pos) {
     var f = Math.pow(10, pos);
     return Math.round(number * f) / f;

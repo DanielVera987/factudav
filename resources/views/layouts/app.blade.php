@@ -56,7 +56,6 @@
                     </a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('invoices.index') }}">Facturas</a></li>
-                      <li><a href="{{ route('invoices.index') }}">Nota de Crédito</a></li>
                       <li><a href="{{ route('invoices.index') }}">Complemento de Pago</a></li>
                     </ul>
                   </li>

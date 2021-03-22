@@ -47,7 +47,7 @@
                       <th>Fecha</th>
                       <th>Moneda</th>
                       <th>Forma de pago</th>
-                      <th>Subtotal</th>
+                      <th>Tipo Comprobante</th>
                       <th>UUID</th>
                       <th>Admin.</th>
                     </tr>
@@ -80,7 +80,7 @@
                             echo $name;
                           @endphp
                         </td>
-                        <td class="text-center">$ {{ App\Models\Invoice::getAmountInvoice($invoice->id) }}</td>
+                        <td class="text-center">@if($invoice->type_voucher == 'I') I - Ingreso @elseif($invoice->type_voucher == 'E') E - Egreso @endif</td>
                         <td class="text-center">
                           @if(App\Helpers\Cfdi33Helper::getTimbreFiscal($invoice->name_file))
                             {{ App\Helpers\Cfdi33Helper::getTimbreFiscal($invoice->name_file) }}

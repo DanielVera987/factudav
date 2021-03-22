@@ -120,7 +120,7 @@
         <td>
             <br>Moneda: {{ $datainvoice->currency->code }}
             <br>Tipo de cambio: {{ $datainvoice->currency->exchange_rate }}
-            <br>Tipo de comprobante: I
+            <br>Tipo de comprobante: {{ $datainvoice->type_voucher }}
         </td>
             </tr>
         </table>
