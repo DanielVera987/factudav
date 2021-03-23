@@ -24,6 +24,7 @@ Route::resource('/products', ProductController::class);
 Route::resource('/invoices', InvoiceController::class);
 Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::put('/user/{user}/update', [UserController::class, 'update'])->name('user.update');
+Route::get('/invoices/create/complement', [InvoiceController::class, 'createComplement'])->name('invoices.create.complement');
 
 // Email
 Route::get('/invoices/email/{id}/create', [InvoiceController::class, 'createEmail'])->name('invoices.createEmail');

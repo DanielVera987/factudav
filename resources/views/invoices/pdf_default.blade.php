@@ -59,7 +59,21 @@
         </tr>
     </table>
 
-    <br>
+    @if (count($datainvoice->relationdocs) > 0)
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Documentos Relacionados</h4>
+            </div>
+
+            <div class="col-md-12">
+            @foreach ($datainvoice->relationdocs as $item)
+                &nbsp;&nbsp; uuid: {{ $item->uuid }} <br />
+            @endforeach
+            </div>
+        </div>
+    @endif
+
+    <br />
     <table class="tableprodserv">
         <thead>
             <tr>

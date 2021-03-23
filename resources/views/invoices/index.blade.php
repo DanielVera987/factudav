@@ -93,11 +93,13 @@
                                     <span class=" fa fa-navicon"></span>
                                   </a>
                                   <ul style="width: 30px;" class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="{{ route('invoices.show', $invoice->id) }}">Ver</a></li>
-                                    <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}">Descargar PDF</a></li>
-                                    <li><a href="{{ route('invoices.createEmail', $invoice->id) }}">Enviar por correo</a></li>
-
-                                    <li><a data-toggle="modal" data-target=".mod{{$invoice->id}}">Cancelar</a></li>
+                                    <li><a href="{{ route('invoices.show', $invoice->id) }}"><i class="fa fa-eye"></i>  Ver</a></li>
+                                    <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}"><i class="fa fa-file-pdf-o"></i>  Descargar PDF</a></li>
+                                    <li><a href="{{ route('invoices.createEmail', $invoice->id) }}"><i class="fa fa-send"></i>  Enviar por correo</a></li>
+                                    @if ($invoice->payment_method_id === 2)
+                                      <li><a href="{{ route('invoices.create.complement') }}"><i class="fa fa-money"></i>  Agregar Pago</a></li>  
+                                    @endif
+                                    <li><a data-toggle="modal" data-target=".mod{{$invoice->id}}"><i class="fa fa-remove"></i>  Cancelar</a></li>
                                   </ul>
                               </li>
                           </ul>

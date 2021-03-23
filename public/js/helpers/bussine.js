@@ -116,5 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if(e.keyCode == 13) {
       e.preventDefault();
     }
-  }))
+  }));
+ 
 });

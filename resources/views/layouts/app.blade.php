@@ -51,13 +51,9 @@
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <a href="{{ route('invoices.index') }}">
                       <i class="fa fa-file-text"></i>Cfdi's
                     </a>
-                    <ul class="nav child_menu">
-                      <li><a href="{{ route('invoices.index') }}">Facturas</a></li>
-                      <li><a href="{{ route('invoices.index') }}">Complemento de Pago</a></li>
-                    </ul>
                   </li>
                   <li>
                     <a href="{{ route('customers.index') }}">

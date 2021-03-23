@@ -23,6 +23,7 @@ use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\InvoiceRequest;
+use App\Models\RelationDocs;
 use App\Models\TypeRelation;
 use App\SuppliersPAC\Multifacturas\Cancelar;
 use Illuminate\Support\Facades\Storage;
@@ -136,6 +137,17 @@ class InvoiceController extends Controller
 
         $invoice = Invoice::create($request->all());
         $details = Detail::createDetail($invoice->id, $request);
+
+        if (!empty($request->type_relation) && !empty($request->uuid_rel)) {
+            foreach($request->type_relation as $key => $value){
+                RelationDocs::create([
+                    'invoice_id' => $invoice->id,
+                    'type_relation_id' => $value,
+                    'uuid' => $request->uuid_rel[$key],
+                ]);
+            }
+        }
+
         if(!$details) return back()->with('warning', 'Se genero un error al guardar la factura');
         
         return redirect(route('invoices.show', $invoice->id));
@@ -155,7 +167,8 @@ class InvoiceController extends Controller
                                 'currency', 
                                 'paymentmethod', 
                                 'usecfdi',
-                                'detail'
+                                'detail',
+                                'relationdocs'
                             )
                         ->where('bussine_id', Auth::user()->bussine_id)
                         ->findOrFail($id);
@@ -214,6 +227,29 @@ class InvoiceController extends Controller
         //
     }
 
+    public function createComplement()
+    {
+        $bussine_id =  Auth::user()->bussine_id;
+        $serie = Bussine::select('start_serie')->find($bussine_id);
+        $wayToPays = WayToPay::all();
+        $currencies = Currency::where('bussine_id',$bussine_id)->get();
+        $paymentMethods = PaymentMethod::all();
+        $usecfdi = Usecfdi::all();
+        $taxes = Tax::where('bussine_id', $bussine_id)->get();
+        $typeRelation = TypeRelation::all();
+
+        return view('invoices.create_complementpay', [
+            'folio' => Invoice::generateFolio(),
+            'serie' => $serie,
+            'waytopays' => $wayToPays,
+            'currencies' => $currencies,
+            'paymentmethods' => $paymentMethods,
+            'usecfdi' => $usecfdi,
+            'taxes' => $taxes,
+            'typeRelation' => $typeRelation
+        ]);
+    }
+
     /**
      * Create XML for CFDI33 
      * @return \CfdiUtils\CfdiCreator33 
@@ -242,7 +278,7 @@ class InvoiceController extends Controller
 
             if(!empty($cfdiRelations)){
                 $comprobante->addCfdiRelacionados([
-                    'TipoRelacion' => $item['TipoRelacion']
+                    'TipoRelacion' => $cfdiRelations[0]['TipoRelacion']
                 ]);
 
                 foreach($cfdiRelations as $item){    
@@ -501,6 +537,7 @@ class InvoiceController extends Controller
                     } elseif($val['type'] == 'retenido') {
                         if ($val['code'] == '002') $imp = ($trasladoPrevious * 2) / 3;
                         $totalTaxRetenido += bcdiv($imp, '1', 2);
+                        $trasladoPrevious = 0;
                     }
 
                     $taxes[] = [
@@ -553,7 +590,8 @@ class InvoiceController extends Controller
                             'currency', 
                             'paymentmethod', 
                             'usecfdi',
-                            'detail'
+                            'detail',
+                            'relationdocs'
                         )->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
 
         return $this->print($dataInvoice, true);

@@ -57,6 +57,21 @@
                     <br><br>
                 </div>
             </div>
+            
+            @if (count($invoice->relationdocs) > 0)
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Documentos Relacionados</h4>
+                </div>
+
+                @foreach ($invoice->relationdocs as $item)
+                    <div class="col-md-12">
+                        &nbsp;&nbsp; uuid: {{ $item->uuid }}
+                    </div>
+                @endforeach
+            </div>
+            <br />
+            @endif
 
             <div class="card-box table-responsive">
                 <table class="table table-striped" cellspacing="0" width="100%">
