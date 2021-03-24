@@ -66,6 +66,11 @@ class Invoice extends Model
         return $this->hasMany(RelationDocs::class);
     }
 
+    public function complementpay()
+    {
+        return $this->hasMany(ComplementPay::class);
+    }
+
     public static function getAmountInvoice($invoice_id) {
         $details = Detail::select('quantity', 'amount')->where('invoice_id', $invoice_id)->get();
         $sumaAmount = 0;

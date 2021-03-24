@@ -97,7 +97,7 @@
                                     <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}"><i class="fa fa-file-pdf-o"></i>  Descargar PDF</a></li>
                                     <li><a href="{{ route('invoices.createEmail', $invoice->id) }}"><i class="fa fa-send"></i>  Enviar por correo</a></li>
                                     @if ($invoice->payment_method_id === 2)
-                                      <li><a href="{{ route('invoices.create.complement') }}"><i class="fa fa-money"></i>  Agregar Pago</a></li>  
+                                      <li><a href="{{ route('invoices.create.complement', $invoice->id) }}"><i class="fa fa-money"></i>  Agregar Pago</a></li>  
                                     @endif
                                     <li><a data-toggle="modal" data-target=".mod{{$invoice->id}}"><i class="fa fa-remove"></i>  Cancelar</a></li>
                                   </ul>

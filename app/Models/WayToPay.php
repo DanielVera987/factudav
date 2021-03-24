@@ -18,4 +18,9 @@ class WayToPay extends Model
     {
         return $this->hasMany(Invoice::class);
     }
+
+    public function complementpay()
+    {
+        return $this->hasMany(ComplementPay::class);
+    }
 }
