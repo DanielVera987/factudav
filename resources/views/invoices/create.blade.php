@@ -459,6 +459,8 @@
                   @foreach ($typeRelation as $item)
                     <option value="{{ $item->code }}">{{ $item->code }} - {{ $item->name }}</option>
                   @endforeach
+                </select>
+                @error('type_relation')
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                     </span>

@@ -10,7 +10,7 @@ class ComplementPay extends Model
     use HasFactory;
 
     protected $fillable = [
-        'invoices_id',
+        'invoice_id',
         'serie',
         'folio',
         'date',

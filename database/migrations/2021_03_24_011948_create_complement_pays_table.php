@@ -15,7 +15,7 @@ class CreateComplementPaysTable extends Migration
     {
         Schema::create('complement_pays', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('invoices_id')
+            $table->foreignId('invoice_id')
                 ->references('id')
                 ->on('invoices');
             $table->string('serie');
@@ -30,12 +30,12 @@ class CreateComplementPaysTable extends Migration
                 ->on('way_to_pays');
             $table->string('date_pay');
             $table->string('amount');
-            $table->string('num_operation');
-            $table->string('rfc_payer');
-            $table->string('account_payer');
-            $table->string('rfc_beneficiary');
-            $table->string('account_beneficiary');
-            $table->string('no_parciality');
+            $table->string('num_operation')->nullable();
+            $table->string('rfc_payer')->nullable();
+            $table->string('account_payer')->nullable();
+            $table->string('rfc_beneficiary')->nullable();
+            $table->string('account_beneficiary')->nullable();
+            $table->string('no_parciality')->nullable();
             $table->timestamps();
         });
     }

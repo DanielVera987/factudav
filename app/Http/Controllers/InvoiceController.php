@@ -23,6 +23,7 @@ use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\InvoiceRequest;
+use App\Models\ComplementPay;
 use App\Models\RelationDocs;
 use App\Models\TypeRelation;
 use App\SuppliersPAC\Multifacturas\Cancelar;
@@ -225,29 +226,6 @@ class InvoiceController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function createComplement()
-    {
-        $bussine_id =  Auth::user()->bussine_id;
-        $serie = Bussine::select('start_serie')->find($bussine_id);
-        $wayToPays = WayToPay::all();
-        $currencies = Currency::where('bussine_id',$bussine_id)->get();
-        $paymentMethods = PaymentMethod::all();
-        $usecfdi = Usecfdi::all();
-        $taxes = Tax::where('bussine_id', $bussine_id)->get();
-        $typeRelation = TypeRelation::all();
-
-        return view('invoices.create_complementpay', [
-            'folio' => Invoice::generateFolio(),
-            'serie' => $serie,
-            'waytopays' => $wayToPays,
-            'currencies' => $currencies,
-            'paymentmethods' => $paymentMethods,
-            'usecfdi' => $usecfdi,
-            'taxes' => $taxes,
-            'typeRelation' => $typeRelation
-        ]);
     }
 
     /**

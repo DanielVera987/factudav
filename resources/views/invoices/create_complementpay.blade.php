@@ -21,7 +21,7 @@
 @endsection
 
 @section('content')
-<form id="demo-form" method="POST" action="{{ route('invoices.store') }}" enctype="multipart/form-data" data-parsley-validate>
+<form id="demo-form" method="POST" action="{{ route('invoices.store.complement', $invoice->id) }}" enctype="multipart/form-data" data-parsley-validate>
   @csrf
   <div class="x_panel">
     <div class="x_title">
@@ -63,35 +63,53 @@
               <div class="col-md-4">
                 <h5>
                   <label>Serie :</label>
-                  Factura-
+                  {{ \Auth::user()->bussine->start_serie }}
                 </h5>
               </div>
 
               <div class="col-md-4">
                 <h5>
                   <label>Folio :</label>
-                  0000000030
+                  {{ $invoice->folio }}
                 </h5>
               </div>
 
               <div class="col-md-4">
                 <h5>
                   <label>Monto de Pagado :</label>
-                  $2,300.00
+                  @empty($invoice->complementpay)
+                    
+                  @else
+                    @php
+                      $xml = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $invoice->name_file)))
+                        ->getQuickReader();
+
+                      echo '$'.$xml['Total']
+                    @endphp
+                  @endempty
                 </h5>
               </div>
 
               <div class="col-md-4">
                 <h5>
                   <label>Monto Pendiente :</label>
-                  $1,500.00
+                  @empty($invoice->complementpay)
+                    
+                  @else
+                    @php
+                      $xml = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $invoice->name_file)))
+                        ->getQuickReader();
+
+                      echo '$'.$xml['Total']
+                    @endphp
+                  @endempty
                 </h5>
               </div>
 
               <div class="col-md-4">
                 <h5>
                   <label>Moneda :</label>
-                  MXN
+                  {{ $invoice->currency->code }}
                 </h5>
               </div>
             </div>
@@ -150,11 +168,11 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                      <label for="type_voucher">Tipo de Comprobante * :</label>
-                      <select id="type_voucher" name="type_voucher" class="form-control select2" value="{{ old('type_voucher') }}" required data-parsley-trigger="change">
+                      <label for="type_vaucher">Tipo de Comprobante * :</label>
+                      <select id="type_vaucher" name="type_vaucher" class="form-control select2" value="{{ old('type_vaucher') }}" required data-parsley-trigger="change">
                         <option value="P">P - Pago</option>
                       </select>
-                      @error('type_voucher')
+                      @error('type_vaucher')
                         <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                         </span>
@@ -167,9 +185,9 @@
 
                 <div class="row">  
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="rfc_search">Fecha de Pago * :</label>
-                        <input type="text" id="rfc_search" class="form-control" value="{{ old('rfc_search') }}" data-parsley-trigger="change" required />
-                        @error('rfc_search')
+                        <label for="date_pay">Fecha de Pago * :</label>
+                        <input type="text" id="date_pay" name="date_pay" class="form-control" value="{{ old('date_pay') }}" data-parsley-trigger="change" required />
+                        @error('date_pay')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -178,7 +196,7 @@
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
                       <label for="way_to_pay_id">Forma de Pago * :</label>
-                      <select id="way_to_pay_id" name="way_to_pay_id" class="form-control select2" value="{{ old('way_to_pays_id') }}" required data-parsley-trigger="change">
+                      <select id="way_to_pay_id" name="way_to_pay_id" class="form-control select2" value="{{ old('way_to_pay_id') }}" required data-parsley-trigger="change">
                         @foreach($waytopays as $value)
                           <option value="{{ $value->id }}">{{ $value->code }} - {{ $value->name }}</option>
                         @endforeach
@@ -191,9 +209,9 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="bussine_name_search">Monto * :</label>
-                        <input type="text" id="bussine_name_search" class="form-control" data-parsley-trigger="change" value="{{ old('bussine_name_search') }}" required />
-                        @error('bussine_name_search')
+                        <label for="amount">Monto * :</label>
+                        <input type="text" id="amount" name="amount" class="form-control" data-parsley-trigger="change" value="{{ old('amount') }}" required />
+                        @error('amount')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -203,9 +221,9 @@
 
                 <div class="row">
                   <div class="col-md-4 col-sm-4 col-xs-12">
-                      <label for="zip_search">Número de Operación <small>(Opcional)</small> :</label>
-                      <input type="text" id="zip_search" class="form-control" data-parsley-trigger="change" value="{{ old('zip_search') }}" required />
-                      @error('zip_search')
+                      <label for="num_operation">Número de Operación <small>(Opcional)</small> :</label>
+                      <input type="text" id="num_operation" name="num_operation" class="form-control" data-parsley-trigger="change" value="{{ old('num_operation') }}" />
+                      @error('num_operation')
                           <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                           </span>
@@ -213,9 +231,9 @@
                   </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="street_search">RFC Emisor cuenta ordenante <small>(Opcional)</small> :</label>
-                        <input type="text" id="street_search" class="form-control" value="{{ old('street_search') }}" data-parsley-trigger="change" required />
-                        @error('street_search')
+                        <label for="rfc_payer">RFC Emisor cuenta ordenante <small>(Opcional)</small> :</label>
+                        <input type="text" id="rfc_payer" name="rfc_payer" class="form-control" value="{{ old('rfc_payer') }}" data-parsley-trigger="change" />
+                        @error('rfc_payer')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -223,9 +241,9 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="no_exterior_search">Cuenta ordenante <small>(Opcional)</small> *:</label>
-                        <input type="text" id="no_exterior_search" class="form-control" value="{{ old('no_exterior_search') }}" data-parsley-trigger="change" required />
-                        @error('no_exterior_search')
+                        <label for="account_payer">Cuenta ordenante <small>(Opcional)</small> *:</label>
+                        <input type="text" id="account_payer" name="account_payer" class="form-control" value="{{ old('account_payer') }}" data-parsley-trigger="change" />
+                        @error('account_payer')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -233,9 +251,9 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                        <label for="no_inside_search">RFC Emisor cuenta beneficiaria <small>(Opcional)</small> :</label>
-                        <input type="text" id="no_inside_search" class="form-control" value="{{ old('no_inside_search') }}" data-parsley-trigger="change" required />
-                        @error('no_inside_search')
+                        <label for="rfc_beneficiary">RFC Emisor cuenta beneficiaria <small>(Opcional)</small> :</label>
+                        <input type="text" id="rfc_beneficiary" name="rfc_beneficiary" class="form-control" value="{{ old('rfc_beneficiary') }}" data-parsley-trigger="change" />
+                        @error('rfc_beneficiary')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
@@ -243,9 +261,9 @@
                     </div>
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
-                      <label for="no_exterior_search">Cuenta beneficiaria <small>(Opcional)</small> :</label>
-                      <input type="text" id="no_exterior_search" class="form-control" value="{{ old('no_exterior_search') }}" data-parsley-trigger="change" required />
-                      @error('no_exterior_search')
+                      <label for="account_beneficiary">Cuenta beneficiaria <small>(Opcional)</small> :</label>
+                      <input type="text" id="account_beneficiary" name="account_beneficiary" class="form-control" value="{{ old('account_beneficiary') }}" data-parsley-trigger="change" />
+                      @error('account_beneficiary')
                           <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
                           </span>
@@ -257,17 +275,37 @@
                 <div class="row">
                   <div class="col-md-3">
                     <strong>Importe saldo anterior</strong>
-                    <br />$2,300.00
+                    <br />
+                    @empty($invoice->complementpay)
+                    
+                    @else
+                      @php
+                        $xml = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $invoice->name_file)))
+                          ->getQuickReader();
+
+                        echo '$'.$xml['Total']
+                      @endphp
+                    @endempty
                   </div>
 
                   <div class="col-md-3">
                     <strong>Importe pagado</strong>
-                    <br />$1,000.00
+                    <br />
+                    @empty($invoice->complementpay)
+                    
+                    @else
+                      $0.00
+                    @endempty
                   </div>
 
                   <div class="col-md-3">
                     <strong>Importe saldo insoluto</strong>
-                    <br />$1,300.00
+                    <br />
+                    @empty($invoice->complementpay)
+                    
+                    @else
+                      $0.00
+                    @endempty
                   </div>
 
                   <div class="col-md-3">
@@ -318,6 +356,7 @@
         $(document).ready(function() {
           //Momentjs
           $('#date').val(moment().format('YYYY-MM-DDTHH:mm:ss'));
+          $('#date_pay').val(moment().format('YYYY-MM-DDTHH:mm:ss'));
           
           $('#search_product').select2({
             placeholder: 'Escribe para comenzar a buscar',

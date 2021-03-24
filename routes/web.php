@@ -2,13 +2,14 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\BussineController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ComplementPayController;
 
 Route::get('/', function () { return redirect()->route('login'); });
 
@@ -24,9 +25,12 @@ Route::resource('/products', ProductController::class);
 Route::resource('/invoices', InvoiceController::class);
 Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::put('/user/{user}/update', [UserController::class, 'update'])->name('user.update');
-Route::get('/invoices/create/{id}/complement', [InvoiceController::class, 'createComplement'])
+Route::get('/invoices/create/{id}/complement', [ComplementPayController::class, 'createComplement'])
   ->where(['id' => '[0-9]+'])
   ->name('invoices.create.complement');
+Route::post('/invoices/store/{id}/complement', [ComplementPayController::class, 'storeComplement'])
+  ->where(['id' => '[0-9]+'])
+  ->name('invoices.store.complement');
 
 // Email
 Route::get('/invoices/email/{id}/create', [InvoiceController::class, 'createEmail'])->name('invoices.createEmail');
