@@ -23,23 +23,23 @@ class CustomerFactory extends Factory
     {
         return [
             'bussine_id' => 1,
-            'bussine_name' => $this->faker->company(),
-            'tradename' => $this->faker->companySuffix(),
-            'rfc' => $this->faker->swiftBicNumber(),
-            'email' => $this->faker->email(),
-            'telephone' => $this->faker->tollFreePhoneNumber(),
-            'usecfdi_id' => $this->faker->randomDigit(),
+            'bussine_name' => 1,
+            'tradename' => 'PUBLICO EN GENERAL',
+            'rfc' => 'XAXX010101000',
+            'email' => 'test@test.com',
+            'telephone' => '9999999999',
+            'usecfdi_id' => 3,
             'country_id' => 1,
-            'state_id' => $this->faker->randomDigit(),
-            'municipality_id' => $this->faker->randomDigit(),
-            'location' => $this->faker->cityPrefix(),
-            'street' => $this->faker->streetAddress(),
-            'colony' => $this->faker->country(),
-            'zip' => $this->faker->postcode(),
-            'no_exterior' => $this->faker->buildingNumber(),
-            'no_inside' => $this->faker->buildingNumber(),
-            'street_reference' => $this->faker->address(),
-            'type' => $this->faker->randomDigit(), //1 cliente, 2 proveedor
+            'state_id' => 22,
+            'municipality_id' => 1,
+            'location' => 'Cozumel',
+            'street' => '0',
+            'colony' => '0',
+            'zip' => '77666',
+            'no_exterior' => '0',
+            'no_inside' => '0',
+            'street_reference' => '',
+            'type' => 1, //1 cliente, 2 proveedor
         ];
     }
 }

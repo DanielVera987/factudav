@@ -144,6 +144,16 @@
                     </span>
                   @enderror
               </div>
+
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <label for="currency_id">Tipo de Cambio * :</label>
+                <input type="text" id="type_change" name="type_change" class="form-control" data-parsley-trigger="change" value="" readonly='readonly' />
+                @error('type_change')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+            </div>
             </div>
 
             <div class="row">  
@@ -310,7 +320,7 @@
 
                   <div class="col-md-3">
                     <strong>No. de parcialidad</strong>
-                    <br />1
+                    <br />{{ count($invoice->complementpay) + 1 }}
                   </div>
                 </div>
 
@@ -468,6 +478,15 @@
               $('#state_id_search').val(data.state);
               $('#municipality_id_search').val(data.municipality);
             })
+          });
+
+          $('#currency_id').on('change', function() {
+            let val = $('#currency_id').val();
+            if(val != 'MXN')
+              $('#type_change').attr('readonly', true);
+            else 
+              $('#type_change').attr('readonly', false);
+
           });
 
         });

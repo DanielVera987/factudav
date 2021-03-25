@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         Currency::factory()->create();
         Tax::factory()->create();
         Product::factory()->create();
-        Customer::factory(10)->create();
+        Customer::factory()->create();
         Detail::factory(10)->create();
         TaxDetail::factory(5)->create();
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tax;
+use App\Helpers\Helper;
 use App\Models\Unit;
 use App\Models\State;
 use App\Models\Detail;
@@ -16,20 +17,20 @@ use App\Models\WayToPay;
 use App\Models\ProduServ;
 use App\Models\TaxRegimen;
 use App\Models\Municipality;
+use App\Models\RelationDocs;
+use App\Models\TypeRelation;
 use Illuminate\Http\Request;
 use App\Helpers\Cfdi33Helper;
 use App\Mail\SendInvoiceMail;
+use App\Models\ComplementPay;
 use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\InvoiceRequest;
-use App\Models\ComplementPay;
-use App\Models\RelationDocs;
-use App\Models\TypeRelation;
-use App\SuppliersPAC\Multifacturas\Cancelar;
 use Illuminate\Support\Facades\Storage;
 use App\SuppliersPAC\Multifacturas\Config;
 use App\SuppliersPAC\Multifacturas\Timbrar;
+use App\SuppliersPAC\Multifacturas\Cancelar;
 
 class InvoiceController extends Controller
 {
@@ -125,7 +126,7 @@ class InvoiceController extends Controller
         if (!$unsignedXml) return back()->with('warning', 'Se genero un error al procesar el XML, Intentalo de nuevo');
         $request['name_file'] = $unsignedXml;
         
-        if($this->CheckRegisterPac()){
+        if(Helper::CheckRegisterPac()){
             $res = $this->timbrar($unsignedXml);
             if(!$res){
                 $request['name_file'] = str_replace('_UNSIGNED', '', $unsignedXml);
@@ -742,20 +743,6 @@ class InvoiceController extends Controller
         return redirect(route('invoice.createEmail', $invoice->id))->with('success', 'Correo Enviado');
     }
 
-    /**
-     * Check Register Pac for Invoices
-     * 
-     * @var bool
-     */
-    public function CheckRegisterPac()
-    {
-        if(Auth::user()->bussine->name_pac && Auth::user()->bussine->password_pac){
-            return true;
-        }
-
-        return false;
-    }
-
     protected function timbrar($unsignedXml)
     {
         $params = new Config(
@@ -780,7 +767,7 @@ class InvoiceController extends Controller
         $invoice = Invoice::where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
 
         //Cancel in SAT
-        if ($this->CheckRegisterPac() && Cfdi33Helper::getTimbreFiscal($invoice->name_file)) {
+        if (Helper::CheckRegisterPac() && Cfdi33Helper::getTimbreFiscal($invoice->name_file)) {
             $uuid = Cfdi33Helper::getTimbreFiscal($invoice->name_file);
 
             $params = new Config(

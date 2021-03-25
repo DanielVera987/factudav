@@ -36,6 +36,7 @@ class CreateComplementPaysTable extends Migration
             $table->string('rfc_beneficiary')->nullable();
             $table->string('account_beneficiary')->nullable();
             $table->string('no_parciality')->nullable();
+            $table->string('name_file')->nullable();
             $table->timestamps();
         });
     }
