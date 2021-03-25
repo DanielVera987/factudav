@@ -65,7 +65,7 @@ class ComplementPayController extends Controller
         $request['invoice_id'] = $invoice->id;
 
         if(count($invoice->complementpay) > 0){
-            $request['no_parciality'] = count($invoice->complementpay);
+            $request['no_parciality'] = count($invoice->complementpay) + 1;
         }else {
             $request['no_parciality'] = 1;
         }
@@ -139,7 +139,6 @@ class ComplementPayController extends Controller
     {
         $data = [];
         $customer = Customer::select('rfc', 'bussine_name', 'usecfdi_id')->find($customerId);
-        $code_usecfdi = Usecfdi::find($customer->usecfdi_id);
 
         $data['Rfc'] = $customer->rfc;
         $data['Nombre'] = $customer->bussine_name;
