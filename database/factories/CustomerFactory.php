@@ -23,7 +23,7 @@ class CustomerFactory extends Factory
     {
         return [
             'bussine_id' => 1,
-            'bussine_name' => 1,
+            'bussine_name' => 'PUBLICO EN GENERAL',
             'tradename' => 'PUBLICO EN GENERAL',
             'rfc' => 'XAXX010101000',
             'email' => 'test@test.com',

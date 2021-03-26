@@ -49,6 +49,7 @@
                       <th>Forma de pago</th>
                       <th>Tipo Comprobante</th>
                       <th>UUID</th>
+                      <th>Metodo Pago</th>
                       <th>Admin.</th>
                     </tr>
                   </thead>
@@ -85,6 +86,12 @@
                           @if(App\Helpers\Cfdi33Helper::getTimbreFiscal($invoice->name_file))
                             {{ App\Helpers\Cfdi33Helper::getTimbreFiscal($invoice->name_file) }}
                           @endif
+                        </td>
+                        <td class="text-center">
+                          @php
+                            $pm = App\Models\PaymentMethod::find($invoice->payment_method_id);
+                            echo $pm->code;
+                          @endphp
                         </td>
                         <td class="text-center" width="5%">
                           <ul class="nav navbar-nav navbar-right">

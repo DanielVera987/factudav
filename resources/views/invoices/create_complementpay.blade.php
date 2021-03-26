@@ -76,16 +76,11 @@
 
               <div class="col-md-4">
                 <h5>
-                  <label>Monto de Pagado :</label>
+                  <label>Monto Pagado :</label>
                   @empty($invoice->complementpay)
                     
                   @else
-                    @php
-                      $xml = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $invoice->name_file)))
-                        ->getQuickReader();
-
-                      echo '$'.$xml['Total']
-                    @endphp
+                    $0.00
                   @endempty
                 </h5>
               </div>

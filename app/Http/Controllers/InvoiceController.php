@@ -69,7 +69,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->orderByDesc('id')->get();
+        $invoices = Invoice::with('customer', 'paymentmethod')->where('bussine_id', Auth::user()->bussine_id)->orderByDesc('id')->get();
         return view('invoices.index', compact('invoices'));
     }
 

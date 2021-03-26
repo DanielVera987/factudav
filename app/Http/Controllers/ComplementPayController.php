@@ -88,6 +88,7 @@ class ComplementPayController extends Controller
 
         ComplementPay::create($request->all());
 
+        return back()->with('success', 'Perfecto');
     }
 
     public function createCfdiComplement(Invoice $invoice, Request $request)
