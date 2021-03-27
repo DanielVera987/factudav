@@ -23,7 +23,14 @@ class Invoice extends Model
         'date',
         'cancel_date',
         'cancel_acuse',
-        'cancel_status'
+        'cancel_status',
+        'amount',
+        'date_pay',
+        'num_operation',
+        'rfc_payer',
+        'account_payer',
+        'rfc_beneficiary',
+        'account_beneficiary'
     ];
 
     public function bussine() 

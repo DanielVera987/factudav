@@ -18,25 +18,12 @@ class CreateComplementPaysTable extends Migration
             $table->foreignId('invoice_id')
                 ->references('id')
                 ->on('invoices');
-            $table->string('serie');
-            $table->string('folio');
-            $table->string('date');
-            $table->foreignId('currency_id')
-                ->references('id')
-                ->on('currencies');
-            $table->set('type_vaucher', ['P']);
-            $table->foreignId('way_to_pay_id')
-                ->references('id')
-                ->on('way_to_pays');
-            $table->string('date_pay');
-            $table->string('amount');
-            $table->string('num_operation')->nullable();
-            $table->string('rfc_payer')->nullable();
-            $table->string('account_payer')->nullable();
-            $table->string('rfc_beneficiary')->nullable();
-            $table->string('account_beneficiary')->nullable();
-            $table->string('no_parciality')->nullable();
-            $table->string('name_file')->nullable();
+            $table->string('invoice_pay_id');
+            $table->string('no_parciality');
+            $table->string('amount_prev');
+            $table->string('amount_paid');
+            $table->string('amount_unpaid');
+        
             $table->timestamps();
         });
     }

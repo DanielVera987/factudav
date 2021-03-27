@@ -145,6 +145,34 @@
                 </div>
             </div>
 
+            {{--  @if ( !empty($invoice->complementpay) )    
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-6">
+                        <h4>Complemento de Pagos</h4>
+                        <table class="table" cellspacing="0" width="100%">
+                            <tr>
+                                <th>Folio</th>
+                                <th>Fecha</th>
+                                <th>Importe Saldo Anterior</th>
+                                <th>Importe Pagado</th>
+                                <th>Importe Saldo Insoluto</th>
+                                <th>N° Parcialidad</th>
+                            </tr>
+                            @foreach($invoice->complementpay as $key => $value)
+                            <tr>
+                                <td>{{ $value->folio }}</td>
+                                <td>{{ $value->date_pay }}</td>
+                                <td></td>
+                                <td>$ {{ $value->amount }}</td>
+                                <td></td>
+                                <td>{{ $value->no_parciality }}</td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            @endif  --}}
+
             <div class="row no-print">
                 <div class=" ">
                 <a href="{{ route('uploads.xml', $invoice->name_file) }}" class="btn btn-success pull-right"><i class="fa fa-download"></i> Descargar XML</button>

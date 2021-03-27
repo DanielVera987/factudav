@@ -23,6 +23,7 @@ class CreateInvoicesTable extends Migration
                 ->references('id')
                 ->on('customers');
 
+            $table->string('serie');
             $table->string('folio');
 
             $table->foreignId('way_to_pay_id')
@@ -41,14 +42,22 @@ class CreateInvoicesTable extends Migration
                 ->references('id')
                 ->on('usecfis');
 
-            $table->string('type_voucher')->set(['I', 'E']);
-
+            $table->string('type_voucher')->set(['I', 'E', 'P']);
             $table->string('name_file');
             $table->string('date');
 
             $table->string('cancel_date')->nullable();
             $table->longText('cancel_acuse')->nullable();
             $table->string('cancel_status')->nullable();
+
+            /** Information for complement pay */
+            $table->string('amount')->nullable();
+            $table->string('date_pay')->nullable();
+            $table->string('num_operation')->nullable();
+            $table->string('rfc_payer')->nullable();
+            $table->string('account_payer')->nullable();
+            $table->string('rfc_beneficiary')->nullable();
+            $table->string('account_beneficiary')->nullable();
 
             $table->timestamps();
         });

@@ -112,7 +112,6 @@ class ComplementPayController extends Controller
             $comprobante->addReceptor($receptor);
             $comprobante->addConcepto($concept);
 
-
             $pagos = new \CfdiUtils\Elements\Pagos10\Pagos();
             $pago = $pagos->addPago($pagos10);
             $pago->addDoctoRelacionado($pagos_docs);
@@ -120,6 +119,8 @@ class ComplementPayController extends Controller
 
             $filePem = \Storage::disk('key')->get($fileKey.'.pem');
             $creator->addSello($filePem, Auth::user()->bussine->password);
+
+            $creator->moveSatDefinitionsToComprobante();
 
             $asserts = $creator->validate();
             if ($asserts->hasErrors()) {

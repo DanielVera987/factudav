@@ -7,7 +7,6 @@
   <link href="{{ asset('/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css') }}" rel="stylesheet">
-
 @endsection
 
 @section('content')
@@ -17,13 +16,9 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
             <div class="x_title">
-              <h2><i class="fa fa-file-text"></i> Listado De Facturas</h2>
+              <h2><i class="fa fa-file-text"></i> Listado De Complemento de Pagos</h2>
               <div class="title_right">
-                <div style="float: right;">
-                  <a href="{{ route('invoices.create') }}" class="btn btn-success" type="button">
-                    Crear Nuevo
-                  </a>
-                </div>
+                
               </div>
               <div class="clearfix"></div>
               @if(session()->has('success'))

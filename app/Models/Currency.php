@@ -26,11 +26,6 @@ class Currency extends Model
         return $this->hasMany(Currency::class);
     }
 
-    public function complementpay()
-    {
-        return $this->hasMany(ComplementPay::class);
-    }
-
     public static function isCurrency($request, $bussine_id)
     {
         if (isset($request->name_currency)) self::add_currency($request, $bussine_id);
