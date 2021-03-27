@@ -86,7 +86,12 @@ class ComplementPayController extends Controller
             }
         }
 
-        ComplementPay::create($request->all());
+        //Crear invoice con la informacion del invoice relacionado
+        Invoice::create(
+
+        );
+
+        //ComplementPay::create($request->all());
 
         return back()->with('success', 'Perfecto');
     }

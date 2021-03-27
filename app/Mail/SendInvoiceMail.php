@@ -74,7 +74,7 @@ class SendInvoiceMail extends Mailable
 
         if(!empty($this->pdf)) {
             $message->attachData($this->pdf,
-                \Auth::user()->bussine->start_serie . $this->invoice->folio . 'pdf', [
+                $this->invoice->serie . $this->invoice->folio . 'pdf', [
                     'mime' => 'application/pdf',
                 ]
             );
@@ -83,7 +83,7 @@ class SendInvoiceMail extends Mailable
         if(!empty($this->xml)) {
             if(\Storage::disk('xml')->exists($this->xml)){
                 $message->attach(\Storage::disk('xml')->path($this->xml), [
-                    'as' => \Auth::user()->bussine->start_serie . $this->invoice->folio . '.xml'
+                    'as' => $this->invoice->serie . $this->invoice->folio . '.xml'
                 ]);
             }
         }

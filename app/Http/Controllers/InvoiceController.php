@@ -624,7 +624,7 @@ class InvoiceController extends Controller
 
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadView('invoices.pdf_default', compact('datainvoice'));
-        $fileName = Auth::user()->bussine->start_serie . $comprobante['folio'];
+        $fileName = $datainvoice->serie . $comprobante['folio'];
 
         if ($save) {
             return $pdf->output();
@@ -693,9 +693,9 @@ class InvoiceController extends Controller
     public function createEmail($id)
     {
         $invoice = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
-        $serie = Auth::user()->bussine->start_serie;
+        $serie = $invoice->serie;
 
-        $fileName = Auth::user()->bussine->start_serie . $invoice->folio;
+        $fileName = $invoice->serie . $invoice->folio;
 
         return view('emails.create', [
             "id" => $invoice->id,
@@ -721,7 +721,7 @@ class InvoiceController extends Controller
         $invoice = Invoice::with('customer')->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
 
         $fileNamePdf = false;
-        if(isset($request->sendPDF)){
+        if(isset($request->sendPDF)){  
             $fileNamePdf = $this->print($invoice);
         }
 
@@ -740,7 +740,7 @@ class InvoiceController extends Controller
 
         Mail::to($request->to)->send($email);
 
-        return redirect(route('invoice.createEmail', $invoice->id))->with('success', 'Correo Enviado');
+        return redirect(route('invoices.createEmail', $invoice->id))->with('success', 'Correo Enviado');
     }
 
     protected function timbrar($unsignedXml)

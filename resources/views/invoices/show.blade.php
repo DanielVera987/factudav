@@ -15,7 +15,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="invoice-header">
                         <h1>
-                            <i class="fa fa-globe"></i> {{ Auth::user()->bussine->start_serie }}{{ $invoice->folio }}
+                            <i class="fa fa-globe"></i> {{ $invoice->serie }}{{ $invoice->folio }}
                             @if(!$isTimbrado) <small><strong style="font-size: 15px;color: #ccc">PreCfdi</strong></small> @endif
                             <br>
                         </h1>

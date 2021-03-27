@@ -41,7 +41,7 @@
         </tr>
         <tr>
             <td class="nameCompany" colspan="2"><h2 class="pm0"><strong>{{ \Auth::user()->bussine->bussine_name }}</strong></h2></td>
-            <td><h3><strong>{{ \Auth::user()->bussine->start_serie }}{{ $datainvoice->folio }}</strong></h3></td>
+            <td><h3><strong>{{ $datainvoice->serie }}{{ $datainvoice->folio }}</strong></h3></td>
         </tr>
         <tr>
             <td class="logo"><img src="{{ public_path('/images/logos/'. \Auth::user()->bussine->logo) }}" /></td>
