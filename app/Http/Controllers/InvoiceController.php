@@ -573,7 +573,7 @@ class InvoiceController extends Controller
                             'relationdocs'
                         )->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
 
-        return $this->print($dataInvoice, true);
+        return $this->print($dataInvoice, false);
     }
 
     /**

@@ -29,7 +29,9 @@
                     <address>
                         RFC: {{ $invoice->customer->rfc }}
                         <br>Nombre: <strong>{{ $invoice->customer->bussine_name }}</strong>
+                        @if($invoice->type_voucher != 'P')
                         <br>Uso de CFDI: [{{ $invoice->usecfdi->code }}] {{ $invoice->usecfdi->name }}
+                        @endif
                     </address>
                 </div>
 
@@ -54,7 +56,10 @@
                         $wtp = App\Models\WayToPay::find($invoice->way_to_pay_id);
                         echo '['.$wtp->code.']'.' '.$wtp->name;
                     @endphp
-                    <br><br>
+                    <br>
+                    <b>Tipo de Comprobante :</b>
+                    [{{ $invoice->type_voucher }}]
+                    <br>
                 </div>
             </div>
             
@@ -73,6 +78,7 @@
             <br />
             @endif
 
+            @if($invoice->type_voucher != 'P')
             <div class="card-box table-responsive">
                 <table class="table table-striped" cellspacing="0" width="100%">
                     <thead>
@@ -144,34 +150,118 @@
                     </table>
                 </div>
             </div>
+            @else
+            <div class="row">
+                <div class="col-md-12">
+                    <h4><strong>Información del Pago</strong></h4>
+                </div>
+                <div class="col-md-6">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td><strong>Forma de Pago :</strong></td>
+                            <td>
+                                @php
+                                    $wtp = App\Models\WayToPay::find($invoice->way_to_pay_id);
+                                    echo '['.$wtp->code.']'.' '.$wtp->name;
+                                @endphp
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td>
+                                <strong>Fecha de Pago :</strong><br />
+                                <strong>Moneda de Pago :</strong><br />
+                                <strong>Monto :</strong>
+                            </td>
+                            <td>
+                                {{ $invoice->date_pay }}<br />
+                                {{ $invoice->currency->code }}<br />
+                                $ {{ $invoice->amount }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 
-            {{--  @if ( !empty($invoice->complementpay) )    
+            <div class="row">
+                <div class="col-md-12">
+                    <h4><strong>Documento Relacionado</strong></h4>
+                    @php
+                        $invoiceComplementPay = App\Models\ComplementPay::where('invoice_pay_id', $invoice->id)->get();
+                        
+                        foreach($invoiceComplementPay as $value) {
+                            $invoiceRel = App\Models\Invoice::find($value['invoice_id']);
+                        }
+                    @endphp
+                </div>
+                <div class="col-md-6">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td>
+                                <strong>UUID Documento :</strong><br />
+                                <strong>Número parcialidad :</strong>
+                            </td>
+                            <td>
+                                {{ App\Helpers\Cfdi33Helper::getTimbreFiscal($invoiceRel->name_file) }} <br />
+                                {{ $invoiceComplementPay[0]->no_parciality }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table style="width: 100%;">
+                        <tr>
+                            <td>
+                                <strong>Fecha de Pago :</strong><br />
+                                <strong>Moneda de Pago :</strong><br />
+                                <strong>Monto :</strong>
+                            </td>
+                            <td>
+                                {{ $invoice->date_pay }}<br />
+                                {{ $invoice->currency->code }}<br />
+                                $ {{ $invoice->amount }}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            @endif
+
+            @if ( !empty($invoice->complementpay) && count($invoice->complementpay) > 0)    
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-6">
-                        <h4>Complemento de Pagos</h4>
+                        <h4><strong>Complemento de Pagos</strong></h4>
                         <table class="table" cellspacing="0" width="100%">
                             <tr>
-                                <th>Folio</th>
-                                <th>Fecha</th>
+                                <th>Serie y Folio</th>
                                 <th>Importe Saldo Anterior</th>
                                 <th>Importe Pagado</th>
                                 <th>Importe Saldo Insoluto</th>
                                 <th>N° Parcialidad</th>
                             </tr>
                             @foreach($invoice->complementpay as $key => $value)
+                            @php
+                                $invoicePay = \App\Models\Invoice::find($value->invoice_pay_id);
+                            @endphp
                             <tr>
-                                <td>{{ $value->folio }}</td>
-                                <td>{{ $value->date_pay }}</td>
-                                <td></td>
-                                <td>$ {{ $value->amount }}</td>
-                                <td></td>
+                                <td>
+                                    <a href="{{ route('invoices.show', $invoicePay->id) }}">
+                                        {{ $invoicePay['serie'] }}{{ $invoicePay['folio'] }}
+                                    </a>
+                                </td>
+                                <td>$ {{ $value->amount_prev }}</td>
+                                <td>$ {{ $value->amount_paid }}</td>
+                                <td>$ {{ $value->amount_unpaid }}</td>
                                 <td>{{ $value->no_parciality }}</td>
                             </tr>
                             @endforeach
                         </table>
                     </div>
                 </div>
-            @endif  --}}
+            @endif 
 
             <div class="row no-print">
                 <div class=" ">

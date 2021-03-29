@@ -41,7 +41,19 @@
         </tr>
         <tr>
             <td class="nameCompany" colspan="2"><h2 class="pm0"><strong>{{ \Auth::user()->bussine->bussine_name }}</strong></h2></td>
-            <td><h3><strong>{{ $datainvoice->serie }}{{ $datainvoice->folio }}</strong></h3></td>
+            <td>
+                <h3>
+                    <strong>{{ $datainvoice->serie }}{{ $datainvoice->folio }}</strong><br />
+                    @if($datainvoice->type_voucher == 'I')
+                        I - Ingreso
+                    @elseif($datainvoice->type_voucher == 'E')
+                        E - Egreso
+                    @elseif($datainvoice->type_voucher == 'P')
+                        P - Pago
+                    @endif
+                </h3>
+            </td>
+
         </tr>
         <tr>
             <td class="logo"><img src="{{ public_path('/images/logos/'. \Auth::user()->bussine->logo) }}" /></td>
@@ -49,7 +61,9 @@
                 <strong>Receptor</strong>
                 <br>RFC: {{ $datainvoice->customer->rfc }}
                 <br>Nombre: {{ $datainvoice->customer->bussine_name }}
-                <br>Uso de CFDI: {{ $datainvoice->usecfdi->name }}
+                @if($datainvoice->type_voucher != 'P')
+                    <br>Uso de CFDI: {{ $datainvoice->usecfdi->name }}
+                @endif
             </td>
             <td>
                 <strong>Emisor</strong>
@@ -73,90 +87,158 @@
         </div>
     @endif
 
-    <br />
-    <table class="tableprodserv">
-        <thead>
-            <tr>
-                <th>Cant.</th>
-                <th>ClavProdServ.</th>
-                <th>ClaUni.</th>
-                <th style="width: 40%">Descripción</th>
-                <th>Precio Uni.</th>
-                <th>Descuento.</th>
-                <th>Importe</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($datainvoice->detail as $detail)
-            <tr>
-                <td>{{ $detail->quantity }}</td>
-                <td>{{ $detail->produserv->code }}</td>
-                <td>{{ $detail->unit->code }}</td>
-                <td>
-                    {{ $detail->description }} 
-                    <br><br>
-                    <small>Impuestos
-                    <br>
-                    @php
-                        $taxes = App\Models\TaxDetail::with('tax')->where('detail_id', $detail->id)->get();
-                        $t = '';
-                        foreach ($taxes as $tax){
-                            $t .= $tax->tax->code . ' ' . $tax->tax->tax . ' ' . $tax->tax->type . ' ' . $tax->tax->tasa . '<br>';
-                        }
-                        echo $t;
-                    @endphp
-                    </small> 
-                </td>
-                <td>$ {{ $detail->amount }} </td>
-                <td>$ {{ $detail->discount }} </td>
-                <td>$ {{ bcdiv($detail->quantity * $detail->amount, '1', 2) }} </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    
+    @if($datainvoice->type_voucher != 'P')
+        <br />
+        <table class="tableprodserv">
+            <thead>
+                <tr>
+                    <th>Cant.</th>
+                    <th>ClavProdServ.</th>
+                    <th>ClaUni.</th>
+                    <th style="width: 40%">Descripción</th>
+                    <th>Precio Uni.</th>
+                    <th>Descuento.</th>
+                    <th>Importe</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($datainvoice->detail as $detail)
+                <tr>
+                    <td>{{ $detail->quantity }}</td>
+                    <td>{{ $detail->produserv->code }}</td>
+                    <td>{{ $detail->unit->code }}</td>
+                    <td>
+                        {{ $detail->description }} 
+                        <br><br>
+                        <small>Impuestos
+                        <br>
+                        @php
+                            $taxes = App\Models\TaxDetail::with('tax')->where('detail_id', $detail->id)->get();
+                            $t = '';
+                            foreach ($taxes as $tax){
+                                $t .= $tax->tax->code . ' ' . $tax->tax->tax . ' ' . $tax->tax->type . ' ' . $tax->tax->tasa . '<br>';
+                            }
+                            echo $t;
+                        @endphp
+                        </small> 
+                    </td>
+                    <td>$ {{ $detail->amount }} </td>
+                    <td>$ {{ $detail->discount }} </td>
+                    <td>$ {{ bcdiv($detail->quantity * $detail->amount, '1', 2) }} </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-    <br>
-    <div style="float: left;width: 50%; text-align: right;">
+        <br>
+        <div style="float: left;width: 50%; text-align: right;">
+            <table>
+                <tr>
+            <td>
+                <br>Forma de pago: 
+                @php
+                    $wtp = App\Models\WayToPay::find($datainvoice->way_to_pay_id);
+                    echo '['.$wtp->code.']'.' '.$wtp->name;
+                @endphp
+                <br>Metodo de pago: 
+                @php
+                    $pm = App\Models\PaymentMethod::find($datainvoice->payment_method_id);
+                    echo '['.$pm->code.']'.' '.$pm->name;
+                @endphp
+            </td>
+            <td>
+                <br>Moneda: {{ $datainvoice->currency->code }}
+                <br>Tipo de cambio: {{ $datainvoice->currency->exchange_rate }}
+                <br>Tipo de comprobante: {{ $datainvoice->type_voucher }}
+            </td>
+                </tr>
+            </table>
+        </div>
+        <div style="float: right;width: 10%; text-align: right;">
+            $ {{ $datainvoice->subtotal }}
+            <br>$ {{ $datainvoice->descuento }}
+            <br>$ {{ $datainvoice->totalImpRete }}
+            <br>$ {{ $datainvoice->totalImpTras }}<hr>
+            <strong>$ {{ $datainvoice->total }}</strong><hr>
+        </div>
+        <div style="float: right;width: 10%; text-align: left;">
+            SUBTOTAL:
+            <br>DESCUENTO:
+            <br>RETENIDO:
+            <br>TRASLADADO: <hr>
+            <strong>TOTAL:</strong><hr>
+        </div>
+        <div class="clearfix"></div>
+        <div style="float: right;width: 100%; text-align: right;">
+            ({{ $datainvoice->numberToWords }} )
+        </div>
+    @else 
+        <h3>Información del Pago</h3>
         <table>
             <tr>
-        <td>
-            <br>Forma de pago: 
-            @php
-                $wtp = App\Models\WayToPay::find($datainvoice->way_to_pay_id);
-                echo '['.$wtp->code.']'.' '.$wtp->name;
-            @endphp
-            <br>Metodo de pago: 
-            @php
-                $pm = App\Models\PaymentMethod::find($datainvoice->payment_method_id);
-                echo '['.$pm->code.']'.' '.$pm->name;
-            @endphp
-        </td>
-        <td>
-            <br>Moneda: {{ $datainvoice->currency->code }}
-            <br>Tipo de cambio: {{ $datainvoice->currency->exchange_rate }}
-            <br>Tipo de comprobante: {{ $datainvoice->type_voucher }}
-        </td>
+                <td>
+                    <strong>Forma de pago :</strong>
+                </td>
+                <td>
+                    @php
+                        $wtp = App\Models\WayToPay::find($datainvoice->way_to_pay_id);
+                        echo '['.$wtp->code.']'.' '.$wtp->name;
+                    @endphp
+                </td>
+                <td>
+                    <strong>Fecha de pago:</strong><br />
+                    <strong>Moneda de Pago :</strong><br />
+                    <strong>Monto</strong>
+                </td>
+                <td>
+                    {{ $datainvoice->date_pay }}<br />
+                    {{ $datainvoice->currency->code }}<br />
+                    {{ $datainvoice->amount }}
+                </td>
             </tr>
         </table>
-    </div>
-    <div style="float: right;width: 10%; text-align: right;">
-        $ {{ $datainvoice->subtotal }}
-        <br>$ {{ $datainvoice->descuento }}
-        <br>$ {{ $datainvoice->totalImpRete }}
-        <br>$ {{ $datainvoice->totalImpTras }}<hr>
-        <strong>$ {{ $datainvoice->total }}</strong><hr>
-    </div>
-    <div style="float: right;width: 10%; text-align: left;">
-        SUBTOTAL:
-        <br>DESCUENTO:
-        <br>RETENIDO:
-        <br>TRASLADADO: <hr>
-        <strong>TOTAL:</strong><hr>
-    </div>
-    <div class="clearfix"></div>
-    <div style="float: right;width: 100%; text-align: right;">
-        ({{ $datainvoice->numberToWords }} )
-    </div>
+
+        <h3>Documento Relacionado</h3>
+        @php
+            $invoiceComplementPay = App\Models\ComplementPay::where('invoice_pay_id', $datainvoice->id)->get();
+            
+            foreach($invoiceComplementPay as $value) {
+                $invoiceRel = App\Models\Invoice::find($value['invoice_id']);
+            }
+        @endphp
+        <table>
+            <tr>
+                <td>
+                    <strong>UUID Documento :</strong><br />
+                    <strong>Número parcialidad :</strong>
+                </td>
+                <td>
+                    {{ App\Helpers\Cfdi33Helper::getTimbreFiscal($invoiceRel->name_file) }} <br />
+                    {{ $invoiceComplementPay[0]->no_parciality }}
+                </td>
+                <td>
+                    <strong>Moneda del documento relacionado:</strong><br />
+                    <strong>Método de pago del documento relacionado :</strong><br />
+                    <strong>Importe de saldo anterior :</strong><br />
+                    <strong>Importe pagado :</strong><br />
+                    <strong>Importe de salgo insoluto :</strong><br />
+                </td>
+                <td>
+                    {{ $datainvoice->currency->code }}<br />
+                    @php
+                        $pm = App\Models\PaymentMethod::find($datainvoice->payment_method_id);
+                        echo '['.$pm->code.']'.' '.$pm->name;
+                    @endphp<br />
+                    $ {{ $invoiceComplementPay[0]->amount_prev }}<br />
+                    $ {{ $invoiceComplementPay[0]->amount_paid }}<br />
+                    $ {{ $invoiceComplementPay[0]->amount_unpaid }}
+                </td>
+            </tr>
+        </table>
+        <br />
+    @endif
+
     <div class="clearfix"></div>
     @if (isset($datainvoice->folioFiscal))    
         <table class="DataSAT">

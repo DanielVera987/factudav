@@ -80,7 +80,7 @@
                             echo $name;
                           @endphp
                         </td>
-                        <td class="text-center" width="5%">@if($invoice->type_voucher == 'I') I - Ingreso @elseif($invoice->type_voucher == 'E') E - Egreso @endif</td>
+                        <td class="text-center" width="5%">@if($invoice->type_voucher == 'I') I - Ingreso @elseif($invoice->type_voucher == 'E') E - Egreso @elseif($invoice->type_voucher == 'P') P - Pago @endif</td>
                         <td class="text-center">
                           @if(App\Helpers\Cfdi33Helper::getTimbreFiscal($invoice->name_file))
                             {{ App\Helpers\Cfdi33Helper::getTimbreFiscal($invoice->name_file) }}
@@ -105,7 +105,7 @@
                                     <li><a href="{{ route('invoices.show', $invoice->id) }}"><i class="fa fa-eye"></i>  Ver</a></li>
                                     <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}"><i class="fa fa-file-pdf-o"></i>  Descargar PDF</a></li>
                                     <li><a href="{{ route('invoices.createEmail', $invoice->id) }}"><i class="fa fa-send"></i>  Enviar por correo</a></li>
-                                    @if ($invoice->payment_method_id === 2)
+                                    @if ($invoice->payment_method_id === 2 && $invoice->type_voucher != 'P')
                                       <li><a href="{{ route('invoices.create.complement', $invoice->id) }}"><i class="fa fa-money"></i>  Agregar Pago</a></li>  
                                     @endif
                                     <li><a data-toggle="modal" data-target=".mod{{$invoice->id}}"><i class="fa fa-remove"></i>  Cancelar</a></li>

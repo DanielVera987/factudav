@@ -64,6 +64,11 @@ class ComplementPayController extends Controller
     
     public function storeComplement(ComplementPayRequest $request, $id)
     {
+        $existFolio = Invoice::where('bussine_id', Auth::user()->bussine_id)
+                                ->where('folio', intval($request['folio']))
+                                ->count();
+        
+        if ($existFolio > 0) return back()->with('warning', 'El folio ya esta en uso');
         $invoice = Invoice::with('complementpay')->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
 
         $request['invoice_id'] = $invoice->id;
@@ -87,13 +92,44 @@ class ComplementPayController extends Controller
         }
 
         //Crear invoice con la informacion del invoice relacionado
-        Invoice::create(
+        $invoicePay = Invoice::create([
+            'bussine_id' => $invoice->bussine_id,
+            'customer_id' => $invoice->customer_id,
+            'serie' => $request['serie'],
+            'folio' => $request['folio'],
+            'way_to_pay_id' => $invoice->way_to_pay_id,
+            'currency_id' => $request['currency_id'],
+            'payment_method_id' => $invoice->payment_method_id,
+            'usecfdi_id' => $invoice->usecfdi_id,
+            'type_voucher' => 'P',
+            'name_file' => $request['name_file'],
+            'date' => $request['date'],
+            'amount' => $request['amount'],
+            'date_pay' => $request['date_pay'],
+            'num_operation' => $request['num_operation'],
+            'rfc_payer' => $request['rfc_payer'],
+            'account_payer' => $request['account_payer'],
+            'rfc_beneficiary' => $request['rfc_beneficiary'],
+            'account_beneficiary' => $request['account_beneficiar']
+        ]);
 
-        );
+        $dataXML = Cfdi33Helper::getXML($invoice->name_file);
+        $impSaldoAnt = $dataXML['Total'];
+        if(count($invoice->complementpay) > 0){
+            $i = count($invoice->complementpay) - 1;
+            $impSaldoAnt =  $invoice->complementpay[$i]['amount'];
+        }
 
-        //ComplementPay::create($request->all());
+        ComplementPay::create([
+            'invoice_id' => $invoice->id,
+            'invoice_pay_id' => $invoicePay->id,
+            'no_parciality' => $request['no_parciality'],
+            'amount_prev' => $impSaldoAnt,
+            'amount_paid' => $request['amount'],
+            'amount_unpaid' => bcdiv($impSaldoAnt - $request['amount'], '1', 2)
+        ]);
 
-        return back()->with('success', 'Perfecto');
+        return redirect(route('invoice.show', $invoicePay->id));
     }
 
     public function createCfdiComplement(Invoice $invoice, Request $request)

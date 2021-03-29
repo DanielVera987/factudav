@@ -160,7 +160,6 @@
                       <select id="type_voucher" name="type_voucher" class="form-control select2" value="{{ old('type_voucher') }}" required data-parsley-trigger="change">
                         <option value="I">I - Ingreso</option>
                         <option value="E">E - Egreso (Nota de Crédito)</option>
-                        <option value="P">P - Pago</option>
                       </select>
                       @error('type_voucher')
                         <span class="invalid-feedback" role="alert">

@@ -215,7 +215,7 @@
 
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <label for="amount">Monto * :</label>
-                        <input type="text" id="amount" name="amount" class="form-control" data-parsley-trigger="change" value="{{ old('amount') }}" required />
+                        <input type="number" id="amount" name="amount" class="form-control" data-parsley-trigger="change" value="{{ old('amount') }}" required />
                         @error('amount')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
