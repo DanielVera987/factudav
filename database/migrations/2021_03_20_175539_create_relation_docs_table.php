@@ -18,7 +18,7 @@ class CreateRelationDocsTable extends Migration
             $table->foreignId('invoice_id')
                 ->nullable()
                 ->references('id')
-                ->on('inovoices');
+                ->on('invoices');
 
             $table->foreignId('type_relation_id')
                 ->references('id')

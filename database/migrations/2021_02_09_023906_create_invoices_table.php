@@ -40,7 +40,7 @@ class CreateInvoicesTable extends Migration
 
             $table->foreignId('usecfdi_id')
                 ->references('id')
-                ->on('usecfis');
+                ->on('usecfdis');
 
             $table->string('type_voucher')->set(['I', 'E', 'P']);
             $table->string('name_file');

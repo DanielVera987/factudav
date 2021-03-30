@@ -30,7 +30,7 @@ class CreateCustomersTable extends Migration
                 
             $table->foreignId('country_id')
                 ->references('id')
-                ->on('contries');
+                ->on('countries');
 
             $table->foreignId('state_id')
                 ->references('id')
