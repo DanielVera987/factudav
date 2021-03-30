@@ -78,9 +78,16 @@
                 <h5>
                   <label>Monto Pagado :</label>
                   @empty($invoice->complementpay)
-                    
+                    $ 0.00
                   @else
-                    $0.00
+                    $ 
+                    @php                     
+                      $cont = 0;   
+                      foreach ($invoice->complementpay as $value) {
+                        $cont = $cont + $value['amount_paid'];
+                      }
+                      echo bcdiv($cont, '1', 2);
+                    @endphp
                   @endempty
                 </h5>
               </div>
@@ -89,13 +96,18 @@
                 <h5>
                   <label>Monto Pendiente :</label>
                   @empty($invoice->complementpay)
-                    
-                  @else
                     @php
                       $xml = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $invoice->name_file)))
                         ->getQuickReader();
 
                       echo '$'.$xml['Total']
+                    @endphp
+                  @else
+                    $ 
+                    @php                     
+                      $i = count($invoice->complementpay);
+                      $amount_unpaid = $invoice->complementpay[$i - 1]['amount_unpaid'];
+                      echo bcdiv($amount_unpaid, '1', 2);
                     @endphp
                   @endempty
                 </h5>
@@ -105,6 +117,13 @@
                 <h5>
                   <label>Moneda :</label>
                   {{ $invoice->currency->code }}
+                </h5>
+              </div>
+
+              <div class="col-md-4">
+                <h5>
+                  <label>No. de parcialidad :</label>
+                  {{ count($invoice->complementpay) + 1 }}
                 </h5>
               </div>
             </div>
@@ -277,48 +296,6 @@
                 </div>
 
                 <br />
-                <div class="row">
-                  <div class="col-md-3">
-                    <strong>Importe saldo anterior</strong>
-                    <br />
-                    @empty($invoice->complementpay)
-                    
-                    @else
-                      @php
-                        $xml = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $invoice->name_file)))
-                          ->getQuickReader();
-
-                        echo '$'.$xml['Total']
-                      @endphp
-                    @endempty
-                  </div>
-
-                  <div class="col-md-3">
-                    <strong>Importe pagado</strong>
-                    <br />
-                    @empty($invoice->complementpay)
-                    
-                    @else
-                      $0.00
-                    @endempty
-                  </div>
-
-                  <div class="col-md-3">
-                    <strong>Importe saldo insoluto</strong>
-                    <br />
-                    @empty($invoice->complementpay)
-                    
-                    @else
-                      $0.00
-                    @endempty
-                  </div>
-
-                  <div class="col-md-3">
-                    <strong>No. de parcialidad</strong>
-                    <br />{{ count($invoice->complementpay) + 1 }}
-                  </div>
-                </div>
-
                 <div class="row">
                     <br/>
                     <div class="col-md-12 col-sm-12 col-xs-12">

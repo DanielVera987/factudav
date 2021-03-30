@@ -77,7 +77,7 @@ Class Cancelar
             $data = $this->data();
             return $this->$action($data);
         } catch (\SoapFault $e) {
-            return $e->getMessage();
+            return dd($e->getMessage());
         }
     }
 
@@ -107,7 +107,6 @@ Class Cancelar
     protected function cancelar($data)
     {
         $res = $this->CLIENT->__soapCall('cancelarCfdi', $data);
-
         $this->STATUS = $res->status;
         $this->ACUSE = $res->acuse;
         $this->MESSAGE = $res->mensaje_original;

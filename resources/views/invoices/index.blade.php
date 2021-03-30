@@ -32,7 +32,7 @@
                 </div>
               @endif
               @if(session()->has('warning'))
-                <div class="alert alert-success">
+                <div class="alert alert-warning">
                   <strong>{{ session()->get('warning') }}</strong>
                 </div>
               @endif
@@ -93,7 +93,15 @@
                           @endphp
                         </td>
                         <td class="text-center" width="5%">
-                          Pagado
+                          @if ($invoice->status == 'Unpaid')
+                            <span class="label label-info">Pendiente</span>
+                          @elseif($invoice->status == 'Paid')
+                            <span class="label label-success">Pagado</span>
+                          @elseif($invoice->status == 'Partially')
+                            <span class="label label-primary">Parcialidad</span>
+                          @elseif($invoice->status == 'Cancel')
+                            <span class="label label-warning">Cancelado</span>
+                          @endif
                         </td>
                         <td class="text-center" width="5%">
                           <ul class="nav navbar-nav navbar-right">
@@ -105,8 +113,12 @@
                                     <li><a href="{{ route('invoices.show', $invoice->id) }}"><i class="fa fa-eye"></i>  Ver</a></li>
                                     <li><a href="{{ route('invoices.downloadPDF', $invoice->id) }}"><i class="fa fa-file-pdf-o"></i>  Descargar PDF</a></li>
                                     <li><a href="{{ route('invoices.createEmail', $invoice->id) }}"><i class="fa fa-send"></i>  Enviar por correo</a></li>
-                                    @if ($invoice->payment_method_id === 2 && $invoice->type_voucher != 'P')
-                                      <li><a href="{{ route('invoices.create.complement', $invoice->id) }}"><i class="fa fa-money"></i>  Agregar Pago</a></li>  
+                                    @if ($invoice->payment_method_id === 2 && $invoice->type_voucher != 'P' && $invoice->status != 'Paid')
+                                      <li><a href="{{ route('invoices.create.complement', $invoice->id) }}"><i class="fa fa-money"></i>  Agregar Pago</a></li> 
+                                    @elseif($invoice->status == 'Unpaid')
+                                      <li><a href="{{ route('invoices.mark', [$invoice->id, 'Paid']) }}"><i class="fa fa-money"></i>  Marcar Pagado</a></li> 
+                                    @elseif($invoice->status == 'Paid')
+                                      <li><a href="{{ route('invoices.mark', [$invoice->id, 'Unpaid']) }}"><i class="fa fa-money"></i>  Marcar Pendiente</a></li> 
                                     @endif
                                     <li><a data-toggle="modal" data-target=".mod{{$invoice->id}}"><i class="fa fa-remove"></i>  Cancelar</a></li>
                                   </ul>

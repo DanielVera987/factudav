@@ -12,13 +12,58 @@
     <div class="x_content">
         <section class="content invoice">
             <div class="row">
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-12">
+                    @if(session()->has('success'))
+                        <div class="alert alert-success">
+                        <strong>{{ session()->get('success') }}</strong>
+                        </div>
+                    @endif
+                    @if(session()->has('warning'))
+                        <div class="alert alert-success">
+                        <strong>{{ session()->get('warning') }}</strong>
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row flex-column-reverse flex-md-row">
+                <div class="col-md-6 col-sm-12">
                     <div class="invoice-header">
                         <h1>
                             <i class="fa fa-globe"></i> {{ $invoice->serie }}{{ $invoice->folio }}
                             @if(!$isTimbrado) <small><strong style="font-size: 15px;color: #ccc">PreCfdi</strong></small> @endif
                             <br>
                         </h1>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <a data-toggle="modal" data-target=".mod{{$invoice->id}}" class="btn btn-app btn-xs" style="float: right;">
+                        <i class="fa fa-remove"></i> Cancelar
+                    </a>
+                    <a href="{{ route('invoices.createEmail', $invoice->id) }}" class="btn btn-app btn-xs" style="float: right;">
+                        <i class="fa fa-send-o"></i> Email
+                    </a>
+                    <a href="{{ route('invoices.mark', [$invoice->id, 'Unpaid']) }}" class="btn btn-app btn-xs" style="float: right;">
+                        <i class="fa fa-spinner"></i> Pendiente
+                    </a>
+                    <a href="{{ route('invoices.mark', [$invoice->id, 'Paid']) }}" class="btn btn-app btn-xs" style="float: right;">
+                        <i class="fa fa-check"></i> Pagado
+                    </a>
+                </div>
+                <div class="modal fade mod{{$invoice->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="myModalLabel2">¿Esta seguro?</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                          <a href="{{ route('invoices.cancel', [$invoice->id, 'cancelar']) }}" class="btn btn-sm btn-danger"> Cancelar</a>
+                        </div>
+                      </div>  
                     </div>
                 </div>
             </div>

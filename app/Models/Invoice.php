@@ -31,7 +31,8 @@ class Invoice extends Model
         'rfc_payer',
         'account_payer',
         'rfc_beneficiary',
-        'account_beneficiary'
+        'account_beneficiary',
+        'status'
     ];
 
     public function bussine() 

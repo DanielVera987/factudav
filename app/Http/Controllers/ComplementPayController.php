@@ -110,14 +110,15 @@ class ComplementPayController extends Controller
             'rfc_payer' => $request['rfc_payer'],
             'account_payer' => $request['account_payer'],
             'rfc_beneficiary' => $request['rfc_beneficiary'],
-            'account_beneficiary' => $request['account_beneficiar']
+            'account_beneficiary' => $request['account_beneficiar'],
+            'status' => 'Partially'
         ]);
 
         $dataXML = Cfdi33Helper::getXML($invoice->name_file);
         $impSaldoAnt = $dataXML['Total'];
         if(count($invoice->complementpay) > 0){
             $i = count($invoice->complementpay) - 1;
-            $impSaldoAnt =  $invoice->complementpay[$i]['amount'];
+            $impSaldoAnt =  $invoice->complementpay[$i]['amount_unpaid'];
         }
 
         ComplementPay::create([
@@ -129,7 +130,12 @@ class ComplementPayController extends Controller
             'amount_unpaid' => bcdiv($impSaldoAnt - $request['amount'], '1', 2)
         ]);
 
-        return redirect(route('invoice.show', $invoicePay->id));
+        if(($impSaldoAnt - $request['amount']) == 0){
+            $invoice->status = 'Paid';
+            $invoice->save();
+        }
+
+        return redirect(route('invoices.show', $invoicePay->id));
     }
 
     public function createCfdiComplement(Invoice $invoice, Request $request)
@@ -328,7 +334,7 @@ class ComplementPayController extends Controller
         $impSaldoAnt = $dataXML['Total'];
         if(count($invoice->complementpay) > 0){
             $i = count($invoice->complementpay) - 1;
-            $impSaldoAnt =  $invoice->complementpay[$i]['amount'];
+            $impSaldoAnt =  $invoice->complementpay[$i]['amount_unpaid'];
         }
 
         $pagos10_doc_relacionados ['ImpSaldoAnt'] = $impSaldoAnt;

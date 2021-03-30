@@ -59,6 +59,8 @@ class CreateInvoicesTable extends Migration
             $table->string('rfc_beneficiary')->nullable();
             $table->string('account_beneficiary')->nullable();
 
+            $table->string('status');
+
             $table->timestamps();
         });
     }

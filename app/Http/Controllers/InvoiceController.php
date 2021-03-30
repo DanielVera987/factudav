@@ -136,6 +136,7 @@ class InvoiceController extends Controller
         }
 
         $request['bussine_id'] = $bussine_id;
+        $request['status'] = 'Unpaid';
 
         $invoice = Invoice::create($request->all());
         $details = Detail::createDetail($invoice->id, $request);
@@ -229,6 +230,32 @@ class InvoiceController extends Controller
         //
     }
 
+    public function markPaid($id, $action)
+    {
+        $invoice = Invoice::findOrFail($id);
+        $action = ucfirst($action);
+
+        
+        $invoice->status = $action;
+        $invoice->save();
+
+        switch ($action) {
+            case 'Paid':
+                $action = 'Pagado';
+                break;
+            
+            case 'Unpaid':
+                $action = 'Pendiente';
+                break;
+            
+            case 'Partially':
+                $action = 'Parcialidad';
+                break;
+        }
+
+        return redirect(route('invoices.show', $invoice->id))->with('success', "Marcado como {$action}");
+    }
+
     /**
      * Create XML for CFDI33 
      * @return \CfdiUtils\CfdiCreator33 
@@ -238,12 +265,12 @@ class InvoiceController extends Controller
         try {
             $path = storage_path('app/public/csd_sat/cer');
             $pathkey = storage_path('app/public/csd_sat/key');
-
+            
             $fileCer = Auth::user()->bussine->certificate;
             $fileKey = Auth::user()->bussine->key_private;
-
+            
             $certificate = new \CfdiUtils\Certificado\Certificado($path.'/'.$fileCer);
-
+            
             /** Preparando los datos para la creacion del XML */
             $cfdiRelations = $this->preparedCfdiRelation($data);
             $concepts = $this->preparedingConcepts($data);
@@ -495,14 +522,13 @@ class InvoiceController extends Controller
         $totalTaxTrasladado = 0;
         $totalTaxRetenido = 0;
         $discount = 0;
-
         foreach ($request['detail'] as $key => $value) {
             $codeProduct = ProduServ::select('code')->find($value['prodserv_id']);
             $unidad = Unit::select('code', 'name')->find($value['unit_id']);
-
+            
             $importe = $value['quantity'] * $value['amount'];
             
-            if(isset($value['taxes'])){   
+            if(isset($value['taxes'])){                   
                 $taxes = [];
                 $trasladoPrevious = 0;
 
@@ -782,6 +808,7 @@ class InvoiceController extends Controller
             $res = new Cancelar($params, $uuid, $action);
 
             if($res->STATUS == "success") {
+                $invoice->status = 'Cancel';
                 $invoice->cancel_date = date('Y-m-d H:i:s');
                 $invoice->cancel_acuse = $res->ACUSE;
                 $invoice->cancel_status = $res->STATUS;
@@ -790,11 +817,14 @@ class InvoiceController extends Controller
                 return back()->with('success', $res->CODIGO_RES_SAT);
             }
              
-            return back()->with('warning', $res->CODIGO_RES_SAT);
+            return back()->with('warning', $res->MESSAGE);
         }
 
         //Cancel in plataform
         $invoice->cancel_date = date('Y-m-d H:i:s');
+        $invoice->status = 'Cancel';
         $invoice->save();
+
+        return back()->with('success', 'Cancelación exitosa');
     }
 }

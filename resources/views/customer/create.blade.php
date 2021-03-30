@@ -173,18 +173,6 @@
                 </div>
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                  <label for="no_inside">No. Interior * :</label>
-                  <input type="text" id="no_inside" name="no_inside" class="form-control @error('no_inside') parsley-error @enderror" data-parsley-trigger="change" value="{{ old('no_inside') }}" required />
-                  @error('no_inside')
-                    <span class="invalid-feedback red" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                  @enderror
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="location">Localidad * :</label>
                   <input type="text" id="location" name="location" class="form-control @error('location') parsley-error @enderror" data-parsley-trigger="change" value="{{ old('location') }}" required />
                   @error('location')
@@ -193,6 +181,10 @@
                     </span>
                   @enderror
                 </div>
+              </div>
+
+              <div class="row">
+                
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="street">Calle * :</label>
@@ -203,9 +195,7 @@
                     </span>
                   @enderror
                 </div>
-              </div>
 
-              <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="colony">Colonia * :</label>
                   <input type="text" id="colony" name="colony" class="form-control @error('colony') parsley-error @enderror" data-parsley-trigger="change" value="{{ old('colony') }}" required />
@@ -215,6 +205,10 @@
                     </span>
                   @enderror
                 </div>
+              </div>
+
+              <div class="row">
+                
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="zip">Código Postal * :</label>
@@ -225,9 +219,7 @@
                     </span>
                   @enderror
                 </div>
-              </div>
 
-              <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="no_exterior">No. Exterior * :</label>
                   <input type="text" id="no_exterior" name="no_exterior" class="form-control  @error('no_exterior') parsley-error @enderror" data-parsley-trigger="change" value="{{ old('no_exterior') }}" required />
@@ -237,6 +229,10 @@
                     </span>
                   @enderror
                 </div>
+              </div>
+
+              <div class="row">
+                
 
                 <div class="col-md-6 col-sm-6 col-xs-12">
                   <label for="no_inside">No. Interior * :</label>

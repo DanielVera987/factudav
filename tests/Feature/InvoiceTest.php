@@ -9,6 +9,7 @@ use App\Models\Detail;
 use App\Models\Bussine;
 use App\Models\Invoice;
 use App\Models\Product;
+use App\Models\ProduServ;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -45,6 +46,7 @@ class InvoiceTest extends TestCase
 
         Invoice::create([
             'bussine_id' => 1,
+            'serie' => 'factura-',
             'folio' => 10,
             'way_to_pay_id' => 1,
             'currency_id' => 1,
@@ -52,7 +54,9 @@ class InvoiceTest extends TestCase
             'usecfdi_id' => 1,
             'date' => '2020-02-21T01:18:00',
             'customer_id' => 1,
-            'name_file' => 'name_file.xml'
+            'name_file' => 'name_file.xml',
+            'type_voucher' => 'I',
+            'status' => 'Unpaid'
         ]);
 
         $folio = Invoice::generateFolio();
@@ -79,6 +83,7 @@ class InvoiceTest extends TestCase
         Product::factory(10)->create();
         Invoice::create([
             'bussine_id' => 1,
+            'serie' => 'Factura-',
             'folio' => 1,
             'way_to_pay_id' => 1,
             'currency_id' => 1,
@@ -86,7 +91,9 @@ class InvoiceTest extends TestCase
             'usecfdi_id' => 1,
             'date' => '2020-02-21T01:18:00',
             'customer_id' => 1,
-            'name_file' => 'name_file.xml'
+            'name_file' => 'name_file.xml',
+            'status' => 'Unpaid',
+            'type_voucher' => 'I'
         ]);
 
         $this->authentication();
@@ -128,10 +135,11 @@ class InvoiceTest extends TestCase
     
     public function test_create_invoice()
     {
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
         DB::table('invoices')->truncate();
         DB::table('bussines')->truncate();
         Product::factory(10)->create();
+
         $un = Unit::create([
             'code' => 'H48',
             'name' => 'Unidad',
@@ -139,16 +147,24 @@ class InvoiceTest extends TestCase
             'description' => ''
         ]);
 
+        $proserv = ProduServ::create([
+            "code"=> "01010101",
+            "name"=> "No existe en el catálogo",
+            "start_date_validity"=> "07-01-2019",
+            "end_date_validity"=> "",
+            "similarwords"=> "Público en general"
+        ]);
+
         $this->authentication();
         Bussine::factory()->create([
             'rfc' => 'CACX7605101P8',
             'password' => '12345678a',
-            'certificate' => '1614819022_CACX7605101P8_test.cer',
-            'key_private' => '1614819023_CACX7605101P8_test.key'
+            'certificate' => '1617126585_CACX7605101P8_test.cer',
+            'key_private' => '1617126585_CACX7605101P8_test.key'
         ]);
         
         $response = $this->post(route('invoices.store'), [
-            'serie' => 'FAC-',
+            'serie' => 'Factura-',
             'folio' => '0000000003',
             'way_to_pay_id' => 1,
             'currency_id' => 1,
@@ -156,6 +172,7 @@ class InvoiceTest extends TestCase
             'usecfdi_id' => 1,
             'date' => '2021-08-13T12:00:00',
             'customer_id' => 1,
+            'type_voucher' => 'I',
             'detail' => [
                 0 => [
                     'discount' =>  0,
@@ -165,7 +182,7 @@ class InvoiceTest extends TestCase
                     'unit_id' => $un->id,
                     'description' => 'cocacola bien fria',
                     'quantity' => 1,
-                    'taxes' => [
+                    /* 'taxes' => [
                         0 => [
                             "type" => "traslado",
                             "factor" => "Tasa",
@@ -174,10 +191,12 @@ class InvoiceTest extends TestCase
                             "code" => "002",
                             "id" => "1"
                         ]
-                    ]
+                    ] */
                 ]
             ]
         ]);
+
+        dd($response);
 
         $this->assertDatabaseHas('invoices', [
             'folio' => '0000000003'

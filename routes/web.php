@@ -31,7 +31,7 @@ Route::get('/invoices/create/{id}/complement', [ComplementPayController::class, 
 Route::post('/invoices/store/{id}/complement', [ComplementPayController::class, 'storeComplement'])
   ->where(['id' => '[0-9]+'])
   ->name('invoices.store.complement');
-
+Route::get('/invoices/{id}/mark/{action}', [InvoiceController::class, 'markPaid'])->name('invoices.mark');
 // Email
 Route::get('/invoices/email/{id}/create', [InvoiceController::class, 'createEmail'])->name('invoices.createEmail');
 Route::post('/invoices/{id}/sendinvoice', [InvoiceController::class, 'sendMail'])->name('invoices.sendEmail');
