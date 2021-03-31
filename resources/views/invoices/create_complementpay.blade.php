@@ -95,7 +95,7 @@
               <div class="col-md-4">
                 <h5>
                   <label>Monto Pendiente :</label>
-                  @empty($invoice->complementpay)
+                  @if(count($invoice->complementpay) == 0)
                     @php
                       $xml = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $invoice->name_file)))
                         ->getQuickReader();
@@ -109,7 +109,7 @@
                       $amount_unpaid = $invoice->complementpay[$i - 1]['amount_unpaid'];
                       echo bcdiv($amount_unpaid, '1', 2);
                     @endphp
-                  @endempty
+                  @endif
                 </h5>
               </div>
 

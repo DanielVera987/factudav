@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tax;
-use App\Helpers\Helper;
 use App\Models\Unit;
 use App\Models\State;
 use App\Models\Detail;
+use App\Helpers\Helper;
 use App\Models\Bussine;
 use App\Models\Invoice;
 use App\Models\Product;
@@ -24,6 +24,7 @@ use App\Helpers\Cfdi33Helper;
 use App\Mail\SendInvoiceMail;
 use App\Models\ComplementPay;
 use App\Models\PaymentMethod;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\InvoiceRequest;
@@ -405,9 +406,9 @@ class InvoiceController extends Controller
                 }
             } 
 
-            $filePem = \Storage::disk('key')->get($fileKey.'.pem');
+            $filePem = Storage::disk('key')->get($fileKey.'.pem');
             $creator->addSello($filePem, Auth::user()->bussine->password);
-
+            
             $asserts = $creator->validate();
             if ($asserts->hasErrors()) {
                 $err = [];
@@ -422,13 +423,12 @@ class InvoiceController extends Controller
             }
             
             /** Nombre de archivo no timbrado */
-            $fileName = time() . '_' . Auth::user()->bussine->rfc . '_UNSIGNED.xml'; 
-            $creator->saveXml(public_path('storage/invoicexml/' . $fileName));
-            //dd($fileName);
+            $fileName = time() . '_' . Auth::user()->bussine->rfc . '_UNSIGNED.xml';  
+            Storage::disk('xml')->put($fileName ,$creator->asXml());        
             return $fileName; 
         } catch (\Throwable $err) {
             return false;
-        }
+        } 
 
     }
 
@@ -450,7 +450,7 @@ class InvoiceController extends Controller
      * ['Version', 'Serie', 'Folio', 'Fecha']...
      * @return array
      */
-    protected function preparedingHead($request)
+      protected function preparedingHead($request)
     {
         $data = [];
         $wayToPay = WayToPay::select('code')->find($request->way_to_pay_id);
@@ -599,7 +599,7 @@ class InvoiceController extends Controller
                             'relationdocs'
                         )->where('bussine_id', Auth::user()->bussine_id)->findOrFail($id);
 
-        return $this->print($dataInvoice, false);
+        return $this->print($dataInvoice, true);
     }
 
     /**
@@ -648,7 +648,7 @@ class InvoiceController extends Controller
         $datainvoice['SelloSAT']        = $comprobante->complemento->timbrefiscaldigital['SelloSAT'] ?? '';
         $datainvoice['SelloCFDI']        = $comprobante['Sello'] ?? '';
 
-        $pdf = \App::make('dompdf.wrapper');
+        $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('invoices.pdf_default', compact('datainvoice'));
         $fileName = $datainvoice->serie . $comprobante['folio'];
 
@@ -681,7 +681,7 @@ class InvoiceController extends Controller
         $datainvoice['totalImpRete'] = $comprobante->impuestos['totalImpuestosRetenidos'] ?? '0.00';
         $datainvoice['total']        = $comprobante['Total'];
 
-        $pdf = \App::make('dompdf.wrapper');
+        $pdf = App::make('dompdf.wrapper');
         $pdf->loadView('invoices.pdf_default', compact('datainvoice'));
         $fileName = Auth::user()->bussine->start_serie . $comprobante['folio'];
 

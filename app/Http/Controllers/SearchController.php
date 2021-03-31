@@ -38,14 +38,24 @@ class SearchController extends Controller
 
         if ($request->has('q')) {
             $search = $request->q;
-            $customers = Customer::select('id', 'bussine_name')
-                     ->where('bussine_id', Auth::user()->bussine_id)
+
+            $customers = Customer::where('bussine_id', Auth::user()->bussine_id)
                      ->where('bussine_name', 'LIKE', "%$search%")
-                     ->orWhere('rfc', 'LIKE', "%$search%")
                      ->orWhere('tradename', 'LIKE', "%$search%")
+                     ->orWhere('rfc', 'LIKE', "%$search%")
                      ->get();
+
+            $json_customers = [];
+            foreach($customers as $value) {
+                if($value['bussine_id'] == Auth::user()->bussine_id){
+                    $json_customers[] = [
+                        'id' => $value['id'],
+                        'bussine_name' => $value['bussine_name']
+                    ];
+                }
+            }
         }
-        return response()->json($customers);
+        return response()->json($json_customers);
     }
 
     public function searchProducts(Request $request)
@@ -54,15 +64,27 @@ class SearchController extends Controller
 
         if ($request->has('q') && $request->q != '') {
             $search = $request->q;
-            $products = Product::select('id', 'name', 'description', 'price')
+            $products = Product::select('bussine_id', 'id', 'name', 'description', 'price')
                      ->where('bussine_id', Auth::user()->bussine_id)
                      ->where('stock', '>', 0)
                      ->where('is_active', 'on')
-                     ->where('name', 'LIKE', "%$search%")
+                     ->orWhere('name', 'LIKE', "%$search%")
                      ->orWhere('code', 'LIKE', "%$search%")
                      ->get();
+            
+            $json_products = [];
+            foreach($products as $value) {
+                if($value['bussine_id'] == Auth::user()->bussine_id){
+                    $json_products[] = [
+                        'id' => $value['id'],
+                        'name' => $value['name'],
+                        'description' => $value['description'],
+                        'price' => $value['price']
+                    ];
+                }
+            }
         }
-        return response()->json($products);
+        return response()->json($json_products);
     }
 
     public function searchProduServ(Request $request)

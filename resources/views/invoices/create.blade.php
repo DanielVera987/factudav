@@ -310,7 +310,7 @@
 
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="discount_search">Descuento * :</label>
-                    <input type="number" min="0" id="discount_search" class="form-control" />
+                    <input type="number" step="any" min="0" id="discount_search" class="form-control" />
                     @error('discount_search')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -322,7 +322,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <label for="price_search">Precio *:</label>
-                    <input type="number" min='1' id="price_search" class="form-control" />
+                    <input type="number" min='1' step="any" id="price_search" class="form-control" />
                     @error('price_search')
                         <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

@@ -34,16 +34,5 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TypeRelationSeeder::class
         ]);
-        
-        /* Call Factories */
-        Bussine::factory()->create();
-        Currency::factory()->create();
-        Tax::factory()->create();
-        Product::factory()->create();
-        Customer::factory()->create();
-        //Detail::factory(10)->create();
-        //TaxDetail::factory(5)->create();
-        $b = Bussine::find(1);
-        $b->delete();
     }
 }

@@ -265,23 +265,30 @@ class BussineController extends Controller
 
     protected function createCertificatePem($nameFileCer)
     {
-        return true;
         $path = storage_path('app/public/csd_sat/cer');
         
         $cerFile = $path.'/'.$nameFileCer;
-        $cerFilePem = $path.'/'.$nameFileCer.'.pem';
+        $cerFilePem = $nameFileCer.'.pem';
         
-        system('openssl x509 -inform DER -in ' . $cerFile . ' -outform PEM -pubkey -out ' . $cerFilePem);
+        //system('openssl x509 -inform DER -in ' . $cerFile . ' -outform PEM -pubkey -out ' . $cerFilePem);
+
+        $certificateCApemContent =  '-----BEGIN CERTIFICATE-----'.PHP_EOL
+            .chunk_split(base64_encode(Storage::disk('certificate')->get($nameFileCer)), 64, PHP_EOL)
+        .'-----END CERTIFICATE-----'.PHP_EOL;
+
+        Storage::disk('certificate')->put($cerFilePem, $certificateCApemContent);
+
+        return true;
     }
 
     protected function createKeyPem($nameFileKey, $password)
     {
-        return true;
         $path = storage_path('app/public/csd_sat/key');
         
         $KeyFile = $path.'/'.$nameFileKey;
         $KeyFilePem = $path.'/'.$nameFileKey.'.pem';
-
+        
         system('openssl pkcs8 -inform DER -in ' . $KeyFile . ' -passin pass:' . $password . ' -outform PEM -out ' . $KeyFilePem);
+        return true;
     }
 }

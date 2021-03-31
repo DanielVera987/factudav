@@ -92,7 +92,7 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="cost">Costo * :</label>
-                            <input type="text" id="cost" class="form-control @error('cost') parsley-error @enderror" name="cost" value="{{ old('cost') }}" data-parsley-trigger="change" required />
+                            <input type="number" min="1" step="any" id="cost" class="form-control @error('cost') parsley-error @enderror" name="cost" value="{{ old('cost') }}" data-parsley-trigger="change" required />
                             @error('cost')
                                 <span class="parsley-required red" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -102,7 +102,7 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="price">Precio * :</label>
-                            <input type="text" id="price" class="form-control @error('price') parsley-error @enderror" name="price" value="{{ old('price') }}" data-parsley-trigger="change" required />
+                            <input type="number" min="1" step="any" id="price" class="form-control @error('price') parsley-error @enderror" name="price" value="{{ old('price') }}" data-parsley-trigger="change" required />
                             @error('price')
                                 <span class="parsley-required red" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -132,7 +132,7 @@
 
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="stock">Stock * :</label>
-                            <input type="text" id="stock" class="form-control @error('stock') parsley-error @enderror" name="stock" value="{{ old('stock') }}" data-parsley-trigger="change" required />
+                            <input type="number" min="1" id="stock" class="form-control @error('stock') parsley-error @enderror" name="stock" value="{{ old('stock') }}" data-parsley-trigger="change" required />
                             @error('stock')
                                 <span class="parsley-required red" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -142,7 +142,7 @@
         
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <label for="alert_stock">Alerta Stock *:</label>
-                            <input type="text" id="alert_stock" name="alert_stock" class="form-control @error('alert_stock') parsley-error @enderror" data-parsley-trigger="change" value="{{ old('alert_stock') }}" required />
+                            <input type="number" min="1" id="alert_stock" name="alert_stock" class="form-control @error('alert_stock') parsley-error @enderror" data-parsley-trigger="change" value="{{ old('alert_stock') }}" required />
                             @error('alert_stock')
                                 <span class="parsley-required red" role="alert">
                                 <strong>{{ $message }}</strong>
