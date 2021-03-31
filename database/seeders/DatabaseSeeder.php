@@ -3,10 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Tax;
+use App\Models\Detail;
+use App\Models\Bussine;
 use App\Models\Product;
 use App\Models\Currency;
 use App\Models\Customer;
-use App\Models\Detail;
 use App\Models\TaxDetail;
 use Illuminate\Database\Seeder;
 
@@ -35,11 +36,14 @@ class DatabaseSeeder extends Seeder
         ]);
         
         /* Call Factories */
+        Bussine::factory()->create();
         Currency::factory()->create();
         Tax::factory()->create();
         Product::factory()->create();
         Customer::factory()->create();
-        Detail::factory(10)->create();
-        TaxDetail::factory(5)->create();
+        //Detail::factory(10)->create();
+        //TaxDetail::factory(5)->create();
+        $b = Bussine::find(1);
+        $b->delete();
     }
 }
