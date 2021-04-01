@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\BussineRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 class BussineController extends Controller
 {
@@ -270,13 +272,16 @@ class BussineController extends Controller
         $cerFile = $path.'/'.$nameFileCer;
         $cerFilePem = $nameFileCer.'.pem';
         
-        //system('openssl x509 -inform DER -in ' . $cerFile . ' -outform PEM -pubkey -out ' . $cerFilePem);
-
-        $certificateCApemContent =  '-----BEGIN CERTIFICATE-----'.PHP_EOL
+        $process = new Process(['openssl x509 -inform DER -in ' . Storage::disk('certificate')->path($nameFileCer) . ' -outform PEM -pubkey -out ' . Storage::disk('certificate')->path($cerFilePem)]);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+        /* $certificateCApemContent =  '-----BEGIN CERTIFICATE-----'.PHP_EOL
             .chunk_split(base64_encode(Storage::disk('certificate')->get($nameFileCer)), 64, PHP_EOL)
         .'-----END CERTIFICATE-----'.PHP_EOL;
 
-        Storage::disk('certificate')->put($cerFilePem, $certificateCApemContent);
+        Storage::disk('certificate')->put($cerFilePem, $certificateCApemContent); */
 
         return true;
     }
@@ -284,9 +289,10 @@ class BussineController extends Controller
     protected function createKeyPem($nameFileKey, $password)
     {
         $path = storage_path('app/public/csd_sat/key');
-        
         $KeyFile = $path.'/'.$nameFileKey;
         $KeyFilePem = $path.'/'.$nameFileKey.'.pem';
+        exec("openssl pkcs8 -inform DER -in {$KeyFile} -passin pass:{$password} -outform PEM -out {$KeyFilePem}");
+        return true;
         
         system('openssl pkcs8 -inform DER -in ' . $KeyFile . ' -passin pass:' . $password . ' -outform PEM -out ' . $KeyFilePem);
         return true;
