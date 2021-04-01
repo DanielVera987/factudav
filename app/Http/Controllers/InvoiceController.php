@@ -180,7 +180,7 @@ class InvoiceController extends Controller
         $bussine = Bussine::select('rfc', 'email', 'telephone', 'street', 'bussine_name', 'zip')->findOrFail(Auth::user()->bussine_id);
 
         $totales = [];
-        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $invoice->name_file)))
+        $comprobante = \CfdiUtils\Cfdi::newFromString(Storage::disk('xml')->get($invoice->name_file))
             ->getQuickReader();
 
         $totales['subtotal']     = $comprobante['SubTotal'];

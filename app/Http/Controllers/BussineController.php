@@ -272,16 +272,11 @@ class BussineController extends Controller
         $cerFile = $path.'/'.$nameFileCer;
         $cerFilePem = $nameFileCer.'.pem';
         
-        $process = new Process(['openssl x509 -inform DER -in ' . Storage::disk('certificate')->path($nameFileCer) . ' -outform PEM -pubkey -out ' . Storage::disk('certificate')->path($cerFilePem)]);
-        $process->run();
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
-        }
-        /* $certificateCApemContent =  '-----BEGIN CERTIFICATE-----'.PHP_EOL
+        $certificateCApemContent =  '-----BEGIN CERTIFICATE-----'.PHP_EOL
             .chunk_split(base64_encode(Storage::disk('certificate')->get($nameFileCer)), 64, PHP_EOL)
         .'-----END CERTIFICATE-----'.PHP_EOL;
 
-        Storage::disk('certificate')->put($cerFilePem, $certificateCApemContent); */
+        Storage::disk('certificate')->put($cerFilePem, $certificateCApemContent);
 
         return true;
     }
@@ -292,9 +287,6 @@ class BussineController extends Controller
         $KeyFile = $path.'/'.$nameFileKey;
         $KeyFilePem = $path.'/'.$nameFileKey.'.pem';
         exec("openssl pkcs8 -inform DER -in {$KeyFile} -passin pass:{$password} -outform PEM -out {$KeyFilePem}");
-        return true;
-        
-        system('openssl pkcs8 -inform DER -in ' . $KeyFile . ' -passin pass:' . $password . ' -outform PEM -out ' . $KeyFilePem);
         return true;
     }
 }

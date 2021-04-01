@@ -2,6 +2,8 @@
 
 namespace App\SuppliersPAC\Multifacturas;
 
+use Illuminate\Support\Facades\Storage;
+
 Class Timbrar
 {
     /**
@@ -41,7 +43,7 @@ Class Timbrar
     {
         $this->PARAMS = $params;
         $this->XML = $xml;
-        $this->PATH_SAVE_CFDI = ($path_save_cfdi == '') ? public_path('storage/invoicexml/') : $path_save_cfdi;
+        $this->PATH_SAVE_CFDI = ($path_save_cfdi == '') ? storage_path('public/invoicexml/') : $path_save_cfdi;
         $this->PATH_XML_DEBUG = $path_xml_debug;
     }
 
@@ -52,10 +54,11 @@ Class Timbrar
                 'trace' => 1,
                 'use' => SOAP_LITERAL
             ]);
+            
             $params = [
                 'rfc' => $this->PARAMS->getUsuarioPac(),
                 'clave' => $this->PARAMS->getPasswordPac(),
-                'xml' => base64_encode(file_get_contents($this->PATH_SAVE_CFDI . $this->XML)),
+                'xml' => base64_encode(Storage::disk('xml')->get($this->XML)),
                 'produccion' => $this->PARAMS->getProduction(),
             ];
 
@@ -67,7 +70,7 @@ Class Timbrar
 
             $fileName = str_replace('_UNSIGNED', '', $this->XML);
             $xml_timbrado = base64_decode($response->cfdi);
-            file_put_contents($this->PATH_SAVE_CFDI . $fileName, $xml_timbrado);
+            Storage::disk('xml')->put($fileName ,$xml_timbrado);
 
             return false;
         } catch (\SoapFault $e) {

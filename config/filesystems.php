@@ -52,11 +52,15 @@ return [
         'certificate' => [
             'driver' => 'local',
             'root' => storage_path('app/public/csd_sat/cer'),
+            'url' => env('APP_URL').'/storage/csd_sat/cer',
+            'visibility' => 'public',
         ],
 
         'key' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/csd_sat/key')
+            'root' => storage_path('app/public/csd_sat/key'),
+            'url' => env('APP_URL').'/storage/csd_sat/key',
+            'visibility' => 'public',
         ],
   
         'xml' => [
@@ -93,6 +97,8 @@ return [
         public_path('storage') => storage_path('app/public'),
         public_path('storage/products') => storage_path('app/products'),
         public_path('storage/invoicexml') => storage_path('app/invoicexml'),
+        public_path('storage/csd_sat/cer') => storage_path('app/public/csd_sat/cer'),
+        public_path('storage/csd_sat/key') => storage_path('app/public/csd_sat/key'),
     ],
 
 ];
