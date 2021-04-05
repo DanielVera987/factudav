@@ -612,7 +612,7 @@ class InvoiceController extends Controller
      */
     public function print(Invoice $datainvoice, $download = false, $save = false)
     {
-        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $datainvoice->name_file)))
+        $comprobante = \CfdiUtils\Cfdi::newFromString(Storage::disk('xml')->get($datainvoice->name_file))
         ->getQuickReader();
 
         $tmp = 'default';
@@ -670,7 +670,7 @@ class InvoiceController extends Controller
      * @return void
      */
     public function printDefault(Invoice $datainvoice, $download = false, $save = false){
-        $comprobante = \CfdiUtils\Cfdi::newFromString(file_get_contents(public_path('storage/invoicexml/' . $datainvoice->name_file)))
+        $comprobante = \CfdiUtils\Cfdi::newFromString(Storage::disk('xml')->get($datainvoice->name_file))
         ->getQuickReader();
 
         $datainvoice['numberToWords'] = Cfdi33Helper::NumberToWord($comprobante['Total'], 2,  $comprobante['Moneda']);
@@ -705,7 +705,7 @@ class InvoiceController extends Controller
      */
     public function downloadXML($file)
     {
-        $path = 'storage/invoicexml/'.$file;
+        $path = Storage::disk('xml')->path($file);
 
         $headers = array(
             'Content-Type: application/xml',

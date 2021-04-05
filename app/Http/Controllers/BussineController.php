@@ -283,10 +283,13 @@ class BussineController extends Controller
 
     protected function createKeyPem($nameFileKey, $password)
     {
-        $path = storage_path('app/public/csd_sat/key');
-        $KeyFile = $path.'/'.$nameFileKey;
-        $KeyFilePem = $path.'/'.$nameFileKey.'.pem';
-        exec("openssl pkcs8 -inform DER -in {$KeyFile} -passin pass:{$password} -outform PEM -out {$KeyFilePem}");
+        $path = Storage::disk('key')->path('');
+        $KeyFile = $path.$nameFileKey;
+        $KeyFilePem = $path.$nameFileKey.'.pem';
+
+        $command = "openssl pkcs8 -inform DER -in {$KeyFile} -passin pass:{$password} -outform PEM -out {$KeyFilePem}";
+        
+        $res = exec($command);
         return true;
     }
 }

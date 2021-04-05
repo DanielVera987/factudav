@@ -16,7 +16,7 @@ class Cfdi33Helper{
    * @return /Code QR
    */
   public static function generateQR($filename){
-    $xmlContents = file_get_contents(public_path('storage/invoicexml/' . $filename));
+    $xmlContents = Storage::disk('xml')->get($filename);
 
     $cfdi = \CfdiUtils\Cfdi::newFromString($xmlContents);
     $parameters = \CfdiUtils\ConsultaCfdiSat\RequestParameters::createFromCfdi($cfdi);
