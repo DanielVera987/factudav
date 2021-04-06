@@ -77,6 +77,7 @@ class BussineTest extends TestCase
 
     function test_create_company_user_relationship()
     {
+        //$this->withoutExceptionHandling();
         DB::table('users')->truncate();
 
         $user = User::create([
@@ -104,7 +105,7 @@ class BussineTest extends TestCase
             ->post(route('settings.store'), [
             'bussine_name' => 'DavaDev',
             'tradename' => 'DavaDev',
-            'rfc' => 'DAVA98762DA',
+            'rfc' => 'CACX7605101P8',
             'email' => 'test@gmail.com',
             'telephone' => '9999999999',
             'type_person' => 'F',
@@ -120,17 +121,28 @@ class BussineTest extends TestCase
             'serie' => 'Factura-',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
+            'code_currency' => [
+                'MXN'
+            ],
+            'name_currency' => [
+                'Pesos Mexicanos'
+            ],
+            'type_currency' => [
+                '1.0'
+            ],
             'logo' =>  UploadedFile::fake()->image('photo1.jpg')
         ])->assertSessionMissing('Datos Guardados');
 
+        //dd($data);
         $this->assertDatabaseHas('bussines', [
             'bussine_name' => 'DavaDev',
-            'rfc' => "DAVA98762DA"
+            'rfc' => "CACX7605101P8"
         ]);
     }
 
@@ -157,17 +169,19 @@ class BussineTest extends TestCase
     function test_edit_company_user_relationship()
     {
         //$this->markTestIncomplete();
-        $this->withExceptionHandling();
-        DB::table('bussines')->truncate();
-        $bussine = Bussine::factory()->create();           
+        //$this->withExceptionHandling();
+        //DB::table('bussines')->truncate();
+        
+        $bussine = Bussine::factory()->create();  
+
         $this->authentication($bussine->id);
 
         $file = UploadedFile::fake()->image('photo1.jpg');
 
-        $this->put(route('settings.update', $bussine->id), [
+        $res = $this->put(route('settings.update', $bussine->id), [
             'bussine_name' => 'danielvera',
             'tradename' => 'DavaDev',
-            'rfc' => 'DAVA98762DA',
+            'rfc' => 'CACX7605101P8',
             'email' => 'test@gmail.com',
             'telephone' => '9999999999',
             'type_person' => 'F',
@@ -183,12 +197,15 @@ class BussineTest extends TestCase
             'serie' => 'Factura-',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
+            //'logo' =>  UploadedFile::fake()->image('photo1.jpg')
         ])->assertSessionMissing('Datos Guardados');
+        //dd($res);
         
         $this->assertDatabaseHas('bussines', [
             'bussine_name' => 'danielvera'
@@ -198,7 +215,7 @@ class BussineTest extends TestCase
     function test_edit_company_user_relationship_error_bussine_name_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -209,7 +226,7 @@ class BussineTest extends TestCase
         $this->put(route('settings.update', $bussine->id), [
             'bussine_name' => '',
             'tradename' => 'DavaDev',
-            'rfc' => 'DAVA98762DA',
+            'rfc' => 'CACX7605101P8',
             'email' => 'test@gmail.com',
             'telephone' => '9999999999',
             'type_person' => 'F',
@@ -221,20 +238,23 @@ class BussineTest extends TestCase
             'street' => 'Calle 41',
             'colony' => 'CTM',
             'zip' => '8888',
+            'folio' => 1,
+            'serie' => 'Factura-',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['bussine_name' => 'El campo Razón Social  es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_tradename_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -245,7 +265,7 @@ class BussineTest extends TestCase
         $this->put(route('settings.update', $bussine->id), [
             'bussine_name' => 'sdfsdf',
             'tradename' => '',
-            'rfc' => 'DAVA98762DA',
+            'rfc' => 'CACX7605101P8',
             'email' => 'test@gmail.com',
             'telephone' => '9999999999',
             'type_person' => 'F',
@@ -257,20 +277,23 @@ class BussineTest extends TestCase
             'street' => 'Calle 41',
             'colony' => 'CTM',
             'zip' => '8888',
+            'folio' => 1,
+            'serie' => 'Factura-',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['tradename' => 'El campo Nombre Comercial  es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_rfc_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -295,18 +318,19 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['rfc' => 'El campo RFC es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_email_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -331,18 +355,19 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['email' => 'El campo Correo Electrónico es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_telephone_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -367,18 +392,19 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['telephone' => 'El campo Teléfono  es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_type_person_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -403,18 +429,19 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['type_person' => 'El campo Tipo Persona es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_taxregimen_id_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -439,18 +466,19 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['taxregimen_id' => 'El campo Régimen Fiscal es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_country_id_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -475,18 +503,19 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['country_id' => 'El campo País es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_state_id_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -511,18 +540,19 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['state_id' => 'El campo Estado es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_municipality_id_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -547,18 +577,19 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['municipality_id' => 'El campo Municipio es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_location_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -583,18 +614,19 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['location' => 'El campo Localidad es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_street_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -619,18 +651,19 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['street' => 'El campo Calle es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_colony_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -655,18 +688,19 @@ class BussineTest extends TestCase
             'zip' => '8888',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['colony' => 'El campo Colonia es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_zip_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -691,18 +725,19 @@ class BussineTest extends TestCase
             'zip' => '',
             'no_exterior' => '0',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['zip' => 'El campo Código Postal es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_no_exterior_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -727,18 +762,19 @@ class BussineTest extends TestCase
             'zip' => 'sdfsdf',
             'no_exterior' => '',
             'no_inside' => '0',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['no_exterior' => 'El campo No. Exterior es obligatorio.']);
     }
 
     function test_edit_company_user_relationship_error_no_inside_require()
     {
         //$this->markTestIncomplete();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         $bussine = Bussine::factory()->create();           
         $this->authentication($bussine->id);
         $this->withExceptionHandling();
@@ -763,11 +799,12 @@ class BussineTest extends TestCase
             'zip' => 'sdfsdf',
             'no_exterior' => '0',
             'no_inside' => '',
-            'certificate' => 'centificado',
-            'key_private' => 'AAAAA',
-            'password' => '1234A',
-            'name_pac' => 'AAAA',
-            'password_pac' => 'AAAA',
+            'certificate' => storage_path().'/app/public/csd_sat/cer/CACX7605101P8_test.cer',
+            'key_private' => storage_path().'/app/public/csd_sat/key/CACX7605101P8_test.key',
+            'password' => '12345678a',
+            'name_pac' => 'DEMO700101XXX',
+            'password_pac' => 'DEMO700101XXX',
+            'production_pac' => 'NO',
         ])->assertSessionHasErrors(['no_inside' => 'El campo No. Interior es obligatorio.']);
     }
 
@@ -776,7 +813,7 @@ class BussineTest extends TestCase
         //$this->markTestIncomplete();
         //$this->withoutExceptionHandling();
         DB::table('users')->truncate();
-        DB::table('bussines')->truncate();
+        //DB::table('bussines')->truncate();
         
         $bussine = Bussine::factory()->create();           
 

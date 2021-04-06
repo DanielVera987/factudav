@@ -95,12 +95,12 @@ class AuthTest extends TestCase
     function test_load_view_register()
     {
         $this->get('/register')
-            ->assertStatus(200)
-            ->assertSee('Register');
+            ->assertStatus(404);
     }
 
     function test_create_new_register_form()
     {
+        $this->markTestIncomplete();
         $this->from('/register')
             ->post('/register', [
                 'name' => 'UserTest',
@@ -117,6 +117,7 @@ class AuthTest extends TestCase
 
     function test_name_required_register() 
     {
+        $this->markTestIncomplete();
         $this->from('/register')
         ->post('/register', [
             'name' => '',
@@ -128,6 +129,7 @@ class AuthTest extends TestCase
 
     function test_email_required_register() 
     {
+        $this->markTestIncomplete();
         $this->from('/register')
         ->post('/register', [
             'name' => 'test',

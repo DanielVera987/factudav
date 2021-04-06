@@ -9,6 +9,11 @@ class Municipality extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'state_id',
+        'name'
+    ];
+
     public function bussine() {
         return $this->hasMany(Bussine::class);
     }
