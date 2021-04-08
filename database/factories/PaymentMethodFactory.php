@@ -22,7 +22,8 @@ class PaymentMethodFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'code' => 'PUE',
+            'name' => 'Pago en Una Exhibición'
         ];
     }
 }

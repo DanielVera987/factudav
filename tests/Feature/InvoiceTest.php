@@ -5,11 +5,19 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\Unit;
 use App\Models\User;
+use App\Models\State;
 use App\Models\Detail;
 use App\Models\Bussine;
+use App\Models\Country;
+use App\Models\Currency;
 use App\Models\Invoice;
 use App\Models\Product;
+use App\Models\Customer;
 use App\Models\ProduServ;
+use App\Models\Municipality;
+use App\Models\PaymentMethod;
+use App\Models\Usecfdi;
+use App\Models\WayToPay;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -40,9 +48,11 @@ class InvoiceTest extends TestCase
 
     public function test_verity_generate_folio_for_invoice_with_invoices()
     {
-        $this->authentication();
-
         Bussine::factory()->create();
+        $this->generateData();
+        
+        Customer::factory()->create();
+        $this->authentication();
 
         Invoice::create([
             'bussine_id' => 1,
@@ -65,10 +75,12 @@ class InvoiceTest extends TestCase
 
     public function test_verity_generate_folio_for_invoice_without_invoices()
     {
-        $this->authentication();
-        DB::table('invoices')->truncate();
-
         Bussine::factory()->create();
+        $this->generateData();
+
+        $this->authentication();
+        //DB::table('invoices')->truncate();
+
 
         $folio = Invoice::generateFolio();
         $this->assertSame($folio, '0000000001');
@@ -76,15 +88,15 @@ class InvoiceTest extends TestCase
 
     public function test_create_invoice_with_repeat_folio()
     {
-        $this->authentication();
-        DB::table('invoices')->truncate();
-
         Bussine::factory()->create();
-        Product::factory(10)->create();
+        $this->generateData();
+        $this->authentication();
+        //DB::table('invoices')->truncate();
+
         Invoice::create([
             'bussine_id' => 1,
             'serie' => 'Factura-',
-            'folio' => 1,
+            'folio' => '0000000001',
             'way_to_pay_id' => 1,
             'currency_id' => 1,
             'payment_method_id' => 1,
@@ -95,8 +107,6 @@ class InvoiceTest extends TestCase
             'status' => 'Unpaid',
             'type_voucher' => 'I'
         ]);
-
-        $this->authentication();
         
         $response = $this->from(route('invoices.create'))
             ->post(route('invoices.store'), [
@@ -135,34 +145,16 @@ class InvoiceTest extends TestCase
     
     public function test_create_invoice()
     {
-        //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('bussines')->truncate();
-        Product::factory(10)->create();
-
-        $un = Unit::create([
-            'code' => 'H48',
-            'name' => 'Unidad',
-            'simbol' => '',
-            'description' => ''
-        ]);
-
-        $proserv = ProduServ::create([
-            "code"=> "01010101",
-            "name"=> "No existe en el catálogo",
-            "start_date_validity"=> "07-01-2019",
-            "end_date_validity"=> "",
-            "similarwords"=> "Público en general"
-        ]);
-
-        $this->authentication();
-        Bussine::factory()->create([
+        $b = Bussine::factory()->create([
             'rfc' => 'CACX7605101P8',
             'password' => '12345678a',
-            'certificate' => '1617126585_CACX7605101P8_test.cer',
-            'key_private' => '1617126585_CACX7605101P8_test.key'
+            'certificate' => 'CACX7605101P8_test.cer',
+            'key_private' => 'CACX7605101P8_test.key'
         ]);
-        
+            
+        $this->generateData();
+        $this->authentication($b->id);
+
         $response = $this->post(route('invoices.store'), [
             'serie' => 'Factura-',
             'folio' => '0000000003',
@@ -178,25 +170,18 @@ class InvoiceTest extends TestCase
                     'discount' =>  0,
                     'amount' => 30,
                     'product_id' => 1,
-                    'prodserv_id' => 1,
-                    'unit_id' => $un->id,
+                    'prodserv_id' => 0,
+                    'unit_id' => 1,
                     'description' => 'cocacola bien fria',
                     'quantity' => 1,
                     /* 'taxes' => [
-                        0 => [
-                            "type" => "traslado",
-                            "factor" => "Tasa",
-                            "tasa" => "0.16",
-                            "tax" => "iva",
-                            "code" => "002",
-                            "id" => "1"
-                        ]
-                    ] */
+
+                    ]  */
                 ]
             ]
         ]);
 
-        dd($response);
+        //dd($response);
 
         $this->assertDatabaseHas('invoices', [
             'folio' => '0000000003'
@@ -214,9 +199,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_required_serie()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -260,9 +243,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_required_folio()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -306,9 +287,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_required_way_to_pay()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -352,9 +331,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_required_currency_id()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -398,10 +375,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_required_payment_method_id()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
-
+        $this->generateData();
         $this->authentication();
         
         $response = $this->from(route('invoices.create'))
@@ -444,9 +418,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_required_usecfdi_id()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -490,9 +462,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_in_format_date()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -536,9 +506,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_date()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -582,9 +550,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_customer_id()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -628,9 +594,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_detail()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -655,9 +619,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_detail_discount()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -700,9 +662,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_detail_amount()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -746,10 +706,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_detail_product_id()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
-
+        $this->generateData();
         $this->authentication();
         
         $response = $this->from(route('invoices.create'))
@@ -792,9 +749,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_detail_prodserv_id()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -838,9 +793,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_detail_unit_id()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -884,9 +837,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_detail_description()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -930,9 +881,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_detail_quantity()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -976,9 +925,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_detail_taxes_type()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -1022,9 +969,7 @@ class InvoiceTest extends TestCase
     public function test_create_invoice_error_requerid_detail_taxes_factor()
     {
         //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
+        $this->generateData();
 
         $this->authentication();
         
@@ -1067,11 +1012,7 @@ class InvoiceTest extends TestCase
 
     public function test_create_invoice_error_requerid_detail_taxes_tax()
     {
-        //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
-
+        $this->generateData();
         $this->authentication();
         
         $response = $this->from(route('invoices.create'))
@@ -1113,11 +1054,7 @@ class InvoiceTest extends TestCase
 
     public function test_create_invoice_error_requerid_detail_taxes_id()
     {
-        //$this->withoutExceptionHandling();
-        DB::table('invoices')->truncate();
-        DB::table('products')->truncate();
-        Product::factory(10)->create();
-
+        $this->generateData();
         $this->authentication();
         
         $response = $this->from(route('invoices.create'))
@@ -1205,5 +1142,32 @@ class InvoiceTest extends TestCase
 
         $this->post('/login', $credentials);
         $this->assertCredentials($credentials);
+    }
+
+    protected function generateData()
+    {
+        Country::create([
+            'name' => 'Mexico',
+            'abbreviation' => 'MXN'
+        ]);
+
+        State::create([
+            'country_id' => 1,
+            'name' => 'Quintana Roo',
+            'abbreviation' => 'Q. Roo'
+        ]);
+
+        Municipality::create([
+            'state_id' => 1,
+            'name' => 'Tulum'
+        ]);
+        WayToPay::factory()->create();
+        Currency::factory()->create();
+        PaymentMethod::factory()->create();
+        Usecfdi::create([
+            'code' => 'G01',
+            'name' => 'Adquisición de mercancias'
+        ]);
+        Customer::factory()->create();
     }
 }

@@ -22,7 +22,8 @@ class WayToPayFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'code' => '01',
+            'name' => 'Efectivo'
         ];
     }
 }

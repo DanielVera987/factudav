@@ -275,6 +275,7 @@ class InvoiceController extends Controller
             /** Preparando los datos para la creacion del XML */
             $cfdiRelations = $this->preparedCfdiRelation($data);
             $concepts = $this->preparedingConcepts($data);
+            dd($fileCer);
             $attributesHeader = $this->preparedingHead($data);
             $emitor = $this->preparedingEmitor();
             $receptor = $this->preparedingReceptor($data);
@@ -567,6 +568,7 @@ class InvoiceController extends Controller
                 'Descuento' => $value['discount'],
                 'Impuestos' => $taxes
             ];
+
 
             $discount += $value['discount'];
             $subtotal += $importe;

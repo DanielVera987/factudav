@@ -523,6 +523,22 @@ class CustomerTest extends TestCase
         //DB::table('customers')->truncate();
         $this->authentication();
 
+        Country::create([
+            'name' => 'Mexico',
+            'abbreviation' => 'MXN'
+        ]);
+
+        State::create([
+            'country_id' => 1,
+            'name' => 'Quintana Roo',
+            'abbreviation' => 'Q. Roo'
+        ]);
+
+        Municipality::create([
+            'state_id' => 1,
+            'name' => 'Tulum'
+        ]);
+        
         $customer = Customer::factory()->create();
 
         $this->put(route('customers.update', $customer->id), [
@@ -972,8 +988,24 @@ class CustomerTest extends TestCase
 
     function test_view_edit_customer()
     {
-        DB::table('customers')->truncate();
+        //DB::table('customers')->truncate();
         $this->authentication();
+
+        Country::create([
+            'name' => 'Mexico',
+            'abbreviation' => 'MXN'
+        ]);
+
+        State::create([
+            'country_id' => 1,
+            'name' => 'Quintana Roo',
+            'abbreviation' => 'Q. Roo'
+        ]);
+
+        Municipality::create([
+            'state_id' => 1,
+            'name' => 'Tulum'
+        ]);
 
         $customer = Customer::factory()->create();
 

@@ -6,6 +6,8 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Bussine;
 use App\Models\Product;
+use App\Models\ProduServ;
+use App\Models\Unit;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -24,21 +26,39 @@ class ProductTest extends TestCase
     public function test_load_view_index_product_without_autentication()
     {
         $response = $this->get('/products');
-        $response->assertStatus(302)->assertRedirect(route('login'));
+        $response->assertStatus(302)
+            ->assertRedirect('/login');
     }
 
     public function test_load_view_index_product_with_autentication()
     {
         $this->withExceptionHandling();
-        DB::table('products')->truncate();
+        //DB::table('products')->truncate();
 
         $this->authentication();
 
         $bussine = Bussine::factory()->create();
+        ProduServ::create([
+            'code' => '0000000000',
+            'name' => 'NAMETEST',
+            'start_date_validity' => '',
+            'end_date_validity' => '',
+            'similarwords' => '',
+        ]);
+        
+        Unit::create([
+            'code' => 'H48',
+            'name' => 'Services',
+            'simbol' => '',
+            'description' => ''
+        ]);
+
         Product::factory()->create([
             'bussine_id' => $bussine->id,
             'name' => 'coca'
         ]);
+
+
 
         $response = $this->get('/products');
         $response->assertStatus(200)

@@ -30,7 +30,7 @@ class ProductFactory extends Factory
             'alert_stock' => '2',
             'cost' => '30.00',
             'price' => '32.00',
-            'produserv_id' => $this->faker->randomDigit(),
+            'produserv_id' => 1,
             'unit_id' => 1,
             'image' => $this->faker->randomDigit(),
             'is_active' => 'on',
