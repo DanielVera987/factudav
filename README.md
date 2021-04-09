@@ -1,7 +1,7 @@
 # FactuDav - Facturación Electronica CFDI3.3
 
 _FactuDav es un proyecto opensource hecho en Laravel, realizado para los desarrolladores que requieran de un sistema con facturación electronica en México, con este proyecto se pretende tener lo basico para el timbrado de facturas cfdi3.3 desde agregar clientes, productos y la creación de facturas y Pre-facturas.
-Se ha integrado un proveedor PAC llamado [Multifacturas](https://www.multifacturas.com/), no tenemo relazionado algo con ellos por lo que se requiere entrar a su pagina web y contratar folios para el uso del sistema_
+Se ha integrado un proveedor PAC llamado [Multifacturas](https://www.multifacturas.com/), no tenemo relacionado algo con ellos por lo que se requiere entrar a su pagina web y contratar folios para el uso del sistema_
 
 ## Comenzando 🚀
 
