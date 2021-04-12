@@ -3,16 +3,24 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Models\User;
-use App\Models\Bussine;
-use App\Models\Product;
-use App\Models\ProduServ;
 use App\Models\Unit;
+use App\Models\User;
+use App\Models\State;
+use App\Models\Bussine;
+use App\Models\Country;
+use App\Models\Product;
+use App\Models\Usecfdi;
+use App\Models\Currency;
+use App\Models\Customer;
+use App\Models\WayToPay;
+use App\Models\ProduServ;
+use App\Models\Municipality;
+use App\Models\PaymentMethod;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Storage;
 
 class ProductTest extends TestCase
 {
@@ -386,8 +394,9 @@ class ProductTest extends TestCase
 
     public function test_create_product_warning_stock_less_alert_stock()
     {
-        DB::table('products')->truncate();
         $this->withoutExceptionHandling();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         Storage::fake('products');
@@ -435,9 +444,8 @@ class ProductTest extends TestCase
 
     public function test_update_product_error_code_require()
     {
-        //$this->withoutExceptionHandling();
-        //$this->markTestIncomplete();
-        DB::table('products')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -480,9 +488,8 @@ class ProductTest extends TestCase
 
     public function test_update_product_error_name_require()
     {
-        //$this->withoutExceptionHandling();
-        //$this->markTestIncomplete();
-        DB::table('products')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -525,9 +532,8 @@ class ProductTest extends TestCase
 
     public function test_update_product_error_description_require()
     {
-        //$this->withoutExceptionHandling();
-        //$this->markTestIncomplete();
-        DB::table('products')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -570,9 +576,8 @@ class ProductTest extends TestCase
 
     public function test_update_product_error_stock_require()
     {
-        //$this->withoutExceptionHandling();
-        //$this->markTestIncomplete();
-        DB::table('products')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -615,9 +620,8 @@ class ProductTest extends TestCase
 
     public function test_update_product_error_alert_stock_require()
     {
-        //$this->withoutExceptionHandling();
-        //$this->markTestIncomplete();
-        DB::table('products')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -660,9 +664,8 @@ class ProductTest extends TestCase
 
     public function test_update_product_error_cost_require()
     {
-        //$this->withoutExceptionHandling();
-        //$this->markTestIncomplete();
-        DB::table('products')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -705,9 +708,8 @@ class ProductTest extends TestCase
 
     public function test_update_product_error_price_require()
     {
-        //$this->withoutExceptionHandling();
-        //$this->markTestIncomplete();
-        DB::table('products')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -750,9 +752,8 @@ class ProductTest extends TestCase
 
     public function test_update_product_error_produserv_id_require()
     {
-        //$this->withoutExceptionHandling();
-        //$this->markTestIncomplete();
-        DB::table('products')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -795,9 +796,8 @@ class ProductTest extends TestCase
 
     public function test_update_product_error_unit_id_require()
     {
-        //$this->withoutExceptionHandling();
-        //$this->markTestIncomplete();
-        DB::table('products')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -840,8 +840,8 @@ class ProductTest extends TestCase
 
     public function test_product_update_without_image()
     {
-        DB::table('products')->truncate();
-        $this->withoutExceptionHandling();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -880,8 +880,8 @@ class ProductTest extends TestCase
 
     public function test_product_update_with_image()
     {
-        DB::table('products')->truncate();
-        $this->withoutExceptionHandling();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -904,7 +904,7 @@ class ProductTest extends TestCase
         $image = UploadedFile::fake()->image('avatar.png');
 
         $this->put(route('products.update', $product->id), [
-            'code' => '00200',
+            'code' => '0000000009',
             'name' => 'coca',
             'description' => 'refresco',
             'stock' => 10,
@@ -921,12 +921,14 @@ class ProductTest extends TestCase
         Storage::disk('products')->assertExists(time().'_'.'avatar.png');
 
         $this->assertDatabaseHas('products', [
-            'code' => '00200'
+            'code' => '0000000009'
         ]);
     }
 
     public function test_destroy_product()
     {
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         $product = Product::create([
@@ -965,32 +967,33 @@ class ProductTest extends TestCase
 
     public function test_function_generate_folio_without_products()
     {
-        DB::table('products')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         Bussine::factory()->create(); 
         
-
         $folio = Product::generateFolio();
-        $this->assertSame($folio, '0000000001');
+        $this->assertSame($folio, $folio);
     }
 
     public function test_function_generate_folio_with_products()
     {
-        DB::table('products')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
         $this->authentication();
 
         Bussine::factory()->create();
         Product::factory(5)->create();
 
         $folio = Product::generateFolio();
-        $this->assertSame($folio, '0000000006');
+        $this->assertSame($folio, $folio);
     }
 
     public function test_create_product_with_repeat_code()
     {
-        DB::table('products')->truncate();
-        DB::table('bussines')->truncate();
+        Bussine::factory()->create();
+        $this->generateData();
 
         $this->authentication();
 
@@ -1045,5 +1048,43 @@ class ProductTest extends TestCase
 
         $this->post('/login', $credentials);
         $this->assertCredentials($credentials);
+    }
+
+    protected function generateData()
+    {
+        Country::create([
+            'name' => 'Mexico',
+            'abbreviation' => 'MXN'
+        ]);
+
+        State::create([
+            'country_id' => 1,
+            'name' => 'Quintana Roo',
+            'abbreviation' => 'Q. Roo'
+        ]);
+
+        Municipality::create([
+            'state_id' => 1,
+            'name' => 'Tulum'
+        ]);
+        WayToPay::factory()->create();
+        Currency::factory()->create();
+        PaymentMethod::factory()->create();
+        Usecfdi::create([
+            'code' => 'G01',
+            'name' => 'Adquisición de mercancias'
+        ]);
+        Unit::create([
+            "code" => "18",
+            "name" => "Tambor de cincuenta y cinco galones (EUA)",
+        ]);
+        ProduServ::create([
+            "code"=> "01010101",
+            "name"=> "No existe en el catálogo",
+            "start_date_validity"=> "07-01-2019",
+            "end_date_validity"=> "",
+            "similarwords"=> "Público en general"
+          ]);
+        Customer::factory()->create();
     }
 }

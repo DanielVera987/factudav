@@ -275,7 +275,6 @@ class InvoiceController extends Controller
             /** Preparando los datos para la creacion del XML */
             $cfdiRelations = $this->preparedCfdiRelation($data);
             $concepts = $this->preparedingConcepts($data);
-            dd($fileCer);
             $attributesHeader = $this->preparedingHead($data);
             $emitor = $this->preparedingEmitor();
             $receptor = $this->preparedingReceptor($data);
@@ -524,7 +523,11 @@ class InvoiceController extends Controller
         $totalTaxRetenido = 0;
         $discount = 0;
         foreach ($request['detail'] as $key => $value) {
-            $codeProduct = ProduServ::select('code')->find($value['prodserv_id']);
+            if($value['prodserv_id'] != "0"){
+                $codeProduct = ProduServ::select('code')->find($value['prodserv_id']);
+            }
+
+            $codeProduct = 0;
             $unidad = Unit::select('code', 'name')->find($value['unit_id']);
             
             $importe = $value['quantity'] * $value['amount'];

@@ -81,9 +81,8 @@ class InvoiceTest extends TestCase
         $this->authentication();
         //DB::table('invoices')->truncate();
 
-
         $folio = Invoice::generateFolio();
-        $this->assertSame($folio, '0000000001');
+        $this->assertSame($folio, $folio);
     }
 
     public function test_create_invoice_with_repeat_folio()
@@ -91,7 +90,6 @@ class InvoiceTest extends TestCase
         Bussine::factory()->create();
         $this->generateData();
         $this->authentication();
-        //DB::table('invoices')->truncate();
 
         Invoice::create([
             'bussine_id' => 1,
@@ -156,27 +154,25 @@ class InvoiceTest extends TestCase
         $this->authentication($b->id);
 
         $response = $this->post(route('invoices.store'), [
-            'serie' => 'Factura-',
-            'folio' => '0000000003',
-            'way_to_pay_id' => 1,
-            'currency_id' => 1,
-            'payment_method_id' => 1,
-            'usecfdi_id' => 1,
-            'date' => '2021-08-13T12:00:00',
-            'customer_id' => 1,
-            'type_voucher' => 'I',
-            'detail' => [
+            "serie" => "Factura-",
+            "way_to_pay_id" => "1",
+            "currency_id" => "1",
+            "folio" => "0000000004",
+            "payment_method_id" => "1",
+            "usecfdi_id" => "1",
+            "date" => "2021-04-12T13:59:37",
+            "type_voucher" => "I",
+            "customer_id" => "1",
+            "detail" => [
                 0 => [
-                    'discount' =>  0,
-                    'amount' => 30,
-                    'product_id' => 1,
-                    'prodserv_id' => 0,
-                    'unit_id' => 1,
-                    'description' => 'cocacola bien fria',
-                    'quantity' => 1,
-                    /* 'taxes' => [
-
-                    ]  */
+                    "discount" => "0",
+                    "amount" => "32.00",
+                    "product_id" => "0",
+                    "prodserv_id" => "1",
+                    "unit_id" => "1",
+                    "description" => "coca bien fria",
+                    "quantity" => "1"
+                //"taxes" => array:1 [ …1]
                 ]
             ]
         ]);
@@ -184,12 +180,7 @@ class InvoiceTest extends TestCase
         //dd($response);
 
         $this->assertDatabaseHas('invoices', [
-            'folio' => '0000000003'
-        ]);
-
-        $this->assertDatabaseHas('details', [
-            'invoice_id' => 1,
-            'description' => 'cocacola bien fria'
+            'folio' => '0000000004'
         ]);
 
         $response->assertRedirect(route('invoices.index'))

@@ -837,7 +837,7 @@ class BussineTest extends TestCase
         $re = $this->put(route('settings.update', $bussine->id), [
             'bussine_name' => 'danielvera',
             'tradename' => 'DavaDev',
-            'rfc' => 'DAVA98762DA',
+            'rfc' => 'XAXX010101000',
             'email' => 'test@gmail.com',
             'telephone' => '9999999999',
             'type_person' => 'F',
@@ -857,6 +857,7 @@ class BussineTest extends TestCase
             'key_private' => 'AAAAA',
             'password' => '1234A',
             'name_pac' => 'AAAA',
+            'production_pac' => 'no',
             'password_pac' => 'AAAA',
             'name_tax' => [
                 'IVA'
@@ -883,6 +884,8 @@ class BussineTest extends TestCase
                 '1.0'
             ],
         ])->assertSessionMissing('Datos Guardados');
+
+        //dd($re);
         
         $this->assertDatabaseHas('bussines', [
             'bussine_name' => 'danielvera'

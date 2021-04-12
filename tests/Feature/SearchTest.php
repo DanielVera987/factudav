@@ -3,10 +3,18 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Models\Unit;
 use App\Models\User;
+use App\Models\State;
+use App\Models\Country;
 use App\Models\Product;
+use App\Models\Usecfdi;
+use App\Models\Currency;
 use App\Models\Customer;
+use App\Models\WayToPay;
 use App\Models\ProduServ;
+use App\Models\Municipality;
+use App\Models\PaymentMethod;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -84,6 +92,7 @@ class SearchTest extends TestCase
 
     public function test_verify_route_get_json_searchProduServ_with_autenticate()
     {
+        $this->generateData();
         $this->authentication();
         $response = $this->get('/searchProduServ');
 
@@ -92,17 +101,14 @@ class SearchTest extends TestCase
 
     public function test_get_json_searchProduServ_with_autenticate()
     {
+        $this->generateData();
         $this->authentication();
-        ProduServ::create([
-            'code' => '01010102',
-            'name' => 'publico'
-        ]);
 
-        $response = $this->get('/searchProduServ/?q=publico');
+        $response = $this->get('/searchProduServ/?q=No existe');
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'code' => '01010102'
+                'code' => '01010101'
             ]);
     }
     
@@ -118,7 +124,6 @@ class SearchTest extends TestCase
     {
         $this->authentication();
         $response = $this->get('/searchProducts');
-
         $response->assertStatus(200);
     }
 
@@ -126,7 +131,7 @@ class SearchTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $this->authentication();
-        DB::table('products')->truncate();
+        //DB::table('products')->truncate();
 
         $pro = Product::factory()->create([
             "name"=> "coca",
@@ -168,5 +173,43 @@ class SearchTest extends TestCase
 
         $this->post('/login', $credentials);
         $this->assertCredentials($credentials);
+    }
+
+    protected function generateData()
+    {
+        Country::create([
+            'name' => 'Mexico',
+            'abbreviation' => 'MXN'
+        ]);
+
+        State::create([
+            'country_id' => 1,
+            'name' => 'Quintana Roo',
+            'abbreviation' => 'Q. Roo'
+        ]);
+
+        Municipality::create([
+            'state_id' => 1,
+            'name' => 'Tulum'
+        ]);
+        WayToPay::factory()->create();
+        Currency::factory()->create();
+        PaymentMethod::factory()->create();
+        Usecfdi::create([
+            'code' => 'G01',
+            'name' => 'Adquisición de mercancias'
+        ]);
+        Unit::create([
+            "code" => "18",
+            "name" => "Tambor de cincuenta y cinco galones (EUA)",
+        ]);
+        ProduServ::create([
+            "code"=> "01010101",
+            "name"=> "No existe en el catálogo",
+            "start_date_validity"=> "07-01-2019",
+            "end_date_validity"=> "",
+            "similarwords"=> "Público en general"
+          ]);
+        Customer::factory()->create();
     }
 }

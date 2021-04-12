@@ -35,6 +35,7 @@ class SearchController extends Controller
     public function searchCustomers(Request $request)
     {
         $customers = [];
+        $json_customers = [];
 
         if ($request->has('q')) {
             $search = $request->q;
@@ -45,7 +46,7 @@ class SearchController extends Controller
                      ->orWhere('rfc', 'LIKE', "%$search%")
                      ->get();
 
-            $json_customers = [];
+            
             foreach($customers as $value) {
                 if($value['bussine_id'] == Auth::user()->bussine_id){
                     $json_customers[] = [
@@ -61,6 +62,7 @@ class SearchController extends Controller
     public function searchProducts(Request $request)
     {
         $products = [];
+        $json_products = [];
 
         if ($request->has('q') && $request->q != '') {
             $search = $request->q;
@@ -72,7 +74,7 @@ class SearchController extends Controller
                      ->orWhere('code', 'LIKE', "%$search%")
                      ->get();
             
-            $json_products = [];
+            
             foreach($products as $value) {
                 if($value['bussine_id'] == Auth::user()->bussine_id){
                     $json_products[] = [
